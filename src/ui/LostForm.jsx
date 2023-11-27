@@ -1,4 +1,4 @@
-import Input from "./InputNew";
+import CheckmarkInput from "../components/input";
 import { Form } from "../reactForm/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
 
@@ -33,7 +33,7 @@ const schema = {
 
 const defaultValues = {
   title: "",
-  name: "Alex",
+  name: "Alexa",
   phone: "",
 };
 
@@ -56,7 +56,7 @@ const FormNew = () => {
           render={(field) => (
             <FormItem>
               <FormLabel>Titlu</FormLabel>
-              <Input placeholder="Titlu" {...field} />
+              <CheckmarkInput placeholder="Titlu" {...field} />
               <FormMessage />
             </FormItem>
           )}
@@ -67,7 +67,7 @@ const FormNew = () => {
           render={(field) => (
             <FormItem>
               <FormLabel>Nume</FormLabel>
-              <Input placeholder="Nume" {...field} />
+              <CheckmarkInput placeholder="Nume" {...field} />
               <FormMessage />
             </FormItem>
           )}
@@ -78,7 +78,7 @@ const FormNew = () => {
           render={(field) => (
             <FormItem>
               <FormLabel>Telefon</FormLabel>
-              <Input placeholder="Telefon" {...field} />
+              <CheckmarkInput placeholder="Telefon" {...field} />
               <FormMessage />
             </FormItem>
           )}

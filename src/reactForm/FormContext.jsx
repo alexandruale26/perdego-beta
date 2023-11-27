@@ -14,6 +14,23 @@ const addFieldRef = (refs, newRef) => {
   return [...refs, newRef];
 };
 
+const validateFieldAtRegister = (name, state) => {
+  const input = state.refs.find((el) => el.name === name);
+  const rules = state.schema[name];
+
+  if (!rules) return { isValid: false, errorMessage: null };
+
+  if (rules.minLength && input.value.length <= rules.minLength.value - 1) {
+    return { isValid: false, errorMessage: null };
+  } else if (rules.maxLength && input.value.length > rules.maxLength.value - 1) {
+    return { isValid: false, errorMessage: null };
+  } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
+    return { isValid: false, errorMessage: null };
+  } else {
+    return { isValid: true, errorMessage: null };
+  }
+};
+
 const reducer = (state, { action, payload }) => {
   switch (action) {
     case "schema/register":
@@ -24,10 +41,15 @@ const reducer = (state, { action, payload }) => {
 
     case "field/register":
       const fieldName = payload.ref.name;
+      const fieldValidation = validateFieldAtRegister(fieldName, state);
+
       return {
         ...state,
         refs: [...addFieldRef(state.refs, payload.ref)],
-        fieldsState: { ...state.fieldsState, [fieldName]: { isValid: false, errorMessage: null } },
+        fieldsState: {
+          ...state.fieldsState,
+          [fieldName]: { isValid: fieldValidation.isValid, errorMessage: fieldValidation.errorMessage },
+        },
       };
 
     case "field/registerError":
@@ -39,7 +61,7 @@ const reducer = (state, { action, payload }) => {
         },
       };
 
-    case "field/setValid":
+    case "field/setValidity":
       return {
         ...state,
         fieldsState: {
@@ -64,7 +86,7 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
   };
 
   const setValidation = (name) => {
-    dispatch({ action: "field/setValid", payload: { name } });
+    dispatch({ action: "field/setValidity", payload: { name } });
   };
 
   const allFieldsAreValid = () => {
@@ -81,7 +103,7 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
   };
 
   const validateField = useCallback(
-    (name) => {
+    function validateField(name) {
       const input = state.refs.find((el) => el.name === name);
       const rules = state.schema[name];
 
@@ -126,12 +148,12 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
     validateField(fieldName);
   };
 
-  const registerField = useCallback((ref) => {
+  const registerField = useCallback(function registerField(ref) {
     dispatch({ action: "field/register", payload: { ref } });
   }, []);
 
   const getFieldDefaults = useCallback(
-    (fieldName) => {
+    function getFieldDefaults(fieldName) {
       return state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
     },
     [state.defaultValues]
