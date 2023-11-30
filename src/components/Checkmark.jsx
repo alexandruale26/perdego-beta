@@ -1,6 +1,6 @@
 import { CheckIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-const InputCheckmark = ({ isValid }) => {
+const Checkmark = ({ isValid }) => {
   const style = "w-5 h-5";
 
   return (
@@ -14,4 +14,4 @@ const InputCheckmark = ({ isValid }) => {
   );
 };
 
-export default InputCheckmark;
+export default Checkmark;

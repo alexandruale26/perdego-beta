@@ -1,6 +1,7 @@
-import CheckmarkInput from "../components/input";
+import { CheckmarkInput } from "../components/input";
 import { Form } from "../reactForm/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
+import ComboBox from "../components/combobox";
 
 const schema = {
   title: {
@@ -50,7 +51,7 @@ const FormNew = () => {
 
   return (
     <Form {...formData} onSubmit={onSubmit}>
-      <div className="space-y-8 w-full max-w-4xl p-4 border border-stone-300 rounded-xl">
+      <div className="space-y-8 w-full max-w-4xl p-4 pb-56 border border-stone-300 rounded-xl">
         <FormField
           name="title"
           render={(field) => (
@@ -84,6 +85,7 @@ const FormNew = () => {
           )}
         />
 
+        <ComboBox placeholder={"Search framework"} />
         <button type="submit">Submit</button>
       </div>
     </Form>

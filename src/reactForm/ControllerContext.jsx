@@ -32,8 +32,6 @@ const Controller = ({ name, render }) => {
   const fieldSchema = getFieldSchema(name);
   const field = { id: name, name, onChange, onBlur, ref };
 
-  // console.log(fieldState);
-
   return <ControllerContext.Provider value={{ fieldState, fieldSchema }}>{render(field)}</ControllerContext.Provider>;
 };
 
