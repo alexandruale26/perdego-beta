@@ -6,8 +6,7 @@ const ControllerContext = createContext({});
 const Controller = ({ name, render }) => {
   const ref = useRef(null);
 
-  const { registerField, validateField, getFieldDefaults, getFieldState, getFieldSchema, handleOnBlur } =
-    useFormContext();
+  const { registerField, validateField, getFieldDefaults, getFieldState, getFieldSchema } = useFormContext();
 
   useEffect(() => {
     const inputRef = ref.current;
@@ -22,8 +21,7 @@ const Controller = ({ name, render }) => {
   };
 
   const onBlur = (e) => {
-    e.preventDefault();
-    handleOnBlur(name);
+    onChange(e);
   };
 
   // here i could add all kind of input events: onFocus, etc

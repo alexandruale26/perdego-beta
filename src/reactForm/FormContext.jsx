@@ -40,6 +40,8 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
       registerError(name, rules.maxLength.errorMessage);
     } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
       registerError(name, rules.regex.errorMessage);
+    } else if (rules.required && input.value.length < 1) {
+      registerError(name, rules.required.errorMessage);
     } else {
       setValidation(name);
     }
@@ -59,10 +61,6 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
       });
       console.log("not all are valid");
     }
-  };
-
-  const handleOnBlur = (fieldName) => {
-    validateField(fieldName);
   };
 
   const registerField = useCallback(function registerField(ref) {
@@ -91,9 +89,7 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
   // console.log(state.fieldsState);
 
   return (
-    <FormContext.Provider
-      value={{ registerField, getFieldDefaults, getFieldState, validateField, getFieldSchema, handleOnBlur }}
-    >
+    <FormContext.Provider value={{ registerField, getFieldDefaults, getFieldState, validateField, getFieldSchema }}>
       <form onSubmit={handleSubmit}>{children}</form>
     </FormContext.Provider>
   );

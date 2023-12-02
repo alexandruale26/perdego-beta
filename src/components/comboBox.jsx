@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, forwardRef, Fragment } from "react";
 import { MagnifyingGlassIcon, CaretSortIcon } from "@radix-ui/react-icons";
 import Separator from "./separator";
 import React from "react";
@@ -19,10 +19,10 @@ const Option = ({ value, onClick }) => {
   );
 };
 
-const ComboBox = ({ placeholder }) => {
+const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...props }, ref) => {
   const [filtered, setFiltered] = useState(tags);
-  const [value, setValue] = useState("");
-  const [selected, setSelected] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [selected, setSelected] = useState("");
   const [visible, setVisible] = useState(false);
   const [inputFocus, setInputFocus] = useState(false);
 
@@ -45,12 +45,18 @@ const ComboBox = ({ placeholder }) => {
     e.preventDefault();
     setFiltered(tags.filter((tag) => tag.includes(e.target.value)));
 
-    setValue(e.target.value);
+    setInputValue(e.target.value);
   };
 
-  const handleSelectOnChange = (e) => {
+  const handleSelectOnClick = (e) => {
     e.preventDefault();
-    setSelected(e.target.dataset.value);
+    const value = e.target.dataset.value;
+    setSelected(value);
+    setInputValue(value);
+
+    //error message if ref is ull
+    ref.current.value = value;
+    onChange(e);
   };
 
   const handleInputFocus = (e) => {
@@ -61,6 +67,7 @@ const ComboBox = ({ placeholder }) => {
   const handleInputBlur = (e) => {
     e.preventDefault();
     setInputFocus(false);
+    onBlur(e);
   };
 
   const onComboBoxClick = (e) => {
@@ -70,22 +77,23 @@ const ComboBox = ({ placeholder }) => {
     setVisible(!visible);
   };
 
+  const selectedTitle = selected ? selected : comboTitle;
   const available = filtered.length > 0;
-  console.log(selected);
 
   return (
     <div onClick={onComboBoxClick} ref={modalRef} className=" bg-white relative w-52 h-full space-y-1 rounded-md">
+      <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
       <div className="flex justify-between items-center w-full px-4 py-2 border bg-inherit rounded-md border-stone-300 hover:bg-stone-100 transition-colors select-none">
-        <p className="text-sm font-normal">Select framework...</p>
+        <p className="text-sm font-normal">{selectedTitle}</p>
         <CaretSortIcon className={iconStyle} />
       </div>
 
       {visible && (
-        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out">
+        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
           <div className="flex justify-center items-center gap-2 px-3 py-2">
             <MagnifyingGlassIcon className={iconStyle} />
             <input
-              value={value}
+              value={inputValue}
               ref={inputRef}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
@@ -101,9 +109,9 @@ const ComboBox = ({ placeholder }) => {
           {available && (
             <ul className="p-1">
               {filtered.map((tag) => (
-                <React.Fragment key={tag}>
-                  <Option value={tag} onClick={handleSelectOnChange} />
-                </React.Fragment>
+                <Fragment key={tag}>
+                  <Option value={tag} onClick={handleSelectOnClick} />
+                </Fragment>
               ))}
             </ul>
           )}
@@ -113,6 +121,6 @@ const ComboBox = ({ placeholder }) => {
       )}
     </div>
   );
-};
+});
 
 export default ComboBox;

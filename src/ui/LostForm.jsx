@@ -24,6 +24,11 @@ const schema = {
       errorMessage: "Numele trebuie sa aiba maxim 10 caractere",
     },
   },
+  location: {
+    required: {
+      errorMessage: "Locatie invalida",
+    },
+  },
   phone: {
     regex: {
       pattern: /^\d+$/,
@@ -36,6 +41,7 @@ const defaultValues = {
   title: "",
   name: "Alexa",
   phone: "",
+  location: "",
 };
 
 const formData = {
@@ -85,8 +91,20 @@ const FormNew = () => {
           )}
         />
 
-        <ComboBox placeholder={"Search framework"} />
-        <button type="submit">Submit</button>
+        <FormField
+          name="location"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Locatie</FormLabel>
+              <ComboBox placeholder="Cauta dupa localitate" comboTitle="Alege localitatea" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <button className="bg-teal-500 p-4 rounded-full text-teal-50" type="submit">
+          Publica anuntul
+        </button>
       </div>
     </Form>
   );
