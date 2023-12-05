@@ -5,7 +5,6 @@ import { useController } from "../reactForm/ControllerContext";
 
 const CheckmarkInput = React.forwardRef(({ className, type, ...props }, ref) => {
   const { fieldState } = useController();
-
   const { errorMessage, isValid } = fieldState ? fieldState : { errorMessage: null, isValid: false };
 
   return (
@@ -38,4 +37,17 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
 });
 Input.displayName = "Input";
 
-export { CheckmarkInput, Input };
+const ImageInput = React.forwardRef(({ className, type, ...props }, ref) => {
+  return (
+    <div className={twMerge("w-full h-full rounded-md", className)}>
+      <label>
+        <button>
+          <input type="file" ref={ref} {...props} />
+        </button>
+      </label>
+    </div>
+  );
+});
+ImageInput.displayName = "ImageInput";
+
+export { CheckmarkInput, Input, ImageInput };

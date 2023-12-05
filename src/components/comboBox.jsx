@@ -3,26 +3,25 @@ import { MagnifyingGlassIcon, CaretSortIcon } from "@radix-ui/react-icons";
 import Separator from "./separator";
 import React from "react";
 
-const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 const textStyle = "text-sm font-light";
 const iconStyle = "w-5 h-5 text-stone-500";
 
-const Option = ({ value, onClick }) => {
+const Option = ({ item, onClick, children }) => {
   return (
     <li
       onClick={onClick}
-      data-value={value}
+      data-item={item}
       className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-stone-100 rounded-md`}
     >
-      {value}
+      {children}
     </li>
   );
 };
 
-const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...props }, ref) => {
-  const [filtered, setFiltered] = useState(tags);
-  const [inputValue, setInputValue] = useState("");
-  const [selected, setSelected] = useState("");
+const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, onChange, onBlur, ...props }, ref) => {
+  const [filtered, setFiltered] = useState(data);
+  const [inputValue, setInputValue] = useState(defaultValue || "");
+  const [selected, setSelected] = useState(defaultValue || "");
   const [visible, setVisible] = useState(false);
   const [inputFocus, setInputFocus] = useState(false);
 
@@ -41,16 +40,16 @@ const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...pro
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [visible]);
 
-  const handleInputOnChange = (e) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
-    setFiltered(tags.filter((tag) => tag.includes(e.target.value)));
+    setFiltered(filter(data, e.target.value));
 
     setInputValue(e.target.value);
   };
 
-  const handleSelectOnClick = (e) => {
+  const handleSelectClick = (e) => {
     e.preventDefault();
-    const value = e.target.dataset.value;
+    const value = e.currentTarget.dataset.item;
     setSelected(value);
     setInputValue(value);
 
@@ -77,14 +76,18 @@ const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...pro
     setVisible(!visible);
   };
 
-  const selectedTitle = selected ? selected : comboTitle;
   const available = filtered.length > 0;
+  const titlePlaceholder = selected || placeholder;
 
   return (
-    <div onClick={onComboBoxClick} ref={modalRef} className=" bg-white relative w-52 h-full space-y-1 rounded-md">
+    <button
+      onClick={onComboBoxClick}
+      ref={modalRef}
+      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
+    >
       <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
       <div className="flex justify-between items-center w-full px-4 py-2 border bg-inherit rounded-md border-stone-300 hover:bg-stone-100 transition-colors select-none">
-        <p className="text-sm font-normal">{selectedTitle}</p>
+        <p className="text-sm font-normal">{titlePlaceholder}</p>
         <CaretSortIcon className={iconStyle} />
       </div>
 
@@ -97,7 +100,7 @@ const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...pro
               ref={inputRef}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
-              onChange={handleInputOnChange}
+              onChange={handleInputChange}
               placeholder={placeholder}
               type="text"
               className={`${textStyle} w-full bg-inherit placeholder:text-sm placeholder:font-light placeholder:text-stone-500 focus:outline-none focus:ring-0`}
@@ -108,9 +111,11 @@ const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...pro
 
           {available && (
             <ul className="p-1">
-              {filtered.map((tag) => (
-                <Fragment key={tag}>
-                  <Option value={tag} onClick={handleSelectOnClick} />
+              {filtered.map((item) => (
+                <Fragment key={item}>
+                  <Option item={item} onClick={handleSelectClick}>
+                    {render(item)}
+                  </Option>
                 </Fragment>
               ))}
             </ul>
@@ -119,7 +124,7 @@ const ComboBox = forwardRef(({ placeholder, comboTitle, onChange, onBlur, ...pro
           {!available && <p className={`py-6 text-center ${textStyle}`}>Niciun rezultat</p>}
         </div>
       )}
-    </div>
+    </button>
   );
 });
 

@@ -1,7 +1,10 @@
-import { CheckmarkInput } from "../components/input";
+import { CheckmarkInput, ImageInput } from "../components/input";
+import { CheckmarkTextarea } from "../components/textarea";
 import { Form } from "../reactForm/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
 import ComboBox from "../components/combobox";
+import { COUNTIES } from "../reactForm/constants";
+import { removeDiacritics } from "../utils/helpers";
 
 const schema = {
   title: {
@@ -29,6 +32,16 @@ const schema = {
       errorMessage: "Locatie invalida",
     },
   },
+  description: {
+    minLength: {
+      value: 20,
+      errorMessage: "Descrierea trebuie sa aiba minim 20 caractere",
+    },
+    maxLength: {
+      value: 200,
+      errorMessage: "Descrierea trebuie sa aiba maxim 200 caractere",
+    },
+  },
   phone: {
     regex: {
       pattern: /^\d+$/,
@@ -41,7 +54,7 @@ const defaultValues = {
   title: "",
   name: "Alexa",
   phone: "",
-  location: "",
+  // county: "Galati",
 };
 
 const formData = {
@@ -50,14 +63,22 @@ const formData = {
   delayError: 500,
 };
 
+const filterData = (data, search) => {
+  return data.filter((value) => {
+    const noDiacriticsSearch = removeDiacritics(value);
+    const noDiacriticsTarget = removeDiacritics(search);
+    return noDiacriticsSearch.toLowerCase().includes(noDiacriticsTarget.toLowerCase());
+  });
+};
+
 const FormNew = () => {
   const onSubmit = (values) => {
-    console.log("yeeey...", values);
+    console.log(values);
   };
 
   return (
     <Form {...formData} onSubmit={onSubmit}>
-      <div className="space-y-8 w-full max-w-4xl p-4 pb-56 border border-stone-300 rounded-xl">
+      <div className="space-y-8 w-full max-w-4xl p-4 border border-stone-300 rounded-xl">
         <FormField
           name="title"
           render={(field) => (
@@ -92,11 +113,40 @@ const FormNew = () => {
         />
 
         <FormField
+          name="description"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Descriere</FormLabel>
+              <CheckmarkTextarea placeholder="Adauga descriere" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="image"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Alege imaginea</FormLabel>
+              <ImageInput {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
           name="location"
           render={(field) => (
             <FormItem>
-              <FormLabel>Locatie</FormLabel>
-              <ComboBox placeholder="Cauta dupa localitate" comboTitle="Alege localitatea" {...field} />
+              <FormLabel>Județ | Sector</FormLabel>
+              <ComboBox
+                placeholder="Cauta dupa județ sau sector"
+                defaultValue={defaultValues.county}
+                filter={filterData}
+                data={COUNTIES}
+                render={(item) => <p className="text-left">{item}</p>}
+                {...field}
+              />
               <FormMessage />
             </FormItem>
           )}

@@ -14,9 +14,11 @@ const validateFieldAtRegistering = (name, state) => {
 
   if (rules.minLength && input.value.length <= rules.minLength.value - 1) {
     return defaultValidation;
-  } else if (rules.maxLength && input.value.length > rules.maxLength.value - 1) {
+  } else if (rules.maxLength && input.value.length > rules.maxLength.value) {
     return defaultValidation;
   } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
+    return defaultValidation;
+  } else if (rules.required && input.value.length === 0) {
     return defaultValidation;
   } else {
     return { isValid: true, errorMessage: null };
@@ -29,12 +31,15 @@ const reducer = (state, { action, payload }) => {
       return { ...state, schema: payload.schema, defaultValues: payload.defaultValues };
 
     case consts.FIELD_REGISTER:
-      const fieldName = payload.ref.name;
+      const fieldRef = payload.ref;
+      const fieldName = fieldRef.name;
+
+      fieldRef.value = state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
       const fieldValidation = validateFieldAtRegistering(fieldName, state);
 
       return {
         ...state,
-        refs: [...addFieldRef(state.refs, payload.ref)],
+        refs: [...addFieldRef(state.refs, fieldRef)],
         fieldsState: {
           ...state.fieldsState,
           [fieldName]: { isValid: fieldValidation.isValid, errorMessage: fieldValidation.errorMessage },

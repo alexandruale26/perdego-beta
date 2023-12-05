@@ -6,14 +6,11 @@ const ControllerContext = createContext({});
 const Controller = ({ name, render }) => {
   const ref = useRef(null);
 
-  const { registerField, validateField, getFieldDefaults, getFieldState, getFieldSchema } = useFormContext();
+  const { registerField, validateField, getFieldState, getFieldSchema } = useFormContext();
 
   useEffect(() => {
-    const inputRef = ref.current;
-
-    inputRef.value = getFieldDefaults(name);
-    registerField(inputRef);
-  }, [name, ref, registerField, getFieldDefaults]);
+    registerField(ref.current);
+  }, [name, ref, registerField]);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -30,7 +27,9 @@ const Controller = ({ name, render }) => {
   const fieldSchema = getFieldSchema(name);
   const field = { id: name, name, onChange, onBlur, ref };
 
-  return <ControllerContext.Provider value={{ fieldState, fieldSchema }}>{render(field)}</ControllerContext.Provider>;
+  return (
+    <ControllerContext.Provider value={{ name, fieldState, fieldSchema }}>{render(field)}</ControllerContext.Provider>
+  );
 };
 
 const useController = () => {

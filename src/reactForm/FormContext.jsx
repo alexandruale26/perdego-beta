@@ -1,5 +1,5 @@
 import { useEffect, useReducer, createContext, useContext, useCallback } from "react";
-import reducer from "./reducer";
+import reducer from "./formReducer";
 import INITIAL_STATE, * as consts from "./constants";
 
 const FormContext = createContext({});
@@ -36,11 +36,11 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
 
     if (rules.minLength && input.value.length <= rules.minLength.value - 1) {
       registerError(name, rules.minLength.errorMessage);
-    } else if (rules.maxLength && input.value.length > rules.maxLength.value - 1) {
+    } else if (rules.maxLength && input.value.length > rules.maxLength.value) {
       registerError(name, rules.maxLength.errorMessage);
     } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
       registerError(name, rules.regex.errorMessage);
-    } else if (rules.required && input.value.length < 1) {
+    } else if (rules.required && input.value.length === 0) {
       registerError(name, rules.required.errorMessage);
     } else {
       setValidation(name);
@@ -67,13 +67,6 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
     dispatch({ action: consts.FIELD_REGISTER, payload: { ref } });
   }, []);
 
-  const getFieldDefaults = useCallback(
-    function getFieldDefaults(fieldName) {
-      return state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
-    },
-    [state.defaultValues]
-  );
-
   const getFieldState = (fieldName) => {
     return state.fieldsState[fieldName];
   };
@@ -89,7 +82,7 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
   // console.log(state.fieldsState);
 
   return (
-    <FormContext.Provider value={{ registerField, getFieldDefaults, getFieldState, validateField, getFieldSchema }}>
+    <FormContext.Provider value={{ registerField, getFieldState, validateField, getFieldSchema }}>
       <form onSubmit={handleSubmit}>{children}</form>
     </FormContext.Provider>
   );
