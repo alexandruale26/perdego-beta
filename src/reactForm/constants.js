@@ -61,5 +61,16 @@ const COUNTIES = [
   "Sectorul 6",
 ];
 
+const OBJECT_CATEGORY = [
+  "Documente si carduri",
+  "Electronice personale",
+  "Chei si carduri de acces",
+  "Haine si accesorii",
+  "Animale de companie si accesorii",
+  "Obiecte de transport",
+  "Jucarii si obiecte copii",
+  "Altele",
+];
+
 export default INITIAL_STATE;
-export { FORM_REGISTER_DATA, FIELD_REGISTER, FIELD_REGISTER_ERROR, FIELD_SET_VALIDITY, COUNTIES };
+export { FORM_REGISTER_DATA, FIELD_REGISTER, FIELD_REGISTER_ERROR, FIELD_SET_VALIDITY, COUNTIES, OBJECT_CATEGORY };

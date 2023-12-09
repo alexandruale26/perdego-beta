@@ -1,11 +1,11 @@
 import { useEffect, useReducer, createContext, useContext, useCallback } from "react";
-import reducer from "./formReducer";
+import postReducer from "./postReducer";
 import INITIAL_STATE, * as consts from "./constants";
 
 const FormContext = createContext({});
 
-const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+const Form = ({ children, schema, defaultValues, onSubmit }) => {
+  const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
 
   const registerError = (name, message) => {
     dispatch({ action: consts.FIELD_REGISTER_ERROR, payload: { name, message } });
@@ -77,13 +77,16 @@ const Form = ({ children, schema, defaultValues, delayError, onSubmit }) => {
 
   useEffect(() => {
     dispatch({ action: consts.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
-  }, [schema, defaultValues, delayError, state.refs]);
-
-  // console.log(state.fieldsState);
+  }, [schema, defaultValues, state.refs]);
 
   return (
     <FormContext.Provider value={{ registerField, getFieldState, validateField, getFieldSchema }}>
-      <form onSubmit={handleSubmit}>{children}</form>
+      <form
+        className="space-y-8 w-full max-w-xl p-4 border border-stone-300 rounded-md mx-auto"
+        onSubmit={handleSubmit}
+      >
+        {children}
+      </form>
     </FormContext.Provider>
   );
 };

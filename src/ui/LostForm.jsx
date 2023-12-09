@@ -1,35 +1,43 @@
-import { CheckmarkInput, ImageInput } from "../components/input";
-import { CheckmarkTextarea } from "../components/textarea";
+import ImageSelect from "../components/ImageSelect";
+import ValidationInput from "../components/ValidationInput";
+import Textarea from "../components/Textarea";
 import { Form } from "../reactForm/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
-import ComboBox from "../components/combobox";
-import { COUNTIES } from "../reactForm/constants";
+import ComboBox from "../components/ComboBox";
+import { COUNTIES, OBJECT_CATEGORY } from "../reactForm/constants";
 import { removeDiacritics } from "../utils/helpers";
+import { uploadImage } from "../services/postImageApi";
+import createPost from "../services/postApi";
 
 const schema = {
   title: {
     minLength: {
-      value: 5,
-      errorMessage: "Titlul trebuie sa aiba minim 5 caractere",
+      value: 15,
+      errorMessage: "Titlul trebuie sa aiba minim 15 caractere",
     },
     maxLength: {
-      value: 50,
-      errorMessage: "Titlul trebuie sa aiba maxim 50 caractere",
+      value: 60,
+      errorMessage: "Titlul trebuie sa aiba maxim 60 caractere",
     },
   },
   name: {
     minLength: {
-      value: 5,
-      errorMessage: "Numele trebuie sa aiba minim 5 caractere",
+      value: 3,
+      errorMessage: "Numele trebuie sa aiba minim 3 caractere",
     },
     maxLength: {
-      value: 10,
-      errorMessage: "Numele trebuie sa aiba maxim 10 caractere",
+      value: 25,
+      errorMessage: "Numele trebuie sa aiba maxim 25 caractere",
     },
   },
   location: {
     required: {
-      errorMessage: "Locatie invalida",
+      errorMessage: "Alege o locație",
+    },
+  },
+  category: {
+    required: {
+      errorMessage: "Alege o categorie",
     },
   },
   description: {
@@ -38,13 +46,13 @@ const schema = {
       errorMessage: "Descrierea trebuie sa aiba minim 20 caractere",
     },
     maxLength: {
-      value: 200,
-      errorMessage: "Descrierea trebuie sa aiba maxim 200 caractere",
+      value: 300,
+      errorMessage: "Descrierea trebuie sa aiba maxim 300 caractere",
     },
   },
   phone: {
     regex: {
-      pattern: /^\d+$/,
+      pattern: /^\d{10}$/,
       errorMessage: "Numarul nu este valid",
     },
   },
@@ -54,13 +62,11 @@ const defaultValues = {
   title: "",
   name: "Alexa",
   phone: "",
-  // county: "Galati",
 };
 
 const formData = {
   schema,
   defaultValues,
-  delayError: 500,
 };
 
 const filterData = (data, search) => {
@@ -73,89 +79,111 @@ const filterData = (data, search) => {
 
 const FormNew = () => {
   const onSubmit = (values) => {
-    console.log(values);
+    const process = async () => {
+      const image = await uploadImage(values.image); // handle no image
+
+      const newData = { ...values, image: image };
+      await createPost(newData);
+    };
+
+    process();
   };
 
   return (
     <Form {...formData} onSubmit={onSubmit}>
-      <div className="space-y-8 w-full max-w-4xl p-4 border border-stone-300 rounded-xl">
-        <FormField
-          name="title"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Titlu</FormLabel>
-              <CheckmarkInput placeholder="Titlu" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="title"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Titlu</FormLabel>
+            <ValidationInput placeholder="ex: Pierdut cheie autoturism" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          name="name"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Nume</FormLabel>
-              <CheckmarkInput placeholder="Nume" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="image"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Imaginea anunțului</FormLabel>
+            <ImageSelect {...field} />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          name="phone"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Telefon</FormLabel>
-              <CheckmarkInput placeholder="Telefon" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="description"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Descriere</FormLabel>
+            <Textarea placeholder="Adaugǎ o descriere detaliatǎ" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          name="description"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Descriere</FormLabel>
-              <CheckmarkTextarea placeholder="Adauga descriere" {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="category"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Categorie</FormLabel>
+            <ComboBox
+              placeholder="Cautǎ dupa categorie"
+              defaultValue={defaultValues.county}
+              filter={filterData}
+              data={OBJECT_CATEGORY}
+              render={(item) => <p className="text-left">{item}</p>}
+              {...field}
+            />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          name="image"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Alege imaginea</FormLabel>
-              <ImageInput {...field} />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="location"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Județ | Sector</FormLabel>
+            <ComboBox
+              placeholder="Cautǎ dupa județ sau sector"
+              defaultValue={defaultValues.county}
+              filter={filterData}
+              data={COUNTIES}
+              render={(item) => <p className="text-left">{item}</p>}
+              {...field}
+            />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <FormField
-          name="location"
-          render={(field) => (
-            <FormItem>
-              <FormLabel>Județ | Sector</FormLabel>
-              <ComboBox
-                placeholder="Cauta dupa județ sau sector"
-                defaultValue={defaultValues.county}
-                filter={filterData}
-                data={COUNTIES}
-                render={(item) => <p className="text-left">{item}</p>}
-                {...field}
-              />
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <FormField
+        name="name"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Nume</FormLabel>
+            <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-        <button className="bg-teal-500 p-4 rounded-full text-teal-50" type="submit">
-          Publica anuntul
-        </button>
-      </div>
+      <FormField
+        name="phone"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Telefon</FormLabel>
+            <ValidationInput placeholder="Introdu numǎrul tau" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <button className="bg-teal-500 p-4 rounded-xl text-white hover:bg-teal-600" type="submit">
+        Publicǎ anunțul
+      </button>
     </Form>
   );
 };

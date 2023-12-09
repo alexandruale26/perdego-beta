@@ -3,18 +3,17 @@ import { twMerge } from "tailwind-merge";
 import Checkmark from "./Checkmark";
 import { useController } from "../reactForm/ControllerContext";
 
-const CheckmarkTextarea = React.forwardRef(({ className, ...props }, ref) => {
+const Textarea = React.forwardRef(({ className, ...props }, ref) => {
   const { fieldState } = useController();
   const { errorMessage, isValid } = fieldState ? fieldState : { errorMessage: null, isValid: false };
 
   return (
-    <div className="relative">
+    <div className="w-full max-w-xs relative">
       <textarea
         className={twMerge(
-          "w-full rounded-md border border-slate-700 bg-transparent py-2 pl-3 pr-8 text-sm shadow-sm transition-colors font-light placeholder:text-slate-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
+          "w-full h-[200px] rounded-md border border-slate-700 bg-transparent py-2 pl-3 pr-8 text-sm shadow-sm transition-colors font-light placeholder:text-slate-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
           className
         )}
-        rows={10}
         ref={ref}
         {...props}
       />
@@ -22,6 +21,6 @@ const CheckmarkTextarea = React.forwardRef(({ className, ...props }, ref) => {
     </div>
   );
 });
-CheckmarkTextarea.displayName = "CheckmarkInput";
+Textarea.displayName = "Textarea";
 
-export { CheckmarkTextarea };
+export default Textarea;

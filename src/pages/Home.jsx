@@ -2,7 +2,7 @@ import LostForm from "../ui/LostForm";
 
 const Home = () => {
   return (
-    <div className="max-w-[300px] mx-auto">
+    <div className="p-4">
       <LostForm />
     </div>
   );

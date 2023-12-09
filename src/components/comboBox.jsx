@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, forwardRef, Fragment } from "react";
 import { MagnifyingGlassIcon, CaretSortIcon } from "@radix-ui/react-icons";
-import Separator from "./separator";
+import Separator from "./Separator";
 import React from "react";
 
 const textStyle = "text-sm font-light";
