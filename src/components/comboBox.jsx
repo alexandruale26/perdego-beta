@@ -80,7 +80,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
   const titlePlaceholder = selected || placeholder;
 
   return (
-    <button
+    <div
       onClick={onComboBoxClick}
       ref={modalRef}
       className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
@@ -124,7 +124,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
           {!available && <p className={`py-6 text-center ${textStyle}`}>Niciun rezultat</p>}
         </div>
       )}
-    </button>
+    </div>
   );
 });
 

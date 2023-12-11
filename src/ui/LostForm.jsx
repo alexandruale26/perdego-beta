@@ -4,6 +4,7 @@ import Textarea from "../components/Textarea";
 import { Form } from "../reactForm/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
 import ComboBox from "../components/ComboBox";
+import Selector from "../components/Selector";
 import { COUNTIES, OBJECT_CATEGORY } from "../reactForm/constants";
 import { removeDiacritics } from "../utils/helpers";
 import { uploadImage } from "../services/postImageApi";
@@ -18,6 +19,11 @@ const schema = {
     maxLength: {
       value: 60,
       errorMessage: "Titlul trebuie sa aiba maxim 60 caractere",
+    },
+  },
+  postType: {
+    required: {
+      errorMessage: "Alege tipul de anunț",
     },
   },
   name: {
@@ -97,6 +103,17 @@ const FormNew = () => {
           <FormItem>
             <FormLabel>Titlu</FormLabel>
             <ValidationInput placeholder="ex: Pierdut cheie autoturism" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        name="postType"
+        render={(field) => (
+          <FormItem>
+            <FormLabel>Alege tipul de anunț</FormLabel>
+            <Selector values={["gasite", "pierdute"]} {...field} />
             <FormMessage />
           </FormItem>
         )}
