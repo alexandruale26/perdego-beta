@@ -11,6 +11,8 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
     const file = e.target.files[0];
     const maxSizeInBytes = 1024 * (1024 * 3);
 
+    //TODO: check file size and add error
+
     if (file) {
       if (file.size > maxSizeInBytes) {
         throw new Error("file too large");
@@ -32,7 +34,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
   return (
     <div
       className={twMerge(
-        `${INPUT_MAX_WIDTH} h-[200px] bg-slate-0 rounded-md hover:bg-slate-100 transition-all border border-slate-800 overflow-hidden`,
+        `${INPUT_MAX_WIDTH} h-[200px] rounded-lg hover:bg-emerald-200 transition-all border border-slate-800 overflow-hidden`,
         className
       )}
     >
@@ -42,7 +44,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
         {!selectedImage && (
           <div className="h-full w-full flex items-center justify-center flex-col gap-1">
             <p className="text-base font-normal text-slate-800">Adauga o imagine</p>
-            <p className="text-xs font-light text-slate-500">
+            <p className="text-xs font-light text-slate-600">
               Aceasta va fi imaginea anunțului tău <span className="font-medium">(max 3MB)</span>
             </p>
             <CameraIcon className="w-8 h-8 mt-2" />

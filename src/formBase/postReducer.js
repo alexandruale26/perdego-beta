@@ -1,4 +1,4 @@
-import * as consts from "./constants";
+import * as actions from "./constants";
 
 const addFieldRef = (refs, newRef) => {
   if (refs.find((el) => el.name === newRef.name)) return refs;
@@ -9,6 +9,8 @@ const validateFieldAtRegistering = (name, state) => {
   const input = state.refs.find((el) => el.name === name);
   const rules = state.schema[name];
   const defaultValidation = { isValid: false, errorMessage: null };
+
+  //TODO validate without empty spaces
 
   if (!rules) return defaultValidation;
 
@@ -27,10 +29,10 @@ const validateFieldAtRegistering = (name, state) => {
 
 const reducer = (state, { action, payload }) => {
   switch (action) {
-    case consts.FORM_REGISTER_DATA:
+    case actions.FORM_REGISTER_DATA:
       return { ...state, schema: payload.schema, defaultValues: payload.defaultValues };
 
-    case consts.FIELD_REGISTER:
+    case actions.FIELD_REGISTER:
       const fieldRef = payload.ref;
       const fieldName = fieldRef.name;
 
@@ -46,7 +48,7 @@ const reducer = (state, { action, payload }) => {
         },
       };
 
-    case consts.FIELD_REGISTER_ERROR:
+    case actions.FIELD_REGISTER_ERROR:
       return {
         ...state,
         fieldsState: {
@@ -55,7 +57,7 @@ const reducer = (state, { action, payload }) => {
         },
       };
 
-    case consts.FIELD_SET_VALIDITY:
+    case actions.FIELD_SET_VALIDITY:
       return {
         ...state,
         fieldsState: {

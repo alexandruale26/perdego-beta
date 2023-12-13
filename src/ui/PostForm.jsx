@@ -1,11 +1,11 @@
 import ImageSelect from "../components/ImageSelect";
 import ValidationInput from "../components/ValidationInput";
 import Textarea from "../components/Textarea";
-import { Form } from "../reactForm/FormContext";
+import { Form } from "../formBase/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
 import ComboBox from "../components/ComboBox";
 import Selector from "../components/Selector";
-import { COUNTIES, OBJECT_CATEGORY } from "../reactForm/constants";
+import { COUNTIES, OBJECT_CATEGORY } from "../sharedData";
 import { removeDiacritics } from "../utils/helpers";
 import { uploadImage } from "../services/postImageApi";
 import createPost from "../services/postApi";
@@ -13,8 +13,8 @@ import createPost from "../services/postApi";
 const schema = {
   title: {
     minLength: {
-      value: 15,
-      errorMessage: "Titlul trebuie sa aiba minim 15 caractere",
+      value: 10,
+      errorMessage: "Titlul trebuie sa aiba minim 10 caractere",
     },
     maxLength: {
       value: 60,
@@ -58,7 +58,7 @@ const schema = {
   },
   phone: {
     regex: {
-      pattern: /^\d{10}$/,
+      pattern: /^07\d{8}$/,
       errorMessage: "Numarul nu este valid",
     },
   },
@@ -75,6 +75,11 @@ const formData = {
   defaultValues,
 };
 
+const postType = [
+  ["found", "Gǎsite"],
+  ["lost", "Pierdute"],
+];
+
 const filterData = (data, search) => {
   return data.filter((value) => {
     const noDiacriticsSearch = removeDiacritics(value);
@@ -83,7 +88,7 @@ const filterData = (data, search) => {
   });
 };
 
-const FormNew = () => {
+const PostForm = () => {
   const onSubmit = (values) => {
     const process = async () => {
       const image = await uploadImage(values.image); // handle no image
@@ -93,6 +98,7 @@ const FormNew = () => {
     };
 
     process();
+    // console.log(values);
   };
 
   return (
@@ -112,8 +118,8 @@ const FormNew = () => {
         name="postType"
         render={(field) => (
           <FormItem>
-            <FormLabel>Alege tipul de anunț</FormLabel>
-            <Selector values={["gasite", "pierdute"]} {...field} />
+            <FormLabel>Tipul anunțului</FormLabel>
+            <Selector values={postType} {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -192,7 +198,7 @@ const FormNew = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Telefon</FormLabel>
-            <ValidationInput placeholder="Introdu numǎrul tau" {...field} />
+            <ValidationInput placeholder="ex: 07xxxxxxxx" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -205,4 +211,4 @@ const FormNew = () => {
   );
 };
 
-export default FormNew;
+export default PostForm;

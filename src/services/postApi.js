@@ -12,6 +12,7 @@ const createPost = async (post) => {
         location: post.location,
         category: post.category,
         image: post.image,
+        postType: post.postType,
       },
     ])
     .select();

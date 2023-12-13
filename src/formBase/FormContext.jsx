@@ -1,6 +1,6 @@
 import { useEffect, useReducer, createContext, useContext, useCallback } from "react";
 import postReducer from "./postReducer";
-import INITIAL_STATE, * as consts from "./constants";
+import INITIAL_STATE, * as actions from "./constants";
 
 const FormContext = createContext({});
 
@@ -8,11 +8,11 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
   const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
 
   const registerError = (name, message) => {
-    dispatch({ action: consts.FIELD_REGISTER_ERROR, payload: { name, message } });
+    dispatch({ action: actions.FIELD_REGISTER_ERROR, payload: { name, message } });
   };
 
   const setValidation = (name) => {
-    dispatch({ action: consts.FIELD_SET_VALIDITY, payload: { name } });
+    dispatch({ action: actions.FIELD_SET_VALIDITY, payload: { name } });
   };
 
   const allFieldsAreValid = () => {
@@ -64,7 +64,7 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
   };
 
   const registerField = useCallback(function registerField(ref) {
-    dispatch({ action: consts.FIELD_REGISTER, payload: { ref } });
+    dispatch({ action: actions.FIELD_REGISTER, payload: { ref } });
   }, []);
 
   const getFieldState = (fieldName) => {
@@ -76,7 +76,7 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
   };
 
   useEffect(() => {
-    dispatch({ action: consts.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
+    dispatch({ action: actions.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
   }, [schema, defaultValues, state.refs]);
 
   return (

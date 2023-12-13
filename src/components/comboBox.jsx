@@ -11,7 +11,7 @@ const Option = ({ item, onClick, children }) => {
     <li
       onClick={onClick}
       data-item={item}
-      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-stone-100 rounded-md`}
+      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-emerald-200 rounded-lg`}
     >
       {children}
     </li>
@@ -80,19 +80,20 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
   const titlePlaceholder = selected || placeholder;
 
   return (
-    <div
+    <button
+      type="button"
       onClick={onComboBoxClick}
       ref={modalRef}
-      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
+      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
     >
       <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
-      <div className="flex justify-between items-center w-full px-4 py-2 border bg-inherit rounded-md border-stone-300 hover:bg-stone-100 transition-colors select-none">
+      <div className="flex justify-between items-center w-full px-4 py-2 border bg-inherit rounded-lg border-stone-300 hover:bg-stone-100 transition-colors select-none">
         <p className="text-sm font-normal">{titlePlaceholder}</p>
         <CaretSortIcon className={iconStyle} />
       </div>
 
       {visible && (
-        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
+        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-lg overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
           <div className="flex justify-center items-center gap-2 px-3 py-2">
             <MagnifyingGlassIcon className={iconStyle} />
             <input
@@ -124,7 +125,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
           {!available && <p className={`py-6 text-center ${textStyle}`}>Niciun rezultat</p>}
         </div>
       )}
-    </div>
+    </button>
   );
 });
 

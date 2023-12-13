@@ -4,6 +4,7 @@ import { imageUniqueName } from "../utils/helpers";
 const uploadImage = async (image) => {
   const imageName = imageUniqueName(image.type);
 
+  // TODO: add try-catch
   const { data, error } = await supabase.storage.from("posts-images").upload(`public/${imageName}`, image, {
     cacheControl: "3600",
     upsert: false,

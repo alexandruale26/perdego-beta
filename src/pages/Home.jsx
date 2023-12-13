@@ -1,4 +1,4 @@
-import LostForm from "../ui/LostForm";
+import LostForm from "../ui/PostForm";
 
 const Home = () => {
   return (
