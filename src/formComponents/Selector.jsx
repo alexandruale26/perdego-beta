@@ -6,7 +6,7 @@ const Option = ({ item, className, onSelectedClick }) => {
     <li
       onClick={(e) => onSelectedClick(e, item[0])}
       className={twMerge(
-        "flex items-center justify-center flex-1 text-sm text-slate-900 font-normal hover:bg-emerald-200 select-none transition-all",
+        "flex items-center justify-center flex-1 text-sm text-slate-900 font-normal rounded-lg select-none transition-all",
         className
       )}
     >
@@ -30,7 +30,7 @@ const Selector = forwardRef(({ className, values, onChange, ...props }, ref) => 
     <button
       type="button"
       className={twMerge(
-        "h-9 w-full max-w-xs border border-slate-700 rounded-lg overflow-hidden focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950",
+        "h-9 w-full max-w-xs border border-stone-300 rounded-lg overflow-hidden focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950",
         className
       )}
     >
@@ -43,7 +43,7 @@ const Selector = forwardRef(({ className, values, onChange, ...props }, ref) => 
               item={item}
               className={selected === item[0] ? "bg-black text-emerald-300 hover:bg-black hover:text-emerald-300" : ""}
             />
-            {index + 1 < values.length && !selected && <div className="h-full w-[1px] bg-slate-700"></div>}
+            {/* {index + 1 < values.length && !selected && <div className="h-full w-[1px] bg-stone-300"></div>} */}
           </Fragment>
         ))}
       </ul>

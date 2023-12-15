@@ -27,7 +27,7 @@ const validateFieldAtRegistering = (name, state) => {
   }
 };
 
-const reducer = (state, { action, payload }) => {
+const formReducer = (state, { action, payload }) => {
   switch (action) {
     case actions.FORM_REGISTER_DATA:
       return { ...state, schema: payload.schema, defaultValues: payload.defaultValues };
@@ -71,4 +71,4 @@ const reducer = (state, { action, payload }) => {
   }
 };
 
-export default reducer;
+export default formReducer;

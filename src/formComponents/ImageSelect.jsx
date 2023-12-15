@@ -34,7 +34,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
   return (
     <div
       className={twMerge(
-        `${INPUT_MAX_WIDTH} h-[200px] rounded-lg hover:bg-emerald-200 transition-all border border-slate-800 overflow-hidden`,
+        `${INPUT_MAX_WIDTH} h-[200px] rounded-lg hover:bg-emerald-200 transition-all border border-stone-300 overflow-hidden`,
         className
       )}
     >

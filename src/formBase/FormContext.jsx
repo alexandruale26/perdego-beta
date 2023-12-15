@@ -1,5 +1,5 @@
 import { useEffect, useReducer, createContext, useContext, useCallback } from "react";
-import postReducer from "./postReducer";
+import postReducer from "./formReducer";
 import INITIAL_STATE, * as actions from "./constants";
 
 const FormContext = createContext({});

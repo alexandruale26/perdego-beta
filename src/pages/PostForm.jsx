@@ -1,14 +1,13 @@
-import ImageSelect from "../components/ImageSelect";
-import ValidationInput from "../components/ValidationInput";
-import Textarea from "../components/Textarea";
+import ImageSelect from "../formComponents/ImageSelect";
+import ValidationInput from "../formComponents/ValidationInput";
+import Textarea from "../formComponents/Textarea";
 import { Form } from "../formBase/FormContext";
-import { FormField, FormItem, FormMessage, FormLabel } from "../components/form";
-import ComboBox from "../components/ComboBox";
-import Selector from "../components/Selector";
+import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/form";
+import ComboBox from "../formComponents/ComboBox";
+import Selector from "../formComponents/Selector";
 import { COUNTIES, OBJECT_CATEGORY } from "../sharedData";
 import { removeDiacritics } from "../utils/helpers";
-import { uploadImage } from "../services/postImageApi";
-import createPost from "../services/postApi";
+import { createPost, uploadImage } from "../services/postApi";
 
 const schema = {
   title: {
@@ -90,14 +89,14 @@ const filterData = (data, search) => {
 
 const PostForm = () => {
   const onSubmit = (values) => {
-    const process = async () => {
+    const processPost = async () => {
       const image = await uploadImage(values.image); // handle no image
 
       const newData = { ...values, image: image };
       await createPost(newData);
     };
 
-    process();
+    processPost();
     // console.log(values);
   };
 
@@ -108,7 +107,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Titlu</FormLabel>
-            <ValidationInput placeholder="ex: Pierdut cheie autoturism" {...field} />
+            <ValidationInput placeholder="ex.: Pierdut cheie autoturism" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -198,7 +197,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Telefon</FormLabel>
-            <ValidationInput placeholder="ex: 07xxxxxxxx" {...field} />
+            <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
             <FormMessage />
           </FormItem>
         )}

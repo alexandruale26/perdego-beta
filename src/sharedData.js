@@ -53,7 +53,7 @@ const OBJECT_CATEGORY = [
   "Electronice personale",
   "Chei si carduri de acces",
   "Haine si accesorii",
-  "Animale de companie si accesorii",
+  "Animale de companie",
   "Obiecte de transport",
   "Jucarii si obiecte copii",
   "Altele",

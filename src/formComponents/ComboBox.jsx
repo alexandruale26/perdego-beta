@@ -19,6 +19,7 @@ const Option = ({ item, onClick, children }) => {
 };
 
 const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, onChange, onBlur, ...props }, ref) => {
+  //TODO: data to be array of objects {value: value, label: label}
   const [filtered, setFiltered] = useState(data);
   const [inputValue, setInputValue] = useState(defaultValue || "");
   const [selected, setSelected] = useState(defaultValue || "");
@@ -53,7 +54,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
     setSelected(value);
     setInputValue(value);
 
-    //error message if ref is ull
+    //TODO: error message if ref is ull
     ref.current.value = value;
     onChange(e);
   };
