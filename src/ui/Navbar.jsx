@@ -3,7 +3,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav className="h-[80px] w-full">
-      <div className="mx-auto flex max-w-7xl justify-between px-6 py-4 text-slate-700">
+      <div className="mx-auto flex max-w-7xl justify-between px-6 py-4 text-stone-700">
         <a href="/" className="uppercase">
           Pufisimo 🐶
         </a>

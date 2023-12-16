@@ -5,25 +5,25 @@ const addFieldRef = (refs, newRef) => {
   return [...refs, newRef];
 };
 
-const validateFieldAtRegistering = (name, state) => {
+const validateFieldAtRegister = (name, state) => {
   const input = state.refs.find((el) => el.name === name);
   const rules = state.schema[name];
-  const defaultValidation = { isValid: false, errorMessage: null };
+  const invalidByDefault = { isValid: false, errorMessage: null };
+  const validByDefault = { isValid: true, errorMessage: null };
+  //error message as 'null' because the form will start with invalid error messages
 
-  //TODO validate without empty spaces
-
-  if (!rules) return defaultValidation;
+  if (!rules) return validByDefault;
 
   if (rules.minLength && input.value.length <= rules.minLength.value - 1) {
-    return defaultValidation;
+    return invalidByDefault;
   } else if (rules.maxLength && input.value.length > rules.maxLength.value) {
-    return defaultValidation;
+    return invalidByDefault;
   } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
-    return defaultValidation;
+    return invalidByDefault;
   } else if (rules.required && input.value.length === 0) {
-    return defaultValidation;
+    return invalidByDefault;
   } else {
-    return { isValid: true, errorMessage: null };
+    return validByDefault;
   }
 };
 
@@ -37,7 +37,7 @@ const formReducer = (state, { action, payload }) => {
       const fieldName = fieldRef.name;
 
       fieldRef.value = state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
-      const fieldValidation = validateFieldAtRegistering(fieldName, state);
+      const fieldValidation = validateFieldAtRegister(fieldName, state);
 
       return {
         ...state,
@@ -48,7 +48,7 @@ const formReducer = (state, { action, payload }) => {
         },
       };
 
-    case actions.FIELD_REGISTER_ERROR:
+    case actions.FIELD_SET_INVALID:
       return {
         ...state,
         fieldsState: {
@@ -57,7 +57,7 @@ const formReducer = (state, { action, payload }) => {
         },
       };
 
-    case actions.FIELD_SET_VALIDITY:
+    case actions.FIELD_SET_VALID:
       return {
         ...state,
         fieldsState: {

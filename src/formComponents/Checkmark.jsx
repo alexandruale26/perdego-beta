@@ -5,7 +5,7 @@ const Checkmark = ({ className, isValid }) => {
   return (
     <div
       className={twMerge(
-        "flex justify-center items-center absolute w-8 h-full right-0 top-0 overflow-hidden",
+        "flex justify-center items-center absolute w-8 h-full right-1 top-0 overflow-hidden",
         className
       )}
     >

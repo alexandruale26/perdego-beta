@@ -20,11 +20,6 @@ const schema = {
       errorMessage: "Titlul trebuie sa aiba maxim 60 caractere",
     },
   },
-  postType: {
-    required: {
-      errorMessage: "Alege tipul de anunț",
-    },
-  },
   name: {
     minLength: {
       value: 3,
@@ -67,6 +62,9 @@ const defaultValues = {
   title: "",
   name: "Alexa",
   phone: "",
+  category: "",
+  location: "",
+  postType: "lost",
 };
 
 const formData = {
@@ -75,8 +73,8 @@ const formData = {
 };
 
 const postType = [
-  ["found", "Gǎsite"],
   ["lost", "Pierdute"],
+  ["found", "Gǎsite"],
 ];
 
 const filterData = (data, search) => {
@@ -96,8 +94,8 @@ const PostForm = () => {
       await createPost(newData);
     };
 
-    processPost();
-    // console.log(values);
+    // processPost();
+    console.log(values);
   };
 
   return (
@@ -118,8 +116,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Tipul anunțului</FormLabel>
-            <Selector values={postType} {...field} />
-            <FormMessage />
+            <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
           </FormItem>
         )}
       />
@@ -130,6 +127,7 @@ const PostForm = () => {
           <FormItem>
             <FormLabel>Imaginea anunțului</FormLabel>
             <ImageSelect {...field} />
+            <FormMessage />
           </FormItem>
         )}
       />
@@ -151,8 +149,8 @@ const PostForm = () => {
           <FormItem>
             <FormLabel>Categorie</FormLabel>
             <ComboBox
-              placeholder="Cautǎ dupa categorie"
-              defaultValue={defaultValues.county}
+              placeholder="Cautǎ dupǎ categorie"
+              defaultValue={defaultValues.category}
               filter={filterData}
               data={OBJECT_CATEGORY}
               render={(item) => <p className="text-left">{item}</p>}
@@ -169,7 +167,7 @@ const PostForm = () => {
           <FormItem>
             <FormLabel>Județ | Sector</FormLabel>
             <ComboBox
-              placeholder="Cautǎ dupa județ sau sector"
+              placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.county}
               filter={filterData}
               data={COUNTIES}

@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     fontFamily: {
       sans: [

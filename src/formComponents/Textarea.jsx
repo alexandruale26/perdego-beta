@@ -11,7 +11,7 @@ const Textarea = React.forwardRef(({ className, ...props }, ref) => {
     <div className="w-full max-w-xs relative">
       <textarea
         className={twMerge(
-          "w-full h-[200px] rounded-lg border border-stone-300 bg-transparent py-2 pl-3 pr-8 text-sm shadow-sm transition-colors font-light placeholder:text-slate-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
+          "w-full h-[200px] rounded-lg border border-stone-300 bg-transparent py-2 pl-3 pr-8 text-sm shadow-md transition-colors font-light placeholder:text-stone-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
           className
         )}
         ref={ref}

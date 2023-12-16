@@ -54,7 +54,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
     setSelected(value);
     setInputValue(value);
 
-    //TODO: error message if ref is ull
+    //TODO: error message if ref is null
     ref.current.value = value;
     onChange(e);
   };
@@ -85,16 +85,16 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
       type="button"
       onClick={onComboBoxClick}
       ref={modalRef}
-      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
+      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-lg shadow-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950"
     >
       <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
-      <div className="flex justify-between items-center w-full px-4 py-2 border bg-inherit rounded-lg border-stone-300 hover:bg-stone-100 transition-colors select-none">
-        <p className="text-sm font-normal">{titlePlaceholder}</p>
+      <div className="flex justify-between items-center w-full px-3 py-2 border bg-inherit rounded-lg border-stone-300 hover:bg-stone-100 transition-colors select-none">
+        <p className="text-sm font-light">{titlePlaceholder}</p>
         <CaretSortIcon className={iconStyle} />
       </div>
 
       {visible && (
-        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-lg overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
+        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-lg overflow-scroll animate-in zoom-in-50 ease-out shadow-xl">
           <div className="flex justify-center items-center gap-2 px-3 py-2">
             <MagnifyingGlassIcon className={iconStyle} />
             <input

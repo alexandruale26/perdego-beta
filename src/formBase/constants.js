@@ -1,14 +1,14 @@
 const FORM_REGISTER_DATA = "form/registerData";
 const FIELD_REGISTER = "field/register";
-const FIELD_REGISTER_ERROR = "field/registerError";
-const FIELD_SET_VALIDITY = "field/setValidity";
+const FIELD_SET_INVALID = "field/setInvalid";
+const FIELD_SET_VALID = "field/setValid";
 
 const INITIAL_STATE = {
-  refs: [],
+  refs: [], //TODO: should remove refs and get the element by name from DOM
   schema: {},
   defaultValues: {},
   fieldsState: {},
 };
 
 export default INITIAL_STATE;
-export { FORM_REGISTER_DATA, FIELD_REGISTER, FIELD_REGISTER_ERROR, FIELD_SET_VALIDITY };
+export { FORM_REGISTER_DATA, FIELD_REGISTER, FIELD_SET_INVALID, FIELD_SET_VALID };

@@ -7,12 +7,12 @@ const FormContext = createContext({});
 const Form = ({ children, schema, defaultValues, onSubmit }) => {
   const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
 
-  const registerError = (name, message) => {
-    dispatch({ action: actions.FIELD_REGISTER_ERROR, payload: { name, message } });
+  const setAsInvalid = (name, message) => {
+    dispatch({ action: actions.FIELD_SET_INVALID, payload: { name, message } });
   };
 
-  const setValidation = (name) => {
-    dispatch({ action: actions.FIELD_SET_VALIDITY, payload: { name } });
+  const setAsValid = (name) => {
+    dispatch({ action: actions.FIELD_SET_VALID, payload: { name } });
   };
 
   const allFieldsAreValid = () => {
@@ -32,18 +32,18 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
     const input = state.refs.find((el) => el.name === name);
     const rules = state.schema[name];
 
-    if (!rules) return setValidation(name);
+    if (!rules) return setAsValid(name);
 
     if (rules.minLength && input.value.length <= rules.minLength.value - 1) {
-      registerError(name, rules.minLength.errorMessage);
+      setAsInvalid(name, rules.minLength.errorMessage);
     } else if (rules.maxLength && input.value.length > rules.maxLength.value) {
-      registerError(name, rules.maxLength.errorMessage);
+      setAsInvalid(name, rules.maxLength.errorMessage);
     } else if (rules.regex && !rules.regex.pattern.test(input.value)) {
-      registerError(name, rules.regex.errorMessage);
+      setAsInvalid(name, rules.regex.errorMessage);
     } else if (rules.required && input.value.length === 0) {
-      registerError(name, rules.required.errorMessage);
+      setAsInvalid(name, rules.required.errorMessage);
     } else {
-      setValidation(name);
+      setAsValid(name);
     }
   };
 
@@ -71,18 +71,14 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
     return state.fieldsState[fieldName];
   };
 
-  const getFieldSchema = (fieldName) => {
-    return state.schema[fieldName];
-  };
-
   useEffect(() => {
     dispatch({ action: actions.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
   }, [schema, defaultValues, state.refs]);
 
   return (
-    <FormContext.Provider value={{ registerField, getFieldState, validateField, getFieldSchema }}>
+    <FormContext.Provider value={{ registerField, getFieldState, validateField, setAsInvalid }}>
       <form
-        className="space-y-8 w-full max-w-xl p-4 border border-stone-300 rounded-md mx-auto"
+        className="space-y-8 w-full max-w-xl p-4 border border-stone-300 rounded-lg mx-auto"
         onSubmit={handleSubmit}
       >
         {children}

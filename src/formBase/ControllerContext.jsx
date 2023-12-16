@@ -6,7 +6,7 @@ const ControllerContext = createContext({});
 const Controller = ({ name, render }) => {
   const ref = useRef(null);
 
-  const { registerField, validateField, getFieldState, getFieldSchema } = useFormContext();
+  const { registerField, validateField, getFieldState, setAsInvalid } = useFormContext();
 
   useEffect(() => {
     registerField(ref.current);
@@ -22,13 +22,14 @@ const Controller = ({ name, render }) => {
   };
 
   // here i could add all kind of input events: onFocus, etc
-
   const fieldState = getFieldState(name);
-  const fieldSchema = getFieldSchema(name);
+  const setFieldAsInvalid = (message) => setAsInvalid(name, message);
   const field = { id: name, name, onChange, onBlur, ref };
 
   return (
-    <ControllerContext.Provider value={{ name, fieldState, fieldSchema }}>{render(field)}</ControllerContext.Provider>
+    <ControllerContext.Provider value={{ name, fieldState, setFieldAsInvalid }}>
+      {render(field)}
+    </ControllerContext.Provider>
   );
 };
 
