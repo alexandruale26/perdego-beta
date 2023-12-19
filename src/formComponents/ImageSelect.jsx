@@ -1,8 +1,9 @@
 import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
-import { CameraIcon, Cross2Icon } from "@radix-ui/react-icons";
-import { INPUT_MAX_WIDTH, IMAGE_MAX_SIZE_MB } from "./constants";
+import { ImageIcon, Cross2Icon } from "@radix-ui/react-icons";
+
+const IMAGE_MAX_SIZE_MB = 5;
 
 const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -39,11 +40,10 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
   };
 
   return (
-    <div
+    <button
+      type="button"
       className={twMerge(
-        `${INPUT_MAX_WIDTH} h-[200px] flex rounded-lg hover:bg-emerald-200 transition-all ${
-          !selectedImage ? "border" : "border-none"
-        } border-stone-300 ${!selectedImage ? "shadow-md" : "shadow-lg"} overflow-hidden`,
+        "h-[200px] xs:h-[280px] w-full flex bg-white rounded-md hover:bg-emerald-200 transition-colors border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 overflow-hidden",
         className
       )}
     >
@@ -51,12 +51,12 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
         <input hidden type="file" accept="image/*" onChange={handleImageChange} ref={ref} {...props} />
 
         {!selectedImage && (
-          <div className="h-full w-full flex items-center justify-center flex-col gap-1">
+          <div className="h-full w-full flex items-center justify-center flex-col gap-1  cursor-pointer">
             <p className="text-base font-normal text-stone-800">Adauga o imagine</p>
             <p className="text-xs font-light text-stone-600">
               Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
             </p>
-            <CameraIcon className="w-8 h-8 mt-2" />
+            <ImageIcon className="w-10 h-10 mt-2" />
           </div>
         )}
         {selectedImage && (
@@ -72,7 +72,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
           <Cross2Icon className="w-10 h-10" />
         </button>
       )}
-    </div>
+    </button>
   );
 });
 ImageSelect.displayName = "ImageSelect";

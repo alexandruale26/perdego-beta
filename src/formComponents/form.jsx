@@ -2,13 +2,15 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 import { Controller, useController } from "../formBase/ControllerContext";
 
+const FORM_ITEM_BASE_WIDTH = "w-full max-w-xs";
+
 const FormField = ({ ...props }) => {
   return <Controller {...props} />;
 };
 
 const FormItem = ({ className, children, ...props }) => {
   return (
-    <div className={twMerge("space-y-2", className)} {...props}>
+    <div className={twMerge(`${FORM_ITEM_BASE_WIDTH} space-y-2`, className)} {...props}>
       {children}
     </div>
   );
@@ -41,7 +43,7 @@ const FormMessage = ({ className, children, ...props }) => {
   }
 
   return (
-    <p className={twMerge("text-[0.8rem] font-normal text-rose-500", className)} {...props}>
+    <p className={twMerge("text-[0.8rem] font-normal text-red-500", className)} {...props}>
       {body}
     </p>
   );

@@ -5,19 +5,19 @@ import { useController } from "../formBase/ControllerContext";
 
 const Textarea = React.forwardRef(({ className, ...props }, ref) => {
   const { fieldState } = useController();
-  const { errorMessage, isValid } = fieldState ? fieldState : { errorMessage: null, isValid: false };
+  const { isValid } = fieldState ? fieldState : { isValid: false };
 
   return (
-    <div className="w-full max-w-xs relative">
+    <div className="w-full relative h-[200px]">
       <textarea
         className={twMerge(
-          "w-full h-[200px] rounded-lg border border-stone-300 bg-transparent py-2 pl-3 pr-8 text-sm shadow-md transition-colors font-light placeholder:text-stone-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
+          "w-full h-full rounded-md border border-stone-300 bg-white py-2 pl-3 pr-8 text-sm transition-colors font-light placeholder:text-stone-500 placeholder:font-light focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 resize-none",
           className
         )}
         ref={ref}
         {...props}
       />
-      {(errorMessage || isValid) && <Checkmark isValid={isValid} className="items-start top-2" />}
+      {isValid && <Checkmark className="items-start top-2" />}
     </div>
   );
 });

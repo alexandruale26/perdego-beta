@@ -11,7 +11,7 @@ const Option = ({ item, onClick, children }) => {
     <li
       onClick={onClick}
       data-item={item}
-      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-emerald-200 rounded-lg`}
+      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-emerald-200 rounded-md`}
     >
       {children}
     </li>
@@ -54,7 +54,8 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
     setSelected(value);
     setInputValue(value);
 
-    //TODO: error message if ref is null
+    //TODO: error message if ref is null ????
+    if (!ref) alert("ComboBox ref is null");
     ref.current.value = value;
     onChange(e);
   };
@@ -85,16 +86,16 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
       type="button"
       onClick={onComboBoxClick}
       ref={modalRef}
-      className="bg-white relative w-full max-w-xs h-full space-y-1 rounded-lg shadow-md focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950"
+      className="bg-white relative w-full max-w-xs h-9 space-y-1 rounded-md border focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
     >
       <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
-      <div className="flex justify-between items-center w-full px-3 py-2 border bg-inherit rounded-lg border-stone-300 hover:bg-stone-100 transition-colors select-none">
+      <div className="flex justify-between items-center w-full px-3 py-1 bg-inherit rounded-md transition-colors select-none">
         <p className="text-sm font-light">{titlePlaceholder}</p>
         <CaretSortIcon className={iconStyle} />
       </div>
 
       {visible && (
-        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-lg overflow-scroll animate-in zoom-in-50 ease-out shadow-xl">
+        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
           <div className="flex justify-center items-center gap-2 px-3 py-2">
             <MagnifyingGlassIcon className={iconStyle} />
             <input
@@ -105,7 +106,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
               onChange={handleInputChange}
               placeholder={placeholder}
               type="text"
-              className={`${textStyle} w-full bg-inherit placeholder:text-sm placeholder:font-light placeholder:text-stone-500 focus:outline-none focus:ring-0`}
+              className={`${textStyle} w-full bg-inherit placeholder:text-sm placeholder:font-light placeholder:text-stone-500 focus:outline-none`}
             />
           </div>
 

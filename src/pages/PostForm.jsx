@@ -103,9 +103,31 @@ const PostForm = () => {
       <FormField
         name="title"
         render={(field) => (
-          <FormItem>
+          <FormItem className="max-w-lg">
             <FormLabel>Titlu</FormLabel>
             <ValidationInput placeholder="ex.: Pierdut cheie autoturism" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        name="image"
+        render={(field) => (
+          <FormItem className="max-w-lg">
+            <FormLabel>Imaginea anunțului</FormLabel>
+            <ImageSelect {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        name="description"
+        render={(field) => (
+          <FormItem className="max-w-lg">
+            <FormLabel>Descriere</FormLabel>
+            <Textarea placeholder="Adaugǎ o descriere detaliatǎ" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -117,28 +139,6 @@ const PostForm = () => {
           <FormItem>
             <FormLabel>Tipul anunțului</FormLabel>
             <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        name="image"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Imaginea anunțului</FormLabel>
-            <ImageSelect {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        name="description"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Descriere</FormLabel>
-            <Textarea placeholder="Adaugǎ o descriere detaliatǎ" {...field} />
-            <FormMessage />
           </FormItem>
         )}
       />
@@ -201,7 +201,10 @@ const PostForm = () => {
         )}
       />
 
-      <button className="bg-teal-500 p-4 rounded-xl text-white hover:bg-teal-600" type="submit">
+      <button
+        className="bg-black p-4 rounded-md text-white hover:text-emerald-300 focus-visible:outline-none"
+        type="submit"
+      >
         Publicǎ anunțul
       </button>
     </Form>

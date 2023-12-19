@@ -1,12 +1,11 @@
 import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
-import { INPUT_MAX_WIDTH } from "./constants";
 
 const Input = forwardRef(({ className, type, ...props }, ref) => {
   <input
     type={type}
     className={twMerge(
-      `${INPUT_MAX_WIDTH} flex h-9 flex-1 rounded-lg border border-stone-700 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-light font-light placeholder:text-stone-500 placeholder:font-light focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950 disabled:cursor-not-allowed disabled:opacity-50 `,
+      "flex h-9 w-full rounded-md border border-stone-300 bg-white px-3 py-1 text-sm transition-colors font-light placeholder:text-stone-500 placeholder:font-light focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700",
       className
     )}
     ref={ref}

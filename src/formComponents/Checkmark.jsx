@@ -1,7 +1,7 @@
 import { CheckIcon } from "@radix-ui/react-icons";
 import { twMerge } from "tailwind-merge";
 
-const Checkmark = ({ className, isValid }) => {
+const Checkmark = ({ className }) => {
   return (
     <div
       className={twMerge(
@@ -9,11 +9,9 @@ const Checkmark = ({ className, isValid }) => {
         className
       )}
     >
-      {isValid && (
-        <div className="bg-emerald-500 rounded-full animate-in slide-in-from-right-10">
-          <CheckIcon className="w-6 h-6 text-white" />
-        </div>
-      )}
+      <div className="bg-emerald-500 rounded-full animate-in slide-in-from-right-10">
+        <CheckIcon className="w-6 h-6 text-white" />
+      </div>
     </div>
   );
 };

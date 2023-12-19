@@ -6,7 +6,7 @@ const Option = ({ item, className, onSelectedClick }) => {
     <li
       onClick={(e) => onSelectedClick(e, item[0])}
       className={twMerge(
-        "flex items-center justify-center flex-1 text-sm text-stone-900 font-light hover:bg-emerald-300 select-none transition-all",
+        "flex items-center justify-center flex-1 text-sm text-stone-900 font-medium hover:bg-emerald-300 select-none transition-all",
         className
       )}
     >
@@ -30,7 +30,7 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
     <button
       type="button"
       className={twMerge(
-        "h-9 w-full max-w-xs border border-stone-300 rounded-lg shadow-md overflow-hidden focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-950",
+        "h-9 w-full max-w-xs bg-white border border-stone-300 rounded-md overflow-hidden focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700",
         className
       )}
     >

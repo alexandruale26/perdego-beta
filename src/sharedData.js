@@ -49,13 +49,13 @@ const COUNTIES = [
 ];
 
 const OBJECT_CATEGORY = [
-  "Documente si carduri",
+  "Documente și carduri",
   "Electronice personale",
-  "Chei si carduri de acces",
-  "Haine si accesorii",
+  "Chei și carduri de acces",
+  "Haine și accesorii",
   "Animale de companie",
   "Obiecte de transport",
-  "Jucarii si obiecte copii",
+  "Jucǎrii și obiecte copii",
   "Altele",
 ];
 

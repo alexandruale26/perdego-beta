@@ -77,10 +77,7 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
 
   return (
     <FormContext.Provider value={{ registerField, getFieldState, validateField, setAsInvalid }}>
-      <form
-        className="space-y-8 w-full max-w-xl p-4 border border-stone-300 rounded-lg mx-auto"
-        onSubmit={handleSubmit}
-      >
+      <form className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md border" onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>
