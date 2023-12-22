@@ -16,13 +16,14 @@ const router = createBrowserRouter([
         path: "post/:uid",
         element: <Post />,
         loader: postLoader,
+        errorElement: <div>Not found</div>,
       },
       {
-        path: "postnew",
+        path: "post/new",
         element: <PostForm />,
       },
       {
-        path: "postedit",
+        path: "post/edit",
         element: <div>Edit Post</div>,
       },
       //TODO: Add element on not existing path *

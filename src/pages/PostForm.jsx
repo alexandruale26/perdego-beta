@@ -184,7 +184,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Nume</FormLabel>
-            <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
+            <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" disabled {...field} />
             <FormMessage />
           </FormItem>
         )}

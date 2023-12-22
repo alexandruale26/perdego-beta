@@ -9,8 +9,8 @@ const Checkmark = ({ className }) => {
         className
       )}
     >
-      <div className="bg-emerald-500 rounded-full animate-in slide-in-from-right-10">
-        <CheckIcon className="w-6 h-6 text-white" />
+      <div className=" rounded-full animate-in slide-in-from-right-10">
+        <CheckIcon className="w-6 h-6 text-emerald-500" />
       </div>
     </div>
   );
