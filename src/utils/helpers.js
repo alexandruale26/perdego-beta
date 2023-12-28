@@ -11,4 +11,27 @@ const imageUniqueName = (imageType) => {
   return imageRandomName(type);
 };
 
-export { removeDiacritics, imageUniqueName };
+const convertPostTypeToRou = (postType) => (postType === "lost" ? "Pierdute" : "Gǎsite");
+
+const formatPostDate = (timestamp) => {
+  //TODO: post should be 15 or 30 days available. if 30 days modify the function
+  const postDate = new Date(timestamp);
+  const today = new Date();
+
+  const todayDay = today.getDate();
+  const postDay = postDate.getDate();
+
+  const hours = postDate.getHours();
+  const minutes = postDate.getMinutes();
+
+  if (postDay === todayDay) {
+    return `Azi la ${hours}:${minutes}`;
+  } else if (postDay === todayDay - 1) {
+    return `Ieri la ${hours}:${minutes}`;
+  } else {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Intl.DateTimeFormat("ro-RO", options).format(postDate);
+  }
+};
+
+export { removeDiacritics, imageUniqueName, convertPostTypeToRou, formatPostDate };
