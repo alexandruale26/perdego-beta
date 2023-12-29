@@ -1,15 +1,9 @@
-const imageRandomName = (extension) => {
-  return `${Math.floor(Math.random() * 99999999)}-${Math.floor(Math.random() * 99999999)}.${extension}`;
+const imageRandomName = () => {
+  return `${Math.floor(Math.random() * 99999999)}-${Math.floor(Math.random() * 99999999)}`;
 };
 
+//TODO: change the input data to search to a better type {name:name, value:value}
 const removeDiacritics = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-const imageUniqueName = (imageType) => {
-  const slashPosition = imageType.lastIndexOf("/");
-  const type = imageType.slice(slashPosition + 1);
-
-  return imageRandomName(type);
-};
 
 const convertPostTypeToRou = (postType) => (postType === "lost" ? "Pierdute" : "Gǎsite");
 
@@ -34,4 +28,4 @@ const formatPostDate = (timestamp) => {
   }
 };
 
-export { removeDiacritics, imageUniqueName, convertPostTypeToRou, formatPostDate };
+export { removeDiacritics, imageRandomName, convertPostTypeToRou, formatPostDate };

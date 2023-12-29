@@ -1,6 +1,9 @@
 import supabase from "./supabase";
 
-import { imageUniqueName } from "../utils/helpers";
+import { imageRandomName } from "../utils/helpers";
+
+//TODO: should add path for multiple folders
+const imageExtension = "png";
 
 const createPost = async (post) => {
   const { data, error } = await supabase
@@ -24,15 +27,17 @@ const createPost = async (post) => {
 };
 
 const getPost = async (postId) => {
+  //TODO: fix errors if any
   const { data, error } = await supabase.from("posts").select().eq("postId", postId).single();
   return data;
 };
 
 const uploadImage = async (image) => {
-  const imageName = imageUniqueName(image.type);
+  const imageUniqueName = imageRandomName();
+  const imageFullName = `${imageUniqueName}.${imageExtension}`;
 
   // TODO: add try-catch
-  const { data, error } = await supabase.storage.from("posts-images").upload(imageName, image, {
+  const { data, error } = await supabase.storage.from("posts-images").upload(imageFullName, image, {
     cacheControl: "3600",
     upsert: false,
   });

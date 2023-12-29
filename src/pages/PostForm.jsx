@@ -6,7 +6,7 @@ import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/f
 import ComboBox from "../formComponents/ComboBox";
 import Selector from "../formComponents/Selector";
 import { COUNTIES, OBJECT_CATEGORY } from "../sharedData";
-import { removeDiacritics } from "../utils/helpers";
+import { convertImage, filterData } from "../formBase/formHelpers";
 import { createPost, uploadImage } from "../services/postApi";
 
 const schema = {
@@ -77,25 +77,18 @@ const postType = [
   ["found", "Gǎsite"],
 ];
 
-const filterData = (data, search) => {
-  return data.filter((value) => {
-    const noDiacriticsSearch = removeDiacritics(value);
-    const noDiacriticsTarget = removeDiacritics(search);
-    return noDiacriticsSearch.toLowerCase().includes(noDiacriticsTarget.toLowerCase());
-  });
-};
-
 const PostForm = () => {
   const onSubmit = (values) => {
     const processPost = async () => {
-      const image = await uploadImage(values.image); // handle no image
+      const convertedImg = await convertImage(values.image, 1000, 1000);
+      const image = await uploadImage(convertedImg); //TODO: handle no image
 
-      const newData = { ...values, image: image };
+      const newData = { ...values, image };
       await createPost(newData);
     };
 
-    // processPost();
-    console.log(values);
+    processPost();
+    // console.log(values);
   };
 
   return (

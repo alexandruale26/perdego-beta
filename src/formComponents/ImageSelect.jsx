@@ -39,6 +39,8 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
     setSelectedImage(null);
   };
 
+  //TODO: extract delete button from button. not allowed nested buttons
+
   return (
     <button
       type="button"

@@ -24,7 +24,7 @@ const Post = () => {
 
       <Section className="flex-col items-start justify-center">
         <div className="w-full flex items-center justify-between">
-          <p className="text-xs font-light text-stone-600">{formatPostDate(post.createdAt)}</p>
+          <p className="text-sm font-light text-stone-600">{formatPostDate(post.createdAt)}</p>
           <FavoriteButton isFavorite={true}></FavoriteButton>
         </div>
 
@@ -54,7 +54,7 @@ const Post = () => {
 
 const loader = async () => {
   //TODO: manage request and response params, and unknown id
-  const postId = "dba9034b-80c3-42d0-b662-9e7cb8a79d85";
+  const postId = "8a53b447-6c38-4ffb-931f-a68c80422617";
   const receivedData = await getPost(postId);
   const image = getImageUrl(receivedData.image);
 
