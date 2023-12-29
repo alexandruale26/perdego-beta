@@ -42,29 +42,33 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
   //TODO: extract delete button from button. not allowed nested buttons
 
   return (
-    <button
-      type="button"
+    <div
       className={twMerge(
-        "h-[200px] xs:h-[280px] w-full flex bg-white rounded-md hover:bg-emerald-200 transition-colors border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 overflow-hidden",
+        "h-[200px] xs:h-[280px] w-full flex bg-white rounded-md hover:bg-emerald-200 transition-colors overflow-hidden",
         className
       )}
     >
-      <label className="h-full w-full items-center justify-center overflow-hidden">
-        <input hidden type="file" accept="image/*" onChange={handleImageChange} ref={ref} {...props} />
+      <button
+        type="button"
+        className="h-full w-full border border-stone-300 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
+      >
+        <label className="h-full w-full items-center justify-center overflow-hidden">
+          <input hidden type="file" accept="image/*" onChange={handleImageChange} ref={ref} {...props} />
 
-        {!selectedImage && (
-          <div className="h-full w-full flex items-center justify-center flex-col gap-1  cursor-pointer">
-            <p className="text-base font-normal text-stone-800">Adauga o imagine</p>
-            <p className="text-xs font-light text-stone-600">
-              Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
-            </p>
-            <ImageIcon className="w-10 h-10 mt-2" />
-          </div>
-        )}
-        {selectedImage && (
-          <img src={selectedImage} alt="selected" className="w-full h-full object-cover hover:brightness-[0.6]" />
-        )}
-      </label>
+          {!selectedImage && (
+            <div className="h-full w-full flex items-center justify-center flex-col gap-1  cursor-pointer">
+              <p className="text-base font-normal text-stone-800">Adauga o imagine</p>
+              <p className="text-xs font-light text-stone-600">
+                Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
+              </p>
+              <ImageIcon className="w-10 h-10 mt-2" />
+            </div>
+          )}
+          {selectedImage && (
+            <img src={selectedImage} alt="selected" className="w-full h-full object-cover hover:brightness-[0.6]" />
+          )}
+        </label>
+      </button>
       {selectedImage && (
         <button
           type="button"
@@ -74,7 +78,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
           <Cross2Icon className="w-10 h-10" />
         </button>
       )}
-    </button>
+    </div>
   );
 });
 ImageSelect.displayName = "ImageSelect";
