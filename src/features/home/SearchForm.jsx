@@ -8,6 +8,10 @@ import { COUNTIES, OBJECT_CATEGORY } from "../../sharedData";
 import { filterData } from "../../utils/helpers";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
+const SearchFormDivision = ({ children }) => {
+  return <div className="flex flex-col xsm:flex-row w-full gap-4">{children}</div>;
+};
+
 const defaultValues = {
   search: "",
   location: "",
@@ -33,15 +37,17 @@ const SearchForm = () => {
     <Form
       {...formData}
       onSubmit={onSubmit}
-      className="flex w-full max-w-4xl items-start justify-center gap-6 px-4 py-6 bg-white mx-auto rounded-md border"
+      className="flex flex-col w-full max-w-4xl items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md border"
     >
       <div className="flex flex-col w-full gap-4">
-        <div className="flex w-full gap-4">
+        <h3 className="text-base text-stone-800 text-start pl-1">Ce anume cauți?</h3>
+
+        <SearchFormDivision>
           <FormField
             name="search"
             render={(field) => (
               <FormItem className="max-w-full">
-                <SimpleInput placeholder="Ce cauti?" {...field} />
+                <SimpleInput placeholder="ex.: Cheie autoturism" {...field} />
               </FormItem>
             )}
           />
@@ -61,9 +67,9 @@ const SearchForm = () => {
               </FormItem>
             )}
           />
-        </div>
+        </SearchFormDivision>
 
-        <div className="flex w-full gap-4">
+        <SearchFormDivision>
           <FormField
             name="postType"
             render={(field) => (
@@ -87,11 +93,11 @@ const SearchForm = () => {
               </FormItem>
             )}
           />
-        </div>
+        </SearchFormDivision>
       </div>
 
-      <div className="">
-        <SubmitButton className="flex items-center justify-center gap-2 h-9 px-4" type="submit">
+      <div className="w-full">
+        <SubmitButton className="h-9 w-full xsm:w-56 flex items-center justify-center gap-2" type="submit">
           Cǎutare
           <MagnifyingGlassIcon className="w-6 h-6" />
         </SubmitButton>

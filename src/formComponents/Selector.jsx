@@ -6,7 +6,7 @@ const Option = ({ item, className, onSelectedClick }) => {
     <li
       onClick={(e) => onSelectedClick(e, item[0])}
       className={twMerge(
-        "flex items-center justify-center flex-1 text-sm text-stone-900 font-medium hover:bg-emerald-300 select-none transition-all",
+        "flex items-center justify-center flex-1 text-sm text-stone-900 font-light hover:bg-emerald-400 hover:text-white select-none transition-all",
         className
       )}
     >

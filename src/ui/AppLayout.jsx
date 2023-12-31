@@ -6,6 +6,8 @@ const AppLayout = () => {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
+  const altColor = "[rgb(240_240_240)]";
+
   return (
     <>
       <Navbar />
