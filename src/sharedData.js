@@ -40,12 +40,12 @@ const COUNTIES = [
   "Vâlcea",
   "Vaslui",
   "Vrancea",
-  "Sectorul 1",
-  "Sectorul 2",
-  "Sectorul 3",
-  "Sectorul 4",
-  "Sectorul 5",
-  "Sectorul 6",
+  "București, Sectorul 1",
+  "București, Sectorul 2",
+  "București, Sectorul 3",
+  "București, Sectorul 4",
+  "București, Sectorul 5",
+  "București, Sectorul 6",
 ];
 
 const OBJECT_CATEGORY = [

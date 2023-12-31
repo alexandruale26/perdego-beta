@@ -30,7 +30,7 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
     <button
       type="button"
       className={twMerge(
-        "h-9 w-full max-w-xs bg-white border border-stone-300 rounded-md overflow-hidden focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700",
+        "h-9 w-full bg-white border border-stone-300 rounded-md overflow-hidden focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700",
         className
       )}
     >

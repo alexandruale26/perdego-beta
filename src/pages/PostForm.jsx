@@ -6,8 +6,10 @@ import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/f
 import ComboBox from "../formComponents/ComboBox";
 import Selector from "../formComponents/Selector";
 import { COUNTIES, OBJECT_CATEGORY } from "../sharedData";
-import { convertImage, filterData } from "../formBase/formHelpers";
+import { convertImage } from "../formBase/formHelpers";
+import { filterData } from "../utils/helpers";
 import { createPost, uploadImage } from "../services/postApi";
+import SubmitButton from "../shared/SubmitButton";
 
 const schema = {
   title: {
@@ -63,8 +65,8 @@ const defaultValues = {
   name: "Alexa",
   phone: "",
   category: "",
-  location: "",
   postType: "lost",
+  location: "",
 };
 
 const formData = {
@@ -87,12 +89,16 @@ const PostForm = () => {
       await createPost(newData);
     };
 
-    processPost();
+    // processPost();
     // console.log(values);
   };
 
   return (
-    <Form {...formData} onSubmit={onSubmit}>
+    <Form
+      {...formData}
+      onSubmit={onSubmit}
+      className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md border"
+    >
       <FormField
         name="title"
         render={(field) => (
@@ -103,7 +109,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="image"
         render={(field) => (
@@ -114,7 +119,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="description"
         render={(field) => (
@@ -125,7 +129,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="postType"
         render={(field) => (
@@ -135,7 +138,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="category"
         render={(field) => (
@@ -153,7 +155,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="location"
         render={(field) => (
@@ -171,7 +172,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="name"
         render={(field) => (
@@ -182,7 +182,6 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
       <FormField
         name="phone"
         render={(field) => (
@@ -193,15 +192,10 @@ const PostForm = () => {
           </FormItem>
         )}
       />
-
-      <button
-        className="bg-black p-4 rounded-md text-white hover:text-emerald-300 focus-visible:outline-none"
-        type="submit"
-      >
-        Publicǎ anunțul
-      </button>
+      <SubmitButton className="p-4">Publicǎ anunțul</SubmitButton>
     </Form>
   );
 };
+//TODO: make reusable submit button
 
 export default PostForm;

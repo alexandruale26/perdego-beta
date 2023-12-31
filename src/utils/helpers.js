@@ -28,4 +28,12 @@ const formatPostDate = (timestamp) => {
   }
 };
 
-export { removeDiacritics, imageRandomName, convertPostTypeToRou, formatPostDate };
+const filterData = (data, search) => {
+  return data.filter((value) => {
+    const noDiacriticsSearch = removeDiacritics(value);
+    const noDiacriticsTarget = removeDiacritics(search);
+    return noDiacriticsSearch.toLowerCase().includes(noDiacriticsTarget.toLowerCase());
+  });
+};
+
+export { removeDiacritics, imageRandomName, convertPostTypeToRou, formatPostDate, filterData };

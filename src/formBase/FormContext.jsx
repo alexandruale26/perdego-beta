@@ -4,7 +4,7 @@ import INITIAL_STATE, * as actions from "./constants";
 
 const FormContext = createContext({});
 
-const Form = ({ children, schema, defaultValues, onSubmit }) => {
+const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
   const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
 
   const setAsInvalid = (name, message) => {
@@ -77,7 +77,7 @@ const Form = ({ children, schema, defaultValues, onSubmit }) => {
 
   return (
     <FormContext.Provider value={{ registerField, getFieldState, validateField, setAsInvalid }}>
-      <form className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md border" onSubmit={handleSubmit}>
+      <form className={className} onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>

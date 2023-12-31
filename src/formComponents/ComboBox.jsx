@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, forwardRef, Fragment } from "react";
 import { MagnifyingGlassIcon, CaretSortIcon } from "@radix-ui/react-icons";
 import Separator from "./Separator";
-import React from "react";
 
 const textStyle = "text-sm font-light";
 const iconStyle = "w-5 h-5 text-stone-500";
@@ -86,7 +85,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
       type="button"
       onClick={onComboBoxClick}
       ref={modalRef}
-      className="bg-white relative w-full max-w-xs h-9 space-y-1 rounded-md border focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
+      className="bg-white relative w-full h-9 space-y-1 rounded-md border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
     >
       <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
       <div className="flex justify-between items-center w-full px-3 py-1 bg-inherit rounded-md transition-colors select-none">

@@ -1,5 +1,4 @@
 import ImageResizer from "react-image-file-resizer";
-import { removeDiacritics } from "../utils/helpers";
 
 const compressImage = (file, maxWidth, maxHeight) => {
   return new Promise((resolve) => {
@@ -31,12 +30,4 @@ const convertImage = async (imageFile, maxWidth, maxHeight) => {
   }
 };
 
-const filterData = (data, search) => {
-  return data.filter((value) => {
-    const noDiacriticsSearch = removeDiacritics(value);
-    const noDiacriticsTarget = removeDiacritics(search);
-    return noDiacriticsSearch.toLowerCase().includes(noDiacriticsTarget.toLowerCase());
-  });
-};
-
-export { convertImage, filterData };
+export { convertImage };

@@ -9,7 +9,7 @@ const Checkmark = ({ className }) => {
         className
       )}
     >
-      <div className=" rounded-full animate-in slide-in-from-right-10">
+      <div className="rounded-full animate-in slide-in-from-right-10">
         <CheckIcon className="w-6 h-6 text-emerald-500" />
       </div>
     </div>

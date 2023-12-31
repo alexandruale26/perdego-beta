@@ -14,8 +14,10 @@ const PostLink = ({ post }) => {
           alt="object"
           className="w-full shrink-0 xs:w-[170px] sm:w-[230px] h-[200px] xs:h-full object-cover rounded-sm transition-all"
         />
-        <div className="h-full w-full flex flex-col items-start justify-between gap-2">
-          <h3 className="text-[18px] sm:text-xl font-light text-stone-800 flex break-words word-break">{post.title}</h3>
+        <div className="h-full w-full flex flex-col items-start justify-between py-1 gap-2">
+          <h3 className="text-[18px] sm:text-xl font-light text-stone-800 hover:text-white hover:bg-stone-800 flex break-words word-break">
+            {post.title}
+          </h3>
 
           <div className=" w-full flex flex-col items-start gap-1">
             <p className="text-xs sm:text-sm font-medium text-stone-700">

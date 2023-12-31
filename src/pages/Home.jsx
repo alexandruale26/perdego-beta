@@ -1,4 +1,5 @@
 import PostLink from "../features/home/PostLink";
+import SearchForm from "../features/home/SearchForm";
 
 const post = {
   id: 33,
@@ -16,9 +17,10 @@ const post = {
 };
 
 const Home = () => {
+  //TODO: parent container should be flex and children full width
   return (
-    <div className="h-screen mx-auto text-center">
-      <p>HOME PAGE</p>
+    <div className="h-screen mx-auto text-center space-y-10">
+      <SearchForm />
       <PostLink post={post} />
     </div>
   );
