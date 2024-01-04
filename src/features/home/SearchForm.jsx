@@ -16,7 +16,7 @@ const defaultValues = {
   search: "",
   location: "",
   category: "",
-  postType: "all",
+  postType: "found",
 };
 
 const formData = {
@@ -25,23 +25,21 @@ const formData = {
 };
 
 const postType = [
-  ["all", "Toate"],
-  ["lost", "Pierdute"],
   ["found", "Gǎsite"],
+  ["lost", "Pierdute"],
 ];
 
-const SearchForm = () => {
-  const onSubmit = (values) => console.log("submitted search", values);
+const SearchForm = ({ onSubmit }) => {
+  const handleSubmit = (values) => onSubmit(values);
 
   return (
     <Form
       {...formData}
-      onSubmit={onSubmit}
-      className="flex flex-col w-full max-w-4xl items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md border"
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md border"
     >
       <div className="flex flex-col w-full gap-4">
-        <h3 className="text-base text-stone-800 text-start pl-1">Ce anume cauți?</h3>
-
+        <h1 className="text-lg text-stone-700 text-start pl-1">Ce anume cauți?</h1>
         <SearchFormDivision>
           <FormField
             name="search"
@@ -51,7 +49,16 @@ const SearchForm = () => {
               </FormItem>
             )}
           />
-
+          <FormField
+            name="postType"
+            render={(field) => (
+              <FormItem className="max-w-full">
+                <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
+              </FormItem>
+            )}
+          />
+        </SearchFormDivision>
+        <SearchFormDivision>
           <FormField
             name="location"
             render={(field) => (
@@ -67,23 +74,12 @@ const SearchForm = () => {
               </FormItem>
             )}
           />
-        </SearchFormDivision>
-
-        <SearchFormDivision>
-          <FormField
-            name="postType"
-            render={(field) => (
-              <FormItem className="max-w-full">
-                <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
-              </FormItem>
-            )}
-          />
           <FormField
             name="category"
             render={(field) => (
               <FormItem className="max-w-full">
                 <ComboBox
-                  placeholder="Cautǎ dupǎ categorie"
+                  placeholder="Toate categoriile"
                   defaultValue={defaultValues.category}
                   filter={filterData}
                   data={OBJECT_CATEGORY}
@@ -95,7 +91,6 @@ const SearchForm = () => {
           />
         </SearchFormDivision>
       </div>
-
       <div className="w-full">
         <SubmitButton className="h-9 w-full xsm:w-56 flex items-center justify-center gap-2" type="submit">
           Cǎutare

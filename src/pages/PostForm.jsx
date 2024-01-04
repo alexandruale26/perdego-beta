@@ -82,7 +82,7 @@ const postType = [
 const PostForm = () => {
   const onSubmit = (values) => {
     const processPost = async () => {
-      const convertedImg = await convertImage(values.image, 1000, 1000);
+      const convertedImg = await convertImage(values.image, 600, 600);
       const image = await uploadImage(convertedImg); //TODO: handle no image
 
       const newData = { ...values, image };

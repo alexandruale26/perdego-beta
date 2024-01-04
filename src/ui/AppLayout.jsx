@@ -11,7 +11,9 @@ const AppLayout = () => {
   return (
     <>
       <Navbar />
-      <main className="w-full h-full py-10 px-4 bg-stone-100">{isLoading ? <Spinner /> : <Outlet />}</main>
+      <main className="w-full h-full py-10 px-4 bg-stone-100">
+        {isLoading ? <Spinner className="min-h-screen" /> : <Outlet />}
+      </main>
       <div className="w-full bg-black h-[80px] text-white text-center">Footer</div>
     </>
   );

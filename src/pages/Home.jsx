@@ -1,27 +1,43 @@
+import { useState } from "react";
 import PostLink from "../features/home/PostLink";
 import SearchForm from "../features/home/SearchForm";
-
-const post = {
-  id: 33,
-  createdAt: "2023-12-27T10:40:48.038939+00:00",
-  name: "Carmen",
-  phone: "0753555287",
-  title: "Pierdut bichon alb zona garii bacau piata centrala",
-  description:
-    "Pierdut bichon alb in zona garii. Avea o zgarda de culoare rosie si raspunde la numele de Pufi. Ofer recompensa.",
-  location: "Bacău",
-  category: "Animale de companie",
-  image: "https://asmcrxdpkgfqurghvgkv.supabase.co/storage/v1/object/public/posts-images/35383886-82902299.png",
-  postId: "8a53b447-6c38-4ffb-931f-a68c80422617",
-  postType: "lost",
-};
+import Section from "../shared/Section";
+import Spinner from "../shared/Spinner";
+import queryPosts from "../services/searchApi";
 
 const Home = () => {
   //TODO: parent container should be flex and children full width
+  const [isLoading, setIsLoading] = useState(false);
+  const [posts, setPosts] = useState(null);
+
+  const searchPosts = (searchParams) => {
+    setIsLoading(true);
+    const process = async () => {
+      const results = await queryPosts(searchParams);
+      setPosts(results);
+      setIsLoading(false);
+    };
+
+    process();
+  };
+
   return (
-    <div className="h-screen mx-auto text-center space-y-10">
-      <SearchForm />
-      <PostLink post={post} />
+    <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
+      <SearchForm onSubmit={searchPosts} />
+
+      {isLoading ? (
+        <Spinner className="pt-0 xs:pt-32" />
+      ) : (
+        <Section className="flex flex-col items-start justify-start gap-2 bg-transparent border-none p-0">
+          {posts && (
+            <h2 className="w-full text-start pl-1 mb-2 text-lg xs:text-xl font-medium text-stone-700">
+              Am gǎsit {posts.length} rezultate
+            </h2>
+          )}
+
+          {posts && posts.map((post) => <PostLink key={post.postId} post={post} />)}
+        </Section>
+      )}
     </div>
   );
 };

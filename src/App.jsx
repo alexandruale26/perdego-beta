@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "post/:uid",
+        path: "post/:pid",
         element: <Post />,
         loader: postLoader,
         errorElement: <div>Not found</div>,
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "post/edit",
         element: <div>Edit Post</div>,
       },
-      //TODO: Add element on not existing path *
+      //TODO: Add element on not existing path * and error
     ],
   },
 ]);

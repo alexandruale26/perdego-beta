@@ -14,12 +14,12 @@ const Post = () => {
   // TODO: put user member date at create post
 
   const post = useLoaderData();
-  console.log(post);
+  const image = getImageUrl(post.image);
 
   return (
     <div className="w-full max-w-4xl flex flex-col gap-4 py-4 rounded-md mx-auto">
       <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden border transition-all">
-        <img src={post.image} alt="object" className="w-full h-full object-contain" />
+        <img src={image} alt="object" className="w-full h-full object-contain" />
       </div>
 
       <Section className="flex-col items-start justify-center">
@@ -30,7 +30,7 @@ const Post = () => {
 
         <h1 className="text-xl xs:text-2xl font-semibold text-stone-800">{post.title}</h1>
 
-        <div className="w-full flex flex-wrap gap-2 items-center justify-start">
+        <div className="w-full flex flex-wrap gap-2 items-center justify-start mb-2">
           <Tag title="Tip anunț:" description={convertPostTypeToRou(post.postType)} />
           <Tag title="Locație:" description={post.location} />
           <Tag title="Categorie:" description={post.category} />
@@ -52,14 +52,13 @@ const Post = () => {
   );
 };
 
-const loader = async () => {
+const loader = async ({ request, params }) => {
   //TODO: manage request and response params, and unknown id
-  const postId = "8a53b447-6c38-4ffb-931f-a68c80422617";
-  const receivedData = await getPost(postId);
-  const image = getImageUrl(receivedData.image);
 
-  const post = { ...receivedData, image };
-  return post;
+  const postId = params.pid;
+  const receivedData = await getPost(postId);
+
+  return receivedData;
 };
 
 export default Post;

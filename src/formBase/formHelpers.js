@@ -17,7 +17,7 @@ const compressImage = (file, maxWidth, maxHeight) => {
   });
 };
 
-const convertImage = async (imageFile, maxWidth, maxHeight) => {
+const convertImage = async (imageFile, maxWidth = 800, maxHeight = 800) => {
   if (imageFile) {
     try {
       //TODO: check if compressed image is bigger than the original. very rare case (could ignore?)
