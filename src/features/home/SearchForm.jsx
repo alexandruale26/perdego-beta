@@ -36,7 +36,7 @@ const SearchForm = ({ onSubmit }) => {
     <Form
       {...formData}
       onSubmit={handleSubmit}
-      className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md border"
+      className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md shadow-sm"
     >
       <div className="flex flex-col w-full gap-4">
         <h1 className="text-lg text-stone-700 text-start pl-1">Ce anume cauți?</h1>

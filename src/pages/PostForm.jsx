@@ -97,7 +97,7 @@ const PostForm = () => {
     <Form
       {...formData}
       onSubmit={onSubmit}
-      className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md border"
+      className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md shadow-sm"
     >
       <FormField
         name="title"

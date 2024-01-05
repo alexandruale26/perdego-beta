@@ -28,7 +28,7 @@ const Home = () => {
       {isLoading ? (
         <Spinner className="pt-0 xs:pt-32" />
       ) : (
-        <Section className="flex flex-col items-start justify-start gap-2 bg-transparent border-none p-0">
+        <Section className="flex flex-col items-start justify-start gap-2 bg-transparent border-none p-0 shadow-none">
           {posts && (
             <h2 className="w-full text-start pl-1 mb-2 text-lg xs:text-xl font-medium text-stone-700">
               Am gǎsit {posts.length} rezultate

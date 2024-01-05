@@ -9,7 +9,7 @@ const PostLink = ({ post }) => {
   return (
     <Link
       to={`post/${post.postId}`}
-      className="w-full h-[360px] xs:h-[170px] flex flex-col xs:flex-row items-center justify-between gap-4 mx-auto p-2 bg-white border rounded-md text-start overflow-hidden"
+      className="w-full h-[360px] xs:h-[170px] flex flex-col xs:flex-row items-center justify-between gap-4 mx-auto p-2 bg-white shadow-sm rounded-md text-start overflow-hidden"
     >
       <img
         src={image}

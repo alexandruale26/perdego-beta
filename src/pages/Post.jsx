@@ -18,7 +18,7 @@ const Post = () => {
 
   return (
     <div className="w-full max-w-4xl flex flex-col gap-4 py-4 rounded-md mx-auto">
-      <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden border transition-all">
+      <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">
         <img src={image} alt="object" className="w-full h-full object-contain" />
       </div>
 
