@@ -1,5 +1,3 @@
-import { POSTTYPE } from "../../sharedData";
-
 const lengths = {
   title: {
     min: 10,
@@ -77,15 +75,21 @@ const schema = {
       errorMessage: "Numǎrul nu este valid",
     },
   },
+  postType: {
+    required: {
+      errorMessage: "Alege tipul de anunț",
+    },
+  },
 };
 
+//TODO: defaultValues could be an empty object if there is no default
 const defaultValues = {
-  title: "",
-  name: "",
-  phone: "",
-  category: "",
-  postType: POSTTYPE[0],
-  location: "",
+  // title: "",
+  // name: "",
+  // phone: "",
+  // category: "",
+  // postType: "",
+  // location: "",
 };
 
 export { schema, defaultValues };

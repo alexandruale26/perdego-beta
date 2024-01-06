@@ -29,8 +29,8 @@ const PostForm = () => {
       };
 
       const newData = { ...formData, ...formInputsUppercased, image: imageName };
-      console.log(newData);
-      await createPost("curated form data", newData);
+      console.log("curated form data", newData);
+      await createPost(newData);
     };
 
     // process();
@@ -57,7 +57,9 @@ const PostForm = () => {
         name="image"
         render={(field) => (
           <FormItem className="max-w-lg">
-            <FormLabel>Imaginea anunțului</FormLabel>
+            <FormLabel>
+              Imaginea anunțului<span className="font-light"> (Opțional)</span>
+            </FormLabel>
             <ImageSelect {...field} />
             <FormMessage />
           </FormItem>
@@ -78,7 +80,8 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Tipul anunțului</FormLabel>
-            <Selector values={POSTTYPE} defaultValue={defaultValues.postType} {...field} />
+            <Selector values={POSTTYPE} defaultValue={""} {...field} />
+            <FormMessage />
           </FormItem>
         )}
       />
