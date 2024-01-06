@@ -5,92 +5,36 @@ import { Form } from "../formBase/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/form";
 import ComboBox from "../formComponents/ComboBox";
 import Selector from "../formComponents/Selector";
-import { COUNTIES, OBJECT_CATEGORY } from "../sharedData";
+import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
+import { schema, defaultValues } from "../features/postForm/data";
 import { convertImage } from "../formBase/formHelpers";
-import { filterData } from "../utils/helpers";
+import { filterData, capitalizeFirstLetter } from "../utils/helpers";
 import { createPost, uploadImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
-
-const schema = {
-  title: {
-    minLength: {
-      value: 10,
-      errorMessage: "Titlul trebuie sa aiba minim 10 caractere",
-    },
-    maxLength: {
-      value: 60,
-      errorMessage: "Titlul trebuie sa aiba maxim 60 caractere",
-    },
-  },
-  name: {
-    minLength: {
-      value: 3,
-      errorMessage: "Numele trebuie sa aiba minim 3 caractere",
-    },
-    maxLength: {
-      value: 25,
-      errorMessage: "Numele trebuie sa aiba maxim 25 caractere",
-    },
-  },
-  location: {
-    required: {
-      errorMessage: "Alege o locație",
-    },
-  },
-  category: {
-    required: {
-      errorMessage: "Alege o categorie",
-    },
-  },
-  description: {
-    minLength: {
-      value: 20,
-      errorMessage: "Descrierea trebuie sa aiba minim 20 caractere",
-    },
-    maxLength: {
-      value: 300,
-      errorMessage: "Descrierea trebuie sa aiba maxim 300 caractere",
-    },
-  },
-  phone: {
-    regex: {
-      pattern: /^07\d{8}$/,
-      errorMessage: "Numarul nu este valid",
-    },
-  },
-};
-
-const defaultValues = {
-  title: "",
-  name: "Alexa",
-  phone: "",
-  category: "",
-  postType: "lost",
-  location: "",
-};
 
 const formData = {
   schema,
   defaultValues,
 };
 
-const postType = [
-  ["lost", "Pierdute"],
-  ["found", "Gǎsite"],
-];
-
 const PostForm = () => {
-  const onSubmit = (values) => {
-    const processPost = async () => {
-      const convertedImg = await convertImage(values.image, 600, 600);
-      const image = await uploadImage(convertedImg); //TODO: handle no image
+  const onSubmit = (formData) => {
+    const process = async () => {
+      const convertedImg = await convertImage(formData.image, 600, 600);
+      const imageName = await uploadImage(convertedImg); //TODO: handle no image
 
-      const newData = { ...values, image };
-      await createPost(newData);
+      const formInputsUppercased = {
+        title: capitalizeFirstLetter(formData.title),
+        description: capitalizeFirstLetter(formData.description),
+      };
+
+      const newData = { ...formData, ...formInputsUppercased, image: imageName };
+      console.log(newData);
+      await createPost("curated form data", newData);
     };
 
-    // processPost();
-    // console.log(values);
+    // process();
+    console.log(formData);
   };
 
   return (
@@ -104,7 +48,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem className="max-w-lg">
             <FormLabel>Titlu</FormLabel>
-            <ValidationInput placeholder="ex.: Pierdut cheie autoturism" {...field} />
+            <ValidationInput placeholder="ex.: Portofel de piele de culoare negru" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -134,7 +78,7 @@ const PostForm = () => {
         render={(field) => (
           <FormItem>
             <FormLabel>Tipul anunțului</FormLabel>
-            <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
+            <Selector values={POSTTYPE} defaultValue={defaultValues.postType} {...field} />
           </FormItem>
         )}
       />

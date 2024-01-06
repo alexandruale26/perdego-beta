@@ -3,9 +3,9 @@ import { getPost, getImageUrl } from "../services/postApi";
 import Section from "../shared/Section";
 import Tag from "../shared/Tag";
 import UserProfile from "../shared/UserProfile";
-import FavoriteButton from "../shared/FavoriteButton";
+// import FavoriteButton from "../shared/FavoriteButton";
 import Telephone from "../features/post/Telephone";
-import { convertPostTypeToRou, formatPostDate } from "../utils/helpers";
+import { formatPostDate } from "../utils/helpers";
 
 const Post = () => {
   // TODO: separate tags into in array and map them (location, category, type, maybe other in the future)
@@ -25,13 +25,13 @@ const Post = () => {
       <Section className="flex-col items-start justify-center">
         <div className="w-full flex items-center justify-between">
           <p className="text-sm font-light text-stone-600">{formatPostDate(post.createdAt)}</p>
-          <FavoriteButton isFavorite={true}></FavoriteButton>
+          {/* <FavoriteButton isFavorite={true}></FavoriteButton> */}
         </div>
 
         <h1 className="text-xl xs:text-2xl font-semibold text-stone-800">{post.title}</h1>
 
         <div className="w-full flex flex-wrap gap-2 items-center justify-start mb-2">
-          <Tag title="Tip anunț:" description={convertPostTypeToRou(post.postType)} />
+          <Tag title="Tip anunț:" description={post.postType} />
           <Tag title="Locație:" description={post.location} />
           <Tag title="Categorie:" description={post.category} />
         </div>

@@ -1,24 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import PostLink from "../features/home/PostLink";
 import SearchForm from "../features/home/SearchForm";
 import Section from "../shared/Section";
 import Spinner from "../shared/Spinner";
 import queryPosts from "../services/searchApi";
+import { POSTTYPE } from "../sharedData";
+
+const getAllSearchParamsAsObject = (searchParams) => {
+  return Array.from(searchParams.entries()).reduce((acc, [key, value]) => {
+    acc[key] = value;
+    return acc;
+  }, {});
+};
+
+const defaultSearchParams = {
+  search: "",
+  postType: POSTTYPE[1],
+  location: "",
+  category: "",
+};
 
 const Home = () => {
   //TODO: parent container should be flex and children full width
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
 
-  const searchPosts = (searchParams) => {
+  useEffect(() => {
     setIsLoading(true);
+
     const process = async () => {
-      const results = await queryPosts(searchParams);
-      setPosts(results);
+      const queryParams = getAllSearchParamsAsObject(searchParams);
+      const data = await queryPosts(queryParams);
+
+      setPosts(data);
       setIsLoading(false);
     };
 
     process();
+  }, [searchParams]);
+
+  const searchPosts = (queryData) => {
+    setSearchParams(queryData);
   };
 
   return (

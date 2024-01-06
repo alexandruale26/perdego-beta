@@ -4,7 +4,7 @@ import Selector from "../../formComponents/Selector";
 import SubmitButton from "../../shared/SubmitButton";
 import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
-import { COUNTIES, OBJECT_CATEGORY } from "../../sharedData";
+import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../sharedData";
 import { filterData } from "../../utils/helpers";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
@@ -16,18 +16,13 @@ const defaultValues = {
   search: "",
   location: "",
   category: "",
-  postType: "found",
+  postType: POSTTYPE[1],
 };
 
 const formData = {
   schema: {},
   defaultValues,
 };
-
-const postType = [
-  ["found", "Gǎsite"],
-  ["lost", "Pierdute"],
-];
 
 const SearchForm = ({ onSubmit }) => {
   const handleSubmit = (values) => onSubmit(values);
@@ -53,7 +48,7 @@ const SearchForm = ({ onSubmit }) => {
             name="postType"
             render={(field) => (
               <FormItem className="max-w-full">
-                <Selector values={postType} defaultValue={defaultValues.postType} {...field} />
+                <Selector values={POSTTYPE} defaultValue={defaultValues.postType} {...field} />
               </FormItem>
             )}
           />

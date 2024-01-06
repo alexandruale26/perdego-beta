@@ -1,24 +1,26 @@
 import supabase from "./supabase";
 import { convertToMatchSearch } from "./helpers";
 
-const queryPosts = async (searchParams) => {
-  const filterBySearch = !!searchParams.search;
-  const filterByCategory = !!searchParams.category;
-  const filterByLocation = !!searchParams.location;
+const queryPosts = async (queryData) => {
+  console.log("api search", queryData);
+
+  const filterBySearch = !!queryData.search;
+  const filterByCategory = !!queryData.category;
+  const filterByLocation = !!queryData.location;
 
   let query = supabase
     .from("posts")
     .select("postId, title, location, createdAt, category, image, postType")
-    .eq("postType", searchParams.postType);
+    .eq("postType", queryData.postType);
 
   if (filterByCategory) {
-    query = query.eq("category", searchParams.category);
+    query = query.eq("category", queryData.category);
   }
   if (filterByLocation) {
-    query = query.eq("location", searchParams.location);
+    query = query.eq("location", queryData.location);
   }
   if (filterBySearch) {
-    query = query.ilikeAnyOf("title", convertToMatchSearch(searchParams.search));
+    query = query.ilikeAnyOf("title", convertToMatchSearch(queryData.search));
   }
 
   const { data, error } = await query;

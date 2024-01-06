@@ -4,13 +4,13 @@ import { twMerge } from "tailwind-merge";
 const Option = ({ item, className, onSelectedClick }) => {
   return (
     <li
-      onClick={(e) => onSelectedClick(e, item[0])}
+      onClick={(e) => onSelectedClick(e, item)}
       className={twMerge(
         "flex items-center justify-center flex-1 text-sm text-stone-900 font-light hover:bg-emerald-400 hover:text-white select-none transition-all",
         className
       )}
     >
-      {item[1]}
+      {item}
     </li>
   );
 };
@@ -37,11 +37,11 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
       <input hidden value={selected} onChange={() => console.log("none")} ref={ref} {...props} />
       <ul className="flex w-full h-full">
         {values.map((item, index) => (
-          <Fragment key={item[0]}>
+          <Fragment key={item}>
             <Option
               onSelectedClick={onSelectedClick}
               item={item}
-              className={selected === item[0] ? "bg-black text-white hover:bg-black" : ""}
+              className={selected === item ? "bg-black text-white hover:bg-black" : ""}
             />
             {index + 1 < values.length && !selected && <div className="h-full w-[1px] border-stone-800"></div>}
           </Fragment>

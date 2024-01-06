@@ -5,7 +5,12 @@ const imageRandomName = () => {
 //TODO: change the input data to search to a better type {name:name, value:value}
 const removeDiacritics = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-const convertPostTypeToRou = (postType) => (postType === "lost" ? "Pierdute" : "Gǎsite");
+const capitalizeFirstLetter = (string) => {
+  const trimmedString = string.trim();
+  const firstCharToUpper = trimmedString.charAt(0).toUpperCase();
+
+  return firstCharToUpper.concat(trimmedString.slice(1));
+};
 
 const formatPostDate = (timestamp) => {
   //TODO: post should be 15 or 30 days available. if 30 days modify the function
@@ -36,4 +41,4 @@ const filterData = (data, search) => {
   });
 };
 
-export { removeDiacritics, imageRandomName, convertPostTypeToRou, formatPostDate, filterData };
+export { removeDiacritics, capitalizeFirstLetter, imageRandomName, formatPostDate, filterData };

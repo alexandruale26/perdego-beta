@@ -59,4 +59,6 @@ const OBJECT_CATEGORY = [
   "Altele",
 ];
 
-export { COUNTIES, OBJECT_CATEGORY };
+const POSTTYPE = ["Pierdute", "Gǎsite"];
+
+export { COUNTIES, OBJECT_CATEGORY, POSTTYPE };
