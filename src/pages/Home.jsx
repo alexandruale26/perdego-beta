@@ -54,7 +54,7 @@ const Home = () => {
         <Spinner className="pt-0 xs:pt-32" />
       ) : (
         <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
-          <h2 className="w-full text-start pl-1 mb-2 text-xl xs:text-2xl font-medium text-stone-700">
+          <h2 className="w-full text-start pl-1 mb-2 text-xl xs:text-2xl font-medium text-stone-700 select-none">
             {showSearchResultsTitle(firstRender, posts.length)}
           </h2>
 

@@ -18,7 +18,6 @@ const Option = ({ item, onClick, children }) => {
 };
 
 const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, onChange, onBlur, ...props }, ref) => {
-  //TODO: data to be array of objects {value: value, label: label}
   const [filtered, setFiltered] = useState(data);
   const [inputValue, setInputValue] = useState(defaultValue || "");
   const [selected, setSelected] = useState(defaultValue || "");
@@ -87,7 +86,7 @@ const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, 
       ref={modalRef}
       className="bg-white relative w-full h-9 space-y-1 rounded-md border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
     >
-      <input hidden onChange={() => console.log("none")} value={selected} ref={ref} {...props} />
+      <input hidden readOnly value={selected} ref={ref} {...props} />
       <div className="flex justify-between items-center w-full px-3 py-1 bg-inherit rounded-md transition-colors select-none">
         <p className="text-sm font-light">{titlePlaceholder}</p>
         <CaretSortIcon className={iconStyle} />

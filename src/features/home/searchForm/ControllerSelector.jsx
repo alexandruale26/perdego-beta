@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect, Fragment } from "react";
+import { useState, useRef, useEffect, Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Option = ({ item, className, onSelectedClick }) => {
@@ -15,8 +15,9 @@ const Option = ({ item, className, onSelectedClick }) => {
   );
 };
 
-const Selector = forwardRef(({ className, values, defaultValue, onChange, ...props }, ref) => {
+const ControlledSelector = ({ className, values, defaultValue, onChange, ...props }) => {
   const [selected, setSelected] = useState(defaultValue);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     setSelected(defaultValue);
@@ -26,8 +27,8 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
     e.preventDefault();
     setSelected(newValue);
 
-    ref.current.value = newValue;
-    onChange(e);
+    inputRef.current.value = newValue;
+    onChange(inputRef.current.value);
   };
 
   console.log(defaultValue);
@@ -40,7 +41,7 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
         className
       )}
     >
-      <input hidden readOnly value={selected} ref={ref} {...props} />
+      <input readOnly hidden value={selected} ref={inputRef} {...props} />
       <ul className="flex w-full h-full">
         {values.map((item, index) => (
           <Fragment key={item}>
@@ -55,7 +56,7 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
       </ul>
     </button>
   );
-});
-Selector.displayName = "Selector";
+};
+ControlledSelector.displayName = "ControlledSelector";
 
-export default Selector;
+export default ControlledSelector;

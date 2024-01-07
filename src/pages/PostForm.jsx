@@ -137,7 +137,9 @@ const PostForm = () => {
             </FormItem>
           )}
         />
-        <SubmitButton className="p-4">Publicǎ anunțul</SubmitButton>
+        <div className="w-full max-w-xs">
+          <SubmitButton className="h-14 w-full mt-10">Publicǎ anunțul</SubmitButton>
+        </div>
       </Form>
     </div>
   );
