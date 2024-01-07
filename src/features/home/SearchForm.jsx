@@ -3,6 +3,8 @@ import SimpleInput from "../../formComponents/SimpleInput";
 import ComboBox from "../../formComponents/ComboBox";
 import Selector from "../../formComponents/Selector";
 import SubmitButton from "../../shared/SubmitButton";
+import LinkButton from "../../shared/LinkButton";
+import Division from "./Division";
 import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../sharedData";
@@ -10,9 +12,6 @@ import { filterData, setDefaultValue } from "../../utils/helpers";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 // TODO: maybe should add "Toata tara" && "Toate categoriile" as values.
-const SearchFormDivision = ({ children }) => {
-  return <div className="flex flex-col xsm:flex-row w-full gap-4">{children}</div>;
-};
 
 const SearchForm = ({ onSubmit, searchParams }) => {
   const [search, setSearch] = useState("");
@@ -45,7 +44,7 @@ const SearchForm = ({ onSubmit, searchParams }) => {
     >
       <div className="flex flex-col w-full gap-4">
         <h1 className="text-lg text-stone-700 text-start pl-1">Ce anume cauți ...?</h1>
-        <SearchFormDivision>
+        <Division>
           <FormField
             name="search"
             render={(field) => (
@@ -72,9 +71,9 @@ const SearchForm = ({ onSubmit, searchParams }) => {
               </FormItem>
             )}
           />
-        </SearchFormDivision>
+        </Division>
 
-        <SearchFormDivision>
+        <Division>
           <FormField
             name="location"
             render={(field) => (
@@ -107,14 +106,22 @@ const SearchForm = ({ onSubmit, searchParams }) => {
               </FormItem>
             )}
           />
-        </SearchFormDivision>
+        </Division>
       </div>
-      <div className="w-full">
+
+      <Division className="w-full gap-4 xsm:gap-8 items-start xsm:items-center">
         <SubmitButton className="h-9 w-full xsm:w-56 flex items-center justify-center gap-2" type="submit">
           Cǎutare
           <MagnifyingGlassIcon className="w-6 h-6" />
         </SubmitButton>
-      </div>
+
+        <LinkButton
+          to={"/"}
+          className="border-b-[2px] border-transparent hover:border-emerald-400 focus-visible:text-lg"
+        >
+          Șterge filtrele
+        </LinkButton>
+      </Division>
     </Form>
   );
 };

@@ -1,6 +1,7 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import Navbar from "./Navbar";
 import Spinner from "../shared/Spinner";
+import ScrollToTop from "../shared/ScrollToTop";
 
 const AppLayout = () => {
   const navigation = useNavigation();
@@ -11,6 +12,7 @@ const AppLayout = () => {
   return (
     <>
       <Navbar />
+      <ScrollToTop />
       <main className="w-full h-full py-10 px-4 bg-stone-100">
         {isLoading ? <Spinner className="min-h-screen" /> : <Outlet />}
       </main>
