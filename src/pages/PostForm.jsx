@@ -38,111 +38,109 @@ const PostForm = () => {
   };
 
   return (
-    <Form
-      {...formData}
-      onSubmit={onSubmit}
-      className="space-y-8 w-full max-w-2xl bg-white p-4 mx-auto rounded-md shadow-sm"
-    >
-      <FormField
-        name="title"
-        render={(field) => (
-          <FormItem className="max-w-lg">
-            <FormLabel>Titlu</FormLabel>
-            <ValidationInput placeholder="ex.: Portofel de piele de culoare negru" {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="image"
-        render={(field) => (
-          <FormItem className="max-w-lg">
-            <FormLabel>
-              Imaginea anunțului<span className="font-light"> (Opțional)</span>
-            </FormLabel>
-            <ImageSelect {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="description"
-        render={(field) => (
-          <FormItem className="max-w-lg">
-            <FormLabel>Descriere</FormLabel>
-            <Textarea placeholder="Adaugǎ o descriere detaliatǎ" {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="postType"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Tipul anunțului</FormLabel>
-            <Selector values={POSTTYPE} defaultValue={""} {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="category"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Categorie</FormLabel>
-            <ComboBox
-              placeholder="Cautǎ dupǎ categorie"
-              defaultValue={defaultValues.category}
-              filter={filterData}
-              data={OBJECT_CATEGORY}
-              render={(item) => <p className="text-left">{item}</p>}
-              {...field}
-            />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="location"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Județ | Sector</FormLabel>
-            <ComboBox
-              placeholder="Cautǎ dupǎ județ sau sector"
-              defaultValue={defaultValues.county}
-              filter={filterData}
-              data={COUNTIES}
-              render={(item) => <p className="text-left">{item}</p>}
-              {...field}
-            />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="name"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Nume</FormLabel>
-            <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <FormField
-        name="phone"
-        render={(field) => (
-          <FormItem>
-            <FormLabel>Telefon</FormLabel>
-            <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      <SubmitButton className="p-4">Publicǎ anunțul</SubmitButton>
-    </Form>
+    <div className="w-full max-w-2xl mx-auto space-y-6">
+      <h1 className="text-xl xs:text-2xl font-medium text-stone-700 pl-1">Ce anume ai gǎsit | pierdut ...?</h1>
+      <Form {...formData} onSubmit={onSubmit} className="space-y-6 w-full bg-white p-4 rounded-md shadow-sm">
+        <FormField
+          name="title"
+          render={(field) => (
+            <FormItem className="max-w-lg">
+              <FormLabel>Titlu</FormLabel>
+              <ValidationInput placeholder="ex.: Portofel de piele de culoare negru" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="image"
+          render={(field) => (
+            <FormItem className="max-w-lg">
+              <FormLabel>
+                Imaginea anunțului<span className="font-light"> (Opțional)</span>
+              </FormLabel>
+              <ImageSelect {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="description"
+          render={(field) => (
+            <FormItem className="max-w-lg">
+              <FormLabel>Descriere</FormLabel>
+              <Textarea placeholder="Adaugǎ o descriere detaliatǎ" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="postType"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Tipul anunțului</FormLabel>
+              <Selector values={POSTTYPE} defaultValue={""} {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="category"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Categorie</FormLabel>
+              <ComboBox
+                placeholder="Cautǎ dupǎ categorie"
+                defaultValue={defaultValues.category}
+                filter={filterData}
+                data={OBJECT_CATEGORY}
+                render={(item) => <p className="text-left">{item}</p>}
+                {...field}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="location"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Județ | Sector</FormLabel>
+              <ComboBox
+                placeholder="Cautǎ dupǎ județ sau sector"
+                defaultValue={defaultValues.county}
+                filter={filterData}
+                data={COUNTIES}
+                render={(item) => <p className="text-left">{item}</p>}
+                {...field}
+              />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="name"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Nume</FormLabel>
+              <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="phone"
+          render={(field) => (
+            <FormItem>
+              <FormLabel>Telefon</FormLabel>
+              <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <SubmitButton className="p-4">Publicǎ anunțul</SubmitButton>
+      </Form>
+    </div>
   );
 };
-//TODO: make reusable submit button
 
 export default PostForm;

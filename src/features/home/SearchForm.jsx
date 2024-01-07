@@ -12,20 +12,12 @@ const SearchFormDivision = ({ children }) => {
   return <div className="flex flex-col xsm:flex-row w-full gap-4">{children}</div>;
 };
 
-const defaultValues = {
-  search: "",
-  location: "",
-  category: "",
-  postType: POSTTYPE[1],
-};
-
-const formData = {
-  schema: {},
-  defaultValues,
-};
-
 const SearchForm = ({ onSubmit }) => {
-  const handleSubmit = (values) => onSubmit(values);
+  const handleSubmit = (values) => {
+    onSubmit(values);
+  };
+
+  const formData = { schema: {}, defaultValues: {} };
 
   return (
     <Form
@@ -34,7 +26,7 @@ const SearchForm = ({ onSubmit }) => {
       className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md shadow-sm"
     >
       <div className="flex flex-col w-full gap-4">
-        <h1 className="text-lg text-stone-700 text-start pl-1">Ce anume cauți?</h1>
+        <h1 className="text-lg text-stone-700 text-start pl-1">Ce anume cauți ...?</h1>
         <SearchFormDivision>
           <FormField
             name="search"
@@ -48,7 +40,7 @@ const SearchForm = ({ onSubmit }) => {
             name="postType"
             render={(field) => (
               <FormItem className="max-w-full">
-                <Selector values={POSTTYPE} defaultValue={defaultValues.postType} {...field} />
+                <Selector values={POSTTYPE} defaultValue="" {...field} />
               </FormItem>
             )}
           />
@@ -60,7 +52,6 @@ const SearchForm = ({ onSubmit }) => {
               <FormItem className="max-w-full">
                 <ComboBox
                   placeholder="Toatǎ țara"
-                  defaultValue={defaultValues.county}
                   filter={filterData}
                   data={COUNTIES}
                   render={(item) => <p className="text-left">{item}</p>}
@@ -75,7 +66,6 @@ const SearchForm = ({ onSubmit }) => {
               <FormItem className="max-w-full">
                 <ComboBox
                   placeholder="Toate categoriile"
-                  defaultValue={defaultValues.category}
                   filter={filterData}
                   data={OBJECT_CATEGORY}
                   render={(item) => <p className="text-left">{item}</p>}

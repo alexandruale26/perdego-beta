@@ -82,14 +82,7 @@ const schema = {
   },
 };
 
-//TODO: defaultValues could be an empty object if there is no default
-const defaultValues = {
-  // title: "",
-  // name: "",
-  // phone: "",
-  // category: "",
-  // postType: "",
-  // location: "",
-};
+// TODO: defaultValues could be an empty object if there is no default
+const defaultValues = {};
 
 export { schema, defaultValues };

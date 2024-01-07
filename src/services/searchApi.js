@@ -1,18 +1,18 @@
 import supabase from "./supabase";
 import { convertToMatchSearch } from "./helpers";
 
+// TODO: try to merge these 2 functions if makes sense
 const queryPosts = async (queryData) => {
-  console.log("api search", queryData);
-
-  const filterBySearch = !!queryData.search;
+  const filterByPostType = !!queryData.postType;
   const filterByCategory = !!queryData.category;
   const filterByLocation = !!queryData.location;
+  const filterBySearch = !!queryData.search;
 
-  let query = supabase
-    .from("posts")
-    .select("postId, title, location, createdAt, category, image, postType")
-    .eq("postType", queryData.postType);
+  let query = supabase.from("posts").select("postId, title, location, createdAt, category, image, postType");
 
+  if (filterByPostType) {
+    query = query.eq("postType", queryData.postType);
+  }
   if (filterByCategory) {
     query = query.eq("category", queryData.category);
   }
@@ -23,6 +23,8 @@ const queryPosts = async (queryData) => {
     query = query.ilikeAnyOf("title", convertToMatchSearch(queryData.search));
   }
 
+  query = query.order("createdAt", { ascending: false });
+
   const { data, error } = await query;
 
   // console.log(data);
@@ -31,6 +33,17 @@ const queryPosts = async (queryData) => {
   return data;
 };
 
+const firstRenderPosts = async () => {
+  let query = supabase
+    .from("posts")
+    .select("postId, title, location, createdAt, category, image, postType")
+    .order("createdAt", { ascending: false });
+
+  const { data, error } = await query;
+
+  return data;
+};
+
 //TODO: 10 results per page. Could use range() to get any the results
 
-export default queryPosts;
+export { queryPosts, firstRenderPosts };

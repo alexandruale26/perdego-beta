@@ -8,7 +8,7 @@ const PostLink = ({ post }) => {
 
   return (
     <Link
-      to={`post/${post.postId}`}
+      to={`${post.postId}`}
       className="w-full h-[360px] xs:h-[170px] flex flex-col xs:flex-row items-center justify-between gap-4 mx-auto p-2 bg-white shadow-sm rounded-md text-start overflow-hidden"
     >
       <img
@@ -22,7 +22,9 @@ const PostLink = ({ post }) => {
         </h3>
 
         <div className=" w-full flex flex-col items-start gap-1">
-          <p className="text-xs sm:text-sm font-medium text-stone-700">{post.category}</p>
+          <p className="text-xs sm:text-sm font-medium text-stone-700">
+            {post.postType} - {post.category}
+          </p>
 
           <div className="w-full flex items-center justify-between">
             <p className="text-xs sm:text-sm font-light text-stone-600">
