@@ -78,7 +78,7 @@ const PostForm = () => {
           render={(field) => (
             <FormItem>
               <FormLabel>Tipul anunțului</FormLabel>
-              <Selector values={POSTTYPE} defaultValue={""} {...field} />
+              <Selector values={POSTTYPE} defaultValue="" {...field} />
               <FormMessage />
             </FormItem>
           )}

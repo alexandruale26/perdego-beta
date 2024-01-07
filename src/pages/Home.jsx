@@ -22,7 +22,6 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
 
-  // TODO: manage 0 results if user clicks back after firstRender is false (window.addEvList("popstate") || add something to the url || make firstRender true again on window.addEvList("popstate"))
   useEffect(() => {
     setIsLoading(true);
 
@@ -44,11 +43,9 @@ const Home = () => {
     setFirstRender(false);
   };
 
-  // console.log(xx);
-
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
-      <SearchForm onSubmit={getSearchValues} formParams={getAllSearchParamsAsObject(searchParams)} />
+      <SearchForm onSubmit={getSearchValues} searchParams={getAllSearchParamsAsObject(searchParams)} />
 
       {isLoading ? (
         <Spinner className="pt-0 xs:pt-32" />

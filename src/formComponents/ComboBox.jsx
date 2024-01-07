@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, forwardRef, Fragment } from "react";
 import { MagnifyingGlassIcon, CaretSortIcon } from "@radix-ui/react-icons";
 import Separator from "./Separator";
+import { setDefaultValue } from "../utils/helpers";
 
 const textStyle = "text-sm font-light";
 const iconStyle = "w-5 h-5 text-stone-500";
@@ -17,116 +18,124 @@ const Option = ({ item, onClick, children }) => {
   );
 };
 
-const ComboBox = forwardRef(({ placeholder, defaultValue, filter, data, render, onChange, onBlur, ...props }, ref) => {
-  const [filtered, setFiltered] = useState(data);
-  const [inputValue, setInputValue] = useState(defaultValue || "");
-  const [selected, setSelected] = useState(defaultValue || "");
-  const [visible, setVisible] = useState(false);
-  const [inputFocus, setInputFocus] = useState(false);
+const ComboBox = forwardRef(
+  ({ placeholder, defaultValue, filter, data, render, onChange, exportValue, onBlur, ...props }, ref) => {
+    const [filtered, setFiltered] = useState(data);
+    const [inputValue, setInputValue] = useState(setDefaultValue(defaultValue));
+    const [selected, setSelected] = useState(setDefaultValue(defaultValue));
+    const [visible, setVisible] = useState(false);
+    const [inputFocus, setInputFocus] = useState(false);
 
-  const modalRef = useRef(null);
-  const inputRef = useRef(null);
+    const modalRef = useRef(null);
+    const inputRef = useRef(null);
 
-  const handleOutsideClick = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setVisible(false);
-    }
-  };
+    const handleOutsideClick = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setVisible(false);
+      }
+    };
 
-  useEffect(() => {
-    if (visible && inputRef) inputRef.current.focus();
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [visible]);
+    useEffect(() => {
+      if (visible && inputRef) inputRef.current.focus();
+      document.addEventListener("click", handleOutsideClick);
 
-  const handleInputChange = (e) => {
-    e.preventDefault();
-    setFiltered(filter(data, e.target.value));
+      return () => document.removeEventListener("click", handleOutsideClick);
+    }, [visible]);
 
-    setInputValue(e.target.value);
-  };
+    // not working if not used in separate effect
+    useEffect(() => setSelected(setDefaultValue(defaultValue)), [defaultValue]);
 
-  const handleSelectClick = (e) => {
-    e.preventDefault();
-    const value = e.currentTarget.dataset.item;
-    setSelected(value);
-    setInputValue(value);
+    const handleInputChange = (e) => {
+      e.preventDefault();
+      setFiltered(filter(data, e.target.value));
 
-    //TODO: error message if ref is null ????
-    if (!ref) alert("ComboBox ref is null");
-    ref.current.value = value;
-    onChange(e);
-  };
+      setInputValue(e.target.value);
+    };
 
-  const handleInputFocus = (e) => {
-    e.preventDefault();
-    setInputFocus(true);
-  };
+    const handleSelectClick = (e) => {
+      e.preventDefault();
+      const value = e.currentTarget.dataset.item;
+      setSelected(value);
+      setInputValue(value);
 
-  const handleInputBlur = (e) => {
-    e.preventDefault();
-    setInputFocus(false);
-    onBlur(e);
-  };
+      //TODO: error message if ref is null ????
+      if (!ref) alert("ComboBox ref is null");
+      ref.current.value = value;
+      onChange(e);
 
-  const onComboBoxClick = (e) => {
-    e.preventDefault();
+      if (exportValue) exportValue(value);
+    };
 
-    if (inputFocus) return;
-    setVisible(!visible);
-  };
+    const handleInputFocus = (e) => {
+      e.preventDefault();
+      setInputFocus(true);
+    };
 
-  const available = filtered.length > 0;
-  const titlePlaceholder = selected || placeholder;
+    const handleInputBlur = (e) => {
+      e.preventDefault();
+      setInputFocus(false);
+      onBlur(e);
+    };
 
-  return (
-    <button
-      type="button"
-      onClick={onComboBoxClick}
-      ref={modalRef}
-      className="bg-white relative w-full h-9 space-y-1 rounded-md border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
-    >
-      <input hidden readOnly value={selected} ref={ref} {...props} />
-      <div className="flex justify-between items-center w-full px-3 py-1 bg-inherit rounded-md transition-colors select-none">
-        <p className="text-sm font-light">{titlePlaceholder}</p>
-        <CaretSortIcon className={iconStyle} />
-      </div>
+    const onComboBoxClick = (e) => {
+      e.preventDefault();
 
-      {visible && (
-        <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
-          <div className="flex justify-center items-center gap-2 px-3 py-2">
-            <MagnifyingGlassIcon className={iconStyle} />
-            <input
-              value={inputValue}
-              ref={inputRef}
-              onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
-              onChange={handleInputChange}
-              placeholder={placeholder}
-              type="text"
-              className={`${textStyle} w-full bg-inherit placeholder:text-sm placeholder:font-light placeholder:text-stone-500 focus:outline-none`}
-            />
-          </div>
+      if (inputFocus) return;
+      setVisible(!visible);
+    };
 
-          <Separator />
+    const available = filtered.length > 0;
+    const titlePlaceholder = selected || placeholder;
 
-          {available && (
-            <ul className="p-1">
-              {filtered.map((item) => (
-                <Fragment key={item}>
-                  <Option item={item} onClick={handleSelectClick}>
-                    {render(item)}
-                  </Option>
-                </Fragment>
-              ))}
-            </ul>
-          )}
-
-          {!available && <p className={`py-6 text-center ${textStyle}`}>Niciun rezultat</p>}
+    return (
+      <button
+        type="button"
+        onClick={onComboBoxClick}
+        ref={modalRef}
+        className="bg-white relative w-full h-9 space-y-1 rounded-md border border-stone-300 focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700"
+      >
+        <input hidden readOnly value={selected} ref={ref} {...props} />
+        <div className="flex justify-between items-center w-full px-3 py-1 bg-inherit rounded-md transition-colors select-none">
+          <p className="text-sm font-light">{titlePlaceholder}</p>
+          <CaretSortIcon className={iconStyle} />
         </div>
-      )}
-    </button>
-  );
-});
+
+        {visible && (
+          <div className="absolute z-10 w-full max-h-72 border bg-inherit border-stone-300 rounded-md overflow-scroll animate-in zoom-in-50 ease-out shadow-lg">
+            <div className="flex justify-center items-center gap-2 px-3 py-2">
+              <MagnifyingGlassIcon className={iconStyle} />
+              <input
+                value={inputValue}
+                ref={inputRef}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
+                onChange={handleInputChange}
+                placeholder={placeholder}
+                type="text"
+                className={`${textStyle} w-full bg-inherit placeholder:text-sm placeholder:font-light placeholder:text-stone-500 focus:outline-none`}
+              />
+            </div>
+
+            <Separator />
+
+            {available && (
+              <ul className="p-1">
+                {filtered.map((item) => (
+                  <Fragment key={item}>
+                    <Option item={item} onClick={handleSelectClick}>
+                      {render(item)}
+                    </Option>
+                  </Fragment>
+                ))}
+              </ul>
+            )}
+
+            {!available && <p className={`py-6 text-center ${textStyle}`}>Niciun rezultat</p>}
+          </div>
+        )}
+      </button>
+    );
+  }
+);
 
 export default ComboBox;

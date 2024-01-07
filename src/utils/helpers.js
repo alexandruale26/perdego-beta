@@ -41,4 +41,6 @@ const filterData = (data, search) => {
   });
 };
 
-export { removeDiacritics, capitalizeFirstLetter, imageRandomName, formatPostDate, filterData };
+const setDefaultValue = (initialValue) => (initialValue ? initialValue : "");
+
+export { removeDiacritics, capitalizeFirstLetter, imageRandomName, formatPostDate, filterData, setDefaultValue };

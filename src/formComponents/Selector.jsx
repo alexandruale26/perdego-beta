@@ -1,5 +1,6 @@
 import { forwardRef, useState, useEffect, Fragment } from "react";
 import { twMerge } from "tailwind-merge";
+import { setDefaultValue } from "../utils/helpers";
 
 const Option = ({ item, className, onSelectedClick }) => {
   return (
@@ -15,8 +16,8 @@ const Option = ({ item, className, onSelectedClick }) => {
   );
 };
 
-const Selector = forwardRef(({ className, values, defaultValue, onChange, ...props }, ref) => {
-  const [selected, setSelected] = useState(defaultValue);
+const Selector = forwardRef(({ className, values, defaultValue, onChange, exportValue, ...props }, ref) => {
+  const [selected, setSelected] = useState(setDefaultValue(defaultValue));
 
   useEffect(() => {
     setSelected(defaultValue);
@@ -28,9 +29,9 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, ...pro
 
     ref.current.value = newValue;
     onChange(e);
-  };
 
-  console.log(defaultValue);
+    if (exportValue) exportValue(newValue);
+  };
 
   return (
     <button
