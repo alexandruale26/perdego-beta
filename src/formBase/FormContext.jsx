@@ -1,11 +1,11 @@
 import { useEffect, useReducer, createContext, useContext, useCallback } from "react";
-import postReducer from "./formReducer";
+import formReducer from "./formReducer";
 import INITIAL_STATE, * as actions from "./constants";
 
 const FormContext = createContext({});
 
 const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
-  const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
 
   const setAsInvalid = (name, message) => {
     dispatch({ action: actions.FIELD_SET_INVALID, payload: { name, message } });

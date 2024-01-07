@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import SimpleInput from "../../formComponents/SimpleInput";
 import ComboBox from "../../formComponents/ComboBox";
 import Selector from "../../formComponents/Selector";
@@ -12,12 +13,22 @@ const SearchFormDivision = ({ children }) => {
   return <div className="flex flex-col xsm:flex-row w-full gap-4">{children}</div>;
 };
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, formParams }) => {
+  const [formState, setFormState] = useState({});
   const handleSubmit = (values) => {
     onSubmit(values);
+    setFormState(values);
+    // console.log(values);
   };
 
-  const formData = { schema: {}, defaultValues: {} };
+  // useEffect(() => {
+  // }, []);
+
+  // console.log("FORM", formState);
+  // console.log("PARAMS", formParams);
+
+  const formData = { schema: {}, defaultValues: { search: formParams.search } };
+  // console.log(formParams);
 
   return (
     <Form

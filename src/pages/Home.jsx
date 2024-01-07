@@ -44,16 +44,11 @@ const Home = () => {
     setFirstRender(false);
   };
 
-  const params = getAllSearchParamsAsObject(searchParams);
-  const xx = JSON.stringify(params) === "{}" ? defaultSearchParams : params;
-
   // console.log(xx);
-
-  const formData = { schema: {}, defaultValues: xx };
 
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
-      <SearchForm onSubmit={getSearchValues} />
+      <SearchForm onSubmit={getSearchValues} formParams={getAllSearchParamsAsObject(searchParams)} />
 
       {isLoading ? (
         <Spinner className="pt-0 xs:pt-32" />

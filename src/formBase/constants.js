@@ -4,7 +4,7 @@ const FIELD_SET_INVALID = "field/setInvalid";
 const FIELD_SET_VALID = "field/setValid";
 
 const INITIAL_STATE = {
-  refs: [], //TODO: should remove refs and get the element by name from DOM
+  refs: [],
   schema: {},
   defaultValues: {},
   fieldsState: {},
