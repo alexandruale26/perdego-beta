@@ -54,9 +54,20 @@ const Home = () => {
             {showSearchResultsTitle(hasSearchParams, posts.length)}
           </h2>
 
-          {posts.map((post) => (
+          {/* {posts.map((post) => (
             <PostLink key={post.postId} post={post} searchParams={searchedParams} />
-          ))}
+          ))} */}
+
+          {hasSearchParams === true &&
+            posts.map((post) => <PostLink key={post.postId} post={post} searchParams={searchedParams} />)}
+
+          {hasSearchParams === false && (
+            <div className="w-full flex flex-col">
+              {posts.map((post) => (
+                <PostLink key={post.postId} post={post} searchParams={searchedParams} gridMode={true} />
+              ))}
+            </div>
+          )}
         </Section>
       )}
     </div>
