@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import PostLink from "../features/home/PostLink";
 import SearchForm from "../features/home/SearchForm";
 import Section from "../shared/Section";
@@ -17,31 +17,30 @@ const defaultSearchParams = {
 
 const Home = () => {
   //TODO: parent container should be flex and children full width
-  const [firstRender, setFirstRender] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
+
+  const hasSearchParams = !!useLocation().search;
+  const searchedParams = getAllSearchParamsAsObject(searchParams);
 
   useEffect(() => {
     setIsLoading(true);
 
     const process = async () => {
       const queryParams = getAllSearchParamsAsObject(searchParams);
-      const data = firstRender ? await firstRenderPosts() : await queryPosts(queryParams);
+      const data = hasSearchParams ? await queryPosts(queryParams) : await firstRenderPosts();
 
       setPosts(data);
       setIsLoading(false);
     };
 
     process();
-  }, [searchParams, firstRender]);
+  }, [searchParams, hasSearchParams]);
 
   const getSearchValues = (queryData) => {
     setSearchParams(queryData);
-    setFirstRender(false);
   };
-
-  const searchedParams = getAllSearchParamsAsObject(searchParams);
 
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
@@ -52,7 +51,7 @@ const Home = () => {
       ) : (
         <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
           <h2 className="w-full text-start pl-1 mb-2 text-xl xs:text-2xl font-medium text-stone-700 select-none">
-            {showSearchResultsTitle(firstRender, posts.length)}
+            {showSearchResultsTitle(hasSearchParams, posts.length)}
           </h2>
 
           {posts.map((post) => (

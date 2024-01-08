@@ -5,9 +5,9 @@ const getAllSearchParamsAsObject = (searchParams) => {
   }, {});
 };
 
-const showSearchResultsTitle = (firstRender, postsLength) => {
+const showSearchResultsTitle = (hasSearchParams, postsLength) => {
   if (postsLength < 1) return "Niciun rezultat :(";
-  if (firstRender) return "Cele mai recente anunțuri";
+  if (!hasSearchParams) return "Cele mai recente anunțuri";
 
   return `Am gǎsit ${postsLength} anunțuri`;
 };
