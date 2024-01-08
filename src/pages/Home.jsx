@@ -3,6 +3,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 import PostLink from "../features/home/PostLink";
 import SearchForm from "../features/home/SearchForm";
 import Section from "../shared/Section";
+import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import { queryPosts, firstRenderPosts } from "../services/searchApi";
 import { getAllSearchParamsAsObject, showSearchResultsTitle } from "../features/home/helpers";
@@ -15,10 +16,14 @@ const defaultSearchParams = {
   category: "",
 };
 
+const isLayoutChangeAllowed = () => window.innerWidth >= 480;
+
 const Home = () => {
   //TODO: parent container should be flex and children full width
-  const [isLoading, setIsLoading] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [gridMode, setGridMode] = useState(false);
+  const [allowLayoutChange, setAllowLayoutChange] = useState(isLayoutChangeAllowed());
   const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
 
   const hasSearchParams = !!useLocation().search;
@@ -38,6 +43,16 @@ const Home = () => {
     process();
   }, [searchParams, hasSearchParams]);
 
+  useEffect(() => {
+    const setIfLayoutAllowed = (e) => {
+      e.preventDefault();
+      setAllowLayoutChange(isLayoutChangeAllowed());
+    };
+
+    window.addEventListener("resize", setIfLayoutAllowed);
+    return () => window.removeEventListener("resize", setIfLayoutAllowed);
+  }, []);
+
   const getSearchValues = (queryData) => {
     setSearchParams(queryData);
   };
@@ -50,23 +65,27 @@ const Home = () => {
         <Spinner className="pt-0 xs:pt-32" />
       ) : (
         <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
-          <h2 className="w-full text-start pl-1 mb-2 text-xl xs:text-2xl font-medium text-stone-700 select-none">
-            {showSearchResultsTitle(hasSearchParams, posts.length)}
-          </h2>
+          <div className="w-full flex items-start gap-1 pl-1 select-none">
+            <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium text-stone-700">
+              {showSearchResultsTitle(hasSearchParams, posts.length)}
+            </h2>
+            {hasSearchParams && allowLayoutChange && <LayoutSwitcher onSelect={(value) => setGridMode(value)} />}
+          </div>
 
-          {/* {posts.map((post) => (
-            <PostLink key={post.postId} post={post} searchParams={searchedParams} />
-          ))} */}
-
-          {hasSearchParams === true &&
-            posts.map((post) => <PostLink key={post.postId} post={post} searchParams={searchedParams} />)}
+          {hasSearchParams === true && (
+            <Section gridMode={gridMode} className="flex-col p-0 bg-transparent shadow-none rounded-none">
+              {posts.map((post) => (
+                <PostLink key={post.postId} post={post} gridMode={gridMode} searchParams={searchedParams} />
+              ))}
+            </Section>
+          )}
 
           {hasSearchParams === false && (
-            <div className="w-full flex flex-col">
+            <Section gridMode={true}>
               {posts.map((post) => (
-                <PostLink key={post.postId} post={post} searchParams={searchedParams} gridMode={true} />
+                <PostLink key={post.postId} post={post} gridMode={true} searchParams={searchedParams} />
               ))}
-            </div>
+            </Section>
           )}
         </Section>
       )}

@@ -21,6 +21,7 @@ const config = {
       screens: {
         xs: "480px",
         xsm: "540px",
+        xlg: "700px",
       },
     },
   },

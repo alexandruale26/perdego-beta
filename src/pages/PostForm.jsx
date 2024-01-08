@@ -26,6 +26,7 @@ const PostForm = () => {
       const formInputsUppercased = {
         title: capitalizeFirstLetter(formData.title),
         description: capitalizeFirstLetter(formData.description),
+        // TODO: no diacritics title - URGENT !!!
       };
 
       const newData = { ...formData, ...formInputsUppercased, image: imageName };

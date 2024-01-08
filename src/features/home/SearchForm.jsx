@@ -118,7 +118,7 @@ const SearchForm = ({ onSubmit, searchParams }) => {
 
         <LinkButton
           to={"/"}
-          className="border-b-[2px] border-transparent hover:border-emerald-400 focus-visible:text-lg"
+          className="text-sm xs:text-base border-b-[2px] border-transparent hover:border-emerald-400 focus-visible:text-lg"
         >
           Șterge filtrele
         </LinkButton>
