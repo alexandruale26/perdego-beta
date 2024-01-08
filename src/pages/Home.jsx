@@ -34,8 +34,6 @@ const Home = () => {
     };
 
     process();
-
-    // console.log(getAllSearchParamsAsObject(searchParams));
   }, [searchParams, firstRender]);
 
   const getSearchValues = (queryData) => {
@@ -43,9 +41,11 @@ const Home = () => {
     setFirstRender(false);
   };
 
+  const searchedParams = getAllSearchParamsAsObject(searchParams);
+
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
-      <SearchForm onSubmit={getSearchValues} searchParams={getAllSearchParamsAsObject(searchParams)} />
+      <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} />
 
       {isLoading ? (
         <Spinner className="pt-0 xs:pt-32" />
@@ -56,7 +56,7 @@ const Home = () => {
           </h2>
 
           {posts.map((post) => (
-            <PostLink key={post.postId} post={post} />
+            <PostLink key={post.postId} post={post} searchParams={searchedParams} />
           ))}
         </Section>
       )}

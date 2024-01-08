@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { getPost, getImageUrl } from "../services/postApi";
 import Section from "../shared/Section";
 import Tag from "../shared/Tag";
@@ -6,8 +6,10 @@ import UserProfile from "../shared/UserProfile";
 import LinkButton from "../shared/LinkButton";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 // import FavoriteButton from "../shared/FavoriteButton";
+// import MinifiedSearchForm from "../features/home/MinifiedSearchForm";
 import Telephone from "../features/post/Telephone";
 import { formatPostDate } from "../utils/helpers";
+import generateSearchParamsTitle from "../features/post/helpers";
 
 const Post = () => {
   // TODO: separate tags into in array and map them (location, category, type, maybe other in the future)
@@ -17,11 +19,14 @@ const Post = () => {
 
   const post = useLoaderData();
   const image = getImageUrl(post.image);
+  const { searchParams } = useLocation().state;
 
   return (
-    <div className="w-full max-w-4xl flex flex-col gap-4 py-4 rounded-md mx-auto">
-      <LinkButton to=".." className="max-w-[90px] justify-start xs:text-lg font-medium text-stone-700 select-none">
-        <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi
+    <div className="w-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
+      {/* <MinifiedSearchForm /> */}
+      <LinkButton to={-1} className="justify-start xs:text-lg font-medium text-stone-700 select-none">
+        <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
+        <span className="pl-4 text-xs xs:text-sm font-light">{generateSearchParamsTitle(searchParams)}</span>
       </LinkButton>
 
       <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">

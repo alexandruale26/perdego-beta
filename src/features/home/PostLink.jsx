@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { formatPostDate } from "../../utils/helpers";
 import { getImageUrl } from "../../services/postApi";
 
-const PostLink = ({ post }) => {
+const PostLink = ({ post, searchParams }) => {
   const image = getImageUrl(post.image);
 
   return (
     <Link
       to={`${post.postId}`}
+      state={{ searchParams }}
       className="w-full h-[360px] xs:h-[170px] flex flex-col xs:flex-row items-center justify-between gap-4 mx-auto p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 overflow-hidden"
     >
       <img
