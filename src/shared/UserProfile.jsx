@@ -1,13 +1,15 @@
 import { twMerge } from "tailwind-merge";
-import { PersonIcon } from "@radix-ui/react-icons";
+import { capitalizeJustFirstChar } from "../utils/helpers";
 
 const convertToUserProfileDate = (date) => date;
+
+// TODO: user account should store profile color
 
 const UserProfile = ({ name, memberSinceDate, className }) => {
   return (
     <div className={twMerge("flex gap-4 items-center justify-center", className)}>
-      <div className="flex items-center justify-center w-14 h-14 p-2 border-2 border-black rounded-full">
-        <PersonIcon className="w-full h-full" />
+      <div className="flex items-center justify-center w-[52px] h-[52px] text-white text-3xl bg-lime-500 rounded-full">
+        {capitalizeJustFirstChar(name)}
       </div>
 
       <div>

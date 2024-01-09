@@ -1,19 +1,9 @@
+import { getFromLocalStorage } from "../../utils/helpers";
+
 const minWidth = 480;
 const GRID_STORAGE_NAME = "layout";
 
 const isLayoutChangeAllowed = () => window.innerWidth >= minWidth;
-
-const getFromLocalStorage = (name) => {
-  return localStorage.getItem(name);
-};
-
-const saveToLocalStorage = (name, value) => {
-  const prevValue = getFromLocalStorage(name);
-  const stringifiedValue = typeof value === "string" ? value : value.toString();
-
-  if (prevValue === stringifiedValue) return;
-  localStorage.setItem(name, value);
-};
 
 const getGridModeFromStorage = () => {
   const isInStorage = getFromLocalStorage(GRID_STORAGE_NAME);
@@ -40,7 +30,6 @@ export {
   getAllSearchParamsAsObject,
   showSearchResultsTitle,
   isLayoutChangeAllowed,
-  saveToLocalStorage,
   getGridModeFromStorage,
   GRID_STORAGE_NAME,
 };

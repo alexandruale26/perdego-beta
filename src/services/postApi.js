@@ -2,6 +2,7 @@ import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
 
 //TODO: should add path const for multiple image locations "posts-images"
+//TODO: manage all errors from server
 const imageExtension = "png";
 
 const createPost = async (post) => {

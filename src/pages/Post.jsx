@@ -5,8 +5,6 @@ import Tag from "../shared/Tag";
 import UserProfile from "../shared/UserProfile";
 import LinkButton from "../shared/LinkButton";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
-// import FavoriteButton from "../shared/FavoriteButton";
-// import MinifiedSearchForm from "../features/home/MinifiedSearchForm";
 import Telephone from "../features/post/Telephone";
 import { formatPostDate } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
@@ -49,20 +47,19 @@ const Post = () => {
         <p className="text-sm xs:text-base font-light text-stone-700">{post.description}</p>
       </Section>
 
-      <Section className="flex-wrap items-center justify-between">
-        <div className="flex items-start justify-center flex-col gap-2">
-          <h3 className="text-base xs:text-lg font-semibold  text-stone-800 uppercase">Contacteazǎ-mǎ</h3>
+      <Section className="flex-col items-start justify-start">
+        <h3 className="text-base xs:text-lg font-semibold text-stone-800 uppercase">Contacteazǎ-mǎ</h3>
+        <div className="w-full flex items-center justify-between flex-wrap gap-4">
           <UserProfile name={post.name} memberSinceDate="iunie 2023" />
+          <Telephone number={post.phone} />
         </div>
-
-        <Telephone number={post.phone} />
       </Section>
     </div>
   );
 };
 
 const loader = async ({ request, params }) => {
-  //TODO: manage request and response params, and unknown id
+  //TODO: manage request and response params, and unknown id /=> errors
 
   const postId = params.pid;
   const receivedData = await getPost(postId);

@@ -6,11 +6,11 @@ import Section from "../shared/Section";
 import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import { queryPosts, firstRenderPosts } from "../services/searchApi";
+import { saveToLocalStorage } from "../utils/helpers";
 import {
   getAllSearchParamsAsObject,
   showSearchResultsTitle,
   isLayoutChangeAllowed,
-  saveToLocalStorage,
   getGridModeFromStorage,
   GRID_STORAGE_NAME,
 } from "../features/home/helpers";
@@ -69,7 +69,7 @@ const Home = () => {
 
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
-      <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} />
+      <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} hasSearchParams={hasSearchParams} />
 
       {isLoading ? (
         <Spinner className="pt-0 xs:pt-32" />

@@ -8,7 +8,7 @@ import Selector from "../formComponents/Selector";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
 import { schema, defaultValues } from "../features/postForm/data";
 import { convertImage } from "../formBase/formHelpers";
-import { filterData, capitalizeFirstLetter } from "../utils/helpers";
+import { filterData, sanitizeInput } from "../utils/helpers";
 import { createPost, uploadImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
 
@@ -24,9 +24,8 @@ const PostForm = () => {
       const imageName = await uploadImage(convertedImg); //TODO: handle no image
 
       const formInputsUppercased = {
-        title: capitalizeFirstLetter(formData.title),
-        description: capitalizeFirstLetter(formData.description),
-        // TODO: no diacritics title - URGENT !!!
+        title: sanitizeInput(formData.title, true),
+        description: sanitizeInput(formData.description),
       };
 
       const newData = { ...formData, ...formInputsUppercased, image: imageName };

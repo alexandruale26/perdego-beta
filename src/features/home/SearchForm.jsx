@@ -13,7 +13,7 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 // TODO: maybe should add "Toata tara" && "Toate categoriile" as values.
 
-const SearchForm = ({ onSubmit, searchParams }) => {
+const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
   const [search, setSearch] = useState("");
   const [postType, setPostType] = useState("");
   const [location, setLocation] = useState("");
@@ -116,12 +116,14 @@ const SearchForm = ({ onSubmit, searchParams }) => {
           <MagnifyingGlassIcon className="w-6 h-6" />
         </SubmitButton>
 
-        <LinkButton
-          to={"/"}
-          className="text-sm xs:text-base border-b-[2px] border-transparent hover:border-emerald-400 focus-visible:text-lg"
-        >
-          Șterge filtrele
-        </LinkButton>
+        {hasSearchParams && (
+          <LinkButton
+            to={"/"}
+            className="text-sm xs:text-base border-b-[2px] border-transparent hover:border-emerald-400 focus-visible:text-lg"
+          >
+            Șterge filtrele
+          </LinkButton>
+        )}
       </Division>
     </Form>
   );

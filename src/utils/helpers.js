@@ -5,11 +5,15 @@ const imageRandomName = () => {
 //TODO: change the input data to search to a better type {name:name, value:value}
 const removeDiacritics = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-const capitalizeFirstLetter = (string) => {
-  const trimmedString = string.trim();
-  const firstCharToUpper = trimmedString.charAt(0).toUpperCase();
+const capitalizeJustFirstChar = (string) => string.charAt(0).toUpperCase();
 
-  return firstCharToUpper.concat(trimmedString.slice(1));
+const sanitizeInput = (string, noDiacritics = false) => {
+  // Capitalize first letter and if needed, remove diacritics.
+  const trimmedString = string.trim();
+  const firstCharToUpper = capitalizeJustFirstChar(trimmedString);
+  const fullString = firstCharToUpper.concat(trimmedString.slice(1));
+
+  return noDiacritics ? removeDiacritics(fullString) : fullString;
 };
 
 const formatPostDate = (timestamp) => {
@@ -43,4 +47,26 @@ const filterData = (data, search) => {
 
 const setDefaultValue = (initialValue) => (initialValue ? initialValue : "");
 
-export { removeDiacritics, capitalizeFirstLetter, imageRandomName, formatPostDate, filterData, setDefaultValue };
+const getFromLocalStorage = (name) => {
+  return localStorage.getItem(name);
+};
+
+const saveToLocalStorage = (name, value) => {
+  const prevValue = getFromLocalStorage(name);
+  const stringifiedValue = typeof value === "string" ? value : value.toString();
+
+  if (prevValue === stringifiedValue) return;
+  localStorage.setItem(name, value);
+};
+
+export {
+  removeDiacritics,
+  capitalizeJustFirstChar,
+  sanitizeInput,
+  imageRandomName,
+  formatPostDate,
+  filterData,
+  setDefaultValue,
+  saveToLocalStorage,
+  getFromLocalStorage,
+};
