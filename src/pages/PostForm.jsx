@@ -12,6 +12,8 @@ import { filterData, sanitizeInput } from "../utils/helpers";
 import { createPost, uploadImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
 
+// TODO: disable name and phone and use user uid
+
 const formData = {
   schema,
   defaultValues,

@@ -18,7 +18,7 @@ const Post = () => {
   const { searchParams } = useLocation().state;
 
   return (
-    <div className="w-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
+    <div className="w-full h-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
       {/* <MinifiedSearchForm /> */}
       <LinkButton to={-1} className="justify-start xs:text-lg font-medium text-stone-700 select-none">
         <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}

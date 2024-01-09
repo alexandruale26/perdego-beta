@@ -59,6 +59,13 @@ const saveToLocalStorage = (name, value) => {
   localStorage.setItem(name, value);
 };
 
+const generateErrorMessage = (inputName, minLength, maxLength) => {
+  const messageBase = `${inputName} trebuie sǎ conținǎ`;
+
+  if (minLength) return `${messageBase} minim ${minLength}${minLength >= 20 ? " de" : ""} caractere`;
+  if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere`;
+};
+
 export {
   removeDiacritics,
   capitalizeJustFirstChar,
@@ -69,4 +76,5 @@ export {
   setDefaultValue,
   saveToLocalStorage,
   getFromLocalStorage,
+  generateErrorMessage,
 };

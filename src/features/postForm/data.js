@@ -1,23 +1,14 @@
+import { generateErrorMessage } from "../../utils/helpers";
+
 const lengths = {
   title: {
     min: 10,
     max: 50,
   },
-  name: {
-    min: 3,
-    max: 25,
-  },
   description: {
     min: 20,
     max: 450,
   },
-};
-
-const generateErrorMessage = (inputName, minLength, maxLength) => {
-  const messageBase = `${inputName} trebuie sǎ conținǎ`;
-
-  if (minLength) return `${messageBase} minim ${minLength}${minLength >= 20 ? " de" : ""} caractere`;
-  if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere`;
 };
 
 const schema = {
@@ -33,20 +24,6 @@ const schema = {
     regex: {
       pattern: /^\s*\S.{8,}\S\s*$/,
       errorMessage: "Introdu un text valid",
-    },
-  },
-  name: {
-    minLength: {
-      value: lengths.name.min,
-      errorMessage: generateErrorMessage("Numele", lengths.name.min),
-    },
-    maxLength: {
-      value: lengths.name.max,
-      errorMessage: generateErrorMessage("Numele", null, lengths.name.max),
-    },
-    regex: {
-      pattern: /^\s*\S.{1,}\S\s*$/,
-      errorMessage: "Introdu un nume valid",
     },
   },
   location: {
@@ -67,12 +44,6 @@ const schema = {
     maxLength: {
       value: lengths.description.max,
       errorMessage: generateErrorMessage("Descrierea", null, lengths.description.max),
-    },
-  },
-  phone: {
-    regex: {
-      pattern: /^07\d{8}$/,
-      errorMessage: "Numǎrul nu este valid",
     },
   },
   postType: {
