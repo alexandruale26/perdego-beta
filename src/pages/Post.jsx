@@ -12,10 +12,8 @@ import { formatPostDate } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
 
 const Post = () => {
-  // TODO: separate tags into in array and map them (location, category, type, maybe other in the future)
   // TODO: image should load after render
-  // TODO: favorite if user is logged
-  // TODO: put user member date at create post
+  // TODO: put user member data at create post
 
   const post = useLoaderData();
   const image = getImageUrl(post.image);

@@ -1,4 +1,8 @@
 const generateSearchParamsTitle = (searchParams) => {
+  if (Object.entries(searchParams).length === 0) {
+    return "Toate postǎrile / Toate categoriile / Toatǎ țara";
+  }
+
   const arrangedSearchParams = {
     postType: searchParams.postType,
     category: searchParams.category,

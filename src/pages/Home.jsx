@@ -6,7 +6,14 @@ import Section from "../shared/Section";
 import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import { queryPosts, firstRenderPosts } from "../services/searchApi";
-import { getAllSearchParamsAsObject, showSearchResultsTitle } from "../features/home/helpers";
+import {
+  getAllSearchParamsAsObject,
+  showSearchResultsTitle,
+  isLayoutChangeAllowed,
+  saveToLocalStorage,
+  getGridModeFromStorage,
+  GRID_STORAGE_NAME,
+} from "../features/home/helpers";
 
 // TODO: see if can separate some objects
 const defaultSearchParams = {
@@ -16,13 +23,11 @@ const defaultSearchParams = {
   category: "",
 };
 
-const isLayoutChangeAllowed = () => window.innerWidth >= 480;
-
 const Home = () => {
   //TODO: parent container should be flex and children full width
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [gridMode, setGridMode] = useState(false);
+  const [gridMode, setGridMode] = useState(getGridModeFromStorage());
   const [allowLayoutChange, setAllowLayoutChange] = useState(isLayoutChangeAllowed());
   const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
 
@@ -57,6 +62,11 @@ const Home = () => {
     setSearchParams(queryData);
   };
 
+  const handleLayoutSwitch = (value) => {
+    setGridMode(value);
+    saveToLocalStorage(GRID_STORAGE_NAME, value);
+  };
+
   return (
     <div className="w-full max-w-4xl h-full min-h-screen mx-auto text-center space-y-10">
       <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} />
@@ -69,7 +79,9 @@ const Home = () => {
             <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium text-stone-700">
               {showSearchResultsTitle(hasSearchParams, posts.length)}
             </h2>
-            {hasSearchParams && allowLayoutChange && <LayoutSwitcher onSelect={(value) => setGridMode(value)} />}
+            {hasSearchParams && allowLayoutChange && (
+              <LayoutSwitcher isGridSelected={gridMode} onSelect={handleLayoutSwitch} />
+            )}
           </div>
 
           {hasSearchParams === true && (

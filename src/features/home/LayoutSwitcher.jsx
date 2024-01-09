@@ -11,8 +11,8 @@ const setIconColor = (isGrid) => {
   return isGrid ? "text-emerald-500" : "text-stone-700";
 };
 
-const LayoutSwitcher = ({ className, onSelect }) => {
-  const [isGrid, setIsGrid] = useState(false);
+const LayoutSwitcher = ({ className, isGridSelected, onSelect }) => {
+  const [isGrid, setIsGrid] = useState(isGridSelected);
 
   const setLayout = (e) => {
     e.preventDefault();
