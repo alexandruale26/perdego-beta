@@ -22,7 +22,7 @@ const Post = () => {
       {/* <MinifiedSearchForm /> */}
       <LinkButton to={-1} className="justify-start xs:text-lg font-medium text-stone-700 select-none">
         <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
-        <span className="pl-4 text-xs xs:text-sm font-light">{generateSearchParamsTitle(searchParams)}</span>
+        <span className="pl-4 text-xs xs:text-sm font-light underline">{generateSearchParamsTitle(searchParams)}</span>
       </LinkButton>
 
       <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">

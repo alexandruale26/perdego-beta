@@ -21,7 +21,11 @@ const config = {
       screens: {
         xs: "480px",
         xsm: "540px",
-        xlg: "700px",
+        xmd: "700px",
+        xlg: "800px",
+      },
+      maxWidth: {
+        xlg: "800px",
       },
     },
   },
