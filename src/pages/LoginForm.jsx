@@ -1,80 +1,32 @@
 import { Form } from "../formBase/FormContext";
 import ValidationInput from "../formComponents/ValidationInput";
-import { generateErrorMessage } from "../utils/helpers";
 import { FormField, FormItem, FormLabel, FormMessage } from "../formComponents/form";
 import SubmitButton from "../shared/SubmitButton";
 import LinkButton from "../shared/LinkButton";
 import LoginDiv from "../features/loginForm/LoginDiv";
-import { LeftArrow, RightArrow } from "../shared/LogoArrows";
-import Logo from "../shared/Logo";
-
-const lengths = {
-  email: {
-    min: 3,
-    max: 25,
-  },
-  password: {
-    min: 3,
-    max: 25,
-  },
-};
-
-const schema = {
-  email: {
-    minLength: {
-      value: lengths.email.min,
-      errorMessage: generateErrorMessage("E-mailul", lengths.email.min),
-    },
-    maxLength: {
-      value: lengths.email.max,
-      errorMessage: generateErrorMessage("E-mailul", null, lengths.email.max),
-    },
-    regex: {
-      pattern: /^\s*\S.{1,}\S\s*$/,
-      errorMessage: "Introdu un nume valid",
-    },
-  },
-  password: {
-    minLength: {
-      value: lengths.password.min,
-      errorMessage: generateErrorMessage("Parola", lengths.password.min),
-    },
-    maxLength: {
-      value: lengths.password.max,
-      errorMessage: generateErrorMessage("Parola", null, lengths.password.max),
-    },
-    // regex: {
-    //   pattern: /^\s*\S.{1,}\S\s*$/,
-    //   errorMessage: "Introdu un nume valid",
-    // },
-  },
-};
+import Hero from "../features/loginForm/Hero";
+import { schema, defaultValues, lengths } from "../features/loginForm/data";
 
 const formData = {
   schema,
-  defaultValues: {},
+  defaultValues,
 };
 
-//TODO: password visibility feature
-//TODO: use lengths to input maxLengths
+//TODO: curated and lowercase password for databaase
+//TODO: implement logic for login to supa
 
 const LoginForm = () => {
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
   return (
     <Form
       {...formData}
+      onSubmit={handleSubmit}
       className="flex w-full flex-col sm:flex-row min-h-screen items-start justify-start sm:justify-center gap-2 sm:gap-0 bg-white"
     >
-      <LoginDiv className="bg-black min-h-0">
-        <div className="flex flex-col items-start justify-start w-full max-w-lg sm:min-h-[450px] p-6">
-          <h1>
-            <Logo className="text-3xl xs:text-4xl lg:text-5xl" />
-          </h1>
-          <h3 className="xs:text-lg lg:text-xl text-white font-light py-6 xs:py-10">
-            <LeftArrow className="text-lg lg:text-xl" /> Recupereazǎ-ți obiectele pierdute sau ajutǎ pe alți utilizatori
-            să-și găsească bunurile <RightArrow className="text-lg lg:text-xl" />
-          </h3>
-        </div>
-      </LoginDiv>
+      <Hero />
 
       <LoginDiv className="min-h-0">
         <div className="space-y-8 sm:space-y-10 w-full max-w-lg sm:min-h-[450px] p-6">
@@ -87,7 +39,7 @@ const LoginForm = () => {
               render={(field) => (
                 <FormItem className="max-w-full">
                   <FormLabel>Adresa ta de e-mail</FormLabel>
-                  <ValidationInput placeholder="nume@exemplu.com" {...field} maxLength={60} />
+                  <ValidationInput placeholder="nume@exemplu.com" {...field} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -97,7 +49,7 @@ const LoginForm = () => {
               render={(field) => (
                 <FormItem className="max-w-full">
                   <FormLabel>Parola</FormLabel>
-                  <ValidationInput type="password" {...field} maxLength={40} />
+                  <ValidationInput type="password" {...field} maxLength={lengths.password.max} />
                   <FormMessage />
                 </FormItem>
               )}
@@ -117,10 +69,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-/*        
-  <div className="w-full flex flex-wrap">
-    <h2 className="text-2xl font-medium whitespace-pre">Bun venit în comunitatea </h2>
-      <Logo className="text-3xl" />
-  </div> 
-*/

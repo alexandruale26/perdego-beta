@@ -10,6 +10,11 @@
   }
 }
 
+*::selection {
+  color: #fff;
+  background: theme(colors.primary-500);
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;

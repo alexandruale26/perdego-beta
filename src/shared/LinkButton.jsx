@@ -5,7 +5,10 @@ import React from "react";
 
 const LinkButton = ({ to, children, className }) => {
   return (
-    <Link to={to} className={twMerge("flex items-center justify-center focus-visible:outline-none", className)}>
+    <Link
+      to={to}
+      className={twMerge("flex items-center justify-center focus-visible:outline-none select-none", className)}
+    >
       {children}
     </Link>
   );
