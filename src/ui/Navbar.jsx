@@ -1,10 +1,10 @@
-import React from "react";
+import Logo from "../shared/Logo";
 
 const Navbar = () => {
   return (
-    <div className="flex h-[70px] xsm:h-[80px] w-full mx-auto max-w-6xl justify-between items-center px-6  text-white">
-      <a href="/" className="text-4xl select-none text-primary">
-        &lt;&gt; perdego
+    <div className="flex h-[70px] w-full mx-auto max-w-6xl justify-between items-center px-6  text-white">
+      <a href="/">
+        <Logo className="text-3xl xs:text-4xl" />
       </a>
       <div className="flex items-center justify-center gap-12">
         <a
