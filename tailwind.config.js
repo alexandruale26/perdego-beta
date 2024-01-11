@@ -1,4 +1,7 @@
+const colors = require("tailwindcss/colors");
+
 /** @type {import('tailwindcss').Config} */
+
 const config = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   future: {
@@ -24,8 +27,18 @@ const config = {
         xmd: "700px",
         xlg: "800px",
       },
-      maxWidth: {
-        xlg: "800px",
+      colors: {
+        primary: colors.emerald[400],
+        "primary-50": colors.emerald[50],
+        "primary-100": colors.emerald[100],
+        "primary-200": colors.emerald[200],
+        "primary-300": colors.emerald[300],
+        "primary-400": colors.emerald[400],
+        "primary-500": colors.emerald[500],
+        "primary-600": colors.emerald[600],
+        "primary-700": colors.emerald[700],
+        "primary-800": colors.emerald[800],
+        "primary-900": colors.emerald[900],
       },
     },
   },

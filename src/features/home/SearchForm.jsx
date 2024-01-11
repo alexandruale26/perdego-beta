@@ -119,7 +119,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
         {hasSearchParams && (
           <LinkButton
             to={"/"}
-            className="text-sm xs:text-base border-b-[1px] border-black hover:border-emerald-400 focus-visible:text-lg"
+            className="text-sm xs:text-base border-b-[1px] border-black hover:border-primary focus-visible:text-lg"
           >
             Șterge filtrele
           </LinkButton>

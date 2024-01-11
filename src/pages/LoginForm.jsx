@@ -5,6 +5,9 @@ import { generateErrorMessage } from "../utils/helpers";
 import { FormField, FormItem, FormLabel, FormMessage } from "../formComponents/form";
 import SubmitButton from "../shared/SubmitButton";
 import LinkButton from "../shared/LinkButton";
+import LoginDiv from "../features/loginForm/LoginDiv";
+import { LeftArrow, RightArrow } from "../shared/LogoArrows";
+import Logo from "../shared/Logo";
 
 const lengths = {
   email: {
@@ -96,29 +99,22 @@ const LoginForm = () => {
   console.log(windowWidth);
 
   return (
-    <Form
-      {...formData}
-      className="flex flex-col sm:flex-row w-full min-h-screen items-start justify-start md:justify-center bg-white"
-    >
-      <div name="hero" className="w-full p-6 pb-10 gap-4 flex flex-col items-start justify-between bg-black">
-        <h1 className="text-4xl select-none text-emerald-400">&lt;&gt; perdego</h1>
-
-        <div className="gap-2 xlg:gap-4 text-lg xlg:text-xl flex flex-col font-light text-white max-w-[510px]">
-          <h2 className="text-xl xlg:text-2xl font-medium">
-            Bun venit în comunitatea{" "}
-            <span className="text-2xl xlg:text-3xl font-normal text-emerald-400 whitespace-pre select-none">
-              {" "}
-              &lt;&gt; perdego
-            </span>
-          </h2>
-          Prin platforma noastrǎ îți oferim oportunitatea de a-ți recupera obiectele pierdute sau de a ajuta alți
-          utilizatori să-și găsească bunurile
+    <Form {...formData} className="flex w-full min-h-screen items-start justify-center bg-white">
+      <LoginDiv className="bg-black">
+        <div className="flex flex-col items-start justify-start w-full max-w-lg min-h-[450px] py-6 px-6 xl:px-0">
+          <h1>
+            <Logo />
+          </h1>
+          <h3 className="text-xl text-white font-light pt-10">
+            <LeftArrow className="text-xl" /> Recupereazǎ-ți obiectele pierdute sau ajutǎ pe alți utilizatori să-și
+            găsească bunurile <RightArrow className="text-xl" />
+          </h3>
         </div>
-      </div>
+      </LoginDiv>
 
-      <div name="form" className="w-1/2 h-full min-h-screen flex items-center justify-center">
-        <div className="w-full max-w-sm space-y-8 p-4">
-          <h3 className="text-2xl font-medium text-start">Acceseazǎ contul tǎu</h3>
+      <LoginDiv>
+        <div className="w-full min-h-[450px] max-w-lg space-y-10 py-6 px-6 xl:px-0">
+          <h3 className="text-2xl lg:text-3xl font-medium text-start">Acceseazǎ contul tǎu</h3>
           <div className="w-full space-y-4">
             <FormField
               name="email"
@@ -149,9 +145,16 @@ const LoginForm = () => {
             </div>
           </div>
         </div>
-      </div>
+      </LoginDiv>
     </Form>
   );
 };
 
 export default LoginForm;
+
+/*        
+  <div className="w-full flex flex-wrap">
+    <h2 className="text-2xl font-medium whitespace-pre">Bun venit în comunitatea </h2>
+      <Logo className="text-3xl" />
+  </div> 
+*/

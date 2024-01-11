@@ -5,7 +5,7 @@ const SubmitButton = ({ children, className }) => {
     <button
       type="submit"
       className={twMerge(
-        "flex items-center justify-center gap-2 bg-black rounded-md text-white hover:bg-emerald-400 focus-visible:outline-none focus-visible:text-lg select-none",
+        "flex items-center justify-center gap-2 bg-black rounded-md text-white hover:bg-primary focus-visible:outline-none focus-visible:text-lg select-none",
         className
       )}
     >

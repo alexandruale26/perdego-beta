@@ -11,7 +11,7 @@ const Option = ({ item, onClick, children }) => {
     <li
       onClick={onClick}
       data-item={item}
-      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-emerald-400 hover:text-white rounded-md`}
+      className={`${textStyle} px-2 py-2 text-stone-800 hover:bg-primary hover:text-white rounded-md`}
     >
       {children}
     </li>
