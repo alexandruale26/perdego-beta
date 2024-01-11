@@ -44,5 +44,3 @@ const AppLayout = () => {
 };
 
 export default AppLayout;
-
-//<main className={`w-full h-full ${!isUserLoggedIn ? "" : "py-10 px-4"} min-h-screen ${bgColor}`}>

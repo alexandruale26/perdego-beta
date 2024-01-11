@@ -4,13 +4,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .word-break {
+    word-break: break-word;
+  }
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
 }
 
-@layer utilities {
-  .word-break {
-    word-break: break-word;
-  }
+input[type="password"] {
+  font-weight: 600;
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Form } from "../formBase/FormContext";
 import ValidationInput from "../formComponents/ValidationInput";
 import { generateErrorMessage } from "../utils/helpers";
@@ -57,6 +56,7 @@ const formData = {
 };
 
 //TODO: password visibility feature
+//TODO: use lengths to input maxLengths
 
 const LoginForm = () => {
   return (
@@ -78,7 +78,9 @@ const LoginForm = () => {
 
       <LoginDiv className="min-h-0">
         <div className="space-y-8 sm:space-y-10 w-full max-w-lg sm:min-h-[450px] p-6">
-          <h3 className="text-[22px] xs:text-2xl lg:text-3xl font-medium text-start">Acceseazǎ contul tǎu</h3>
+          <h3 className="text-[22px] xs:text-2xl lg:text-3xl font-medium text-start text-stone-800">
+            Acceseazǎ contul tǎu
+          </h3>
           <div className="w-full space-y-4">
             <FormField
               name="email"
@@ -95,7 +97,7 @@ const LoginForm = () => {
               render={(field) => (
                 <FormItem className="max-w-full">
                   <FormLabel>Parola</FormLabel>
-                  <ValidationInput placeholder="**********" {...field} maxLength={60} />
+                  <ValidationInput type="password" {...field} maxLength={40} />
                   <FormMessage />
                 </FormItem>
               )}
