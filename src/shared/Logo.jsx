@@ -3,7 +3,7 @@ import { LeftArrow, RightArrow } from "./LogoArrows";
 
 const Logo = ({ className }) => {
   return (
-    <div className={twMerge("text-5xl select-none text-primary", className)}>
+    <div className={twMerge("text-5xl select-none text-primary whitespace-pre", className)}>
       <LeftArrow /> perdego <RightArrow />
     </div>
   );

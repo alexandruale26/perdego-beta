@@ -101,19 +101,19 @@ const LoginForm = () => {
   return (
     <Form {...formData} className="flex w-full min-h-screen items-start justify-center bg-white">
       <LoginDiv className="bg-black">
-        <div className="flex flex-col items-start justify-start w-full max-w-lg min-h-[450px] py-6 px-6 xl:px-0">
+        <div className="flex flex-col items-start justify-start w-full max-w-lg min-h-[450px] p-6">
           <h1>
-            <Logo />
+            <Logo className="text-4xl lg:text-5xl" />
           </h1>
-          <h3 className="text-xl text-white font-light pt-10">
-            <LeftArrow className="text-xl" /> Recupereazǎ-ți obiectele pierdute sau ajutǎ pe alți utilizatori să-și
-            găsească bunurile <RightArrow className="text-xl" />
+          <h3 className="text-lg lg:text-xl text-white font-light pt-10">
+            <LeftArrow className="text-lg lg:text-xl" /> Recupereazǎ-ți obiectele pierdute sau ajutǎ pe alți utilizatori
+            să-și găsească bunurile <RightArrow className="text-lg lg:text-xl" />
           </h3>
         </div>
       </LoginDiv>
 
       <LoginDiv>
-        <div className="w-full min-h-[450px] max-w-lg space-y-10 py-6 px-6 xl:px-0">
+        <div className="w-full min-h-[450px] max-w-lg space-y-10 p-6">
           <h3 className="text-2xl lg:text-3xl font-medium text-start">Acceseazǎ contul tǎu</h3>
           <div className="w-full space-y-4">
             <FormField
