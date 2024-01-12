@@ -23,7 +23,7 @@ const showSearchResultsTitle = (hasSearchParams, postsLength) => {
   if (postsLength < 1) return "Niciun rezultat :(";
   if (!hasSearchParams) return "Cele mai recente anunțuri";
 
-  return `Am gǎsit ${postsLength} anunțuri`;
+  return `Am gǎsit ${postsLength} ${postsLength === 1 ? "anunț" : "anunțuri"}`;
 };
 
 export {

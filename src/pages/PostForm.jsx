@@ -39,14 +39,12 @@ const PostForm = () => {
     console.log(values);
   };
 
+  // TODO: modify new design - all paddings
+
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-6">
-      <h1 className="text-xl xs:text-2xl font-medium pl-1">Ce anume ai gǎsit | pierdut...?</h1>
-      <Form
-        {...formData}
-        onSubmit={handleOnSubmit}
-        className="space-y-6 w-full bg-white p-4 sm:p-8 rounded-md shadow-sm"
-      >
+    <div className="w-full max-w-2xl mx-auto space-y-0">
+      <h1 className="text-xl xs:text-2xl font-medium pl-7">Ce anume ai gǎsit | pierdut...?</h1>
+      <Form {...formData} onSubmit={handleOnSubmit} className="space-y-5 w-full bg-white p-4 sm:p-8 rounded-md ">
         <FormField
           name="title"
           render={(field) => (
@@ -82,7 +80,8 @@ const PostForm = () => {
         <FormField
           name="postType"
           render={(field) => (
-            <FormItem>
+            <FormItem className="max-w-lg">
+              {" "}
               <FormLabel>Tipul anunțului</FormLabel>
               <Selector values={POSTTYPE} defaultValue="" {...field} />
               <FormMessage />
@@ -92,7 +91,8 @@ const PostForm = () => {
         <FormField
           name="category"
           render={(field) => (
-            <FormItem>
+            <FormItem className="max-w-lg">
+              {" "}
               <FormLabel>Categorie</FormLabel>
               <ComboBox
                 placeholder="Cautǎ dupǎ categorie"
@@ -109,7 +109,8 @@ const PostForm = () => {
         <FormField
           name="location"
           render={(field) => (
-            <FormItem>
+            <FormItem className="max-w-lg">
+              {" "}
               <FormLabel>Județ | Sector</FormLabel>
               <ComboBox
                 placeholder="Cautǎ dupǎ județ sau sector"
@@ -126,7 +127,8 @@ const PostForm = () => {
         <FormField
           name="name"
           render={(field) => (
-            <FormItem>
+            <FormItem className="max-w-lg">
+              {" "}
               <FormLabel>Nume</FormLabel>
               <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
               <FormMessage />
@@ -136,14 +138,15 @@ const PostForm = () => {
         <FormField
           name="phone"
           render={(field) => (
-            <FormItem>
+            <FormItem className="max-w-lg">
+              {" "}
               <FormLabel>Telefon</FormLabel>
               <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="w-full max-w-xs">
+        <div className="w-full max-w-lg">
           <SubmitButton className="h-14 w-full mt-10">Publicǎ anunțul</SubmitButton>
         </div>
       </Form>

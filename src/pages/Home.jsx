@@ -16,6 +16,8 @@ import {
 } from "../features/home/helpers";
 
 // TODO: see if can separate some objects
+// TODO: if cannot get posts from database show error page
+
 const defaultSearchParams = {
   search: "",
   postType: "",

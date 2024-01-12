@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 // TODO: import colors list
+// TODO: not important. maybe should let users change profile color from account settings
 const bgColors = [
   "bg-red-500",
   "bg-orange-500",
@@ -28,6 +29,7 @@ const ColorCheckmark = () => (
   </div>
 );
 
+// TODO: color by name not index
 const Color = ({ bgColor, exportIndex, index }) => {
   const handleOnClick = (e) => {
     e.preventDefault();
@@ -43,7 +45,7 @@ const Color = ({ bgColor, exportIndex, index }) => {
   );
 };
 // TODO: check whats up: onBlur, defaultValue, etc
-const ColorSelect = forwardRef(({ className, defaultValue, colors, onBlur, ...props }, ref) => {
+const ColorSelect = forwardRef(({ className, defaultValue, colors, colorSize = 8, onBlur, ...props }, ref) => {
   const [selected, setSelected] = useState(0);
 
   const setSelectedIndex = (index) => {
@@ -57,7 +59,7 @@ const ColorSelect = forwardRef(({ className, defaultValue, colors, onBlur, ...pr
       <input hidden readOnly value={selected} ref={ref} {...props} />
       <ul className="grid grid-cols-4 gap-2">
         {bgColors.map((bgColor, index) => (
-          <li key={bgColor} className="relative w-12 h-12 transition-all hover:scale-[1.15]">
+          <li key={bgColor} className={`relative w-${colorSize} h-${colorSize} transition-all hover:scale-[1.15]`}>
             {selected === index && <ColorCheckmark />}
             <Color bgColor={bgColor} index={index} exportIndex={setSelectedIndex} />
           </li>
