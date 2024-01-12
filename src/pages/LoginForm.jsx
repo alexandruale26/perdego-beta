@@ -3,9 +3,9 @@ import ValidationInput from "../formComponents/ValidationInput";
 import { FormField, FormItem, FormLabel, FormMessage } from "../formComponents/form";
 import SubmitButton from "../shared/SubmitButton";
 import LinkButton from "../shared/LinkButton";
-import LoginDiv from "../features/loginForm/LoginDiv";
-import Hero from "../features/loginForm/Hero";
-import { schema, defaultValues, lengths } from "../features/loginForm/data";
+import Div from "../features/account/Div";
+import Hero from "../features/account/Hero";
+import { schema, defaultValues, lengths } from "../features/account/loginForm/data";
 
 const formData = {
   schema,
@@ -28,7 +28,7 @@ const LoginForm = () => {
     >
       <Hero />
 
-      <LoginDiv className="min-h-0">
+      <Div className="min-h-0">
         <div className="space-y-8 sm:space-y-10 w-full max-w-lg sm:min-h-[450px] p-6">
           <h3 className="text-[22px] xs:text-2xl lg:text-3xl font-medium text-start text-stone-800">
             Acceseazǎ contul tǎu
@@ -63,7 +63,7 @@ const LoginForm = () => {
             </div>
           </div>
         </div>
-      </LoginDiv>
+      </Div>
     </Form>
   );
 };

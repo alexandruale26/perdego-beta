@@ -1,7 +1,7 @@
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import Button from "../../shared/button";
 
-const iconStyle = "w-5 h-5 text-stone-700";
+const iconStyle = "w-5 h-5 text-grey-700";
 
 const VisibilityButton = ({ visible, onClick }) => {
   return (

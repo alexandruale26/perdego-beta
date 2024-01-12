@@ -7,11 +7,13 @@ const AppLayout = () => {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
-  const bgColor = "bg-[rgb(242_242_242)]";
+  // const bgColor = "bg-[rgb(242_242_242)]";
+  const bgColor = "bg-grey-100";
+  // const bgColor = "bg-white";
   const isUserLoggedIn = false;
 
   // TODO: calc navbar and footer heights programatically here. now they are hardcoded
-  // TODO: disable
+  // TODO: disable nav and footer by seeing if user i logged out and by url path name
   // TODO: if user is logged and wants to login show message to logout, same if wants to create new account while logged in
 
   return (
@@ -33,8 +35,8 @@ const AppLayout = () => {
         <>
           <Navbar />
           <ScrollToTop />
-          <main className={`w-full h-full py-10 px-4 min-h-screen ${bgColor}`}>
-            {isLoading ? <Spinner className="min-h-[calc(100vh-160px)]" /> : <Outlet />}
+          <main className={`w-full h-full py-10 px-4 ${"min-h-[calc(100vh-150px)]"} ${bgColor}`}>
+            {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}
           </main>
           <div className="w-full bg-black h-[80px] text-white text-center">Footer</div>
         </>

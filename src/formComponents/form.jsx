@@ -23,7 +23,7 @@ const FormLabel = ({ className, children, ...props }) => {
   return (
     <label
       htmlFor={id}
-      className={twMerge("block w-full max-w-xs text-sm font-medium text-stone-800", className)}
+      className={twMerge("block w-full max-w-xs text-sm font-medium text-grey-800", className)}
       {...props}
     >
       {children}

@@ -13,8 +13,8 @@ const UserProfile = ({ name, memberSinceDate, className }) => {
       </div>
 
       <div>
-        <p className="font-light text-stone-800">{name}</p>
-        <p className="text-sm font-light text-stone-500">
+        <p className="font-light text-grey-800">{name}</p>
+        <p className="text-sm font-light text-grey-500">
           Membru din <span className="font-medium">{convertToUserProfileDate(memberSinceDate)}</span>
         </p>
       </div>

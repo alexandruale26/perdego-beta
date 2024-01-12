@@ -14,7 +14,7 @@ const PostLink = ({ post, searchParams, gridMode = false }) => {
     <Link
       to={`${post.postId}`}
       state={{ searchParams }}
-      className={`w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 overflow-hidden transition-all ${
+      className={`w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
         gridMode ? linkGridStyle : linkBaseStyle
       }`}
     >
@@ -27,18 +27,18 @@ const PostLink = ({ post, searchParams, gridMode = false }) => {
         <h3
           className={`${
             gridMode ? "text-base" : "sm:text-lg"
-          } text-stone-800 hover:text-white hover:bg-stone-800 flex break-words word-break`}
+          } text-grey-800 hover:text-white hover:bg-grey-800 flex break-words word-break`}
         >
           {post.title}
         </h3>
 
         <div className="w-full flex flex-col items-start gap-1">
-          <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-medium text-stone-700`}>
+          <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-medium text-grey-700`}>
             {post.postType} - {post.category}
           </p>
 
           <div className="w-full flex items-center justify-between">
-            <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-light text-stone-600`}>
+            <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-light text-grey-600`}>
               {post.location} - {formatPostDate(post.createdAt)}
             </p>
           </div>

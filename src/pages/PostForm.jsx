@@ -20,31 +20,33 @@ const formData = {
 };
 
 const PostForm = () => {
-  const onSubmit = (formData) => {
+  const handleOnSubmit = (values) => {
     const process = async () => {
-      const convertedImg = await convertImage(formData.image, 600, 600);
+      const convertedImg = await convertImage(values.image, 600, 600);
       const imageName = await uploadImage(convertedImg); //TODO: handle no image
 
       const formInputsUppercased = {
-        title: sanitizeInput(formData.title, true),
-        description: sanitizeInput(formData.description),
+        title: sanitizeInput(values.title, true),
+        description: sanitizeInput(values.description),
       };
 
-      const newData = { ...formData, ...formInputsUppercased, image: imageName };
+      const newData = { ...values, ...formInputsUppercased, image: imageName };
       console.log("curated form data", newData);
       await createPost(newData);
     };
 
     // process();
-    console.log(formData);
+    console.log(values);
   };
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-6">
-      <h1 className="text-lg xxs:text-xl xs:text-2xl font-medium text-stone-700 pl-1">
-        Ce anume ai gǎsit | pierdut...?
-      </h1>
-      <Form {...formData} onSubmit={onSubmit} className="space-y-6 w-full bg-white p-4 sm:p-8 rounded-md shadow-sm">
+      <h1 className="text-xl xs:text-2xl font-medium pl-1">Ce anume ai gǎsit | pierdut...?</h1>
+      <Form
+        {...formData}
+        onSubmit={handleOnSubmit}
+        className="space-y-6 w-full bg-white p-4 sm:p-8 rounded-md shadow-sm"
+      >
         <FormField
           name="title"
           render={(field) => (

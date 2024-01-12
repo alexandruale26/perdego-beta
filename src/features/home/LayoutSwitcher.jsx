@@ -5,10 +5,10 @@ import { TokensIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 const iconStyle = "w-6 h-6 xs:w-7 xs:h-7 hover:text-primary";
 const buttonStyle =
-  "hover:text-white transition-colors border-2 border-transparent p-1 rounded-md focus-visible:border-2 focus-visible:border-stone-700";
+  "hover:text-white transition-colors border-2 border-transparent p-1 rounded-md focus-visible:border-2 focus-visible:border-grey-700";
 
 const setIconColor = (isGrid) => {
-  return isGrid ? "text-primary-500" : "text-stone-700";
+  return isGrid ? "text-primary-500" : "text-grey-700";
 };
 
 const LayoutSwitcher = ({ className, isGridSelected, onSelect }) => {

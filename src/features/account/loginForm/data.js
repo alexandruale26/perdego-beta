@@ -1,4 +1,4 @@
-import { generateErrorMessage } from "../../utils/helpers";
+import { generateErrorMessage } from "../../../utils/helpers";
 
 const lengths = {
   email: {

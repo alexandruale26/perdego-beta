@@ -38,7 +38,7 @@ const Color = ({ bgColor, exportIndex, index }) => {
     <button
       key={bgColor}
       onClick={handleOnClick}
-      className={`w-full h-full border-2 border-transparent rounded-full focus-visible:outline-none focus-visible:border-2 focus-visible:border-stone-700 resize-none ${bgColor}`}
+      className={`w-full h-full border-2 border-transparent rounded-full focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 resize-none ${bgColor}`}
     ></button>
   );
 };
