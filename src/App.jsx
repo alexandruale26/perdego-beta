@@ -2,13 +2,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Home from "./pages/Home";
 import PostForm from "./pages/PostForm";
-import Post, { loader as postLoader } from "./pages/Post";
+import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import AccountForm from "./pages/AccountForm";
+import Error from "./shared/Error";
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+
     children: [
       {
         path: "/",
@@ -17,8 +19,7 @@ const router = createBrowserRouter([
       {
         path: ":pid",
         element: <Post />,
-        loader: postLoader,
-        errorElement: <div>Not found</div>,
+        // errorElement: <Error />,
       },
       {
         path: "new",
@@ -36,7 +37,10 @@ const router = createBrowserRouter([
         path: "create",
         element: <AccountForm />,
       },
-      //TODO: Add element on not existing path * and error
+      {
+        path: "*",
+        element: <Error />,
+      },
     ],
   },
 ]);

@@ -1,4 +1,5 @@
 import ImageResizer from "react-image-file-resizer";
+import { uploadImage } from "../services/postApi";
 
 const compressImage = (file, maxWidth, maxHeight) => {
   return new Promise((resolve) => {
@@ -30,4 +31,10 @@ const convertImage = async (imageFile, maxWidth = 600, maxHeight = 600) => {
   }
 };
 
-export { convertImage };
+const handleImageUpload = async (image) => {
+  const convertedImg = await convertImage(image);
+  const response = await uploadImage(convertedImg);
+  return response;
+};
+
+export { handleImageUpload };

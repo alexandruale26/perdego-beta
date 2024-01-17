@@ -1,40 +1,64 @@
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { getPost, getImageUrl } from "../services/postApi";
 import Section from "../shared/Section";
-import Tag from "../shared/Tag";
+import Tag from "../features/post/Tag";
 import UserProfile from "../shared/UserProfile";
 import LinkButton from "../shared/LinkButton";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import Telephone from "../features/post/Telephone";
 import PageContainer from "../shared/PageContainer";
-import PlaceholderImage from "../shared/PlaceholderImage";
+import Image from "../shared/Image";
+import Spinner from "../shared/Spinner";
+import Error from "../shared/Error";
 import { formatPostDate } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
 
-const placeholderStyle = "p-8 bg-grey-200";
+const placeholderStyle = "p-20 bg-grey-200";
 
 const Post = () => {
-  // TODO: image should load after render
   // TODO: put user member data at create post
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const post = useLoaderData();
+  const postId = useLocation().pathname.replaceAll("/", "");
 
-  console.log(post);
+  useEffect(() => {
+    setIsLoading(true);
+
+    const process = async () => {
+      const data = await getPost(postId);
+
+      setPost(data);
+      setIsLoading(false);
+    };
+
+    process();
+  }, [postId]);
+
+  const urlParams = useLocation()?.state;
+
+  if (isLoading && !post) return <Spinner />;
+  if (!post) return <Error errorMessage="Anunțul nu existǎ :(" />;
+
   const image = getImageUrl(post.image);
-  const { searchParams } = useLocation().state;
 
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full h-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
         <LinkButton to={-1} className="justify-start xs:text-lg font-medium text-grey-700 select-none">
-          <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
-          <span className="pl-4 text-xs xs:text-sm font-light underline">
-            {generateSearchParamsTitle(searchParams, true)}
-          </span>
+          {urlParams?.searchParams && (
+            <>
+              <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
+              <span className="pl-4 text-xs xs:text-sm font-light underline">
+                {generateSearchParamsTitle(urlParams.searchParams, true)}
+              </span>
+            </>
+          )}
         </LinkButton>
 
         <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">
-          <PlaceholderImage
+          <Image
             src={image}
             alt="object"
             className={`max-w-full object-contain ${image === null ? placeholderStyle : ""}`}
@@ -70,14 +94,4 @@ const Post = () => {
   );
 };
 
-const loader = async ({ request, params }) => {
-  //TODO: manage request and response params, and unknown id /=> errors
-
-  const postId = params.pid;
-  const receivedData = await getPost(postId);
-
-  return receivedData;
-};
-
 export default Post;
-export { loader };

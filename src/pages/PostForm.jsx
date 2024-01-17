@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ImageSelect from "../formComponents/ImageSelect";
 import ValidationInput from "../formComponents/ValidationInput";
 import Textarea from "../formComponents/Textarea";
@@ -8,10 +10,11 @@ import Selector from "../formComponents/Selector";
 import PageContainer from "../shared/PageContainer";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
 import { schema, defaultValues } from "../features/postForm/data";
-import { convertImage } from "../formBase/formHelpers";
+import { handleImageUpload } from "../formBase/formHelpers";
 import { filterData, sanitizeInput } from "../utils/helpers";
-import { createPost, uploadImage } from "../services/postApi";
+import { createPost } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
+import { warningToast } from "../shared/Toasts";
 
 // TODO: disable name and phone and use uid
 
@@ -20,24 +23,35 @@ const formData = {
   defaultValues,
 };
 
+const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
+
 const PostForm = () => {
+  const [isPostCreated, setIsPostCreated] = useState(false);
+  const navigate = useNavigate();
+
   const handleOnSubmit = (values) => {
     const process = async () => {
-      const convertedImg = await convertImage(values.image, 600, 600);
-      const imageName = await uploadImage(convertedImg); //TODO: handle no image
+      const imageUploaderResponse = await handleImageUpload(values.image);
 
-      const formInputsUppercased = {
+      if (imageUploaderResponse.status !== "ok") return warningToast(errorMessage);
+
+      const sanitizedFormValues = {
         title: sanitizeInput(values.title, true),
         description: sanitizeInput(values.description),
       };
 
-      const newData = { ...values, ...formInputsUppercased, image: imageName };
-      await createPost(newData);
+      const newData = { ...values, ...sanitizedFormValues, image: imageUploaderResponse.data };
+      const postResponse = await createPost(newData);
+
+      if (postResponse.status !== "ok") return warningToast(errorMessage);
+      setIsPostCreated(true);
     };
 
     process();
-    // console.log(values);
   };
+
+  // TODO: create success modal
+  // if (isPostCreated) navigate("/");
 
   return (
     <PageContainer>

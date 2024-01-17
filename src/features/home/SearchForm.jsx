@@ -11,8 +11,6 @@ import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../sharedData";
 import { filterData, setDefaultValue } from "../../utils/helpers";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-// TODO: maybe should add "Toata tara" && "Toate categoriile" as values.
-
 const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
   const [search, setSearch] = useState("");
   const [postType, setPostType] = useState("");

@@ -2,7 +2,7 @@ import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import PlaceholderImage from "../shared/PlaceholderImage";
+import Image from "../shared/Image";
 
 const IMAGE_MAX_SIZE_MB = 5;
 
@@ -60,7 +60,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
               <p className="text-xs font-light text-grey-600">
                 Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
               </p>
-              <PlaceholderImage className="mt-2 max-w-[70px] max-h-[70px]" />
+              <Image className="mt-2 max-w-[70px] max-h-[70px]" />
             </div>
           )}
           {selectedImage && (

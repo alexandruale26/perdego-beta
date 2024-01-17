@@ -1,5 +1,6 @@
 import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
+import { generateResponse } from "./helpers";
 
 //TODO: manage all errors from server
 
@@ -8,38 +9,41 @@ const postImagePath = "posts-images";
 
 const createPost = async (post) => {
   try {
-    const { data, error } = await supabase
-      .from("posts")
-      .insert([
-        {
-          name: post.name,
-          phone: post.phone,
-          title: post.title,
-          description: post.description,
-          location: post.location,
-          category: post.category,
-          image: post.image,
-          postType: post.postType,
-        },
-      ])
-      .select();
+    const { status, error } = await supabase.from("posts").insert([
+      {
+        name: post.name,
+        phone: post.phone,
+        title: post.title,
+        description: post.description,
+        location: post.location,
+        category: post.category,
+        image: post.image,
+        postType: post.postType,
+      },
+    ]);
 
-    if (error) throw new Error("A apǎrut o problemǎ. Te rugǎm incearcǎ din nou :(");
+    if (error || status !== 201) throw new Error("Error creating post");
+    console.log("created - ok");
+    return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null);
+  }
+};
 
-    console.log(data);
+const getPost = async (postId) => {
+  try {
+    const { data, error } = await supabase.from("posts").select().eq("postId", postId).single();
+
+    if (error) throw new Error("Could not find post!");
+    return data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const getPost = async (postId) => {
-  //TODO: fix errors if any
-  const { data, error } = await supabase.from("posts").select().eq("postId", postId).single();
-  return data;
-};
-
 const uploadImage = async (image) => {
-  if (image === null) return null;
+  if (image === null) return generateResponse("ok", null);
 
   const imageUniqueName = imageRandomName();
   const imageFullName = `${imageUniqueName}.${imageExtension}`;
@@ -50,10 +54,11 @@ const uploadImage = async (image) => {
       upsert: false,
     });
 
-    if (error) throw new Error("Failed to upload image");
-    return data.path;
+    if (error || data === null) throw new Error("Failed to upload image");
+    return generateResponse("ok", data.path);
   } catch (error) {
     console.log(error);
+    return generateResponse(null, null);
   }
 };
 

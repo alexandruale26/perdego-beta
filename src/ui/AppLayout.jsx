@@ -1,4 +1,5 @@
 import { Outlet, useNavigation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar";
 import Spinner from "../shared/Spinner";
 import ScrollToTop from "../shared/ScrollToTop";
@@ -39,6 +40,7 @@ const AppLayout = () => {
           <div className="w-full bg-black h-[80px] text-white text-center">Footer</div>
         </>
       )}
+      <Toaster gutter={20} toastOptions={{ duration: 5000, style: { borderRadius: "6px" } }} />
     </>
   );
 };
