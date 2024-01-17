@@ -17,16 +17,16 @@ const compressImage = (file, maxWidth, maxHeight) => {
   });
 };
 
-const convertImage = async (imageFile, maxWidth = 800, maxHeight = 800) => {
-  if (imageFile) {
-    try {
-      //TODO: check if compressed image is bigger than the original. very rare case (could ignore?)
-      const compressedImage = await compressImage(imageFile, maxWidth, maxHeight);
-      return compressedImage;
-    } catch (error) {
-      //TODO: manage errors
-      console.error("Error compressing image:", error);
-    }
+const convertImage = async (imageFile, maxWidth = 600, maxHeight = 600) => {
+  if (imageFile.type.startsWith("image/") === false) return null;
+
+  try {
+    const compressedImage = await compressImage(imageFile, maxWidth, maxHeight);
+
+    if (compressedImage === null) throw new Error("Error converting image");
+    return compressedImage;
+  } catch (error) {
+    console.log(error);
   }
 };
 

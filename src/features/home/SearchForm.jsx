@@ -32,7 +32,6 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
   };
 
   const handleSubmit = (values) => {
-    // console.log(values);
     onSubmit(values);
   };
 

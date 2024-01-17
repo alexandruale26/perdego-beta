@@ -7,10 +7,8 @@ const AppLayout = () => {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
-  // const bgColor = "bg-[rgb(242_242_242)]";
   const bgColor = "bg-grey-100";
-  // const bgColor = "bg-white";
-  const isUserLoggedIn = false;
+  const isUserLoggedIn = true;
 
   // TODO: calc navbar and footer heights programatically here. now they are hardcoded
   // TODO: disable nav and footer by seeing if user i logged out and by url path name
@@ -25,7 +23,7 @@ const AppLayout = () => {
           <ScrollToTop />
           {/* <main className={`w-full py-10 px-4 ${"min-h-[calc(100vh-160px)]"} bg-${bgColor}`}> */}
           {/* JUST TO TEST LOGIN AND CREATE USER PAGES - so i deleted max-h */}
-          <main className={`w-full h-full ${!isUserLoggedIn ? "" : "py-10 px-4"} min-h-screen ${bgColor}`}>
+          <main className={`w-full h-full min-h-screen ${bgColor}`}>
             {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}
           </main>
         </>
@@ -35,7 +33,7 @@ const AppLayout = () => {
         <>
           <Navbar />
           <ScrollToTop />
-          <main className={`w-full h-full py-10 px-4 ${"min-h-[calc(100vh-150px)]"} ${bgColor}`}>
+          <main className={`w-full h-full ${"min-h-[calc(100vh-150px)]"} ${bgColor}`}>
             {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}
           </main>
           <div className="w-full bg-black h-[80px] text-white text-center">Footer</div>

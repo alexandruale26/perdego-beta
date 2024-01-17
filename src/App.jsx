@@ -6,8 +6,6 @@ import Post, { loader as postLoader } from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import AccountForm from "./pages/AccountForm";
 
-import ColorSelect from "./formComponents/ColorSelect";
-
 const router = createBrowserRouter([
   {
     element: <AppLayout />,

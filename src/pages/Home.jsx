@@ -7,6 +7,8 @@ import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import { queryPosts, firstRenderPosts } from "../services/searchApi";
 import { saveToLocalStorage } from "../utils/helpers";
+import generateSearchParamsTitle from "../features/post/helpers";
+import PageContainer from "../shared/PageContainer";
 import {
   getAllSearchParamsAsObject,
   showSearchResultsTitle,
@@ -26,7 +28,6 @@ const defaultSearchParams = {
 };
 
 const Home = () => {
-  //TODO: parent container should be flex and children full width
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [gridMode, setGridMode] = useState(getGridModeFromStorage());
@@ -70,40 +71,47 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl h-full mx-auto text-center space-y-10">
-      <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} hasSearchParams={hasSearchParams} />
+    <PageContainer className="bg-inherit">
+      <div className="w-full max-w-4xl h-full mx-auto text-center space-y-8 xs:space-y-10">
+        <div className="w-full space-y-4">
+          <SearchForm onSubmit={getSearchValues} searchParams={searchedParams} hasSearchParams={hasSearchParams} />
+          <p className="w-full text-left text-xs xs:text-sm font-light text-grey-700 pl-1 underline">
+            {generateSearchParamsTitle(searchedParams)}
+          </p>
+        </div>
 
-      {isLoading ? (
-        <Spinner className="pt-0 xs:pt-32" />
-      ) : (
-        <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
-          <div className="w-full flex items-start gap-1 pl-1 select-none">
-            <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium">
-              {showSearchResultsTitle(hasSearchParams, posts.length)}
-            </h2>
-            {hasSearchParams && allowLayoutChange && (
-              <LayoutSwitcher isGridSelected={gridMode} onSelect={handleLayoutSwitch} />
+        {isLoading ? (
+          <Spinner className="pt-0 xs:pt-32" />
+        ) : (
+          <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
+            <div className="w-full flex items-start gap-1 pl-1 select-none">
+              <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium">
+                {showSearchResultsTitle(hasSearchParams, posts.length)}
+              </h2>
+              {hasSearchParams && allowLayoutChange && (
+                <LayoutSwitcher isGridSelected={gridMode} onSelect={handleLayoutSwitch} />
+              )}
+            </div>
+
+            {hasSearchParams === true && (
+              <Section gridMode={gridMode} className="flex-col p-0 bg-transparent shadow-none rounded-none">
+                {posts.map((post) => (
+                  <PostLink key={post.postId} post={post} gridMode={gridMode} searchParams={searchedParams} />
+                ))}
+              </Section>
             )}
-          </div>
 
-          {hasSearchParams === true && (
-            <Section gridMode={gridMode} className="flex-col p-0 bg-transparent shadow-none rounded-none">
-              {posts.map((post) => (
-                <PostLink key={post.postId} post={post} gridMode={gridMode} searchParams={searchedParams} />
-              ))}
-            </Section>
-          )}
-
-          {hasSearchParams === false && (
-            <Section gridMode={true}>
-              {posts.map((post) => (
-                <PostLink key={post.postId} post={post} gridMode={true} searchParams={searchedParams} />
-              ))}
-            </Section>
-          )}
-        </Section>
-      )}
-    </div>
+            {hasSearchParams === false && (
+              <Section gridMode={true}>
+                {posts.map((post) => (
+                  <PostLink key={post.postId} post={post} gridMode={true} searchParams={searchedParams} />
+                ))}
+              </Section>
+            )}
+          </Section>
+        )}
+      </div>
+    </PageContainer>
   );
 };
 

@@ -5,4 +5,4 @@ const randomBgColor = () => {
   return Math.floor(Math.random() * BG_COLORS.length);
 };
 
-export { randomBgColor as randomColor };
+export { randomBgColor };

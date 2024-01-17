@@ -4,10 +4,9 @@ import { LeftArrow, RightArrow } from "../../shared/LogoArrows";
 import HalfWidthDiv from "./HalfWidthDiv";
 
 const Hero = ({ className }) => {
-  // notita min-h-0
   return (
-    <HalfWidthDiv className="bg-black">
-      <div className={twMerge("flex flex-col items-start justify-start w-full max-w-lg sm:min-h-[0px] p-6", className)}>
+    <HalfWidthDiv>
+      <div className={twMerge("flex flex-col items-start justify-start w-full max-w-lg p-6", className)}>
         <h1>
           <Logo className="text-3xl xs:text-4xl lg:text-5xl" />
         </h1>

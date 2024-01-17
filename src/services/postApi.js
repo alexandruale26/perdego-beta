@@ -1,29 +1,35 @@
 import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
 
-//TODO: should add path const for multiple image locations "posts-images"
 //TODO: manage all errors from server
+
 const imageExtension = "png";
+const postImagePath = "posts-images";
 
 const createPost = async (post) => {
-  const { data, error } = await supabase
-    .from("posts")
-    .insert([
-      {
-        name: post.name,
-        phone: post.phone,
-        title: post.title,
-        description: post.description,
-        location: post.location,
-        category: post.category,
-        image: post.image,
-        postType: post.postType,
-      },
-    ])
-    .select();
+  try {
+    const { data, error } = await supabase
+      .from("posts")
+      .insert([
+        {
+          name: post.name,
+          phone: post.phone,
+          title: post.title,
+          description: post.description,
+          location: post.location,
+          category: post.category,
+          image: post.image,
+          postType: post.postType,
+        },
+      ])
+      .select();
 
-  console.log(data);
-  console.log(error);
+    if (error) throw new Error("A apǎrut o problemǎ. Te rugǎm incearcǎ din nou :(");
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getPost = async (postId) => {
@@ -33,27 +39,34 @@ const getPost = async (postId) => {
 };
 
 const uploadImage = async (image) => {
+  if (image === null) return null;
+
   const imageUniqueName = imageRandomName();
   const imageFullName = `${imageUniqueName}.${imageExtension}`;
 
-  // TODO: add try-catch
-  const { data, error } = await supabase.storage.from("posts-images").upload(imageFullName, image, {
-    cacheControl: "3600",
-    upsert: false,
-  });
+  try {
+    const { data, error } = await supabase.storage.from(postImagePath).upload(imageFullName, image, {
+      cacheControl: "3600",
+      upsert: false,
+    });
 
-  return data.path;
+    if (error) throw new Error("Failed to upload image");
+    return data.path;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getImageUrl = (imageName) => {
-  const { data } = supabase.storage.from("posts-images").getPublicUrl(imageName);
+  const { data } = supabase.storage.from(postImagePath).getPublicUrl(imageName);
 
+  if (data.publicUrl.endsWith(`${postImagePath}/null`)) return null;
   return data.publicUrl;
 };
 
-const deleteImage = async (path) => {
-  const { data, error } = await supabase.storage.from("posts-images").remove([path]);
-  console.log("deleted");
-};
+// const deleteImage = async (path) => {
+//   const { data, error } = await supabase.storage.from(postImagePath).remove([path]);
+//   console.log("deleted");
+// };
 
 export { createPost, getPost, uploadImage, getImageUrl };

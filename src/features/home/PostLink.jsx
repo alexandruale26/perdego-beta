@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { formatPostDate } from "../../utils/helpers";
 import { getImageUrl } from "../../services/postApi";
+import PlaceholderImage from "../../shared/PlaceholderImage";
 
 const linkBaseStyle = "xs:h-[150px] xs:flex-row";
 const linkGridStyle = "xs:h-[320px]";
 const imageBaseStyle = "xs:w-[170px] sm:w-[230px] h-[200px] xs:h-full";
 const imageGridStyle = "h-[200px] xs:h-[150px]";
+const placeholderStyle = "p-4 bg-grey-200";
 
 const PostLink = ({ post, searchParams, gridMode = false }) => {
   const image = getImageUrl(post.image);
@@ -18,10 +20,12 @@ const PostLink = ({ post, searchParams, gridMode = false }) => {
         gridMode ? linkGridStyle : linkBaseStyle
       }`}
     >
-      <img
+      <PlaceholderImage
         src={image}
         alt="object"
-        className={`w-full shrink-0 object-cover rounded-sm ${gridMode ? imageGridStyle : imageBaseStyle}`}
+        className={`max-w-full max-h-full shrink-0 ${
+          image === null ? placeholderStyle : ""
+        } object-contain rounded-sm ${gridMode ? imageGridStyle : imageBaseStyle}`}
       />
       <div className="h-full w-full flex flex-col items-start justify-between py-1 gap-2">
         <h3

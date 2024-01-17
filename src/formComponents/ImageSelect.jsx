@@ -1,7 +1,8 @@
 import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
-import { ImageIcon, Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
+import PlaceholderImage from "../shared/PlaceholderImage";
 
 const IMAGE_MAX_SIZE_MB = 5;
 
@@ -28,7 +29,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
         return reader.readAsDataURL(file);
       }
 
-      setFieldAsInvalid("Adaugǎ o imagine validǎ");
+      setFieldAsInvalid("Adaugǎ o imagine");
     }
   };
 
@@ -38,8 +39,6 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
     if (ref.current) ref.current.value = null;
     setSelectedImage(null);
   };
-
-  //TODO: extract delete button from button. not allowed nested buttons
 
   return (
     <div
@@ -61,7 +60,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
               <p className="text-xs font-light text-grey-600">
                 Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
               </p>
-              <ImageIcon className="w-10 h-10 mt-2" />
+              <PlaceholderImage className="mt-2 max-w-[70px] max-h-[70px]" />
             </div>
           )}
           {selectedImage && (
