@@ -6,26 +6,17 @@ import Section from "../shared/Section";
 import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
-import { queryPosts, latestPosts } from "../services/searchApi";
+import { queryPosts } from "../services/searchApi";
 import { saveToLocalStorage } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
 import PageContainer from "../shared/PageContainer";
+import { GRID_STORAGE_NAME, defaultSearchParams } from "../features/home/data";
 import {
   getAllSearchParamsAsObject,
   showSearchResultsTitle,
   isLayoutChangeAllowed,
   getGridModeFromStorage,
-  GRID_STORAGE_NAME,
 } from "../features/home/helpers";
-
-// TODO: see if can separate some objects
-
-const defaultSearchParams = {
-  search: "",
-  postType: "",
-  location: "",
-  category: "",
-};
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -42,7 +33,7 @@ const Home = () => {
 
     const process = async () => {
       const queryParams = getAllSearchParamsAsObject(searchParams);
-      const data = hasSearchParams ? await queryPosts(queryParams) : await latestPosts();
+      const data = await queryPosts(queryParams, hasSearchParams);
 
       setPosts(data);
       setIsLoading(false);
@@ -85,14 +76,14 @@ const Home = () => {
           )}
         </div>
 
-        {isLoading && <Spinner className="pt-0 xs:pt-32" />}
+        {isLoading && <Spinner fullHeight={false} className="pt-6 xs:pt-24" />}
 
         {isLoading === false && posts === null && (
           <Error
-            className="p-0 pt-6 xs:pt-10 min-h-0"
+            className="p-0 pt-6 xs:pt-20 min-h-0"
             fullHeight={false}
             errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :("
-            buttonMessage="Încearcǎ din nou"
+            showButton={false}
           />
         )}
 

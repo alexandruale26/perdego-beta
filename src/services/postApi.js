@@ -1,10 +1,8 @@
 import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
 import { generateResponse } from "./helpers";
+import { imageExtension } from "../features/postForm/data";
 
-//TODO: manage all errors from server
-
-const imageExtension = "png";
 const postImagePath = "posts-images";
 
 const createPost = async (post) => {

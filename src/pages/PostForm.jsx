@@ -9,7 +9,7 @@ import Selector from "../formComponents/Selector";
 import PageContainer from "../shared/PageContainer";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
 import { schema, defaultValues } from "../features/postForm/data";
-import { handleImageUpload } from "../formBase/formHelpers";
+import { handleImageUpload } from "../features/postForm/formHelpers";
 import { filterData, sanitizeInput } from "../utils/helpers";
 import { createPost } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
@@ -26,7 +26,7 @@ const formData = {
 const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
 
 const PostForm = () => {
-  const [isPostCreated, setIsPostCreated] = useState(true);
+  const [isPostCreated, setIsPostCreated] = useState(false);
 
   const handleOnSubmit = (values) => {
     const process = async () => {
@@ -43,13 +43,13 @@ const PostForm = () => {
       const postResponse = await createPost(newData);
 
       if (postResponse.status !== "ok") return warningToast(errorMessage);
-      setIsPostCreated(true);
+      // setIsPostCreated(true);
     };
 
     process();
   };
 
-  // TODO: create success modal
+  // TODO: use SPINNER until receive confirmation
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>

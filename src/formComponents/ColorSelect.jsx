@@ -2,8 +2,8 @@ import { forwardRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { CheckIcon } from "@radix-ui/react-icons";
 
-// TODO: import colors list
-// TODO: not important. maybe should let users change profile color from account settings
+// IMPORTANT  import colors list
+// IMPORTANT - not important. maybe should let users change profile color from account settings
 const bgColors = [
   "bg-red-500",
   "bg-orange-500",
@@ -29,7 +29,7 @@ const ColorCheckmark = () => (
   </div>
 );
 
-// TODO: color by name not index
+// IMPORTANT  color by name not index
 const Color = ({ bgColor, exportIndex, index }) => {
   const handleOnClick = (e) => {
     e.preventDefault();
@@ -44,7 +44,8 @@ const Color = ({ bgColor, exportIndex, index }) => {
     ></button>
   );
 };
-// TODO: check whats up: onBlur, defaultValue, etc
+
+// IMPORTANT  check whats up: onBlur, defaultValue, etc
 const ColorSelect = forwardRef(({ className, defaultValue, colors, colorSize = 8, onBlur, ...props }, ref) => {
   const [selected, setSelected] = useState(0);
 

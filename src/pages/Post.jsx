@@ -29,6 +29,7 @@ const Post = () => {
     const process = async () => {
       const response = await getPost(postId);
 
+      // no need for response.status
       setPost(response.data);
       setIsLoading(false);
     };

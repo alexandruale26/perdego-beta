@@ -2,15 +2,13 @@ const imageRandomName = () => {
   return `${Math.floor(Math.random() * 99999999)}-${Math.floor(Math.random() * 99999999)}`;
 };
 
-//TODO: change the input data to search to a better type {name:name, value:value}
 const removeDiacritics = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-const capitalizeJustFirstChar = (string) => string.charAt(0).toUpperCase();
+const capitalizeFirstChar = (string) => string.charAt(0).toUpperCase();
 
 const sanitizeInput = (string, noDiacritics = false) => {
-  // Capitalize first letter and if needed, remove diacritics.
   const trimmedString = string.trim();
-  const firstCharToUpper = capitalizeJustFirstChar(trimmedString);
+  const firstCharToUpper = capitalizeFirstChar(trimmedString);
   const fullString = firstCharToUpper.concat(trimmedString.slice(1));
 
   return noDiacritics ? removeDiacritics(fullString) : fullString;
@@ -68,7 +66,7 @@ const generateErrorMessage = (inputName, minLength, maxLength) => {
 
 export {
   removeDiacritics,
-  capitalizeJustFirstChar,
+  capitalizeFirstChar,
   sanitizeInput,
   imageRandomName,
   formatPostDate,

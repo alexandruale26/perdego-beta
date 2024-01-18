@@ -1,5 +1,6 @@
 import ImageResizer from "react-image-file-resizer";
-import { uploadImage } from "../services/postApi";
+import { uploadImage } from "../../services/postApi";
+import { imageExtension } from "./data";
 
 const compressImage = (file, maxWidth, maxHeight) => {
   return new Promise((resolve) => {
@@ -7,8 +8,8 @@ const compressImage = (file, maxWidth, maxHeight) => {
       file,
       maxWidth, // maxWidth
       maxHeight, // maxHeight
-      "png", // format
-      100, // quality
+      imageExtension, // format
+      70, // quality
       0, // rotation
       (uri) => {
         resolve(uri);
@@ -18,7 +19,7 @@ const compressImage = (file, maxWidth, maxHeight) => {
   });
 };
 
-const convertImage = async (imageFile, maxWidth = 600, maxHeight = 600) => {
+const convertImage = async (imageFile, maxWidth = 800, maxHeight = 800) => {
   if (imageFile.type.startsWith("image/") === false) return null;
 
   try {

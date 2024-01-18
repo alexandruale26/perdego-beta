@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
-import Button from "./Button";
+import Button from "./button";
 
-// TODO: should not use
+// IMPORTANT should not use
 
 const iconStyle = "text-orange-500";
 

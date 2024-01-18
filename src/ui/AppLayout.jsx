@@ -22,10 +22,7 @@ const AppLayout = () => {
       {isUserLoggedIn === false && (
         <>
           <ScrollToTop />
-          {/* JUST TO TEST LOGIN AND CREATE USER PAGES - so i deleted max-h */}
-          <main className={`w-full h-full min-h-screen ${bgColor}`}>
-            {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}
-          </main>
+          <main className={`w-full h-full min-h-screen ${bgColor}`}>{isLoading ? <Spinner /> : <Outlet />}</main>
         </>
       )}
 

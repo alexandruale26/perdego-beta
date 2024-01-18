@@ -1,5 +1,7 @@
 import { generateErrorMessage } from "../../utils/helpers";
 
+const imageExtension = "jpeg";
+
 const lengths = {
   title: {
     min: 10,
@@ -56,4 +58,4 @@ const schema = {
 // TODO: defaultValues could be an empty object if there is no default
 const defaultValues = {};
 
-export { schema, defaultValues };
+export { schema, defaultValues, imageExtension };

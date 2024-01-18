@@ -1,7 +1,7 @@
 import { getFromLocalStorage } from "../../utils/helpers";
+import { GRID_STORAGE_NAME } from "./data";
 
 const minWidth = 480;
-const GRID_STORAGE_NAME = "layout";
 
 const isLayoutChangeAllowed = () => window.innerWidth >= minWidth;
 
@@ -26,10 +26,4 @@ const showSearchResultsTitle = (hasSearchParams, postsLength) => {
   return `Am gǎsit ${postsLength} ${postsLength === 1 ? "anunț" : "anunțuri"}`;
 };
 
-export {
-  getAllSearchParamsAsObject,
-  showSearchResultsTitle,
-  isLayoutChangeAllowed,
-  getGridModeFromStorage,
-  GRID_STORAGE_NAME,
-};
+export { getAllSearchParamsAsObject, showSearchResultsTitle, isLayoutChangeAllowed, getGridModeFromStorage };
