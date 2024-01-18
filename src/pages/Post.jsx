@@ -27,9 +27,9 @@ const Post = () => {
     setIsLoading(true);
 
     const process = async () => {
-      const data = await getPost(postId);
+      const response = await getPost(postId);
 
-      setPost(data);
+      setPost(response.data);
       setIsLoading(false);
     };
 
@@ -37,24 +37,24 @@ const Post = () => {
   }, [postId]);
 
   const urlParams = useLocation()?.state;
+  const validParams = !!urlParams?.searchParams;
 
   if (isLoading && !post) return <Spinner />;
-  if (!post) return <Error errorMessage="Anunțul nu existǎ :(" />;
+  if (!post) return <Error errorMessage="Ne pare rǎu, dar anunțul nu existǎ :(" />;
 
   const image = getImageUrl(post.image);
 
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full h-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
-        <LinkButton to={-1} className="justify-start xs:text-lg font-medium text-grey-700 select-none">
-          {urlParams?.searchParams && (
-            <>
-              <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
-              <span className="pl-4 text-xs xs:text-sm font-light underline">
-                {generateSearchParamsTitle(urlParams.searchParams, true)}
-              </span>
-            </>
-          )}
+        <LinkButton
+          to={validParams ? -1 : "/"}
+          className="justify-start xs:text-lg font-medium text-grey-700 select-none"
+        >
+          <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
+          <span className="pl-4 text-xs xs:text-sm font-light underline">
+            {validParams ? generateSearchParamsTitle(urlParams?.searchParams, true) : "Pagina principalǎ"}
+          </span>
         </LinkButton>
 
         <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">

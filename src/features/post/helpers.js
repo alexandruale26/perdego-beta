@@ -6,8 +6,8 @@ const generateSearchParamsTitle = (searchParams, skipSearchValue = false) => {
   const arrangedSearchParams = {
     search: searchParams.search,
     postType: searchParams.postType,
-    category: searchParams.category,
     location: searchParams.location,
+    category: searchParams.category,
   };
 
   return Object.entries(arrangedSearchParams).reduce((acc, [key, value]) => {
@@ -18,12 +18,12 @@ const generateSearchParamsTitle = (searchParams, skipSearchValue = false) => {
       return value === "" ? acc + "Toate postǎrile" : acc + value;
     }
 
-    if (key === "category") {
-      return value === "" ? acc + " / Toate categoriile" : acc + " / " + value;
-    }
-
     if (key === "location") {
       return value === "" ? acc + " / Toatǎ țara" : acc + " / " + value;
+    }
+
+    if (key === "category") {
+      return value === "" ? acc + " / Toate categoriile" : acc + " / " + value;
     }
 
     return "";

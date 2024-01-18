@@ -50,7 +50,6 @@ const PostForm = () => {
   };
 
   // TODO: create success modal
-  // if (isPostCreated) navigate("/");
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>

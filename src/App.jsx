@@ -19,7 +19,6 @@ const router = createBrowserRouter([
       {
         path: ":pid",
         element: <Post />,
-        // errorElement: <Error />,
       },
       {
         path: "new",

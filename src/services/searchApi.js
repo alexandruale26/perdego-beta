@@ -33,7 +33,7 @@ const queryPosts = async (queryData) => {
   return data;
 };
 
-const firstRenderPosts = async () => {
+const latestPosts = async () => {
   let query = supabase
     .from("posts")
     .select("postId, title, location, createdAt, category, image, postType")
@@ -41,9 +41,11 @@ const firstRenderPosts = async () => {
 
   const { data, error } = await query;
 
+  console.log(data, error);
+
   return data;
 };
 
-//TODO: 10 results per page. Could use range() to get any the results
+//TODO: 10 results per page. Could use range() to get any number of results
 
-export { queryPosts, firstRenderPosts };
+export { queryPosts, latestPosts };

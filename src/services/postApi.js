@@ -33,12 +33,13 @@ const createPost = async (post) => {
 
 const getPost = async (postId) => {
   try {
-    const { data, error } = await supabase.from("posts").select().eq("postId", postId).single();
+    const { data, error, status } = await supabase.from("posts").select().eq("postId", postId).single();
 
-    if (error) throw new Error("Could not find post!");
-    return data;
+    if (error || status !== 200 || data === null) throw new Error("Could not find post");
+    return generateResponse("ok", data);
   } catch (error) {
     console.log(error);
+    return generateResponse(null, null);
   }
 };
 
