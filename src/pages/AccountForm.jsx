@@ -8,7 +8,6 @@ import HalfWidthDiv from "../features/account/HalfWidthDiv";
 import AccountPageContainer from "../features/account/AccountPageContainer";
 import FormTitle from "../features/account/FormTitle";
 import FormContainer from "../features/account/FormContainer";
-import { randomBgColor } from "../features/account/helpers";
 import { schema, lengths } from "../features/account/accountFormData";
 
 // TODO: maxpassword length must be shared

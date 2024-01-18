@@ -1,8 +1,12 @@
 import Logo from "../shared/Logo";
+import { BARS_HEIGHT } from "../sharedData";
 
 const Navbar = () => {
   return (
-    <div className="flex h-[70px] w-full mx-auto max-w-6xl justify-between items-center px-6  text-white">
+    <div
+      style={{ height: `${BARS_HEIGHT.nav}px` }}
+      className={`flex w-full mx-auto max-w-6xl justify-between items-center px-6 text-white`}
+    >
       <a href="/">
         <Logo className="text-3xl xs:text-4xl" />
       </a>

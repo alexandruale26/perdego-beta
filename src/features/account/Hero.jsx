@@ -5,7 +5,7 @@ import HalfWidthDiv from "./HalfWidthDiv";
 
 const Hero = ({ className }) => {
   return (
-    <HalfWidthDiv>
+    <HalfWidthDiv className="bg-black">
       <div className={twMerge("flex flex-col items-start justify-start w-full max-w-lg p-6", className)}>
         <h1>
           <Logo className="text-3xl xs:text-4xl lg:text-5xl" />

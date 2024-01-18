@@ -19,10 +19,9 @@ const AppLayout = () => {
     //TODO: !IMPORTANT the lines below are just to correctly test the design. Should be nodified. Everyone is allowed to acess the app. Don't show nav and footer only when creating account or logging in.
 
     <>
-      {!isUserLoggedIn && (
+      {isUserLoggedIn === false && (
         <>
           <ScrollToTop />
-          {/* <main className={`w-full py-10 px-4 ${"min-h-[calc(100vh-160px)]"} bg-${bgColor}`}> */}
           {/* JUST TO TEST LOGIN AND CREATE USER PAGES - so i deleted max-h */}
           <main className={`w-full h-full min-h-screen ${bgColor}`}>
             {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}

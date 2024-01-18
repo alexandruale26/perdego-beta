@@ -78,6 +78,11 @@ const BG_COLORS = [
   "bg-rose-500",
 ];
 
+const BARS_HEIGHT = {
+  nav: 70,
+  footer: 80,
+};
+
 const POSTTYPE = ["Pierdute", "Gǎsite"];
 
-export { COUNTIES, OBJECT_CATEGORY, POSTTYPE, BG_COLORS };
+export { COUNTIES, OBJECT_CATEGORY, POSTTYPE, BG_COLORS, BARS_HEIGHT };
