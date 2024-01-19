@@ -68,9 +68,17 @@ const getImageUrl = (imageName) => {
   return data.publicUrl;
 };
 
-// const deleteImage = async (path) => {
-//   const { data, error } = await supabase.storage.from(postImagePath).remove([path]);
-//   console.log("deleted");
-// };
+const deleteImage = async (imageName) => {
+  console.log(imageName);
+  try {
+    const { data, error } = await supabase.storage.from(postImagePath).remove([imageName]);
 
-export { createPost, getPost, uploadImage, getImageUrl };
+    if (error) throw new Error("Error deleting image");
+    return generateResponse("ok", data);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null);
+  }
+};
+
+export { createPost, getPost, uploadImage, getImageUrl, deleteImage };

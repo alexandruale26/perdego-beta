@@ -5,7 +5,7 @@ const Spinner = ({ className, fullHeight = true }) => {
   const containerHeight = fullHeight ? { minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` } : {};
 
   return (
-    <div style={containerHeight} className={twMerge("h-full flex items-center justify-center", className)}>
+    <div style={containerHeight} className={twMerge("h-full w-full flex items-center justify-center", className)}>
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 animate-spin">
         <circle cx="12" cy="12" r="10" className="stroke-grey-200" strokeWidth="4" />
         <path

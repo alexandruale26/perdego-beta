@@ -1,5 +1,6 @@
 import supabase from "./supabase";
 import { convertToMatchSearch } from "./helpers";
+import { generateResponse } from "./helpers";
 
 const queryPosts = async (queryData, hasSearchParams = false) => {
   let query = supabase.from("posts").select("postId, title, location, createdAt, category, image, postType");
@@ -26,12 +27,15 @@ const queryPosts = async (queryData, hasSearchParams = false) => {
 
   query = query.order("createdAt", { ascending: false });
 
-  const { data, error } = await query;
+  try {
+    const { data, error, status } = await query;
 
-  // console.log(data);
-  // console.log(error);
-
-  return data;
+    if (error || status !== 200 || data === null) throw new Error("Error fetching posts");
+    return generateResponse("ok", data);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null);
+  }
 };
 
 //TODO: 10 results per page. Could use range() to get any number of results

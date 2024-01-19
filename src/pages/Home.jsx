@@ -33,9 +33,10 @@ const Home = () => {
 
     const process = async () => {
       const queryParams = getAllSearchParamsAsObject(searchParams);
-      const data = await queryPosts(queryParams, hasSearchParams);
+      const response = await queryPosts(queryParams, hasSearchParams);
 
-      setPosts(data);
+      // no need to use response.status
+      setPosts(response.data);
       setIsLoading(false);
     };
 

@@ -11,28 +11,34 @@ import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
 import { schema, defaultValues } from "../features/postForm/data";
 import { handleImageUpload } from "../features/postForm/formHelpers";
 import { filterData, sanitizeInput } from "../utils/helpers";
-import { createPost } from "../services/postApi";
+import { createPost, deleteImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
 import { warningToast } from "../shared/Toasts";
 import Success from "../features/postForm/Success";
+import Spinner from "../shared/Spinner";
 
 // TODO: disable name and phone and use uid
 
+const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
 const formData = {
   schema,
   defaultValues,
 };
 
-const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
-
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOnSubmit = (values) => {
+    setIsLoading(true);
+
     const process = async () => {
       const imageUploaderResponse = await handleImageUpload(values.image);
 
-      if (imageUploaderResponse.status !== "ok") return warningToast(errorMessage);
+      if (imageUploaderResponse.status !== "ok") {
+        setIsLoading(false);
+        return warningToast(errorMessage);
+      }
 
       const sanitizedFormValues = {
         title: sanitizeInput(values.title, true),
@@ -42,21 +48,30 @@ const PostForm = () => {
       const newData = { ...values, ...sanitizedFormValues, image: imageUploaderResponse.data };
       const postResponse = await createPost(newData);
 
-      if (postResponse.status !== "ok") return warningToast(errorMessage);
-      // setIsPostCreated(true);
+      if (postResponse.status !== "ok") {
+        // no need to use response.status
+        await deleteImage(imageUploaderResponse.data);
+        setIsLoading(false);
+
+        return warningToast(errorMessage);
+      }
+      setIsPostCreated(true);
+      setIsLoading(false);
     };
 
     process();
   };
 
-  // TODO: use SPINNER until receive confirmation
-
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>
-      {isPostCreated && <Success message="Felicitǎri! Anunțul tǎu a fost creat cu succes." />}
+      {isPostCreated && <Success message="Felicitǎri! Anunțul tǎu a fost postat." />}
 
       {isPostCreated === false && (
-        <div className={"max-w-lg mx-auto space-y-8"}>
+        <div className="max-w-lg mx-auto space-y-8">
+          {isLoading && (
+            <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
+          )}
+
           <h1 className="text-xl xs:text-3xl font-medium">Ce anume ai gǎsit | pierdut...?</h1>
           <Form {...formData} onSubmit={handleOnSubmit} className="space-y-5 w-full">
             <FormField
