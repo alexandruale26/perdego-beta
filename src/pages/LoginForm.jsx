@@ -8,8 +8,9 @@ import Hero from "../features/account/Hero";
 import AccountPageContainer from "../features/account/AccountPageContainer";
 import FormTitle from "../features/account/FormTitle";
 import FormContainer from "../features/account/FormContainer";
-import { schema, defaultValues, lengths } from "../features/account/loginFormData";
+import { schema, lengths } from "../features/account/loginFormData";
 
+const defaultValues = {};
 const formData = {
   schema,
   defaultValues,

@@ -55,7 +55,4 @@ const schema = {
   },
 };
 
-// TODO: defaultValues could be an empty object if there is no default
-const defaultValues = {};
-
-export { schema, defaultValues, imageExtension };
+export { schema, imageExtension };

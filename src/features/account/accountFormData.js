@@ -14,6 +14,8 @@ const lengths = {
   },
 };
 
+// TODO: test everything for blanc spaces
+
 const schema = {
   email: {
     maxLength: {
@@ -23,6 +25,22 @@ const schema = {
     regex: {
       pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)+$/,
       errorMessage: "Introdu o adresǎ de e-mail validǎ",
+    },
+  },
+  password: {
+    minLength: {
+      value: lengths.password.min,
+      errorMessage: generateErrorMessage("Parola", lengths.password.min),
+    },
+    maxLength: {
+      value: lengths.password.max,
+      errorMessage: generateErrorMessage("Parola", null, lengths.password.max),
+    },
+    regex: {
+      pattern:
+        /^(?=.*[A-Z])(?=.*[!@#$%^&*()\-_+={[}\]|;:'",<.>/?\\`~])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*()\-_+={[}\]|;:'",<.>/?\\`~]+$/,
+      errorMessage:
+        "Cel puțin un caracter special (@, #, -, &, !, etc.). Minim o cifrǎ (0-9). Cel puțin o literǎ mare (A-Z). Nu sunt permise caracterele albe (spații).",
     },
   },
   name: {
@@ -37,22 +55,6 @@ const schema = {
     regex: {
       pattern: /^\s*\S.{1,}\S\s*$/,
       errorMessage: "Introdu un nume valid",
-    },
-  },
-  password: {
-    // TODO: change name to password below
-    minLength: {
-      value: lengths.name.min,
-      errorMessage: generateErrorMessage("Numele", lengths.name.min),
-    },
-    maxLength: {
-      value: lengths.name.max,
-      errorMessage: generateErrorMessage("Numele", null, lengths.name.max),
-    },
-    regex: {
-      pattern:
-        /^(?=.*[A-Z])(?=.*[!@#$%^&*()\-_+={[}\]|;:'",<.>/?\\`~])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*()\-_+={[}\]|;:'",<.>/?\\`~]+$/,
-      errorMessage: "Introdu o parolǎ validǎ",
     },
   },
   phone: {

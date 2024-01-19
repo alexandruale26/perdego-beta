@@ -1,37 +1,37 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar";
 import Spinner from "../shared/Spinner";
 import ScrollToTop from "../shared/ScrollToTop";
+import { BARS_HEIGHT } from "../sharedData";
 
 const AppLayout = () => {
+  const { pathname } = useLocation();
   const navigation = useNavigation();
+
+  const isOnLoginOrCreate = pathname.includes("/account/login") || pathname.includes("/account/create");
   const isLoading = navigation.state === "loading";
 
-  const bgColor = "bg-grey-100";
-  const isUserLoggedIn = true;
-
-  // TODO: calc navbar and footer heights programatically here. now they are hardcoded
-  // TODO: disable nav and footer by seeing if user i logged out and by url path name
   // TODO: if user is logged and wants to login show message to logout, same if wants to create new account while logged in
 
   return (
-    //TODO: !IMPORTANT the lines below are just to correctly test the design. Should be nodified. Everyone is allowed to acess the app. Don't show nav and footer only when creating account or logging in.
-
     <>
-      {isUserLoggedIn === false && (
+      {isOnLoginOrCreate && (
         <>
           <ScrollToTop />
-          <main className={`w-full h-full min-h-screen ${bgColor}`}>{isLoading ? <Spinner /> : <Outlet />}</main>
+          <main className={`w-full h-full min-h-screen`}>{isLoading ? <Spinner /> : <Outlet />}</main>
         </>
       )}
 
-      {isUserLoggedIn && (
+      {isOnLoginOrCreate === false && (
         <>
           <Navbar />
           <ScrollToTop />
-          <main className={`w-full h-full ${"min-h-[calc(100vh-150px)]"} ${bgColor}`}>
-            {isLoading ? <Spinner className="min-h-[calc(100vh-150px)]" /> : <Outlet />}
+          <main
+            style={{ minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` }}
+            className={`w-full h-full bg-grey-100`}
+          >
+            {isLoading ? <Spinner /> : <Outlet />}
           </main>
           <div className="w-full bg-black h-[80px] text-white text-center">Footer</div>
         </>

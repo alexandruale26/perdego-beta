@@ -26,9 +26,11 @@ const schema = {
       value: lengths.password.min,
       errorMessage: generateErrorMessage("Parola", lengths.password.min),
     },
+    maxLength: {
+      value: lengths.password.max,
+      errorMessage: generateErrorMessage("Numele", null, lengths.password.max),
+    },
   },
 };
 
-const defaultValues = {};
-
-export { schema, defaultValues, lengths };
+export { schema, lengths };

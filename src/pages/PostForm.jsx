@@ -8,7 +8,7 @@ import ComboBox from "../formComponents/ComboBox";
 import Selector from "../formComponents/Selector";
 import PageContainer from "../shared/PageContainer";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
-import { schema, defaultValues } from "../features/postForm/data";
+import { schema } from "../features/postForm/data";
 import { handleImageUpload } from "../features/postForm/formHelpers";
 import { filterData, sanitizeInput } from "../utils/helpers";
 import { createPost, deleteImage } from "../services/postApi";
@@ -20,6 +20,8 @@ import Spinner from "../shared/Spinner";
 // TODO: disable name and phone and use uid
 
 const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
+const defaultValues = {};
+
 const formData = {
   schema,
   defaultValues,

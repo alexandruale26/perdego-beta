@@ -1,5 +1,4 @@
 import { Form } from "../formBase/FormContext";
-import { generateErrorMessage } from "../utils/helpers";
 import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/form";
 import ValidationInput from "../formComponents/ValidationInput";
 import SubmitButton from "../shared/SubmitButton";
@@ -9,11 +8,12 @@ import AccountPageContainer from "../features/account/AccountPageContainer";
 import FormTitle from "../features/account/FormTitle";
 import FormContainer from "../features/account/FormContainer";
 import { schema, lengths } from "../features/account/accountFormData";
+import { randomBgColor } from "../features/account/helpers";
 
-// TODO: maxpassword length must be shared
 // TODO: curate email, random profile color
 
-const formData = { schema, defaultValues: {} };
+const defaultValues = {};
+const formData = { schema, defaultValues };
 
 const AccountForm = () => {
   const handleOnSubmit = (values) => {
@@ -43,7 +43,7 @@ const AccountForm = () => {
               render={(field) => (
                 <FormItem className="max-w-full">
                   <FormLabel>Introdu o parolǎ sigurǎ</FormLabel>
-                  <ValidationInput {...field} maxLength={30} />
+                  <ValidationInput {...field} maxLength={lengths.password.max} />
                   <FormMessage />
                 </FormItem>
               )}

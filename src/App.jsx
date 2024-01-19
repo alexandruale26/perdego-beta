@@ -29,11 +29,11 @@ const router = createBrowserRouter([
         element: <div>Edit Post</div>,
       },
       {
-        path: "login",
+        path: "account/login",
         element: <LoginForm />,
       },
       {
-        path: "create",
+        path: "account/create",
         element: <AccountForm />,
       },
       {

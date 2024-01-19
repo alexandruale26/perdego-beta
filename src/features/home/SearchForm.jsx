@@ -35,7 +35,8 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
 
   return (
     <Form
-      {...{ schema: {}, defaultValues: {} }}
+      schema={{}}
+      defaultValues={{}}
       onSubmit={handleSubmit}
       className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md shadow-sm"
     >

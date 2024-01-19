@@ -1,5 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { capitalizeFirstChar } from "../utils/helpers";
+import { randomBgColor } from "../features/account/helpers";
 
 const convertToUserProfileDate = (date) => date;
 
@@ -8,7 +9,9 @@ const convertToUserProfileDate = (date) => date;
 const UserProfile = ({ name, memberSinceDate, className }) => {
   return (
     <div className={twMerge("flex gap-4 items-center justify-center select-none", className)}>
-      <div className="flex items-center justify-center w-[52px] h-[52px] text-white text-3xl bg-lime-500 rounded-full">
+      <div
+        className={`flex items-center justify-center w-[52px] h-[52px] text-white text-3xl ${randomBgColor()} rounded-full`}
+      >
         {capitalizeFirstChar(name)}
       </div>
 
