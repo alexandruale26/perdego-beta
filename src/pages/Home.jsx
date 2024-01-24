@@ -1,28 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useLocation } from "react-router-dom";
-import PostLink from "../features/home/PostLink";
 import SearchForm from "../features/home/SearchForm";
-import Section from "../shared/Section";
-import LayoutSwitcher from "../features/home/LayoutSwitcher";
 import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { queryPosts } from "../services/searchApi";
-import { saveToLocalStorage } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
 import PageContainer from "../shared/PageContainer";
-import { GRID_STORAGE_NAME, defaultSearchParams } from "../features/home/data";
-import {
-  getAllSearchParamsAsObject,
-  showSearchResultsTitle,
-  isLayoutChangeAllowed,
-  getGridModeFromStorage,
-} from "../features/home/helpers";
+import SearchResults from "../features/home/SearchResults";
+import { defaultSearchParams } from "../features/home/data";
+import { getAllSearchParamsAsObject } from "../features/home/helpers";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [gridMode, setGridMode] = useState(getGridModeFromStorage());
-  const [allowLayoutChange, setAllowLayoutChange] = useState(isLayoutChangeAllowed());
   const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
 
   const hasSearchParams = !!useLocation().search;
@@ -43,22 +33,7 @@ const Home = () => {
     process();
   }, [searchParams, hasSearchParams]);
 
-  useEffect(() => {
-    const setIfLayoutAllowed = (e) => {
-      e.preventDefault();
-      setAllowLayoutChange(isLayoutChangeAllowed());
-    };
-
-    window.addEventListener("resize", setIfLayoutAllowed);
-    return () => window.removeEventListener("resize", setIfLayoutAllowed);
-  }, []);
-
   const getSearchValues = (queryData) => setSearchParams(queryData);
-
-  const handleLayoutSwitch = (value) => {
-    setGridMode(value);
-    saveToLocalStorage(GRID_STORAGE_NAME, value);
-  };
 
   const loadedAndHasData = isLoading === false && posts !== null;
 
@@ -87,32 +62,7 @@ const Home = () => {
         )}
 
         {loadedAndHasData && (
-          <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
-            <div className="w-full flex items-start gap-1 pl-1 select-none">
-              <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium">
-                {showSearchResultsTitle(hasSearchParams, posts.length)}
-              </h2>
-              {hasSearchParams && allowLayoutChange && (
-                <LayoutSwitcher isGridSelected={gridMode} onSelect={handleLayoutSwitch} />
-              )}
-            </div>
-
-            {hasSearchParams === true && (
-              <Section gridMode={gridMode} className="flex-col p-0 bg-transparent shadow-none rounded-none">
-                {posts.map((post) => (
-                  <PostLink key={post.id} post={post} gridMode={gridMode} searchParams={searchedParams} />
-                ))}
-              </Section>
-            )}
-
-            {hasSearchParams === false && (
-              <Section gridMode={true}>
-                {posts.map((post) => (
-                  <PostLink key={post.id} post={post} gridMode={true} searchParams={searchedParams} />
-                ))}
-              </Section>
-            )}
-          </Section>
+          <SearchResults hasSearchParams={hasSearchParams} posts={posts} searchedParams={searchedParams} />
         )}
       </div>
     </PageContainer>
