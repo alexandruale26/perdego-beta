@@ -14,7 +14,7 @@ import { filterData, wordToUppercase } from "../utils/helpers";
 import { createPost, deleteImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
 import { warningToast } from "../shared/Toasts";
-import Success from "../features/postForm/Success";
+import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
 
 // TODO: disable name and phone and use uid
@@ -61,7 +61,7 @@ const PostForm = () => {
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>
-      {isPostCreated && <Success message="Felicitǎri! Anunțul tǎu a fost postat." />}
+      {isPostCreated && <Confirmation message="Felicitǎri! Anunțul tǎu a fost postat cu succes." />}
 
       {isPostCreated === false && (
         <div className="max-w-lg mx-auto space-y-8">
