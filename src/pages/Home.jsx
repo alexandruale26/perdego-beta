@@ -53,9 +53,7 @@ const Home = () => {
     return () => window.removeEventListener("resize", setIfLayoutAllowed);
   }, []);
 
-  const getSearchValues = (queryData) => {
-    setSearchParams(queryData);
-  };
+  const getSearchValues = (queryData) => setSearchParams(queryData);
 
   const handleLayoutSwitch = (value) => {
     setGridMode(value);
@@ -102,7 +100,7 @@ const Home = () => {
             {hasSearchParams === true && (
               <Section gridMode={gridMode} className="flex-col p-0 bg-transparent shadow-none rounded-none">
                 {posts.map((post) => (
-                  <PostLink key={post.postId} post={post} gridMode={gridMode} searchParams={searchedParams} />
+                  <PostLink key={post.id} post={post} gridMode={gridMode} searchParams={searchedParams} />
                 ))}
               </Section>
             )}
@@ -110,7 +108,7 @@ const Home = () => {
             {hasSearchParams === false && (
               <Section gridMode={true}>
                 {posts.map((post) => (
-                  <PostLink key={post.postId} post={post} gridMode={true} searchParams={searchedParams} />
+                  <PostLink key={post.id} post={post} gridMode={true} searchParams={searchedParams} />
                 ))}
               </Section>
             )}

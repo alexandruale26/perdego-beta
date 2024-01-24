@@ -10,6 +10,6 @@ const convertToMatchSearch = (string) => {
   });
 };
 
-const generateResponse = (status, data) => ({ status, data });
+const generateResponse = (status, data, message = null) => ({ status, data, message });
 
 export { convertToMatchSearch, generateResponse };

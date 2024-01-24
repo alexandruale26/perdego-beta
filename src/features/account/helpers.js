@@ -17,10 +17,20 @@ const BG_COLORS = [
   "bg-rose-500",
 ];
 
-const randomBgColor = () => {
+const EMAIL_AND_PASSWORD_LENGTHS = {
+  email: {
+    max: 100,
+  },
+  password: {
+    min: 8,
+    max: 30,
+  },
+};
+
+const randomAvatarColor = () => {
   if (BG_COLORS.length < 1) throw new Error("Must have at least 1 color for background");
   const randomNumber = Math.floor(Math.random() * BG_COLORS.length);
   return BG_COLORS[randomNumber];
 };
 
-export { randomBgColor };
+export { randomAvatarColor, EMAIL_AND_PASSWORD_LENGTHS };

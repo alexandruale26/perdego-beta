@@ -3,7 +3,7 @@ import { convertToMatchSearch } from "./helpers";
 import { generateResponse } from "./helpers";
 
 const queryPosts = async (queryData, hasSearchParams = false) => {
-  let query = supabase.from("posts").select("postId, title, location, createdAt, category, image, postType");
+  let query = supabase.from("posts").select("id, title, location, createdAt, category, image, postType");
 
   if (hasSearchParams) {
     const filterByPostType = !!queryData.postType;

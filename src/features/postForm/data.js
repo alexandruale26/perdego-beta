@@ -25,17 +25,17 @@ const schema = {
     },
     regex: {
       pattern: /^\s*\S.{8,}\S\s*$/,
-      errorMessage: "Introdu un text valid",
+      errorMessage: "Introdu un text valid.",
     },
   },
   location: {
     required: {
-      errorMessage: "Alege o locație",
+      errorMessage: "Alege o locație.",
     },
   },
   category: {
     required: {
-      errorMessage: "Alege o categorie",
+      errorMessage: "Alege o categorie.",
     },
   },
   description: {
@@ -50,7 +50,7 @@ const schema = {
   },
   postType: {
     required: {
-      errorMessage: "Alege tipul de anunț",
+      errorMessage: "Alege tipul de anunț.",
     },
   },
 };

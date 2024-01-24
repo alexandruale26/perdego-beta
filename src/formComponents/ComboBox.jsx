@@ -42,9 +42,6 @@ const ComboBox = forwardRef(
       return () => document.removeEventListener("click", handleOutsideClick);
     }, [visible]);
 
-    // not working if not used in separate effect
-    useEffect(() => setSelected(setDefaultValue(defaultValue)), [defaultValue]);
-
     const handleInputChange = (e) => {
       e.preventDefault();
       setFiltered(filter(data, e.target.value));
@@ -58,8 +55,6 @@ const ComboBox = forwardRef(
       setSelected(value);
       setInputValue(value);
 
-      //TODO: error message if ref is null ????
-      if (!ref) alert("ComboBox ref is null");
       ref.current.value = value;
       onChange(e);
 

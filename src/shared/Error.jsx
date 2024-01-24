@@ -14,7 +14,7 @@ const Error = ({ className, errorMessage = null, buttonMessage = null, fullHeigh
   return (
     <div
       style={containerHeight}
-      className={twMerge("h-full flex flex-col items-center justify-center gap-8 p-4", className)}
+      className={twMerge("h-full flex flex-col items-center justify-center gap-8 p-4 bg-white", className)}
     >
       <div className="flex items-center justify-center flex-wrap gap-2">
         <WarningIcon className="shrink-0" />

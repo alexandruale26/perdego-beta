@@ -2,8 +2,11 @@ import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
 import { generateResponse } from "./helpers";
 import { imageExtension } from "../features/postForm/data";
+import { GENERIC_ERROR_MESSAGE } from "./constants";
 
 const postImagePath = "posts-images";
+
+// TODO: user id to post
 
 const createPost = async (post) => {
   try {
@@ -20,18 +23,18 @@ const createPost = async (post) => {
       },
     ]);
 
-    if (error || status !== 201) throw new Error("Error creating post");
-    console.log("created - ok");
+    if (error || status !== 201) throw new Error(GENERIC_ERROR_MESSAGE);
+    console.log("created post - ok");
     return generateResponse("ok", null);
   } catch (error) {
     console.log(error);
-    return generateResponse(null, null);
+    return generateResponse(null, null, error.message);
   }
 };
 
-const getPost = async (postId) => {
+const getPost = async (id) => {
   try {
-    const { data, error, status } = await supabase.from("posts").select().eq("postId", postId).single();
+    const { data, error, status } = await supabase.from("posts").select().eq("id", id).single();
 
     if (error || status !== 200 || data === null) throw new Error("Could not find post");
     return generateResponse("ok", data);
@@ -53,11 +56,11 @@ const uploadImage = async (image) => {
       upsert: false,
     });
 
-    if (error || data === null) throw new Error("Failed to upload image");
+    if (error || data === null) throw new Error(GENERIC_ERROR_MESSAGE);
     return generateResponse("ok", data.path);
   } catch (error) {
     console.log(error);
-    return generateResponse(null, null);
+    return generateResponse(null, null, error.message);
   }
 };
 
@@ -69,10 +72,11 @@ const getImageUrl = (imageName) => {
 };
 
 const deleteImage = async (imageName) => {
-  console.log(imageName);
+  console.log("deleted", imageName);
   try {
     const { data, error } = await supabase.storage.from(postImagePath).remove([imageName]);
 
+    // user shouldn't know if on create post error the uploaded image cannot be deleted
     if (error) throw new Error("Error deleting image");
     return generateResponse("ok", data);
   } catch (error) {

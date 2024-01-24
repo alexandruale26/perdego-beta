@@ -21,13 +21,13 @@ const Post = () => {
   const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const postId = useLocation().pathname.replaceAll("/", "");
+  const id = useLocation().pathname.replaceAll("/", "");
 
   useEffect(() => {
     setIsLoading(true);
 
     const process = async () => {
-      const response = await getPost(postId);
+      const response = await getPost(id);
 
       // no need for response.status
       setPost(response.data);
@@ -35,7 +35,7 @@ const Post = () => {
     };
 
     process();
-  }, [postId]);
+  }, [id]);
 
   const urlParams = useLocation()?.state;
   const validParams = !!urlParams?.searchParams;

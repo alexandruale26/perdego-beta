@@ -6,12 +6,18 @@ const removeDiacritics = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/
 
 const capitalizeFirstChar = (string) => string.charAt(0).toUpperCase();
 
-const sanitizeInput = (string, noDiacritics = false) => {
+const wordToUppercase = (string, noDiacritics = false) => {
   const trimmedString = string.trim();
   const firstCharToUpper = capitalizeFirstChar(trimmedString);
   const fullString = firstCharToUpper.concat(trimmedString.slice(1));
 
   return noDiacritics ? removeDiacritics(fullString) : fullString;
+};
+
+const capitalizeEachWordFromString = (string) => {
+  const words = string.toLowerCase().split(" ");
+  const converted = words.map((word) => wordToUppercase(word));
+  return converted.join(" ");
 };
 
 const formatPostDate = (timestamp) => {
@@ -60,14 +66,14 @@ const saveToLocalStorage = (name, value) => {
 const generateErrorMessage = (inputName, minLength, maxLength) => {
   const messageBase = `${inputName} trebuie sǎ conținǎ`;
 
-  if (minLength) return `${messageBase} minim ${minLength}${minLength >= 20 ? " de" : ""} caractere`;
-  if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere`;
+  if (minLength) return `${messageBase} minim ${minLength}${minLength >= 20 ? " de" : ""} caractere.`;
+  if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere.`;
 };
 
 export {
   removeDiacritics,
   capitalizeFirstChar,
-  sanitizeInput,
+  wordToUppercase,
   imageRandomName,
   formatPostDate,
   filterData,
@@ -75,4 +81,5 @@ export {
   saveToLocalStorage,
   getFromLocalStorage,
   generateErrorMessage,
+  capitalizeEachWordFromString,
 };

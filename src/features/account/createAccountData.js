@@ -1,20 +1,14 @@
 import { generateErrorMessage } from "../../utils/helpers";
+import { EMAIL_AND_PASSWORD_LENGTHS } from "./helpers";
 
 const lengths = {
-  email: {
-    max: 100,
-  },
-  password: {
-    min: 8,
-    max: 30,
-  },
+  email: EMAIL_AND_PASSWORD_LENGTHS.email,
+  password: EMAIL_AND_PASSWORD_LENGTHS.password,
   name: {
     min: 3,
-    max: 25,
+    max: 30,
   },
 };
-
-// TODO: test everything for blanc spaces
 
 const schema = {
   email: {
@@ -24,7 +18,7 @@ const schema = {
     },
     regex: {
       pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)+$/,
-      errorMessage: "Introdu o adresǎ de e-mail validǎ",
+      errorMessage: "Introdu o adresǎ de e-mail validǎ.",
     },
   },
   password: {
@@ -53,16 +47,21 @@ const schema = {
       errorMessage: generateErrorMessage("Numele", null, lengths.name.max),
     },
     regex: {
-      pattern: /^\s*\S.{1,}\S\s*$/,
-      errorMessage: "Introdu un nume valid",
+      pattern: /^[a-zA-Z]+(?:[ -][a-zA-Z]+)*[ -]?/,
+      errorMessage: "Introdu un nume valid.",
     },
   },
   phone: {
     regex: {
       pattern: /^07\d{8}$/,
-      errorMessage: "Numǎrul nu este valid",
+      errorMessage: "Numǎrul de telefon nu este valid.",
     },
   },
+  // location: {
+  //   required: {
+  //     errorMessage: "Alege o locație.",
+  //   },
+  // },
 };
 
 export { schema, lengths };

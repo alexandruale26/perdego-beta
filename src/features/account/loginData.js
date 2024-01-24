@@ -1,14 +1,7 @@
 import { generateErrorMessage } from "../../utils/helpers";
+import { EMAIL_AND_PASSWORD_LENGTHS } from "./helpers";
 
-const lengths = {
-  email: {
-    max: 100,
-  },
-  password: {
-    min: 8,
-    max: 30,
-  },
-};
+const lengths = { ...EMAIL_AND_PASSWORD_LENGTHS };
 
 const schema = {
   email: {
@@ -18,7 +11,7 @@ const schema = {
     },
     regex: {
       pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)+$/,
-      errorMessage: "Introdu o adresǎ de e-mail validǎ",
+      errorMessage: "Introdu o adresǎ de e-mail validǎ.",
     },
   },
   password: {

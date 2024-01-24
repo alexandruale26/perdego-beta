@@ -14,7 +14,7 @@ const PostLink = ({ post, searchParams, gridMode = false }) => {
 
   return (
     <Link
-      to={`${post.postId}`}
+      to={`${post.id}`}
       state={{ searchParams }}
       className={`w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
         gridMode ? linkGridStyle : linkBaseStyle

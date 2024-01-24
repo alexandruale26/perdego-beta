@@ -8,7 +8,8 @@ import Hero from "../features/account/Hero";
 import AccountPageContainer from "../features/account/AccountPageContainer";
 import FormTitle from "../features/account/FormTitle";
 import FormContainer from "../features/account/FormContainer";
-import { schema, lengths } from "../features/account/loginFormData";
+import { schema, lengths } from "../features/account/loginData";
+import { loginUser } from "../services/userApi";
 
 const defaultValues = {};
 const formData = {
@@ -21,7 +22,11 @@ const formData = {
 
 const LoginForm = () => {
   const handleOnSubmit = (values) => {
-    console.log(values);
+    const process = async () => {
+      const data = await loginUser(values);
+    };
+
+    process();
   };
 
   return (

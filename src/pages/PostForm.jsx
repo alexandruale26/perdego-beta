@@ -10,7 +10,7 @@ import PageContainer from "../shared/PageContainer";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
 import { schema } from "../features/postForm/data";
 import { handleImageUpload } from "../features/postForm/formHelpers";
-import { filterData, sanitizeInput } from "../utils/helpers";
+import { filterData, wordToUppercase } from "../utils/helpers";
 import { createPost, deleteImage } from "../services/postApi";
 import SubmitButton from "../shared/SubmitButton";
 import { warningToast } from "../shared/Toasts";
@@ -18,14 +18,10 @@ import Success from "../features/postForm/Success";
 import Spinner from "../shared/Spinner";
 
 // TODO: disable name and phone and use uid
+// TODO: separate process() from all files
 
-const errorMessage = "A apǎrut o eroare. Te rugǎm încearcǎ din nou.";
 const defaultValues = {};
-
-const formData = {
-  schema,
-  defaultValues,
-};
+const formData = { schema, defaultValues };
 
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
@@ -39,23 +35,22 @@ const PostForm = () => {
 
       if (imageUploaderResponse.status !== "ok") {
         setIsLoading(false);
-        return warningToast(errorMessage);
+        return warningToast(imageUploaderResponse.message);
       }
 
       const sanitizedFormValues = {
-        title: sanitizeInput(values.title, true),
-        description: sanitizeInput(values.description),
+        title: wordToUppercase(values.title, true),
+        description: wordToUppercase(values.description),
       };
 
       const newData = { ...values, ...sanitizedFormValues, image: imageUploaderResponse.data };
       const postResponse = await createPost(newData);
 
       if (postResponse.status !== "ok") {
-        // no need to use response.status
-        await deleteImage(imageUploaderResponse.data);
+        await deleteImage(imageUploaderResponse.data); // no need to use response.status
         setIsLoading(false);
 
-        return warningToast(errorMessage);
+        return warningToast(postResponse.message);
       }
       setIsPostCreated(true);
       setIsLoading(false);
@@ -112,7 +107,6 @@ const PostForm = () => {
               name="postType"
               render={(field) => (
                 <FormItem>
-                  {" "}
                   <FormLabel>Tipul anunțului</FormLabel>
                   <Selector values={POSTTYPE} defaultValue="" {...field} />
                   <FormMessage />
@@ -123,7 +117,6 @@ const PostForm = () => {
               name="category"
               render={(field) => (
                 <FormItem>
-                  {" "}
                   <FormLabel>Categorie</FormLabel>
                   <ComboBox
                     placeholder="Cautǎ dupǎ categorie"
@@ -141,7 +134,6 @@ const PostForm = () => {
               name="location"
               render={(field) => (
                 <FormItem>
-                  {" "}
                   <FormLabel>Județ | Sector</FormLabel>
                   <ComboBox
                     placeholder="Cautǎ dupǎ județ sau sector"
@@ -159,7 +151,6 @@ const PostForm = () => {
               name="name"
               render={(field) => (
                 <FormItem>
-                  {" "}
                   <FormLabel>Nume</FormLabel>
                   <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
                   <FormMessage />
@@ -170,7 +161,6 @@ const PostForm = () => {
               name="phone"
               render={(field) => (
                 <FormItem>
-                  {" "}
                   <FormLabel>Telefon</FormLabel>
                   <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
                   <FormMessage />
