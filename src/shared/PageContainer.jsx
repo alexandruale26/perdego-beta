@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { BARS_HEIGHT } from "../sharedData";
+import { BARS_HEIGHT } from "../utils/sharedData";
 
 const PageContainer = ({ className, children }) => {
   return (

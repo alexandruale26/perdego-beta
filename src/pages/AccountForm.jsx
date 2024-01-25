@@ -11,7 +11,7 @@ import FormContainer from "../features/account/FormContainer";
 import Spinner from "../shared/Spinner";
 import Confirmation from "../shared/Confirmation";
 import { schema, lengths } from "../features/account/createAccountData";
-import { randomAvatarColor } from "../features/account/helpers";
+import { randomColor } from "../features/account/helpers";
 import { capitalizeEachWordFromString } from "../utils/helpers";
 import { signUpUser, createProfile, deleteUserAtSignupError } from "../services/userApi";
 import { warningToast } from "../shared/Toasts";
@@ -28,7 +28,7 @@ const AccountForm = () => {
 
     const process = async () => {
       const email = values.email.toLowerCase();
-      const avatarColor = randomAvatarColor();
+      const color = randomColor();
       const name = capitalizeEachWordFromString(values.name);
 
       const signUpResponse = await signUpUser({ email, password: values.password });
@@ -40,7 +40,7 @@ const AccountForm = () => {
       console.log(signUpResponse.data);
 
       const userId = signUpResponse.data;
-      const newProfile = { name, email, avatarColor, id: userId, phone: values.phone };
+      const newProfile = { name, email, color, id: userId, phone: values.phone };
 
       const profileResponse = await createProfile(newProfile);
       console.log(profileResponse);

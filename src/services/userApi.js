@@ -27,7 +27,7 @@ const createProfile = async (profile) => {
       {
         name: profile.name,
         phone: profile.phone,
-        avatarColor: profile.avatarColor,
+        color: profile.color,
         email: profile.email,
         id: profile.id,
       },
@@ -66,9 +66,30 @@ const loginUser = async (credentials) => {
   console.log(data);
 };
 
-const userSession = async () => {
-  const data = await supabase.auth.getSession();
-  console.log(data);
+const getCurrentUser = async () => {
+  const { data: session } = await supabase.auth.getSession();
+  if (session.session === null) return generateResponse(null, null);
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || data.user === null) return generateResponse(null, null);
+
+  return generateResponse("ok", { id: data.user.id });
 };
 
-export { signUpUser, loginUser, deleteUserAtSignupError, createProfile, userSession };
+const getProfile = async (id) => {
+  try {
+    const { data, error, status } = await supabase
+      .from("profiles")
+      .select("email, name, phone, createdAt, color")
+      .eq("id", id)
+      .single();
+
+    if (error || status !== 200 || data === error) throw new Error("Error fetching user profile");
+    return generateResponse("ok", data);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null);
+  }
+};
+
+export { signUpUser, loginUser, deleteUserAtSignupError, createProfile, getCurrentUser, getProfile };

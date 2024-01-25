@@ -87,7 +87,7 @@ const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
 const useFormContext = () => {
   const context = useContext(FormContext);
 
-  if (!context) throw new Error("context should be used inside <Form>");
+  if (!context) throw new Error("Context should be used inside <Form>");
   return context;
 };
 

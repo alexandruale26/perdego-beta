@@ -7,7 +7,7 @@ import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/f
 import ComboBox from "../formComponents/ComboBox";
 import Selector from "../formComponents/Selector";
 import PageContainer from "../shared/PageContainer";
-import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../sharedData";
+import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../utils/sharedData";
 import { schema } from "../features/postForm/data";
 import { handleImageUpload } from "../features/postForm/formHelpers";
 import { filterData, wordToUppercase } from "../utils/helpers";
@@ -17,15 +17,14 @@ import { warningToast } from "../shared/Toasts";
 import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
 
-// TODO: disable name and phone and use uid
 // TODO: separate process() from all files
 
-const defaultValues = {};
-const formData = { schema, defaultValues };
-
-const PostForm = () => {
+const PostForm = ({ user }) => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const defaultValues = user === null ? {} : { name: user.name, phone: user.phone };
+  const formData = { schema, defaultValues };
 
   const handleOnSubmit = (values) => {
     setIsLoading(true);
@@ -152,8 +151,7 @@ const PostForm = () => {
               render={(field) => (
                 <FormItem>
                   <FormLabel>Nume</FormLabel>
-                  <ValidationInput placeholder="Numele cu care vei apǎrea în anunț" {...field} />
-                  <FormMessage />
+                  <ValidationInput disabled {...field} />
                 </FormItem>
               )}
             />
@@ -162,8 +160,7 @@ const PostForm = () => {
               render={(field) => (
                 <FormItem>
                   <FormLabel>Telefon</FormLabel>
-                  <ValidationInput placeholder="ex.: 07xxxxxxxx" {...field} />
-                  <FormMessage />
+                  <ValidationInput disabled {...field} />
                 </FormItem>
               )}
             />

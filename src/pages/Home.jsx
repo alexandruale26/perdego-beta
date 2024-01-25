@@ -54,10 +54,10 @@ const Home = () => {
 
         {isLoading === false && posts === null && (
           <Error
-            className="p-0 pt-6 xs:pt-20 min-h-0"
             fullHeight={false}
-            errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :("
             showButton={false}
+            errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :("
+            className=""
           />
         )}
 

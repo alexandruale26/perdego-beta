@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { BARS_HEIGHT } from "../sharedData";
+import { BARS_HEIGHT } from "../utils/sharedData";
 
 const Spinner = ({ className, fullHeight = true }) => {
   const containerHeight = fullHeight ? { minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` } : {};

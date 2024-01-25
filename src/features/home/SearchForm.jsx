@@ -7,7 +7,7 @@ import LinkButton from "../../shared/LinkButton";
 import Division from "./Division";
 import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
-import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../sharedData";
+import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../utils/sharedData";
 import { filterData, setDefaultValue } from "../../utils/helpers";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
