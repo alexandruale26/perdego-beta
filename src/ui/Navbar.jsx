@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const formPath = "/new";
 const loginPath = "account/login";
-const iconsStyle = "w-11 h-11 focus-visible:scale-110";
+const iconsStyle = "w-10 sm:w-11 h-10 sm:h-11 focus-visible:scale-110";
 
 const Navbar = () => {
   const { user } = useAppContext();
@@ -32,12 +32,12 @@ const Navbar = () => {
       className={`flex w-full mx-auto max-w-6xl items-center justify-between px-6 text-white overflow-hidden`}
     >
       <LinkButton to="/">
-        <Logo className="text-3xl xs:text-4xl" />
+        <Logo className="text-3xl sm:text-4xl" />
       </LinkButton>
       <div className="flex items-center justify-center gap-6">
         <LinkButton
           to={user !== null ? formPath : loginPath}
-          className="min-h-[40px] bg-white text-black px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
+          className="min-h-[36px] sm:min-h-[40px] bg-white text-black px-2 sm:px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
         >
           Adaugǎ anunț nou
         </LinkButton>
@@ -52,7 +52,7 @@ const Navbar = () => {
         )}
 
         {user !== null && (
-          <Button onClick={signOut} className={`text-xl hover:scale-110 transition-transform ${iconsStyle}`}>
+          <Button onClick={signOut} className={`hover:scale-110 transition-transform ${iconsStyle}`}>
             <Avatar color={user.color} name={user.name} className="w-full h-full" />
           </Button>
         )}

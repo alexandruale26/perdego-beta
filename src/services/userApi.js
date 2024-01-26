@@ -52,7 +52,7 @@ const loginUser = async (credentials) => {
 
 const logoutUser = async () => {
   try {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut({ scope: "local" });
 
     if (error) throw new Error(GENERIC_ERROR_MESSAGE);
     return generateResponse("ok", null, "Te-ai deconectat cu succes.");
