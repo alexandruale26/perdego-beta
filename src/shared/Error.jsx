@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import WarningIcon from "./WarningIcon";
+import WarningIcon from "./icons/WarningIcon";
 import LinkButton from "./LinkButton";
 import { BARS_HEIGHT } from "../utils/sharedData";
 

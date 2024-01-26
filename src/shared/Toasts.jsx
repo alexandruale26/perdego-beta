@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
-import WarningIcon from "../shared/WarningIcon";
-import SuccessIcon from "./SuccessIcon";
+import WarningIcon from "./icons/WarningIcon";
+import SuccessIcon from "./icons/SuccessIcon";
 
 const warningToast = (message) =>
   toast(<span className="text-white">{message}</span>, {

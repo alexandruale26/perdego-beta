@@ -21,28 +21,6 @@ const signUpUser = async (credentials) => {
   }
 };
 
-const createProfile = async (profile) => {
-  try {
-    const { error, status } = await supabase.from("profiles").insert([
-      {
-        name: profile.name,
-        phone: profile.phone,
-        color: profile.color,
-        email: profile.email,
-        id: profile.id,
-      },
-    ]);
-
-    if (error || status !== 201) throw new Error(GENERIC_ERROR_MESSAGE);
-
-    console.log("created profile - ok");
-    return generateResponse("ok", null);
-  } catch (error) {
-    console.log(error);
-    return generateResponse(null, null, error.message);
-  }
-};
-
 const deleteUserAtSignupError = async (id) => {
   try {
     const { error, status } = await supabase.rpc("delete_user_at_signup_error", { user_id_to_delete: id });
@@ -94,20 +72,4 @@ const getCurrentUser = async () => {
   return generateResponse("ok", { id: data.user.id });
 };
 
-const getProfile = async (id) => {
-  try {
-    const { data, error, status } = await supabase
-      .from("profiles")
-      .select("email, name, phone, createdAt, color")
-      .eq("id", id)
-      .single();
-
-    if (error || status !== 200 || data === error) throw new Error("Error fetching user profile");
-    return generateResponse("ok", data);
-  } catch (error) {
-    console.log(error);
-    return generateResponse(null, null);
-  }
-};
-
-export { signUpUser, loginUser, deleteUserAtSignupError, createProfile, getCurrentUser, logoutUser, getProfile };
+export { signUpUser, loginUser, deleteUserAtSignupError, getCurrentUser, logoutUser };

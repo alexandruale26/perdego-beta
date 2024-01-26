@@ -13,7 +13,8 @@ import Confirmation from "../shared/Confirmation";
 import { schema, lengths } from "../features/account/createAccountData";
 import { randomColor } from "../features/account/helpers";
 import { capitalizeEachWordFromString } from "../utils/helpers";
-import { signUpUser, createProfile, deleteUserAtSignupError } from "../services/userApi";
+import { signUpUser, deleteUserAtSignupError } from "../services/userApi";
+import { createProfile } from "../services/profileApi";
 import { warningToast } from "../shared/Toasts";
 
 const defaultValues = {};

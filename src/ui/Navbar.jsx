@@ -1,4 +1,4 @@
-import Logo from "../shared/Logo";
+import Logo from "../shared/icons/Logo";
 import Avatar from "../shared/Avatar";
 import LinkButton from "../shared/LinkButton";
 import Button from "../shared/button";

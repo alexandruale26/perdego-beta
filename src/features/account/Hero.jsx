@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
-import Logo from "../../shared/Logo";
-import { LeftArrow, RightArrow } from "../../shared/LogoArrows";
+import Logo from "../../shared/icons/Logo";
+import { LeftArrow, RightArrow } from "../../shared/icons/LogoArrows";
 import LinkButton from "../../shared/LinkButton";
 import HalfWidthDiv from "./HalfWidthDiv";
 

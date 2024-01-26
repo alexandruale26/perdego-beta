@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { getCurrentUser, getProfile } from "./services/userApi";
+import { getCurrentUser } from "./services/userApi";
+import { getProfile } from "./services/profileApi";
 import AppLayout from "./ui/AppLayout";
 import Home from "./pages/Home";
 import PostForm from "./pages/PostForm";
