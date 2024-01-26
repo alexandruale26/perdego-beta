@@ -2,8 +2,6 @@ import { twMerge } from "tailwind-merge";
 import { capitalizeFirstChar } from "../utils/helpers";
 
 const getNameInitials = (name) => {
-  if (!name) return "??";
-
   const words = name.split(" ");
   return words.reduce((acc, word, index) => {
     if (index > 1) return acc;

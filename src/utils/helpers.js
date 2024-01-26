@@ -20,6 +20,14 @@ const capitalizeEachWordFromString = (string) => {
   return converted.join(" ");
 };
 
+const formatDateToRoumanian = (date, hasDay = true) => {
+  const dayMonthYearOptions = { year: "numeric", month: "long", day: "numeric" };
+  const monthYearOptions = { year: "numeric", month: "long" };
+  const options = hasDay ? dayMonthYearOptions : monthYearOptions;
+
+  return new Intl.DateTimeFormat("ro-RO", options).format(date);
+};
+
 const formatPostDate = (timestamp) => {
   //TODO: post should be 15 or 30 days available. if 30 days modify the function
   const postDate = new Date(timestamp);
@@ -31,13 +39,14 @@ const formatPostDate = (timestamp) => {
   const hours = postDate.getHours();
   const minutes = postDate.getMinutes();
 
+  const addZeroBefore = (number) => (number < 10 ? "0" + number : number);
+
   if (postDay === todayDay) {
-    return `Azi la ${hours}:${minutes}`;
+    return `Azi la ${addZeroBefore(hours)}:${addZeroBefore(minutes)}`;
   } else if (postDay === todayDay - 1) {
-    return `Ieri la ${hours}:${minutes}`;
+    return `Ieri la ${addZeroBefore(hours)}:${addZeroBefore(minutes)}`;
   } else {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Intl.DateTimeFormat("ro-RO", options).format(postDate);
+    return formatDateToRoumanian(postDate);
   }
 };
 
@@ -76,6 +85,7 @@ export {
   wordToUppercase,
   imageRandomName,
   formatPostDate,
+  formatDateToRoumanian,
   filterData,
   setDefaultValue,
   saveToLocalStorage,

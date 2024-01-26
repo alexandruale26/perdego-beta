@@ -13,12 +13,13 @@ import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { formatPostDate } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
+import { getProfile } from "../services/profileApi";
 
 const placeholderStyle = "p-20 bg-grey-200";
 
 const Post = () => {
-  // TODO: put user member data at create post
   const [post, setPost] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const id = useLocation().pathname.replaceAll("/", "");
@@ -27,10 +28,20 @@ const Post = () => {
     setIsLoading(true);
 
     const process = async () => {
-      const response = await getPost(id);
+      const postResponse = await getPost(id);
 
-      // no need for response.status
-      setPost(response.data);
+      if (postResponse.status !== "ok") {
+        return setIsLoading(false);
+      }
+
+      const profileResponse = await getProfile(postResponse.data.userId);
+
+      if (profileResponse.status !== "ok") {
+        return setIsLoading(false);
+      }
+
+      setPost(postResponse.data);
+      setProfile(profileResponse.data);
       setIsLoading(false);
     };
 
@@ -86,8 +97,8 @@ const Post = () => {
         <Section className="flex-col items-start justify-start">
           <h3 className="text-base xs:text-lg font-semibold text-grey-800 uppercase">Contacteazǎ-mǎ</h3>
           <div className="w-full flex items-center justify-between flex-wrap gap-4">
-            <UserProfile name={post.name} memberSinceDate="iunie 2023" />
-            <Telephone number={post.phone} />
+            <UserProfile profile={profile} />
+            <Telephone number={profile.phone} />
           </div>
         </Section>
       </div>
