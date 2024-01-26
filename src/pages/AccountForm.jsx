@@ -43,7 +43,6 @@ const AccountForm = () => {
       const newProfile = { name, email, color, id: userId, phone: values.phone };
 
       const profileResponse = await createProfile(newProfile);
-      console.log(profileResponse);
 
       if (profileResponse.status !== "ok") {
         await deleteUserAtSignupError(userId); // no need to use response.status

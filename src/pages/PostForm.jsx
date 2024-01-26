@@ -16,12 +16,14 @@ import SubmitButton from "../shared/SubmitButton";
 import { warningToast } from "../shared/Toasts";
 import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
+import { useAppContext } from "../App";
 
 // TODO: separate process() from all files
 
-const PostForm = ({ user }) => {
+const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAppContext();
 
   const defaultValues = user === null ? {} : { name: user.name, phone: user.phone };
   const formData = { schema, defaultValues };
@@ -30,6 +32,8 @@ const PostForm = ({ user }) => {
     setIsLoading(true);
 
     const process = async () => {
+      if (user === null) return warningToast("A apǎrut o problemǎ. Te rugǎm conecteazǎ-te.");
+
       const imageUploaderResponse = await handleImageUpload(values.image);
 
       if (imageUploaderResponse.status !== "ok") {
@@ -42,6 +46,7 @@ const PostForm = ({ user }) => {
         description: wordToUppercase(values.description),
       };
 
+      // userId automatically added by DB whenever user creates or modifies post
       const newData = { ...values, ...sanitizedFormValues, image: imageUploaderResponse.data };
       const postResponse = await createPost(newData);
 
@@ -57,6 +62,8 @@ const PostForm = ({ user }) => {
 
     process();
   };
+
+  if (user === null) return;
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>

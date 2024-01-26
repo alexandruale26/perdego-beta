@@ -9,6 +9,7 @@ import LoginForm from "./pages/LoginForm";
 import AccountForm from "./pages/AccountForm";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import supabase from "./services/supabase";
 
 const AppContext = createContext({});
 
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: "account/create",
         element: (
-          <ProtectedRoute routeToHome={true}>
+          <ProtectedRoute routeToHome={true} allowCreatePath={true}>
             <AccountForm />
           </ProtectedRoute>
         ),
@@ -68,21 +69,31 @@ const router = createBrowserRouter([
 function App() {
   const [user, setUser] = useState(null);
 
+  const process = async () => {
+    const authResponse = await getCurrentUser();
+    if (authResponse.status !== "ok") return setUser(null);
+
+    const profileResponse = await getProfile(authResponse.data.id);
+    if (profileResponse.status !== "ok") return setUser(null);
+
+    setUser({ ...authResponse.data, ...profileResponse.data });
+  };
+
   useEffect(() => {
-    const process = async () => {
-      const authResponse = await getCurrentUser();
-      if (authResponse.status !== "ok") return setUser(null);
+    const subscription = supabase.auth.onAuthStateChange((event, session) => {
+      // console.log(event, session);
 
-      const profileResponse = await getProfile(authResponse.data.id);
-      if (profileResponse.status !== "ok") return setUser(null);
+      if (event === "INITIAL_SESSION") {
+        process();
+      } else if (event === "SIGNED_IN") {
+        process();
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+      }
+    });
 
-      setUser({ ...authResponse.data, ...profileResponse.data });
-    };
-
-    process();
+    return () => subscription.data.subscription.unsubscribe();
   }, []);
-
-  // TODO: use onAuthStateChange
 
   return (
     <AppContext.Provider value={{ user }}>

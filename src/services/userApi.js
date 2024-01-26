@@ -58,12 +58,30 @@ const deleteUserAtSignupError = async (id) => {
 };
 
 const loginUser = async (credentials) => {
-  const data = await supabase.auth.signInWithPassword({
-    email: credentials.email,
-    password: credentials.password,
-  });
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: credentials.email,
+      password: credentials.password,
+    });
 
-  console.log(data);
+    if (error || data.user === null) throw new Error("Ai introdus greșit datele tale. Încearcǎ din nou.");
+    return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
+};
+
+const logoutUser = async () => {
+  try {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) throw new Error(GENERIC_ERROR_MESSAGE);
+    return generateResponse("ok", null, "Te-ai deconectat cu succes.");
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
 };
 
 const getCurrentUser = async () => {
@@ -92,4 +110,4 @@ const getProfile = async (id) => {
   }
 };
 
-export { signUpUser, loginUser, deleteUserAtSignupError, createProfile, getCurrentUser, getProfile };
+export { signUpUser, loginUser, deleteUserAtSignupError, createProfile, getCurrentUser, logoutUser, getProfile };

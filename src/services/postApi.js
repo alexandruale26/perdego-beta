@@ -6,14 +6,10 @@ import { GENERIC_ERROR_MESSAGE } from "./constants";
 
 const postImagePath = "posts-images";
 
-// TODO: user id to post
-
 const createPost = async (post) => {
   try {
     const { status, error } = await supabase.from("posts").insert([
       {
-        name: post.name,
-        phone: post.phone,
         title: post.title,
         description: post.description,
         location: post.location,
@@ -57,6 +53,7 @@ const uploadImage = async (image) => {
     });
 
     if (error || data === null) throw new Error(GENERIC_ERROR_MESSAGE);
+
     return generateResponse("ok", data.path);
   } catch (error) {
     console.log(error);

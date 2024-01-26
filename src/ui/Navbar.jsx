@@ -5,6 +5,9 @@ import Button from "../shared/button";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { BARS_HEIGHT } from "../utils/sharedData";
 import { useAppContext } from "../App";
+import { logoutUser } from "../services/userApi";
+import { warningToast, successToast } from "../shared/Toasts";
+import { useNavigate } from "react-router-dom";
 
 const formPath = "/new";
 const loginPath = "account/login";
@@ -12,6 +15,16 @@ const iconsStyle = "w-11 h-11 focus-visible:scale-110";
 
 const Navbar = () => {
   const { user } = useAppContext();
+  const navigate = useNavigate();
+
+  const signOut = async () => {
+    const response = await logoutUser();
+
+    if (response.status !== "ok") return warningToast(response.message);
+
+    successToast(response.message);
+    navigate("/", { replace: true });
+  };
 
   return (
     <div
@@ -39,7 +52,7 @@ const Navbar = () => {
         )}
 
         {user !== null && (
-          <Button className={`text-xl hover:scale-110 transition-transform ${iconsStyle}`}>
+          <Button onClick={signOut} className={`text-xl hover:scale-110 transition-transform ${iconsStyle}`}>
             <Avatar color={user.color} name={user.name} className="w-full h-full" />
           </Button>
         )}
