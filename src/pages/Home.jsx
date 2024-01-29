@@ -53,12 +53,7 @@ const Home = () => {
         {isLoading && <Spinner fullHeight={false} className="pt-6 xs:pt-24" />}
 
         {isLoading === false && posts === null && (
-          <Error
-            fullHeight={false}
-            showButton={false}
-            errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :("
-            className=""
-          />
+          <Error fullHeight={false} showButton={false} errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :(" />
         )}
 
         {loadedAndHasData && (

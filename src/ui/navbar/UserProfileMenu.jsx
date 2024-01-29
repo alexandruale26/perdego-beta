@@ -10,6 +10,7 @@ import { logoutUser } from "../../services/userApi";
 import { warningToast, successToast } from "../../shared/Toasts";
 
 const iconsStyle = "w-5 h-5";
+const linksStyle = "w-full flex items-center justify-start gap-2 p-1 xs:text-lg rounded-[4px]";
 
 const UserProfileMenu = ({ user, isOnMobileDevice = true }) => {
   const [mainElDimensions, setMainElDimensions] = useState({ width: 0, height: 0 });
@@ -42,10 +43,6 @@ const UserProfileMenu = ({ user, isOnMobileDevice = true }) => {
     navigate("/", { replace: true });
   };
 
-  // tailwindcss can't render dynamic styles, so the style needs to be fully created first
-  const hoverBgColor = "hover:".concat(user.color);
-  const linksStyle = `w-full flex items-center justify-start gap-2 p-1 xs:text-lg rounded-[4px] hover:text-white ${hoverBgColor}`;
-
   return (
     <div
       style={{
@@ -62,20 +59,20 @@ const UserProfileMenu = ({ user, isOnMobileDevice = true }) => {
 
           <div className="w-full flex flex-col items-start justify-center gap-1 px-2">
             {isOnMobileDevice && (
-              <LinkButton to="/new" className={linksStyle}>
+              <LinkButton to="/new" color={user.color} className={linksStyle}>
                 <PlusIcon className={iconsStyle} />
                 <span>Adaugǎ anunț nou</span>
               </LinkButton>
             )}
-            <LinkButton to="/manageposts" className={linksStyle}>
+            <LinkButton to="/manageposts" color={user.color} className={linksStyle}>
               <ReaderIcon className={iconsStyle} />
               <span>Anunțurile mele</span>
             </LinkButton>
-            <LinkButton className={linksStyle}>
+            <LinkButton color={user.color} className={linksStyle}>
               <GearIcon className={iconsStyle} />
               <span>Setǎri cont</span>
             </LinkButton>
-            <Button onClick={signOut} className={linksStyle}>
+            <Button onClick={signOut} color={user.color} className={linksStyle}>
               <ExitIcon className={iconsStyle} />
               <span>Ieșire cont</span>
             </Button>

@@ -12,8 +12,9 @@ const getNameInitials = (name) => {
 const Avatar = ({ color, name, className }) => {
   return (
     <div
+      style={{ backgroundColor: color }}
       className={twMerge(
-        `flex items-center justify-center w-[52px] h-[52px] text-white text-xl sm:text-2xl ${color} rounded-full overflow-hidden select-none`,
+        `flex items-center justify-center w-[52px] h-[52px] text-white text-xl sm:text-2xl rounded-full overflow-hidden select-none`,
         className
       )}
     >
