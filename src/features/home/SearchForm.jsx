@@ -41,7 +41,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
       className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md shadow-sm"
     >
       <div className="flex flex-col w-full gap-4">
-        <h1 className="text-lg text-start pl-1">Ce anume cauți...?</h1>
+        <h1 className="text-lg text-start pl-1 select-none">Ce anume cauți?</h1>
         <Division>
           <FormField
             name="search"

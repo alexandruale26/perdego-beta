@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import PostForm from "./pages/PostForm";
 import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
-import AccountForm from "./pages/AccountForm";
+import SignupForm from "./pages/SignupForm";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import supabase from "./services/supabase";
@@ -44,20 +44,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "account/login",
-        element: (
-          <ProtectedRoute routeToHome={true}>
-            <LoginForm />
-          </ProtectedRoute>
-        ),
+        path: "login",
+        element: <LoginForm />,
       },
       {
-        path: "account/create",
-        element: (
-          <ProtectedRoute routeToHome={true} allowCreatePath={true}>
-            <AccountForm />
-          </ProtectedRoute>
-        ),
+        path: "signup",
+        element: <SignupForm />,
       },
       {
         path: "*",

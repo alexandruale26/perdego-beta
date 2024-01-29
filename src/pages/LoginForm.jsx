@@ -79,7 +79,7 @@ const LoginForm = () => {
             <div className="w-full pt-6 space-y-4">
               <SubmitButton className="h-12 w-full">Conecteazǎ-te</SubmitButton>
               <LinkButton
-                to="/account/create"
+                to="/signup"
                 className="h-12 w-full border border-black rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
               >
                 Creeazǎ cont

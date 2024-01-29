@@ -1,7 +1,7 @@
 import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@radix-ui/react-icons";
 import Image from "../shared/Image";
 
 const IMAGE_MAX_SIZE_MB = 5;
@@ -43,7 +43,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
   return (
     <div
       className={twMerge(
-        "h-[200px] xs:h-[280px] w-full relative bg-white rounded-md hover:bg-primary-300-300 transition-colors overflow-hidden select-none",
+        "h-[220px] xs:h-[300px] sm:h-[400px] w-full relative bg-white rounded-md hover:bg-primary-300-300 transition-colors overflow-hidden select-none",
         className
       )}
     >
@@ -73,9 +73,9 @@ const ImageSelect = forwardRef(({ className, type, onChange, ...props }, ref) =>
         <button
           type="button"
           onClick={handleOnClickRemove}
-          className="flex items-center justify-center w-12 h-full border border-l-0 border-grey-300 rounded-r-md text-white bg-red-600 hover:text-black hover:w-1/3 z-10 transition-all shadow-[0_0_20px_0_rgba(255,0,0,0.3)] absolute top-0 right-0 focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
+          className="flex items-center justify-center w-12 h-full border border-l-0 border-grey-300 rounded-r-md text-white bg-[rgba(252,0,60,1)] hover:text-black hover:w-1/3 z-10 transition-all shadow-[0_0_20px_0_rgba(255,0,0,0.3)] absolute top-0 right-0 focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
         >
-          <Cross2Icon className="w-10 h-10" />
+          <TrashIcon className="w-10 h-10" />
         </button>
       )}
     </div>

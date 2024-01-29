@@ -20,7 +20,7 @@ import { warningToast } from "../shared/Toasts";
 const defaultValues = {};
 const formData = { schema, defaultValues };
 
-const AccountForm = () => {
+const SignupForm = () => {
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,7 +73,7 @@ const AccountForm = () => {
             <Confirmation
               message="Felicitǎri! Contul tǎu a fost creat cu succes."
               buttonTitle="Du-mǎ pe pagina principalǎ"
-              className="pt-20 sm:pt-0"
+              className="py-10 sm:py-0"
             />
           )}
 
@@ -150,4 +150,4 @@ const AccountForm = () => {
   );
 };
 
-export default AccountForm;
+export default SignupForm;

@@ -1,61 +1,43 @@
 import Logo from "../shared/icons/Logo";
-import Avatar from "../shared/Avatar";
 import LinkButton from "../shared/LinkButton";
-import Button from "../shared/button";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { BARS_HEIGHT } from "../utils/sharedData";
 import { useAppContext } from "../App";
-import { logoutUser } from "../services/userApi";
-import { warningToast, successToast } from "../shared/Toasts";
-import { useNavigate } from "react-router-dom";
+import UserProfileButton from "./navbar/UserProfileButton";
 
 const formPath = "/new";
-const loginPath = "account/login";
-const iconsStyle = "w-10 sm:w-11 h-10 sm:h-11 focus-visible:scale-110";
+const loginPath = "/login";
+const iconsStyle = "w-11 h-11 focus-visible:scale-110";
 
 const Navbar = () => {
   const { user } = useAppContext();
-  const navigate = useNavigate();
-
-  const signOut = async () => {
-    const response = await logoutUser();
-
-    if (response.status !== "ok") return warningToast(response.message);
-
-    successToast(response.message);
-    navigate("/", { replace: true });
-  };
 
   return (
-    <div
-      style={{ height: `${BARS_HEIGHT.nav}px` }}
-      className={`flex w-full mx-auto max-w-6xl items-center justify-between px-6 text-white overflow-hidden`}
-    >
-      <LinkButton to="/">
-        <Logo className="text-3xl sm:text-4xl" />
-      </LinkButton>
-      <div className="flex items-center justify-center gap-6">
-        <LinkButton
-          to={user !== null ? formPath : loginPath}
-          className="min-h-[36px] sm:min-h-[40px] bg-white text-black px-2 sm:px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
-        >
-          Adaugǎ anunț nou
+    <div className="px-4">
+      <div style={{ height: `${BARS_HEIGHT.nav}px` }} className={`flex w-full mx-auto items-center justify-between`}>
+        <LinkButton to="/">
+          <Logo className="text-3xl sm:text-4xl" />
         </LinkButton>
 
-        {user === null && (
+        <div className="flex items-center justify-center gap-8">
           <LinkButton
-            to={loginPath}
-            className={`text-black bg-white p-2 hover:bg-primary hover:text-white rounded-full ${iconsStyle}`}
+            to={user !== null ? formPath : loginPath}
+            className="hidden xsm:flex min-h-[40px] bg-white text-black px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
           >
-            <PersonIcon className="w-full h-full" />
+            Adaugǎ anunț nou
           </LinkButton>
-        )}
 
-        {user !== null && (
-          <Button onClick={signOut} className={`hover:scale-110 transition-transform ${iconsStyle}`}>
-            <Avatar color={user.color} name={user.name} className="w-full h-full" />
-          </Button>
-        )}
+          {user === null && (
+            <LinkButton
+              to={loginPath}
+              className={`text-black bg-white p-2 hover:bg-primary hover:text-white rounded-full ${iconsStyle}`}
+            >
+              <PersonIcon className="w-full h-full" />
+            </LinkButton>
+          )}
+
+          {user !== null && <UserProfileButton user={user} />}
+        </div>
       </div>
     </div>
   );

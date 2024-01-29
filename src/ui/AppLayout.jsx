@@ -8,7 +8,7 @@ const AppLayout = () => {
   const { pathname } = useLocation();
   const navigation = useNavigation();
 
-  const isOnLoginOrCreate = pathname.includes("/account/login") || pathname.includes("/account/create");
+  const isOnLoginOrCreate = pathname.includes("/login") || pathname.includes("/signup");
   const isLoading = navigation.state === "loading";
 
   return (

@@ -9,16 +9,12 @@ import Selector from "../formComponents/Selector";
 import PageContainer from "../shared/PageContainer";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../utils/sharedData";
 import { schema } from "../features/postForm/data";
-import { handleImageUpload } from "../features/postForm/formHelpers";
-import { filterData, wordToUppercase } from "../utils/helpers";
-import { createPost, deleteImage } from "../services/postApi";
+import { filterData } from "../utils/helpers";
 import SubmitButton from "../shared/SubmitButton";
-import { warningToast } from "../shared/Toasts";
 import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
 import { useAppContext } from "../App";
-
-// TODO: separate process() from all files
+import postFormProcess from "../features/postForm/postFormProcess";
 
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
@@ -30,39 +26,11 @@ const PostForm = () => {
 
   const handleOnSubmit = (values) => {
     setIsLoading(true);
-
-    const process = async () => {
-      if (user === null) return warningToast("A apǎrut o problemǎ. Te rugǎm conecteazǎ-te.");
-
-      const imageUploaderResponse = await handleImageUpload(values.image);
-
-      if (imageUploaderResponse.status !== "ok") {
-        setIsLoading(false);
-        return warningToast(imageUploaderResponse.message);
-      }
-
-      const sanitizedFormValues = {
-        title: wordToUppercase(values.title, true),
-        description: wordToUppercase(values.description),
-      };
-
-      // userId automatically added by DB whenever user creates or modifies post
-      const newData = { ...values, ...sanitizedFormValues, image: imageUploaderResponse.data };
-      const postResponse = await createPost(newData);
-
-      if (postResponse.status !== "ok") {
-        await deleteImage(imageUploaderResponse.data); // no need to use response.status
-        setIsLoading(false);
-
-        return warningToast(postResponse.message);
-      }
-      setIsPostCreated(true);
-      setIsLoading(false);
-    };
-
-    process();
+    postFormProcess(values, user, setIsLoading, setIsPostCreated);
   };
 
+  // user's data will be null at default values (name, phone)
+  // form will re-render when user will not be null
   if (user === null) return;
 
   return (
@@ -70,12 +38,12 @@ const PostForm = () => {
       {isPostCreated && <Confirmation message="Felicitǎri! Anunțul tǎu a fost postat cu succes." />}
 
       {isPostCreated === false && (
-        <div className="max-w-lg mx-auto space-y-8">
+        <div className="max-w-2xl mx-auto space-y-8">
           {isLoading && (
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
 
-          <h1 className="text-xl xs:text-3xl font-medium">Ce anume ai gǎsit | pierdut...?</h1>
+          <h1 className="text-xl xs:text-3xl font-medium select-none">Ce anume dorești sǎ postezi?</h1>
           <Form {...formData} onSubmit={handleOnSubmit} className="space-y-5 w-full">
             <FormField
               name="title"
