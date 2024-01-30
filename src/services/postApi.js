@@ -40,6 +40,15 @@ const getPost = async (id) => {
   }
 };
 
+const getPostsByUserId = async (userId) => {
+  const data = supabase
+    .from("posts")
+    .select("id, title, location, createdAt, category, image, postType")
+    .eq("userId", userId);
+
+  console.log(data);
+};
+
 const uploadImage = async (image) => {
   if (image === null) return generateResponse("ok", null);
 
@@ -82,4 +91,4 @@ const deleteImage = async (imageName) => {
   }
 };
 
-export { createPost, getPost, uploadImage, getImageUrl, deleteImage };
+export { createPost, getPost, uploadImage, getImageUrl, deleteImage, getPostsByUserId };

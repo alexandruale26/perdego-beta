@@ -8,9 +8,11 @@ import PostForm from "./pages/PostForm";
 import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
+import PostsDashboard from "./pages/PostsDashboard";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import supabase from "./services/supabase";
+import Spinner from "./shared/Spinner";
 
 const AppContext = createContext({});
 
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         path: "edit",
         element: (
           <ProtectedRoute>
-            <div>Edit Post</div>
+            <PostsDashboard />
           </ProtectedRoute>
         ),
       },
@@ -61,15 +63,23 @@ const router = createBrowserRouter([
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const process = async () => {
     const authResponse = await getCurrentUser();
-    if (authResponse.status !== "ok") return setUser(null);
+    if (authResponse.status !== "ok") {
+      setIsLoading(false);
+      return setUser(null);
+    }
 
     const profileResponse = await getProfile(authResponse.data.id);
-    if (profileResponse.status !== "ok") return setUser(null);
+    if (profileResponse.status !== "ok") {
+      setIsLoading(false);
+      return setUser(null);
+    }
 
     setUser({ ...authResponse.data, ...profileResponse.data });
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -87,6 +97,9 @@ function App() {
 
     return () => subscription.data.subscription.unsubscribe();
   }, []);
+
+  if (isLoading) return <Spinner />;
+  if (isLoading && user === null) return <Error errorMessage="A aparut o problema !!!!!!!!!!" />;
 
   return (
     <AppContext.Provider value={{ user }}>

@@ -63,7 +63,7 @@ const Post = () => {
           to={validParams ? -1 : "/"}
           className="justify-start xs:text-lg font-medium text-grey-700 select-none"
         >
-          <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi{" "}
+          <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi
           <span className="pl-4 text-xs xs:text-sm font-light underline">
             {validParams ? generateSearchParamsTitle(urlParams?.searchParams, true) : "Pagina principalǎ"}
           </span>

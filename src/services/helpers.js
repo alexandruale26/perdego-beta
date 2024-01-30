@@ -6,6 +6,8 @@ const convertToMatchSearch = (string) => {
 
   return noBlankWordsArray.map((word) => {
     const noDiacriticsWord = removeDiacritics(word);
+
+    // supabase syntax for seaching pieces of text
     return `%${noDiacriticsWord}%`;
   });
 };
