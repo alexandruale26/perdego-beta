@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
-  // get currentUser() is better for this element than getting the user from useAppContext()
+  // get currentUser() is better for this element than getting the user from useUserSessionContext()
   // used <Spinner> while waiting to fetch logged user
   useEffect(() => {
     const process = async () => {

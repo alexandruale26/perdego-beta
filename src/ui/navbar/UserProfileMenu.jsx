@@ -64,7 +64,7 @@ const UserProfileMenu = ({ user, isOnMobileDevice = true }) => {
                 <span>Adaugǎ anunț nou</span>
               </LinkButton>
             )}
-            <LinkButton to="/manageposts" color={user.color} className={linksStyle}>
+            <LinkButton to="/edit" color={user.color} className={linksStyle}>
               <ReaderIcon className={iconsStyle} />
               <span>Anunțurile mele</span>
             </LinkButton>

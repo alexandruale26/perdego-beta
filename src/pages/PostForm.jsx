@@ -13,13 +13,13 @@ import { filterData } from "../utils/helpers";
 import SubmitButton from "../shared/SubmitButton";
 import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
-import { useAppContext } from "../App";
+import { useUserSessionContext } from "../ui/UserSession";
 import postFormProcess from "../features/postForm/postFormProcess";
 
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useAppContext();
+  const { user } = useUserSessionContext();
 
   const defaultValues = user === null ? {} : { name: user.name, phone: user.phone };
   const formData = { schema, defaultValues };

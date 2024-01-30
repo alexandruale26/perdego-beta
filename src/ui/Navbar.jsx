@@ -2,7 +2,7 @@ import Logo from "../shared/icons/Logo";
 import LinkButton from "../shared/LinkButton";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { BARS_HEIGHT } from "../utils/sharedData";
-import { useAppContext } from "../App";
+import { useUserSessionContext } from "./UserSession";
 import UserProfileButton from "./navbar/UserProfileButton";
 
 const formPath = "/new";
@@ -10,7 +10,7 @@ const loginPath = "/login";
 const iconsStyle = "w-11 h-11 focus-visible:scale-110";
 
 const Navbar = () => {
-  const { user } = useAppContext();
+  const { user } = useUserSessionContext();
 
   return (
     <div className="px-4">
