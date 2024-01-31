@@ -43,7 +43,7 @@ const PostForm = () => {
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
 
-          <h1 className="text-xl xs:text-3xl font-medium select-none">Ce anume dorești sǎ postezi?</h1>
+          <h1 className="text-xl xs:text-3xl font-medium select-none">Ai pierdut sau ai gǎsit un obiect?</h1>
           <Form {...formData} onSubmit={handleOnSubmit} className="space-y-5 w-full">
             <FormField
               name="title"

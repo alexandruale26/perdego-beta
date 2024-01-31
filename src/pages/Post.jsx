@@ -48,8 +48,11 @@ const Post = () => {
     process();
   }, [id]);
 
-  const urlParams = useLocation()?.state;
-  const validParams = !!urlParams?.searchParams;
+  const urlState = useLocation()?.state;
+  const validParams = !!urlState?.searchParams;
+  const backToUserPosts = !!urlState?.backToUserPosts;
+
+  const linkRedirect = backToUserPosts || validParams ? -1 : "/";
 
   if (isLoading && !post) return <Spinner />;
   if (!post) return <Error errorMessage="Ne pare rǎu, dar anunțul nu existǎ :(" />;
@@ -59,13 +62,14 @@ const Post = () => {
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full h-full max-w-4xl flex flex-col gap-4 rounded-md mx-auto">
-        <LinkButton
-          to={validParams ? -1 : "/"}
-          className="justify-start xs:text-lg font-medium text-grey-700 select-none"
-        >
+        <LinkButton to={linkRedirect} className="justify-start xs:text-lg font-medium text-grey-700 select-none">
           <ChevronLeftIcon className="w-10 h-10 pb-1 mr-[-4px]" /> Înapoi
           <span className="pl-4 text-xs xs:text-sm font-light underline">
-            {validParams ? generateSearchParamsTitle(urlParams?.searchParams, true) : "Pagina principalǎ"}
+            {backToUserPosts
+              ? "Anunțurile tale"
+              : validParams
+                ? generateSearchParamsTitle(urlState?.searchParams, true)
+                : "Pagina principalǎ"}
           </span>
         </LinkButton>
 

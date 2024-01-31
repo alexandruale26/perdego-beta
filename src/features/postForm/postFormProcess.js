@@ -1,16 +1,16 @@
-import { warningToast } from "../../shared/Toasts";
+import { errorToast } from "../../shared/Toasts";
 import { wordToUppercase } from "../../utils/helpers";
 import { createPost, deleteImage } from "../../services/postApi";
 import { handleImageUpload } from "./formHelpers";
 
 const postFormProcess = async (values, user, setIsLoading, setIsPostCreated) => {
-  if (user === null) return warningToast("A apǎrut o problemǎ. Te rugǎm conecteazǎ-te.");
+  if (user === null) return errorToast("A apǎrut o problemǎ. Te rugǎm conecteazǎ-te.");
 
   const imageUploaderResponse = await handleImageUpload(values.image);
 
   if (imageUploaderResponse.status !== "ok") {
     setIsLoading(false);
-    return warningToast(imageUploaderResponse.message);
+    return errorToast(imageUploaderResponse.message);
   }
 
   const sanitizedFormValues = {
@@ -26,7 +26,7 @@ const postFormProcess = async (values, user, setIsLoading, setIsPostCreated) => 
     await deleteImage(imageUploaderResponse.data); // no need to use response.status
     setIsLoading(false);
 
-    return warningToast(postResponse.message);
+    return errorToast(postResponse.message);
   }
   setIsPostCreated(true);
   setIsLoading(false);

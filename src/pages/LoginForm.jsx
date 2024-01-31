@@ -13,7 +13,7 @@ import FormContainer from "../features/account/FormContainer";
 import Spinner from "../shared/Spinner";
 import { schema, lengths } from "../features/account/loginData";
 import { loginUser } from "../services/userApi";
-import { warningToast } from "../shared/Toasts";
+import { errorToast } from "../shared/Toasts";
 
 const defaultValues = {};
 const formData = {
@@ -34,7 +34,7 @@ const LoginForm = () => {
 
       if (response.status !== "ok") {
         setIsLoading(false);
-        return warningToast(response.message);
+        return errorToast(response.message);
       }
 
       navigate("/");

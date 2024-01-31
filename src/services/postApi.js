@@ -41,12 +41,18 @@ const getPost = async (id) => {
 };
 
 const getPostsByUserId = async (userId) => {
-  const data = supabase
-    .from("posts")
-    .select("id, title, location, createdAt, category, image, postType")
-    .eq("userId", userId);
+  try {
+    const { data, error, status } = await supabase
+      .from("posts")
+      .select("id, title, location, createdAt, category, image, postType")
+      .eq("userId", userId);
 
-  console.log(data);
+    if (error || status !== 200 || data === null) throw new Error("Error fetching posts");
+    return generateResponse("ok", data);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null);
+  }
 };
 
 const uploadImage = async (image) => {

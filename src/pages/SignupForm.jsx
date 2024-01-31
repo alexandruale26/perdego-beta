@@ -15,7 +15,10 @@ import { randomColor } from "../features/account/helpers";
 import { capitalizeEachWordFromString } from "../utils/helpers";
 import { signUpUser, deleteUserAtSignupError } from "../services/userApi";
 import { createProfile } from "../services/profileApi";
-import { warningToast } from "../shared/Toasts";
+import { errorToast } from "../shared/Toasts";
+// import ComboBox from "../formComponents/ComboBox";
+// import { COUNTIES } from "../utils/sharedData";
+// import { filterData } from "../utils/helpers";
 
 const defaultValues = {};
 const formData = { schema, defaultValues };
@@ -36,7 +39,7 @@ const SignupForm = () => {
 
       if (signUpResponse.status !== "ok") {
         setIsLoading(false);
-        return warningToast(signUpResponse.message);
+        return errorToast(signUpResponse.message);
       }
       console.log(signUpResponse.data);
 
@@ -49,7 +52,7 @@ const SignupForm = () => {
         await deleteUserAtSignupError(userId); // no need to use response.status
         setIsLoading(false);
 
-        return warningToast(profileResponse.message);
+        return errorToast(profileResponse.message);
       }
 
       setIsAccountCreated(true);
@@ -112,21 +115,21 @@ const SignupForm = () => {
                   )}
                 />
                 {/* <FormField
-        name="location"
-        render={(field) => (
-          <FormItem className="max-w-full">
-            <FormLabel>Locația ta</FormLabel>
-            <ComboBox
-              placeholder="Cautǎ dupǎ județ sau sector"
-              filter={filterData}
-              data={COUNTIES}
-              render={(item) => <p className="text-left">{item}</p>}
-              {...field}
-            />
-            <FormMessage />
-          </FormItem>
-        )}
-      /> */}
+                  name="location"
+                  render={(field) => (
+                    <FormItem className="max-w-full">
+                      <FormLabel>Locația ta</FormLabel>
+                      <ComboBox
+                        placeholder="Cautǎ dupǎ județ sau sector"
+                        filter={filterData}
+                        data={COUNTIES}
+                        render={(item) => <p className="text-left">{item}</p>}
+                        {...field}
+                      />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                /> */}
                 <FormField
                   name="phone"
                   render={(field) => (
