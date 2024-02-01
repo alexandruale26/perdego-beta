@@ -42,6 +42,9 @@ const ComboBox = forwardRef(
       return () => document.removeEventListener("click", handleOutsideClick);
     }, [visible]);
 
+    // IMPORTANT necessary for SearchForm, otherwise "selected" will be one selection behind
+    useEffect(() => setSelected(setDefaultValue(defaultValue)), [defaultValue]);
+
     const handleInputChange = (e) => {
       e.preventDefault();
       setFiltered(filter(data, e.target.value));

@@ -13,16 +13,16 @@ import { getAllSearchParamsAsObject } from "../features/home/helpers";
 const Home = () => {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams(defaultSearchParams);
+  const [urlSearchParams, setUrlSearchParams] = useSearchParams(defaultSearchParams);
 
   const hasSearchParams = !!useLocation().search;
-  const searchedParams = getAllSearchParamsAsObject(searchParams);
+  const searchedParams = getAllSearchParamsAsObject(urlSearchParams);
 
   useEffect(() => {
     setIsLoading(true);
 
     const process = async () => {
-      const queryParams = getAllSearchParamsAsObject(searchParams);
+      const queryParams = getAllSearchParamsAsObject(urlSearchParams);
       const response = await queryPosts(queryParams, hasSearchParams);
 
       // no need to use response.status
@@ -31,9 +31,9 @@ const Home = () => {
     };
 
     process();
-  }, [searchParams, hasSearchParams]);
+  }, [urlSearchParams, hasSearchParams]);
 
-  const getSearchValues = (queryData) => setSearchParams(queryData);
+  const getSearchValues = (queryData) => setUrlSearchParams(queryData);
 
   const loadedAndHasData = isLoading === false && posts !== null;
 
