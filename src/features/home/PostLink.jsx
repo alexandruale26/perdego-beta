@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { formatPostDate } from "../../utils/helpers";
 import { getImageUrl } from "../../services/postApi";
@@ -9,16 +10,19 @@ const imageBaseStyle = "xs:w-[170px] sm:w-[230px] h-[200px] xs:h-full";
 const imageGridStyle = "h-[200px] xs:h-[150px]";
 const placeholderStyle = "p-4 bg-grey-200 object-contain";
 
-const PostLink = ({ post, searchParams = "", gridMode = false, backToUserPosts = false }) => {
+const PostLink = ({ post, className, searchParams = "", gridMode = false, backToUserPosts = false }) => {
   const image = getImageUrl(post.image);
 
   return (
     <Link
       to={`/${post.id}`}
       state={{ searchParams, backToUserPosts }}
-      className={`w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
-        gridMode ? linkGridStyle : linkBaseStyle
-      }`}
+      className={twMerge(
+        `w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
+          gridMode ? linkGridStyle : linkBaseStyle
+        }`,
+        className
+      )}
     >
       <Image
         src={image}

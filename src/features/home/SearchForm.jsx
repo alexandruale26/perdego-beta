@@ -33,6 +33,8 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
     onSubmit(values);
   };
 
+  // console.log(searchParams);
+
   return (
     <Form
       schema={{}}

@@ -5,7 +5,7 @@ import PostForm from "./pages/PostForm";
 import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
-import PostsDashboard from "./pages/PostsDashboard";
+import UserPostsDashboard from "./pages/UserPostsDashboard";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "edit",
         element: (
           <ProtectedRoute>
-            <PostsDashboard />
+            <UserPostsDashboard />
           </ProtectedRoute>
         ),
       },
