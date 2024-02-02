@@ -4,8 +4,6 @@ import Button from "../../shared/button";
 import LinkButton from "../../shared/LinkButton";
 import PostLink from "../home/PostLink";
 import ConfirmationBox from "./ConfirmationBox";
-import { BARS_HEIGHT } from "../../utils/sharedData";
-import { windowScroll } from "../../utils/helpers";
 
 const iconsAnimationStyle = "transition-all hover:scale-125";
 
@@ -23,7 +21,6 @@ const DashboardPost = ({ post }) => {
   const handleModal = (e) => {
     e.preventDefault();
     setModalIsOpen(!modalIsOpen);
-    windowScroll(modalIsOpen);
   };
 
   useEffect(() => {

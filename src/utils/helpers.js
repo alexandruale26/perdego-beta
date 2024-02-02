@@ -79,7 +79,7 @@ const generateErrorMessage = (inputName, minLength, maxLength) => {
   if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere.`;
 };
 
-const windowScroll = (canScroll = true) => {
+const allowWindowScroll = (canScroll = true) => {
   if (canScroll) {
     document.body.style.overflow = "unset";
   } else {
@@ -100,5 +100,5 @@ export {
   getFromLocalStorage,
   generateErrorMessage,
   capitalizeEachWordFromString,
-  windowScroll,
+  allowWindowScroll,
 };
