@@ -18,28 +18,27 @@ const ConfirmationBox = ({
   useEffect(() => {
     const centerElement = () => {
       var element = boxRef.current;
-      var windowHeight = window.innerHeight;
-
-      var elementHeight = element.offsetHeight;
-      var topPosition = (windowHeight - elementHeight) / 2;
+      const distanceFromTop = window.scrollY;
+      console.log(distanceFromTop);
+      var topPosition = distanceFromTop + 70;
 
       element.style.marginTop = topPosition + "px";
     };
 
     centerElement();
-    window.addEventListener("resize", centerElement);
+    window.addEventListener("scroll", centerElement);
 
     return () => {
-      window.removeEventListener("resize", centerElement);
+      window.removeEventListener("scroll", centerElement);
     };
   }, []);
 
   return (
-    <Modal className="fixed items-start">
+    <Modal className="items-start">
       <div
         ref={boxRef}
         className={twMerge(
-          "flex items-start justify-center bg-white w-full max-w-sm rounded-md shadow-large",
+          "flex items-start justify-center bg-white w-full max-w-sm rounded-md shadow-large translate-y-full select-none",
           className
         )}
       >

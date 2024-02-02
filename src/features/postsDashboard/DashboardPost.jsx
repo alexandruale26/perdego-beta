@@ -23,7 +23,7 @@ const DashboardPost = ({ post }) => {
   const handleModal = (e) => {
     e.preventDefault();
     setModalIsOpen(!modalIsOpen);
-    // windowScroll(modalIsOpen);
+    windowScroll(modalIsOpen);
   };
 
   useEffect(() => {
