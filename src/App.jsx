@@ -6,6 +6,7 @@ import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import UserPostsDashboard from "./pages/UserPostsDashboard";
+import UserAccountDashboard from "./pages/UserAccountDashboard";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
@@ -36,10 +37,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "edit",
+        path: "manage",
         element: (
           <ProtectedRoute>
             <UserPostsDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "edit",
+        element: (
+          <ProtectedRoute>
+            <UserAccountDashboard />
           </ProtectedRoute>
         ),
       },

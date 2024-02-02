@@ -35,6 +35,25 @@ const deleteUserAtSignupError = async (id) => {
   }
 };
 
+const deleteUserAccount = async (id) => {
+  try {
+    // profiles are automatically removed at user deletion
+    const data = await supabase.rpc("delete_user_and_images", { user_id: id });
+
+    console.log(data);
+    // ok these are good !!!
+    // TODO: logout user and delete cache and redirect
+
+    // if (error || status !== 204) throw new Error(error);
+
+    // console.log(`user deleted: ${id}`, status === 204);
+    // return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error.message);
+    // return generateResponse(null, null, error.message);
+  }
+};
+
 const loginUser = async (credentials) => {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -72,4 +91,4 @@ const getCurrentUser = async () => {
   return generateResponse("ok", { id: data.user.id });
 };
 
-export { signUpUser, loginUser, deleteUserAtSignupError, getCurrentUser, logoutUser };
+export { signUpUser, loginUser, deleteUserAtSignupError, deleteUserAccount, getCurrentUser, logoutUser };
