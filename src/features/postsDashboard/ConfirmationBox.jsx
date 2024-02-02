@@ -12,7 +12,7 @@ const ConfirmationBox = ({
   denyButtonTitle,
   confirmButtonTitle,
   handleOnDeny,
-  handleOnConfirma,
+  handleOnConfirm,
 }) => {
   const boxRef = useRef(null);
 
@@ -51,7 +51,7 @@ const ConfirmationBox = ({
             <Button onClick={handleOnDeny} className={`bg-black hover:bg-primary-400 ${buttonsStyle}`}>
               {denyButtonTitle}
             </Button>
-            <Button onClick={handleOnConfirma} className={`bg-rose-600 hover:bg-rose-500 ${buttonsStyle}`}>
+            <Button onClick={handleOnConfirm} className={`bg-rose-600 hover:bg-rose-500 ${buttonsStyle}`}>
               {confirmButtonTitle}
             </Button>
           </div>

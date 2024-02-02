@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef, Fragment } from "react";
-import { DotsVerticalIcon, TrashIcon, Pencil2Icon } from "@radix-ui/react-icons";
-import Button from "../../shared/button";
-import LinkButton from "../../shared/LinkButton";
 import PostLink from "../home/PostLink";
+import PostSettingsMenu from "./PostSettingsMenu";
 import ConfirmationBox from "./ConfirmationBox";
-
-const iconsAnimationStyle = "transition-all hover:scale-125";
+import { deletePost } from "../../services/postApi";
+import { errorToast } from "../../shared/Toasts";
 
 const DashboardPost = ({ post }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -13,7 +11,7 @@ const DashboardPost = ({ post }) => {
 
   const parentRef = useRef(null);
 
-  const handleOnClick = (e) => {
+  const handleMenuOnClick = (e) => {
     e.preventDefault();
     setMenuIsOpen(!menuIsOpen);
   };
@@ -21,6 +19,11 @@ const DashboardPost = ({ post }) => {
   const handleModal = (e) => {
     e.preventDefault();
     setModalIsOpen(!modalIsOpen);
+  };
+
+  const closeMenuAndModal = () => {
+    setMenuIsOpen(false);
+    setModalIsOpen(false);
   };
 
   useEffect(() => {
@@ -36,42 +39,35 @@ const DashboardPost = ({ post }) => {
     };
   }, []);
 
+  const handleDeletePost = () => {
+    const process = async () => {
+      const postResponse = await deletePost(post.id);
+
+      if (postResponse.status !== "ok") {
+        closeMenuAndModal();
+        return errorToast(postResponse.message);
+      }
+
+      window.location.reload();
+    };
+
+    process();
+  };
+
   return (
     <Fragment key={post.id}>
-      <div ref={parentRef} onClick={handleOnClick} className="relative w-full cursor-pointer select-none">
+      <div ref={parentRef} onClick={handleMenuOnClick} className="relative w-full cursor-pointer select-none">
         <PostLink post={post} backToUserPosts={true} className="xs:pr-14" />
-
-        <div
-          className={`absolute min-h-[54px] min-w-[54px] flex flex-col items-center justify-center rounded-full p-2 top-3 xs:top-1 right-3 xs:right-2 transition-all ${
-            menuIsOpen ? "text-white bg-grey-800/80 xs:bg-grey-800" : "text-black bg-white/60 hover:bg-grey-300"
-          }`}
-        >
-          <DotsVerticalIcon
-            height={menuIsOpen ? 38 : 20}
-            width={menuIsOpen ? 38 : 20}
-            className={`transition-all ${menuIsOpen ? "hover:scale-125 hover:text-primary p-2 rotate-90" : ""}`}
-          />
-
-          {menuIsOpen && (
-            <div className="flex flex-col gap-2">
-              <LinkButton
-                className={`p-1 flex items-center justify-center text-white hover:text-primary ${iconsAnimationStyle}`}
-              >
-                <Pencil2Icon height="24" width="24" />
-              </LinkButton>
-              <Button
-                onClick={handleModal}
-                className={`p-1 flex items-center justify-center text-white hover:text-rose-400 ${iconsAnimationStyle}`}
-              >
-                <TrashIcon height="30" width="30" />
-              </Button>
-            </div>
-          )}
-        </div>
+        <PostSettingsMenu menuIsOpen={menuIsOpen} handleModal={handleModal} />
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox denyButtonTitle="Anuleazǎ" confirmButtonTitle="Sunt sigur" handleOnDeny={handleModal}>
+        <ConfirmationBox
+          denyButtonTitle="Anuleazǎ"
+          confirmButtonTitle="Sunt sigur"
+          handleOnDeny={handleModal}
+          handleOnConfirm={handleDeletePost}
+        >
           <div className="h-full flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base font-light text-grey-700 text-center">
               Ești sigur cǎ dorești sǎ ștergi anunțul{" "}

@@ -5,10 +5,11 @@ import { imageExtension } from "../features/postForm/data";
 import { GENERIC_ERROR_MESSAGE } from "./constants";
 
 const postImagePath = "posts-images";
+const postsPath = "posts";
 
 const createPost = async (post) => {
   try {
-    const { status, error } = await supabase.from("posts").insert([
+    const { status, error } = await supabase.from(postsPath).insert([
       {
         title: post.title,
         description: post.description,
@@ -30,7 +31,7 @@ const createPost = async (post) => {
 
 const getPost = async (id) => {
   try {
-    const { data, error, status } = await supabase.from("posts").select().eq("id", id).single();
+    const { data, error, status } = await supabase.from(postsPath).select().eq("id", id).single();
 
     if (error || status !== 200 || data === null) throw new Error("Could not find post");
     return generateResponse("ok", data);
@@ -43,8 +44,9 @@ const getPost = async (id) => {
 const getPostsByUserId = async (userId) => {
   try {
     const { data, error, status } = await supabase
-      .from("posts")
+      .from(postsPath)
       .select("id, title, location, createdAt, category, image, postType")
+      .order("createdAt", { ascending: false })
       .eq("userId", userId);
 
     if (error || status !== 200 || data === null) throw new Error("Error fetching posts");
@@ -52,6 +54,18 @@ const getPostsByUserId = async (userId) => {
   } catch (error) {
     console.log(error);
     return generateResponse(null, null);
+  }
+};
+
+const deletePost = async (postId) => {
+  try {
+    const { error, status } = await supabase.rpc("delete_image_at_deleting_post", { post_id: postId });
+    if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
+    console.log(`post deleted: ${postId}`, status === 204);
+    return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error.message);
+    return generateResponse(null, null, error.message);
   }
 };
 
@@ -88,7 +102,8 @@ const deleteImage = async (imageName) => {
   try {
     const { data, error } = await supabase.storage.from(postImagePath).remove([imageName]);
 
-    // user shouldn't know if on create post error the uploaded image cannot be deleted
+    // user shouldn't know if the image cannot be deleted
+    // an Edge function will clear any leftovers once a month
     if (error) throw new Error("Error deleting image");
     return generateResponse("ok", data);
   } catch (error) {
@@ -97,4 +112,4 @@ const deleteImage = async (imageName) => {
   }
 };
 
-export { createPost, getPost, uploadImage, getImageUrl, deleteImage, getPostsByUserId };
+export { createPost, getPost, deletePost, uploadImage, getImageUrl, deleteImage, getPostsByUserId };
