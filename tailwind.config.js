@@ -22,6 +22,7 @@ const config = {
     },
     extend: {
       screens: {
+        xxs: "400px",
         xs: "480px",
         xsm: "540px",
         xmd: "700px",
@@ -50,6 +51,9 @@ const config = {
         "grey-700": colors.gray[700],
         "grey-800": colors.gray[800],
         "grey-900": colors.gray[900],
+      },
+      boxShadow: {
+        large: "0 2px 10px 1px rgba(0, 0, 0, 0.2)",
       },
     },
   },

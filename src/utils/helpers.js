@@ -79,6 +79,14 @@ const generateErrorMessage = (inputName, minLength, maxLength) => {
   if (maxLength) return `${messageBase} maxim ${maxLength}${maxLength >= 20 ? " de" : ""} caractere.`;
 };
 
+const windowScroll = (canScroll = true) => {
+  if (canScroll) {
+    document.body.style.overflow = "unset";
+  } else {
+    document.body.style.overflow = "hidden";
+  }
+};
+
 export {
   removeDiacritics,
   capitalizeFirstChar,
@@ -92,4 +100,5 @@ export {
   getFromLocalStorage,
   generateErrorMessage,
   capitalizeEachWordFromString,
+  windowScroll,
 };

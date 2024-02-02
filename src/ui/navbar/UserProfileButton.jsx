@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
 import UserProfileMenu from "./UserProfileMenu";
 import Avatar from "../../shared/Avatar";
+import { windowScroll } from "../../utils/helpers";
 
 const menuIconsStyle = "w-8 h-8 text-white";
 
@@ -11,6 +12,7 @@ const UserProfileButton = ({ user }) => {
   const handleOnClick = (e) => {
     e.preventDefault();
     setMenuIsOpen(!menuIsOpen);
+    windowScroll(menuIsOpen);
   };
 
   return (

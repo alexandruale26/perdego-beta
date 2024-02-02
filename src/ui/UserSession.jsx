@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import supabase from "../services/supabase";
 import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
@@ -11,6 +12,7 @@ const UserSessionContext = createContext({});
 function UserSession({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const process = async () => {
     const authResponse = await getCurrentUser();
@@ -39,11 +41,15 @@ function UserSession({ children }) {
         process();
       } else if (event === "SIGNED_OUT") {
         setUser(null);
+
+        // IMPORTANT if user has the app opened in separate tabs and has access to logged user content.
+        // Otherwise will crash
+        navigate("/", { replace: true });
       }
     });
 
     return () => subscription.data.subscription.unsubscribe();
-  }, []);
+  }, [navigate]);
 
   if (isLoading) return <Spinner />;
   if (isLoading && user === null) return <Error errorMessage={GENERIC_ERROR_MESSAGE} />;

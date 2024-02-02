@@ -53,7 +53,7 @@ const UserProfileMenu = ({ user, isOnMobileDevice = true }) => {
       className="flex justify-end absolute -right-4 animate-in slide-in-from-right-10 ease-out z-20 backdrop-blur-sm overflow-hidden cursor-default"
     >
       <div className="p-4">
-        <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 bg-white shadow-[0px_2px_10px_1px_rgba(0,0,0,0.2)] rounded-md">
+        <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 bg-white shadow-large rounded-md select-none">
           <User className="px-4 pb-2" user={user} hideAvatar={!isOnMobileDevice} />
           <Separator className="mt-2 mb-4" />
 
