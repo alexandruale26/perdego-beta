@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Form } from "../formBase/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../formComponents/form";
 import ValidationInput from "../formComponents/ValidationInput";
@@ -11,56 +11,54 @@ import FormContainer from "../features/account/FormContainer";
 import Spinner from "../shared/Spinner";
 import Confirmation from "../shared/Confirmation";
 import { schema, lengths } from "../features/account/createAccountData";
-import { randomColor } from "../features/account/helpers";
-import { capitalizeEachWordFromString } from "../utils/helpers";
-import { signUpUser, deleteUserAtSignupError } from "../services/userApi";
-import { createProfile } from "../services/profileApi";
-import { errorToast } from "../shared/Toasts";
-// import ComboBox from "../formComponents/ComboBox";
-// import { COUNTIES } from "../utils/sharedData";
-// import { filterData } from "../utils/helpers";
+import ComboBox from "../formComponents/ComboBox";
+import { COUNTIES } from "../utils/sharedData";
+import { filterData } from "../utils/helpers";
+import signupFormProcess from "../features/account/signupFormProcess";
 
 const defaultValues = {};
 const formData = { schema, defaultValues };
+const smSize = 640; // from tailwindcss sizes
 
 const SignupForm = () => {
   const [isAccountCreated, setIsAccountCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [pageWidth, setPageWidth] = useState(0);
+  const [formTopMargin, setFormTopMargin] = useState(0);
+  const formContainerRef = useRef(null);
+
+  // all below are necessary for ComboBox to correctly work
+  // if ComboBox parent is forced to be screen centered, the error label will slightly push
+  // the form above and the click will not be registered, resulting in showing error label
+  // dynamic top margin and items-start will do the trick <HalfWidthDiv className="bg-white sm:items-start">
+
+  useEffect(() => {
+    const handleResize = () => {
+      const formContainer = document.getElementById("page-container");
+
+      if (formContainer && formContainerRef) {
+        const { height, width } = formContainer.getBoundingClientRect();
+        const formHeight = formContainerRef.current.getBoundingClientRect().height;
+
+        setPageWidth(width);
+        setFormTopMargin((height - formHeight) / 2);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleOnSubmit = (values) => {
     setIsLoading(true);
-
-    const process = async () => {
-      const email = values.email.toLowerCase();
-      const color = randomColor();
-      const name = capitalizeEachWordFromString(values.name);
-
-      const signUpResponse = await signUpUser({ email, password: values.password });
-
-      if (signUpResponse.status !== "ok") {
-        setIsLoading(false);
-        return errorToast(signUpResponse.message);
-      }
-      console.log(signUpResponse.data);
-
-      const userId = signUpResponse.data;
-      const newProfile = { name, email, color, id: userId, phone: values.phone };
-
-      const profileResponse = await createProfile(newProfile);
-
-      if (profileResponse.status !== "ok") {
-        await deleteUserAtSignupError(userId); // no need to use response.status
-        setIsLoading(false);
-
-        return errorToast(profileResponse.message);
-      }
-
-      setIsAccountCreated(true);
-      setIsLoading(false);
-    };
-
-    process();
+    signupFormProcess(values, setIsLoading, setIsAccountCreated);
   };
+
+  const topMargin = pageWidth >= smSize ? formTopMargin : 0;
 
   return (
     <AccountPageContainer>
@@ -70,8 +68,8 @@ const SignupForm = () => {
 
       <Hero />
 
-      <HalfWidthDiv className="bg-white">
-        <FormContainer>
+      <HalfWidthDiv className="bg-white sm:items-start">
+        <FormContainer ref={formContainerRef} style={{ marginTop: topMargin }}>
           {isAccountCreated && (
             <Confirmation
               message="Felicitǎri! Contul tǎu a fost creat cu succes."
@@ -99,7 +97,7 @@ const SignupForm = () => {
                   render={(field) => (
                     <FormItem className="max-w-full">
                       <FormLabel>Introdu o parolǎ sigurǎ</FormLabel>
-                      <ValidationInput {...field} maxLength={lengths.password.max} />
+                      <ValidationInput type="password" {...field} maxLength={lengths.password.max} />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -114,13 +112,14 @@ const SignupForm = () => {
                     </FormItem>
                   )}
                 />
-                {/* <FormField
+                <FormField
                   name="location"
                   render={(field) => (
                     <FormItem className="max-w-full">
                       <FormLabel>Locația ta</FormLabel>
                       <ComboBox
                         placeholder="Cautǎ dupǎ județ sau sector"
+                        defaultValue={defaultValues.location}
                         filter={filterData}
                         data={COUNTIES}
                         render={(item) => <p className="text-left">{item}</p>}
@@ -129,7 +128,7 @@ const SignupForm = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                /> */}
+                />
                 <FormField
                   name="phone"
                   render={(field) => (

@@ -21,7 +21,7 @@ const PostForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserSessionContext();
 
-  const defaultValues = user === null ? {} : { name: user.name, phone: user.phone };
+  const defaultValues = user === null ? {} : { name: user.name, phone: user.phone, location: user.location };
   const formData = { schema, defaultValues };
 
   const handleOnSubmit = (values) => {
@@ -111,7 +111,7 @@ const PostForm = () => {
                   <FormLabel>Județ | Sector</FormLabel>
                   <ComboBox
                     placeholder="Cautǎ dupǎ județ sau sector"
-                    defaultValue={defaultValues.county}
+                    defaultValue={defaultValues.location}
                     filter={filterData}
                     data={COUNTIES}
                     render={(item) => <p className="text-left">{item}</p>}

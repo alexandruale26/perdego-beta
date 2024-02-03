@@ -57,11 +57,11 @@ const schema = {
       errorMessage: "Numǎrul de telefon nu este valid.",
     },
   },
-  // location: {
-  //   required: {
-  //     errorMessage: "Alege o locație.",
-  //   },
-  // },
+  location: {
+    required: {
+      errorMessage: "Alege o locație.",
+    },
+  },
 };
 
 export { schema, lengths };

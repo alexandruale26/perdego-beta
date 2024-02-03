@@ -10,6 +10,7 @@ const createProfile = async (profile) => {
         phone: profile.phone,
         color: profile.color,
         email: profile.email,
+        location: profile.location,
         id: profile.id,
       },
     ]);
@@ -28,7 +29,7 @@ const getProfile = async (id) => {
   try {
     const { data, error, status } = await supabase
       .from("profiles")
-      .select("email, name, phone, createdAt, color")
+      .select("email, name, phone, createdAt, color, location")
       .eq("id", id)
       .single();
 

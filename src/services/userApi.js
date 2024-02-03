@@ -41,8 +41,8 @@ const deleteUserAccount = async (id) => {
     const data = await supabase.rpc("delete_user_and_images", { user_id: id });
 
     console.log(data);
-    // ok these are good !!!
     // TODO: logout user and delete cache and redirect
+    // ok these are good !!! ⬇️
 
     // if (error || status !== 204) throw new Error(error);
 
