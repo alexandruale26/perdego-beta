@@ -4,7 +4,15 @@ import { Link } from "react-router-dom";
 
 import React from "react";
 
-const LinkButton = ({ to, replace = false, children, className, color = null, disguiseAsFullButton = false }) => {
+const LinkButton = ({
+  to,
+  replace = false,
+  children,
+  className,
+  color = null,
+  disguiseAsFullButton = false,
+  ...props
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -29,6 +37,7 @@ const LinkButton = ({ to, replace = false, children, className, color = null, di
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={twMerge(`flex items-center justify-center ${linkClassStyle}`, className)}
+      {...props}
     >
       {children}
     </Link>

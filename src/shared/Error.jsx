@@ -6,12 +6,21 @@ import { BARS_HEIGHT } from "../utils/sharedData";
 const textGenericMessage = "Ne pare rǎu, dar pagina nu existǎ :(";
 const buttonGenericMessage = "Du-mǎ pe pagina principalǎ";
 
-const Error = ({ className, errorMessage = null, buttonMessage = null, fullHeight = true, showButton = true }) => {
+const Error = ({
+  className,
+  errorMessage = null,
+  buttonMessage = null,
+  fullHeight = true,
+  showButton = true,
+  to = null,
+}) => {
   const textMessage = errorMessage === null ? textGenericMessage : errorMessage;
   const linkButtonMessage = buttonMessage === null ? buttonGenericMessage : buttonMessage;
   const containerHeight = fullHeight
     ? { minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` }
     : { minHeight: "300px" };
+
+  const path = to === null ? "/" : to;
 
   return (
     <div
@@ -24,7 +33,7 @@ const Error = ({ className, errorMessage = null, buttonMessage = null, fullHeigh
       </div>
 
       {showButton && (
-        <LinkButton to="/" disguiseAsFullButton={true} className="p-2">
+        <LinkButton to={path} disguiseAsFullButton={true} className="p-2">
           {linkButtonMessage}
         </LinkButton>
       )}

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Home from "./pages/Home";
 import PostForm from "./pages/PostForm";
+import EditPostForm from "./pages/EditPostForm";
 import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "edit",
+        element: (
+          <ProtectedRoute>
+            <EditPostForm />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "manage",
         element: (
           <ProtectedRoute>
@@ -45,7 +54,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "edit",
+        path: "account",
         element: (
           <ProtectedRoute>
             <UserAccountDashboard />

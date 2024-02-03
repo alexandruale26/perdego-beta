@@ -4,7 +4,7 @@ import { DotsVerticalIcon, TrashIcon, Pencil2Icon } from "@radix-ui/react-icons"
 
 const iconsAnimationStyle = "transition-all hover:scale-125";
 
-const PostSettingsMenu = ({ menuIsOpen, handleModal }) => {
+const PostSettingsMenu = ({ menuIsOpen, handleModal, postId }) => {
   return (
     <div
       className={`absolute min-h-[54px] min-w-[54px] flex flex-col items-center justify-center rounded-full p-2 top-3 xs:top-1 right-3 xs:right-2 transition-all ${
@@ -20,6 +20,8 @@ const PostSettingsMenu = ({ menuIsOpen, handleModal }) => {
       {menuIsOpen && (
         <div className="flex flex-col gap-2">
           <LinkButton
+            to="/edit"
+            state={{ postId: postId }}
             className={`p-1 flex items-center justify-center text-white hover:text-primary ${iconsAnimationStyle}`}
           >
             <Pencil2Icon height="24" width="24" />

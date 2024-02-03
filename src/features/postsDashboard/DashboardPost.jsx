@@ -58,7 +58,7 @@ const DashboardPost = ({ post }) => {
     <Fragment key={post.id}>
       <div ref={parentRef} onClick={handleMenuOnClick} className="relative w-full cursor-pointer select-none">
         <PostLink post={post} backToUserPosts={true} className="xs:pr-14" />
-        <PostSettingsMenu menuIsOpen={menuIsOpen} handleModal={handleModal} />
+        <PostSettingsMenu menuIsOpen={menuIsOpen} handleModal={handleModal} postId={post.id} />
       </div>
 
       {modalIsOpen && (

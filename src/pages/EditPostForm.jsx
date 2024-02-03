@@ -5,12 +5,15 @@ import Confirmation from "../shared/Confirmation";
 import Spinner from "../shared/Spinner";
 import { useUserSessionContext } from "../ui/UserSession";
 import postFormProcess from "../features/postForm/postFormProcess";
+import { useLocation } from "react-router-dom";
 import FormContent from "../features/postForm/FormContent";
+import Error from "../shared/Error";
 
-const PostForm = () => {
+const EditPostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUserSessionContext();
+  const { pathname, state } = useLocation();
 
   const defaultValues = user === null ? {} : { name: user.name, phone: user.phone, location: user.location };
   const formData = { schema, defaultValues };
@@ -23,6 +26,9 @@ const PostForm = () => {
   // if user === null, user's data will be null at default values
   // form will re-render when user will not be null
   if (user === null) return;
+  if (pathname === "/edit" && state?.postId === null) {
+    return <Error errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ." buttonMessage="Du-mǎ inapoi" to="/manage" />;
+  }
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>
@@ -41,4 +47,4 @@ const PostForm = () => {
   );
 };
 
-export default PostForm;
+export default EditPostForm;

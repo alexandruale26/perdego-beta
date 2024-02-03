@@ -61,7 +61,7 @@ const UserProfileMenu = ({ user }) => {
             <ReaderIcon className={iconsStyle} />
             <span>Anunțurile mele</span>
           </LinkButton>
-          <LinkButton to="edit" color={user.color} className={linksStyle}>
+          <LinkButton to="account" color={user.color} className={linksStyle}>
             <GearIcon className={iconsStyle} />
             <span>Setǎri cont</span>
           </LinkButton>
