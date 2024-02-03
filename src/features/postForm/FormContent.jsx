@@ -9,7 +9,9 @@ import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../utils/sharedData";
 import { filterData } from "../../utils/helpers";
 import SubmitButton from "../../shared/SubmitButton";
 
-const FormContent = ({ formData, handleOnSubmit, submitButtonTitle }) => {
+const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => {
+  const title = submitButtonTitle ? submitButtonTitle : "Publicǎ anunțul";
+
   return (
     <Form {...formData} onSubmit={handleOnSubmit} className="space-y-5 w-full">
       <FormField
@@ -29,7 +31,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle }) => {
             <FormLabel>
               Imaginea anunțului<span className="font-light"> (Opțional)</span>
             </FormLabel>
-            <ImageSelect {...field} />
+            <ImageSelect imageUrl={formData.defaultValues.imageUrl} {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -49,7 +51,11 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle }) => {
         render={(field) => (
           <FormItem>
             <FormLabel>Tipul anunțului</FormLabel>
-            <Selector values={POSTTYPE} defaultValue="" {...field} />
+            <Selector
+              values={POSTTYPE}
+              defaultValue={formData.defaultValues.postType ? formData.defaultValues.postType : ""}
+              {...field}
+            />
             <FormMessage />
           </FormItem>
         )}
@@ -107,7 +113,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle }) => {
         )}
       />
       <div className="w-full">
-        <SubmitButton className="h-12 w-full mt-10">Publicǎ anunțul</SubmitButton>
+        <SubmitButton className="h-12 w-full mt-10">{title}</SubmitButton>
       </div>
     </Form>
   );

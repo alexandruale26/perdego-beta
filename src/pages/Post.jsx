@@ -8,7 +8,7 @@ import LinkButton from "../shared/LinkButton";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import Telephone from "../features/post/Telephone";
 import PageContainer from "../shared/PageContainer";
-import Image from "../shared/Image";
+import Image from "../shared/icons/Image";
 import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { formatPostDate } from "../utils/helpers";

@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { Link } from "react-router-dom";
 import { formatPostDate } from "../../utils/helpers";
 import { getImageUrl } from "../../services/postApi";
-import Image from "../../shared/Image";
+import Image from "../../shared/icons/Image";
 
 const linkBaseStyle = "xs:h-[150px] xs:flex-row";
 const linkGridStyle = "xs:h-[320px]";

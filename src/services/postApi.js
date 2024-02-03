@@ -29,6 +29,37 @@ const createPost = async (post) => {
   }
 };
 
+const updatePost = async (post, postId) => {
+  console.log(post);
+  console.log(postId);
+
+  try {
+    const { data, status, error } = await supabase
+      .from(postsPath)
+      .update({
+        title: post.title,
+        description: post.description,
+        location: post.location,
+        category: post.category,
+        // image: post.image,
+        postType: post.postType,
+      })
+      .eq("id", postId);
+
+    console.log("data", data);
+    console.log("status", status);
+    console.log("error", error);
+
+    // if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
+    if (error) throw new Error(GENERIC_ERROR_MESSAGE);
+    console.log("modified post - ok");
+    return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
+};
+
 const getPost = async (id) => {
   try {
     const { data, error, status } = await supabase.from(postsPath).select().eq("id", id).single();
@@ -112,4 +143,4 @@ const deleteImage = async (imageName) => {
   }
 };
 
-export { createPost, getPost, deletePost, uploadImage, getImageUrl, deleteImage, getPostsByUserId };
+export { createPost, updatePost, getPost, deletePost, uploadImage, getImageUrl, deleteImage, getPostsByUserId };
