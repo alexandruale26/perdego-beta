@@ -2,7 +2,7 @@ import Section from "../../shared/Section";
 import LinkButton from "../../shared/LinkButton";
 import DashboardPost from "./DashboardPost";
 
-const Content = ({ posts }) => {
+const PostsDashboardContent = ({ posts }) => {
   return (
     <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
       {posts.length < 1 ? (
@@ -23,4 +23,4 @@ const Content = ({ posts }) => {
   );
 };
 
-export default Content;
+export default PostsDashboardContent;

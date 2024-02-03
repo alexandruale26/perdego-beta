@@ -4,7 +4,7 @@ import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { getPostsByUserId } from "../services/postApi";
 import { useUserSessionContext } from "../ui/UserSession";
-import Content from "../features/postsDashboard/Content";
+import PostsDashboardContent from "../features/postsDashboard/PostsDashboardContent";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 const UserPostsDashboard = () => {
@@ -48,7 +48,7 @@ const UserPostsDashboard = () => {
           <Error fullHeight={false} showButton={false} errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :(" />
         )}
 
-        {loadedAndHasData && <Content posts={posts} />}
+        {loadedAndHasData && <PostsDashboardContent posts={posts} />}
       </div>
     </PageContainer>
   );
