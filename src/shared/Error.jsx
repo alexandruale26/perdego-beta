@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import WarningIcon from "./icons/WarningIcon";
 import LinkButton from "./LinkButton";
-import { BARS_HEIGHT } from "../utils/sharedData";
+import PageContainer from "./PageContainer";
 
 const textGenericMessage = "Ne pare rǎu, dar pagina nu existǎ :(";
 const buttonGenericMessage = "Du-mǎ pe pagina principalǎ";
@@ -16,15 +16,12 @@ const Error = ({
 }) => {
   const textMessage = errorMessage === null ? textGenericMessage : errorMessage;
   const linkButtonMessage = buttonMessage === null ? buttonGenericMessage : buttonMessage;
-  const containerHeight = fullHeight
-    ? { minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` }
-    : { minHeight: "300px" };
 
   const path = to === null ? "/" : to;
 
   return (
-    <div
-      style={containerHeight}
+    <PageContainer
+      style={fullHeight === false ? { minHeight: "300px" } : ""}
       className={twMerge("h-full flex flex-col items-center justify-center gap-8 p-4 bg-white", className)}
     >
       <div className="flex items-center justify-center flex-wrap gap-2">
@@ -37,7 +34,7 @@ const Error = ({
           {linkButtonMessage}
         </LinkButton>
       )}
-    </div>
+    </PageContainer>
   );
 };
 

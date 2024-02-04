@@ -30,28 +30,20 @@ const createPost = async (post) => {
 };
 
 const updatePost = async (post, postId) => {
-  console.log(post);
-  console.log(postId);
-
   try {
-    const { data, status, error } = await supabase
+    const { status, error } = await supabase
       .from(postsPath)
       .update({
         title: post.title,
         description: post.description,
         location: post.location,
         category: post.category,
-        // image: post.image,
+        image: post.image,
         postType: post.postType,
       })
       .eq("id", postId);
 
-    console.log("data", data);
-    console.log("status", status);
-    console.log("error", error);
-
-    // if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
-    if (error) throw new Error(GENERIC_ERROR_MESSAGE);
+    if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
     console.log("modified post - ok");
     return generateResponse("ok", null);
   } catch (error) {
@@ -134,7 +126,7 @@ const deleteImage = async (imageName) => {
     const { data, error } = await supabase.storage.from(postImagePath).remove([imageName]);
 
     // user shouldn't know if the image cannot be deleted
-    // an Edge function will clear any leftovers once a month
+    // an Edge function will clear any leftovers
     if (error) throw new Error("Error deleting image");
     return generateResponse("ok", data);
   } catch (error) {

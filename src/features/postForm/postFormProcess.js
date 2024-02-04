@@ -3,9 +3,7 @@ import { wordToUppercase } from "../../utils/helpers";
 import { createPost, deleteImage } from "../../services/postApi";
 import { handleImageUpload } from "./formHelpers";
 
-const postFormProcess = async (values, user, setIsLoading, setIsPostCreated) => {
-  if (user === null) return errorToast("A apǎrut o problemǎ. Te rugǎm conecteazǎ-te.");
-
+const postFormProcess = async (values, setIsLoading, setIsPostCreated) => {
   const imageUploaderResponse = await handleImageUpload(values.image);
 
   if (imageUploaderResponse.status !== "ok") {

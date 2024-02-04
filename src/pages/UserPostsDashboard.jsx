@@ -37,7 +37,7 @@ const UserPostsDashboard = () => {
           <div className="flex items-center justify-center gap-2">
             <InfoCircledIcon className="w-7 h-7 text-orange-600 shrink-0" />
             <h3 className="text-start text-sm xs:text-base text-grey-600 font-light">
-              Anunțurile vor fi șterse dupǎ 30 de zile de la crearea lor.
+              Anunțurile vor fi șterse dupǎ 15 zile de la data creǎrii.
             </h3>
           </div>
         </div>

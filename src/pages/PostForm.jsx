@@ -17,7 +17,7 @@ const PostForm = () => {
 
   const handlePostCreate = (values) => {
     setIsLoading(true);
-    postFormProcess(values, user, setIsLoading, setIsPostCreated);
+    postFormProcess(values, setIsLoading, setIsPostCreated);
   };
 
   // if user === null, user's data will be null at default values

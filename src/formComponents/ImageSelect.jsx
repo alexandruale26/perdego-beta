@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { TrashIcon } from "@radix-ui/react-icons";
 import Image from "../shared/icons/Image";
 
-const IMAGE_MAX_SIZE_MB = 5;
+const IMAGE_MAX_SIZE_MB = 8;
 
 const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ...props }, ref) => {
   const [selectedImage, setSelectedImage] = useState(null);

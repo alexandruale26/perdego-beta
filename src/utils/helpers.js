@@ -29,7 +29,7 @@ const formatDateToRoumanian = (date, hasDay = true) => {
 };
 
 const formatPostDate = (timestamp) => {
-  //TODO: post should be 15 or 30 days available. if 30 days modify the function
+  // REMINDER: for legal reasons about found objects, post should be available for 10 days
   const postDate = new Date(timestamp);
   const today = new Date();
 

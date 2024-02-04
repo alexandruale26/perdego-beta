@@ -11,7 +11,7 @@ import Error from "../shared/Error";
 import { getPost, getImageUrl } from "../services/postApi";
 
 const EditPostForm = () => {
-  const [isPostCreated, setIsPostCreated] = useState(false);
+  const [isPostModified, setIsPostModified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPostDataFetched, setIsPostDataFetched] = useState(false);
   const [defaultValues, setDefaultValues] = useState({});
@@ -40,6 +40,7 @@ const EditPostForm = () => {
         location: response.data.location,
         name: user.name,
         phone: user.phone,
+        imageName: response.data.image, // old image to be deleted if necesssary
         imageUrl,
       });
 
@@ -50,10 +51,8 @@ const EditPostForm = () => {
   }, [state?.postId, user.name, user.phone]);
 
   const handlePostCreate = (values) => {
-    console.log(values);
-
     setIsLoading(true);
-    postEditProcess(values, user, state?.postId, setIsLoading, setIsPostCreated);
+    postEditProcess(values, state?.postId, defaultValues.imageName, setIsLoading, setIsPostModified);
   };
 
   // if user === null, user's data will be null at default values
@@ -67,10 +66,10 @@ const EditPostForm = () => {
   const formData = { schema, defaultValues };
 
   return (
-    <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>
-      {isPostCreated && <Confirmation message="Felicitǎri! Anunțul tǎu a fost modificat cu succes." />}
+    <PageContainer className={isPostModified ? "flex items-center justify-center" : ""}>
+      {isPostModified && <Confirmation message="Felicitǎri! Anunțul tǎu a fost modificat cu succes." />}
 
-      {isPostCreated === false && (
+      {isPostModified === false && (
         <div className="max-w-2xl mx-auto space-y-8">
           {(isLoading || isPostDataFetched === false) && (
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
