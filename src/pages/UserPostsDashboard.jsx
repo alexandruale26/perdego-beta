@@ -33,7 +33,7 @@ const UserPostsDashboard = () => {
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-4xl h-full mx-auto text-center space-y-6">
         <div className="flex flex-col items-start justify-center gap-6">
-          <h1 className="text-start text-xl xs:text-2xl font-medium">Anunțurile tale</h1>
+          <h1 className="text-start text-xl xs:text-2xl font-medium">Anunțurile mele</h1>
           <div className="flex items-center justify-center gap-2">
             <InfoCircledIcon className="w-7 h-7 text-orange-600 shrink-0" />
             <h3 className="text-start text-sm xs:text-base text-grey-600 font-light">

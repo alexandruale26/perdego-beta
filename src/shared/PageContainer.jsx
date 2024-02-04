@@ -8,7 +8,7 @@ const PageContainer = ({ className, children, style }) => {
     <div
       id="page-container"
       style={styleToApply}
-      className={twMerge("relative w-full h-full py-10 px-4 bg-white", className)}
+      className={twMerge("relative w-full h-full py-10 px-4 pb-12 bg-white", className)}
     >
       {children}
     </div>

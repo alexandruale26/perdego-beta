@@ -46,31 +46,29 @@ const UserProfileMenu = ({ user }) => {
 
   return (
     <Modal className="items-start justify-end animate-in slide-in-from-right-10 ease-out z-20 overflow-hidden cursor-default">
-      <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 bg-white shadow-large rounded-md select-none">
-        <User className="px-4 pb-2" user={user} hideAvatar={mainWidth >= xsmSize} />
+      <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 px-2 bg-white shadow-large rounded-md select-none">
+        <User className="pb-2 px-1" user={user} hideAvatar={mainWidth >= xsmSize} />
 
-        <div className="w-full flex flex-col items-start justify-center gap-1 px-2">
-          <Separator className="mt-2 mb-4" />
+        <Separator className="mt-2 mb-3" />
 
-          {mainWidth < xsmSize && (
-            <LinkButton to="/new" color={user.color} className={linksStyle}>
-              <PlusIcon className={iconsStyle} />
-              <span>Adaugǎ anunț nou</span>
-            </LinkButton>
-          )}
-          <LinkButton to="/manage" color={user.color} className={linksStyle}>
-            <ReaderIcon className={iconsStyle} />
-            <span>Anunțurile mele</span>
+        {mainWidth < xsmSize && (
+          <LinkButton to="/new" color={user.color} className={linksStyle}>
+            <PlusIcon className={iconsStyle} />
+            <span>Adaugǎ anunț nou</span>
           </LinkButton>
-          <LinkButton to="account" color={user.color} className={linksStyle}>
-            <GearIcon className={iconsStyle} />
-            <span>Setǎri cont</span>
-          </LinkButton>
-          <Button onClick={signOut} color={user.color} className={linksStyle}>
-            <ExitIcon className={iconsStyle} />
-            <span>Ieșire cont</span>
-          </Button>
-        </div>
+        )}
+        <LinkButton to="/manage" color={user.color} className={linksStyle}>
+          <ReaderIcon className={iconsStyle} />
+          <span>Anunțurile mele</span>
+        </LinkButton>
+        <LinkButton to="account" color={user.color} className={linksStyle}>
+          <GearIcon className={iconsStyle} />
+          <span>Setǎri cont</span>
+        </LinkButton>
+        <Button onClick={signOut} color={user.color} className={linksStyle}>
+          <ExitIcon className={iconsStyle} />
+          <span>Ieșire cont</span>
+        </Button>
       </div>
     </Modal>
   );

@@ -6,7 +6,7 @@ import SubmitButton from "../../shared/SubmitButton";
 import { schema, lengths } from "../account/createAccountData";
 import ConfirmationBox from "../../shared/ConfirmationBox";
 
-const CredentialsEditForm = ({ profile }) => {
+const CredentialsEditForm = ({ email }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -39,7 +39,7 @@ const CredentialsEditForm = ({ profile }) => {
     process();
   };
 
-  const defaultValues = { ...profile };
+  const defaultValues = { email };
   const formData = { schema, defaultValues };
 
   return (
