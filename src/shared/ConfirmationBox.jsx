@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
-import Modal from "../../shared/Modal";
-import Button from "../../shared/button";
-import { BARS_HEIGHT } from "../../utils/sharedData";
+import Modal from "./Modal";
+import Button from "./button";
+import { BARS_HEIGHT } from "../utils/sharedData";
 
 const buttonsStyle = "w-full text-sm xxs:text-base p-2 text-white rounded-md";
 
@@ -15,6 +15,9 @@ const ConfirmationBox = ({
   handleOnConfirm,
 }) => {
   const boxRef = useRef(null);
+
+  const confirmButtonText = confirmButtonTitle ? confirmButtonTitle : "Sunt sigur";
+  const denyButtonText = denyButtonTitle ? denyButtonTitle : "Anuleazǎ";
 
   useEffect(() => {
     const offsetElement = () => {
@@ -49,10 +52,10 @@ const ConfirmationBox = ({
 
           <div className="w-full flex items-center justify-between gap-4 py-2">
             <Button onClick={handleOnDeny} className={`bg-black hover:bg-primary-400 ${buttonsStyle}`}>
-              {denyButtonTitle}
+              {denyButtonText}
             </Button>
             <Button onClick={handleOnConfirm} className={`bg-rose-600 hover:bg-rose-500 ${buttonsStyle}`}>
-              {confirmButtonTitle}
+              {confirmButtonText}
             </Button>
           </div>
         </div>

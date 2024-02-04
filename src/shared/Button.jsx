@@ -21,7 +21,7 @@ const Button = ({ children, onClick, className, color = null, ...props }) => {
       style={hoverStyle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={twMerge("focus-visible:outline-none", className)}
+      className={twMerge("focus-visible:outline-none select-none", className)}
       {...props}
     >
       {children}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, Fragment } from "react";
 import PostLink from "../home/PostLink";
 import PostSettingsMenu from "./PostSettingsMenu";
-import ConfirmationBox from "./ConfirmationBox";
+import ConfirmationBox from "../../shared/ConfirmationBox";
 import { deletePost } from "../../services/postApi";
 import { errorToast } from "../../shared/Toasts";
 
@@ -62,12 +62,7 @@ const DashboardPost = ({ post }) => {
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox
-          denyButtonTitle="Anuleazǎ"
-          confirmButtonTitle="Sunt sigur"
-          handleOnDeny={handleModal}
-          handleOnConfirm={handleDeletePost}
-        >
+        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleDeletePost}>
           <div className="h-full flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base font-light text-grey-700 text-center">
               Ești sigur cǎ dorești sǎ ștergi anunțul{" "}
