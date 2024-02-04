@@ -59,8 +59,8 @@ const LoginForm = () => {
               name="email"
               render={(field) => (
                 <FormItem className="max-w-full">
-                  <FormLabel>Adresa ta de e-mail</FormLabel>
-                  <ValidationInput placeholder="nume@exemplu.com" {...field} />
+                  <FormLabel>E-mail</FormLabel>
+                  <ValidationInput {...field} />
                   <FormMessage />
                 </FormItem>
               )}

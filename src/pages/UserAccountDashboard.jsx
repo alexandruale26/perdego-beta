@@ -15,7 +15,8 @@ const UserAccountDashboard = () => {
 
   const handleAccountDeletion = () => {
     const process = async () => {
-      const response = await deleteUserAccount(user.id);
+      console.log("user deleted");
+      // const response = await deleteUserAccount(user.id);
 
       // navigate("/", { replace: true });
 
@@ -33,6 +34,8 @@ const UserAccountDashboard = () => {
 
   const profile = { name: user.name, location: user.location, phone: user.phone };
 
+  // error if user session is out while he tries to do something. manage user === null or was because i deleted the account and i didn't know it?????
+
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-2xl h-full mx-auto space-y-6">
@@ -40,7 +43,7 @@ const UserAccountDashboard = () => {
           <h1 className="text-start text-xl xs:text-2xl font-medium">Contul tǎu</h1>
           <div className="w-full flex flex-col items-start justify-center gap-6">
             <Section className="flex flex-col items-start justify-center">
-              <h3 className="text-lg font-medium text-grey-900">Profilul tǎu</h3>
+              <h3 className="text-lg font-medium text-grey-900">Profil</h3>
               <Separator />
               <div className="w-full  flex flex-col gap-6">
                 <p className="text-sm text-grey-700">Modificǎ informațiile de bazǎ</p>
@@ -49,7 +52,7 @@ const UserAccountDashboard = () => {
             </Section>
 
             <Section className="flex flex-col items-start justify-center">
-              <h3 className="text-lg">Date de conectare</h3>
+              <h3 className="text-lg font-medium text-grey-900">Date de conectare</h3>
               <Separator />
               <div className="w-full  flex flex-col gap-6">
                 <p className="text-sm text-grey-700">Modificǎ informațiile de conectare</p>
@@ -58,16 +61,16 @@ const UserAccountDashboard = () => {
             </Section>
 
             <Section className="flex flex-col items-start justify-center">
-              <h3 className="text-lg">Șterge contul</h3>
+              <h3 className="text-lg font-medium text-grey-900">Eliminǎ contul</h3>
               <Separator />
               <div className="w-full flex flex-col gap-6">
-                <p className="text-sm text-grey-700">Datele și postǎrile tale vor fi șterse definitiv</p>
+                <p className="text-sm text-grey-700">Datele și anunțurile tale vor fi șterse definitiv</p>
                 <Button
                   onClick={handleAccountDeletion}
                   className="w-full h-12 flex items-center justify-center mt-4 bg-rose-600 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg"
                 >
                   Șterge contul
-                </Button>{" "}
+                </Button>
               </div>
             </Section>
           </div>

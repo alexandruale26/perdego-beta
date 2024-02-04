@@ -48,8 +48,18 @@ const CredentialsEditForm = ({ profile }) => {
         name="email"
         render={(field) => (
           <FormItem className="max-w-full">
-            <FormLabel>Adresa ta de e-mail</FormLabel>
+            <FormLabel>E-mail</FormLabel>
             <ValidationInput placeholder="nume@exemplu.com" {...field} />
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      <FormField
+        name="passwordNew"
+        render={(field) => (
+          <FormItem className="max-w-full">
+            <FormLabel>Parola actualǎ</FormLabel>
+            <ValidationInput type="password" {...field} maxLength={lengths.password.max} />
             <FormMessage />
           </FormItem>
         )}
@@ -58,7 +68,7 @@ const CredentialsEditForm = ({ profile }) => {
         name="password"
         render={(field) => (
           <FormItem className="max-w-full">
-            <FormLabel>Introdu o parolǎ sigurǎ</FormLabel>
+            <FormLabel>Parola nouǎ</FormLabel>
             <ValidationInput type="password" {...field} maxLength={lengths.password.max} />
             <FormMessage />
           </FormItem>
@@ -71,7 +81,7 @@ const CredentialsEditForm = ({ profile }) => {
 
       {modalIsOpen && (
         <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleDeletePost}>
-          <div className="h-full min-h-[80px] flex flex-col items-center justify-between gap-8">
+          <div className="h-full min-h-[60px] xxs:min-h-[80px] flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici datele tale de conectare?
             </p>

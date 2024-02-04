@@ -48,9 +48,10 @@ const UserProfileMenu = ({ user }) => {
     <Modal className="items-start justify-end animate-in slide-in-from-right-10 ease-out z-20 overflow-hidden cursor-default">
       <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 bg-white shadow-large rounded-md select-none">
         <User className="px-4 pb-2" user={user} hideAvatar={mainWidth >= xsmSize} />
-        <Separator className="mt-2 mb-4" />
 
         <div className="w-full flex flex-col items-start justify-center gap-1 px-2">
+          <Separator className="mt-2 mb-4" />
+
           {mainWidth < xsmSize && (
             <LinkButton to="/new" color={user.color} className={linksStyle}>
               <PlusIcon className={iconsStyle} />

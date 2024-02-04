@@ -19,7 +19,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         render={(field) => (
           <FormItem>
             <FormLabel>Titlul anunțului</FormLabel>
-            <ValidationInput placeholder="ex.: Portofel de piele de culoare negru" {...field} />
+            <ValidationInput placeholder="ex.: Portofel bǎrbǎtesc de culoare maro" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -81,7 +81,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         name="location"
         render={(field) => (
           <FormItem>
-            <FormLabel>Județ | Sector</FormLabel>
+            <FormLabel>Locație</FormLabel>
             <ComboBox
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={formData.defaultValues.location}

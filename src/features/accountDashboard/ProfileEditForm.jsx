@@ -51,7 +51,7 @@ const ProfileEditForm = ({ profile }) => {
         name="name"
         render={(field) => (
           <FormItem className="max-w-full">
-            <FormLabel>Numele tǎu</FormLabel>
+            <FormLabel>Nume</FormLabel>
             <ValidationInput {...field} />
             <FormMessage />
           </FormItem>
@@ -61,7 +61,7 @@ const ProfileEditForm = ({ profile }) => {
         name="location"
         render={(field) => (
           <FormItem className="max-w-full">
-            <FormLabel>Locația ta</FormLabel>
+            <FormLabel>Locație</FormLabel>
             <ComboBox
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.location}
@@ -91,7 +91,7 @@ const ProfileEditForm = ({ profile }) => {
 
       {modalIsOpen && (
         <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleModifyProfile}>
-          <div className="h-full min-h-[80px] flex flex-col items-center justify-between gap-8">
+          <div className="h-full min-h-[60px] xxs:min-h-[80px] flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici datele profilulului tǎu?
             </p>
