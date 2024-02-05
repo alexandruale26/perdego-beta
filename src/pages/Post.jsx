@@ -82,25 +82,23 @@ const Post = () => {
         </div>
 
         <Section className="flex-col items-start justify-center">
-          <div className="w-full flex items-center justify-between">
-            <p className="text-sm font-light text-grey-600">{formatPostDate(post.createdAt)}</p>
-          </div>
+          <p className="text-xs font-light text-grey-600">{formatPostDate(post.createdAt)}</p>
 
-          <h1 className="text-xl xs:text-2xl font-semibold text-grey-800">{post.title}</h1>
+          <h1 className="text-lg font-medium text-grey-800">{post.title}</h1>
 
-          <div className="w-full flex flex-wrap gap-2 items-center justify-start mb-2">
+          <div className="w-full flex flex-wrap gap-2 items-center justify-start -mt-2 mb-2">
             <Tag title="Tip anunț:" description={post.postType} />
             <Tag title="Locație:" description={post.location} />
             <Tag title="Categorie:" description={post.category} />
           </div>
 
-          <h2 className="text-lg xs:text-xl font-semibold uppercase text-grey-800 mt-2">Descriere</h2>
+          <h2 className="text-lg font-medium uppercase text-grey-800 -mb-3">Descriere</h2>
           <p className="text-sm xs:text-base font-light text-grey-700">{post.description}</p>
         </Section>
 
         <Section className="flex-col items-start justify-start">
-          <h3 className="text-base xs:text-lg font-semibold text-grey-800 uppercase">Contacteazǎ-mǎ</h3>
-          <div className="w-full flex items-center justify-between flex-wrap gap-4">
+          <h3 className="text-base font-medium text-grey-800 uppercase">Contacteazǎ-mǎ</h3>
+          <div className="w-full flex items-center justify-between flex-wrap gap-5 pb-1">
             <UserProfile profile={profile} />
             <Telephone number={profile.phone} />
           </div>

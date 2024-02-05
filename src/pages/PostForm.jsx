@@ -33,7 +33,7 @@ const PostForm = () => {
           {isLoading && (
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
-          <h1 className="text-xl xs:text-3xl font-medium select-none">Creeazǎ un anunț nou</h1>
+          <h1 className="text-2xl font-medium text-grey-800">Creeazǎ un anunț nou</h1>
           <FormContent formData={formData} handleOnSubmit={handlePostCreate} />
         </div>
       )}

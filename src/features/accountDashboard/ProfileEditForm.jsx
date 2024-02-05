@@ -86,7 +86,7 @@ const ProfileEditForm = ({ profile }) => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton className="h-12 w-full">Modificǎ profilul</SubmitButton>
+        <SubmitButton className="h-12 w-full">Salveazǎ profilul</SubmitButton>
       </div>
 
       {modalIsOpen && (

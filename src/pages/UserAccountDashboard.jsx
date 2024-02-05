@@ -38,13 +38,13 @@ const UserAccountDashboard = () => {
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-2xl mx-auto">
         <div className="flex flex-col items-start justify-center gap-6">
-          <h1 className="text-xl xs:text-2xl font-medium">Contul meu</h1>
+          <h1 className="text-2xl font-medium text-grey-800">Contul meu</h1>
           <div className="w-full flex flex-col items-start justify-center gap-8">
             <DashboardSection title="Profil" subtitle="Modificǎ informațiile de bazǎ">
               <ProfileEditForm profile={profile} />
             </DashboardSection>
 
-            <DashboardSection title="Date de conectare" subtitle="Modificǎ informațiile de conectare">
+            <DashboardSection title="Autentificare" subtitle="Modificǎ informațiile de autentificare">
               <CredentialsEditForm email={user.email} />
             </DashboardSection>
 
