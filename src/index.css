@@ -8,11 +8,20 @@
   .word-break {
     word-break: break-word;
   }
+
+  .no-select-webkit::-webkit-selection {
+    background-color: purple;
+  }
 }
 
-*::selection {
+::selection {
   color: #fff;
   background: theme(colors.primary-500);
+}
+
+::-webkit-selection {
+  color: #fff;
+  background-color: theme(colors.primary-500);
 }
 
 button,
@@ -23,4 +32,18 @@ a {
 
 input[type="password"] {
   font-weight: 600;
+}
+
+input[type="file"],
+img {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.no-select {
+  user-select: none;
+}
+
+img {
+  -webkit-touch-callout: none;
 }

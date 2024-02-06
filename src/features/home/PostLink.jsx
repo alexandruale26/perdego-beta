@@ -33,8 +33,8 @@ const PostLink = ({ post, className, searchParams = "", gridMode = false, backTo
       />
       <div className="h-full w-full flex flex-col items-start justify-between py-1 gap-2">
         <h3
-          className={`${
-            gridMode ? "text-base" : "sm:text-lg"
+          className={`tracking-[0.01em] ${
+            gridMode ? "text-base font-semibold" : "sm:text-lg font-semibold"
           } text-grey-800 hover:text-white hover:bg-grey-800 flex break-words word-break`}
         >
           {post.title}

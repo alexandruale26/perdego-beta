@@ -30,7 +30,7 @@ const UserProfileButton = ({ user }) => {
   return (
     <div ref={profileButtonRef} className="relative cursor-pointer">
       <div className="hidden xsm:flex flex-col">
-        <Avatar color={user.color} name={user.name} className="w-11 h-11" />
+        <Avatar color={user.color} name={user.name} className="w-11 h-11 text-xl" />
         {menuIsOpen && <UserProfileMenu user={user} isOnMobileDevice={false} />}
       </div>
 

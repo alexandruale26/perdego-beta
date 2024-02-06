@@ -5,7 +5,7 @@ const placeholder = "placeholder.png";
 const Image = ({ className, src = null }) => {
   const image = src === null ? placeholder : src;
 
-  return <img src={image} alt="placeholder" className={twMerge("w-full h-full", className)} />;
+  return <img src={image} alt="placeholder" draggable="false" className={twMerge("w-full h-full", className)} />;
 };
 
 export default Image;

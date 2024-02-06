@@ -26,9 +26,9 @@ const SearchResults = ({ hasSearchParams, posts, searchedParams }) => {
   };
 
   return (
-    <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
+    <Section className="flex flex-col items-start justify-start gap-5 bg-transparent border-none p-0 shadow-none">
       <div className="w-full flex items-start gap-1 pl-1 select-none">
-        <h2 className="w-full my-auto text-start text-xl xs:text-2xl font-medium">
+        <h2 className="w-full my-auto text-start text-2xl text-gray-700 font-medium">
           {showSearchResultsTitle(hasSearchParams, posts.length)}
         </h2>
         {hasSearchParams && allowLayoutChange && (

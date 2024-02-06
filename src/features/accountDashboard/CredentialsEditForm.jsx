@@ -76,7 +76,7 @@ const CredentialsEditForm = ({ email }) => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton className="h-12 w-full">Salveazǎ datele</SubmitButton>
+        <SubmitButton className="h-12 w-full">Modificǎ datele</SubmitButton>
       </div>
 
       {modalIsOpen && (

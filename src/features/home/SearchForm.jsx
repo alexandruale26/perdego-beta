@@ -9,9 +9,11 @@ import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
 import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../utils/sharedData";
 import { filterData, setDefaultValue } from "../../utils/helpers";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import Info from "../../shared/Info";
+import Button from "../../shared/button";
 
-const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
+const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideFilters, handleHideFilters }) => {
   const [search, setSearch] = useState("");
   const [postType, setPostType] = useState("");
   const [location, setLocation] = useState("");
@@ -33,22 +35,29 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
     onSubmit(values);
   };
 
+  const hiddenFiltersApplyedStyle = hideFilters ? "hidden" : "flex";
+
   return (
     <Form
       schema={{}}
       defaultValues={{}}
       onSubmit={handleSubmit}
-      className="flex flex-col w-full items-start justify-center gap-6 p-4 bg-white mx-auto rounded-md shadow-sm"
+      className="flex flex-col w-full items-start justify-center gap-6 p-4 pb-5 bg-white mx-auto rounded-md shadow-sm"
     >
       <div className="flex flex-col w-full gap-4">
-        <h1 className="text-lg font-medium text-grey-800 text-start pl-1 select-none">Cautǎ un anunț</h1>
+        <Info className="justify-start">
+          <p className="text-start text-xs xs:text-sm text-grey-500 font-light">
+            Folosește filtrele de cǎutare pentru rezultate mai bune
+          </p>
+        </Info>
+
         <Division>
           <FormField
             name="search"
             render={(field) => (
-              <FormItem className="max-w-full">
+              <FormItem>
                 <SimpleInput
-                  placeholder="ex.: Cheie autoturism"
+                  placeholder="Ce anume cauți?"
                   {...field}
                   value={search}
                   onChange={handleSearchOnChange}
@@ -60,7 +69,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
           <FormField
             name="postType"
             render={(field) => (
-              <FormItem className="max-w-full">
+              <FormItem className={hiddenFiltersApplyedStyle}>
                 <Selector
                   values={POSTTYPE}
                   defaultValue={postType}
@@ -72,11 +81,11 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
           />
         </Division>
 
-        <Division>
+        <Division className={hiddenFiltersApplyedStyle}>
           <FormField
             name="location"
             render={(field) => (
-              <FormItem className="max-w-full">
+              <FormItem>
                 <ComboBox
                   placeholder="Toatǎ țara"
                   filter={filterData}
@@ -92,7 +101,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
           <FormField
             name="category"
             render={(field) => (
-              <FormItem className="max-w-full">
+              <FormItem>
                 <ComboBox
                   placeholder="Toate categoriile"
                   filter={filterData}
@@ -114,14 +123,22 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams }) => {
           <MagnifyingGlassIcon className="w-6 h-6" />
         </SubmitButton>
 
-        {hasSearchParams && (
-          <LinkButton
-            to={"/"}
-            className="text-sm xs:text-base border-b-[1px] border-black hover:border-primary focus-visible:text-lg"
-          >
-            Șterge filtrele
-          </LinkButton>
-        )}
+        <div className="w-full flex items-center justify-between -mb-2">
+          {hasSearchParams && (
+            <LinkButton
+              to={"/"}
+              className="shrink-0 p-1 text-sm xs:text-base font-medium text-grey-900 hover:text-rose-500 focus-visible:text-lg"
+            >
+              Șterge filtrele
+            </LinkButton>
+          )}
+
+          {isOnMobile && (
+            <Button onClick={handleHideFilters} className="w-full flex items-start justify-end -my-2">
+              <ChevronUpIcon className={`w-8 h-8 transition-all ${hideFilters ? "rotate-180" : "0"}`} />
+            </Button>
+          )}
+        </div>
       </Division>
     </Form>
   );

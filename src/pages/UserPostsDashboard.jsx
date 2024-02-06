@@ -5,7 +5,7 @@ import Error from "../shared/Error";
 import { getPostsByUserId } from "../services/postApi";
 import { useUserSessionContext } from "../ui/UserSession";
 import PostsDashboardContent from "../features/postsDashboard/PostsDashboardContent";
-import { InfoCircledIcon } from "@radix-ui/react-icons";
+import Info from "../shared/Info";
 
 const UserPostsDashboard = () => {
   const [posts, setPosts] = useState(null);
@@ -34,12 +34,11 @@ const UserPostsDashboard = () => {
       <div className="w-full max-w-4xl h-full mx-auto text-center space-y-6">
         <div className="flex flex-col items-start justify-center gap-6">
           <h1 className="text-start text-2xl font-medium text-grey-800">Anunțurile mele</h1>
-          <div className="flex items-center justify-center gap-2">
-            <InfoCircledIcon className="w-7 h-7 text-orange-600 shrink-0" />
-            <h3 className="text-start text-sm xs:text-base text-grey-600 font-light">
+          <Info>
+            <p className="text-start text-sm xs:text-base text-grey-600 font-light">
               Anunțurile vor fi șterse dupǎ 15 zile de la data creǎrii.
-            </h3>
-          </div>
+            </p>
+          </Info>
         </div>
 
         {isLoading && <Spinner fullHeight={false} className="pt-6 xs:pt-24" />}

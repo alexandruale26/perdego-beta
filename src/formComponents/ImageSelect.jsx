@@ -64,10 +64,20 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
             </div>
           )}
           {selectedImage && (
-            <img src={selectedImage} alt="selected" className="w-full h-full object-cover hover:brightness-[0.6]" />
+            <img
+              src={selectedImage}
+              alt="selected"
+              draggable="false"
+              className="w-full h-full object-cover hover:brightness-[0.6]"
+            />
           )}
           {selectedImage === null && imageUrl && (
-            <img src={imageUrl} alt="selected" className="w-full h-full object-cover hover:brightness-[0.6]" />
+            <img
+              src={imageUrl}
+              alt="selected"
+              draggable="false"
+              className="w-full h-full object-cover hover:brightness-[0.6]"
+            />
           )}
         </label>
       </button>
