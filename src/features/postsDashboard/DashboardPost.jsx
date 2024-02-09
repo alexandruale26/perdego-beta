@@ -68,7 +68,7 @@ const DashboardPost = ({ post }) => {
               Ești sigur cǎ dorești sǎ ștergi anunțul{" "}
               <span className="text-grey-800 font-semibold">'{post.title}'</span>?
             </p>
-            <p className="text-xs font-light text-grey-500 mr-auto">Anunțul tǎu va fi șters definitiv</p>
+            <span className="text-xs font-light text-grey-500 mr-auto">Anunțul tǎu va fi șters definitiv</span>
           </div>
         </ConfirmationBox>
       )}

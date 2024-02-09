@@ -21,8 +21,6 @@ function UserSession({ children }) {
       return setUser(null);
     }
 
-    console.log(authResponse.data);
-
     const profileResponse = await getProfile(authResponse.data.id);
     if (profileResponse.status !== "ok") {
       setIsLoading(false);
@@ -35,8 +33,6 @@ function UserSession({ children }) {
 
   useEffect(() => {
     const subscription = supabase.auth.onAuthStateChange((event, session) => {
-      // console.log(event, session);
-
       if (event === "INITIAL_SESSION") {
         process();
       } else if (event === "SIGNED_IN") {
@@ -45,9 +41,6 @@ function UserSession({ children }) {
         setUser(null);
 
         navigate("/", { replace: true });
-      } else if (event === "USER_UPDATED") {
-        console.log("new", session.user.new_email);
-        console.log("old", session.user.email);
       }
     });
 
@@ -56,8 +49,8 @@ function UserSession({ children }) {
 
   // changing profile data in context because there is no need to reload
   // the entire app just to get a few values that can easily be saved here
-  const changeUserProfile = (newProfile) => {
-    setUser({ ...user, ...newProfile });
+  const changeUserProfile = (newProfile, clearUser = false) => {
+    clearUser ? setUser(null) : setUser({ ...user, ...newProfile });
   };
 
   if (isLoading) return <Spinner />;

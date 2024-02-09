@@ -33,7 +33,7 @@ const UserPostsDashboard = () => {
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-4xl h-full mx-auto text-center space-y-6">
         <div className="flex flex-col items-start justify-center gap-6">
-          <h1 className="text-start text-2xl font-medium text-grey-800">Anunțurile mele</h1>
+          <h1 className="text-start text-2xl font-medium text-grey-800">Anunțurile tale</h1>
           <Info>
             <p className="text-start text-sm xs:text-base text-grey-600 font-light">
               Anunțurile vor fi șterse dupǎ 15 zile de la data creǎrii.

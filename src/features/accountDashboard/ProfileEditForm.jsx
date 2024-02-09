@@ -43,6 +43,10 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
         toastNotification(response.message);
       } else {
         changeUserProfile(newProfile);
+
+        const nameInput = document.getElementById("name");
+        if (nameInput) nameInput.value = newProfile.name;
+
         toastNotification(response.message, true);
       }
 
@@ -104,7 +108,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
       {modalIsOpen && (
         <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleProfileUpdate}>
           <div className="h-full min-h-[60px] xxs:min-h-[80px] flex flex-col items-center justify-between gap-8">
-            <p className="px-0 text-sm xxs:text-base text-grey-800 text-center">
+            <p className="px-0 text-sm xxs:text-base font-light text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici datele profilulului?
             </p>
           </div>

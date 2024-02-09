@@ -1,6 +1,5 @@
 import { twMerge } from "tailwind-merge";
 import Section from "../../shared/Section";
-import { LeftArrow, RightArrow } from "../../shared/icons/LogoArrows";
 
 const DashboardSection = ({ title, children, className }) => {
   return (

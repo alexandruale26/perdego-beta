@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import PageContainer from "../shared/PageContainer";
 import Button from "../shared/button";
 import { useUserSessionContext } from "../ui/UserSession";
@@ -8,29 +9,41 @@ import PasswordEditForm from "../features/accountDashboard/PasswordEditForm";
 import DashboardSection from "../features/accountDashboard/DashboardSection";
 import EmailEditForm from "../features/accountDashboard/EmailEditForm";
 import Info from "../shared/Info";
+import toastNotification from "../shared/Toasts";
+import ConfirmationBox from "../shared/ConfirmationBox";
+import Spinner from "../shared/Spinner";
+import { removeSessionFromLocalStorage } from "../utils/helpers";
 
 const UserAccountDashboard = () => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { user, changeUserProfile } = useUserSessionContext();
   const navigate = useNavigate();
 
+  const handleModal = (e) => {
+    e.preventDefault();
+    setModalIsOpen(!modalIsOpen);
+  };
+
   const handleAccountDeletion = () => {
     const process = async () => {
-      console.log("user deleted");
-      // const response = await deleteUserAccount(user.id);
+      setModalIsOpen(false);
+      setIsLoading(true);
 
-      // navigate("/", { replace: true });
+      const response = await deleteUserAccount(user.id);
+      if (response.status !== "ok") {
+        setIsLoading(false);
+        return toastNotification(response.message);
+      }
 
-      // if (response.status !== "ok") {
-      //   closeMenuAndModal();
-      //   return errorToast(response.message);
-      // }
-
-      // window.location.reload();
+      removeSessionFromLocalStorage();
+      changeUserProfile({}, true);
+      navigate("/", { replace: true });
+      setIsLoading(false);
     };
-
     process();
   };
-  // console.log(user);
 
   const profile = { name: user.name, location: user.location, phone: user.phone, id: user.id };
 
@@ -57,14 +70,27 @@ const UserAccountDashboard = () => {
 
             <DashboardSection title="Eliminǎ contul">
               <Button
-                onClick={handleAccountDeletion}
-                className="w-full h-12 flex items-center justify-center bg-rose-600 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg"
+                onClick={handleModal}
+                disabled={isLoading}
+                className="w-full h-12 flex items-center justify-center bg-rose-600 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg disabled:hover:bg-rose-600"
               >
-                Șterge contul
+                {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Șterge contul</span>}
               </Button>
             </DashboardSection>
           </div>
         </div>
+        {modalIsOpen && (
+          <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleAccountDeletion}>
+            <div className="w-full h-full min-h-[50px] flex flex-col items-center justify-between gap-8">
+              <p className="px-0 text-sm xxs:text-base font-light text-grey-700 text-center">
+                Ești sigur cǎ dorești sǎ ștergi contul?
+              </p>
+              <Info iconStyle="w-4 h-4" className="mr-auto gap-1 text-start text-xs text-grey-600 font-light">
+                Contul si anunțurile tale vor fi șterse definitiv
+              </Info>
+            </div>
+          </ConfirmationBox>
+        )}
       </div>
     </PageContainer>
   );

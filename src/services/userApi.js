@@ -7,6 +7,7 @@ import {
   SAME_PASSWORD_ERROR_MESSAGE,
 } from "./apiErrorMessages";
 
+// TODO move these from below
 const supabaseSamePasswordResponseMessage = "New password should be different from the old password.";
 const supabaseExistingEmailResponseMessage = "A user with this email address has already been registered";
 const supabaseUserExistsError = "User already registered";
@@ -44,20 +45,15 @@ const deleteUserAtSignupError = async (id) => {
 
 const deleteUserAccount = async (id) => {
   try {
-    // profiles are automatically removed at user deletion
-    const data = await supabase.rpc("delete_user_and_images", { user_id: id });
+    // profiles and images are automatically removed at user deletion
+    const { error, status } = await supabase.rpc("delete_user_and_images", { user_id: id });
 
-    console.log(data);
-    // TODO: logout user and delete cache and redirect
-    // ok these are good !!! ⬇️
-
-    // if (error || status !== 204) throw new Error(error);
-
-    // console.log(`user deleted: ${id}`, status === 204);
-    // return generateResponse("ok", null);
+    if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
+    console.log(`user deleted: ${id}`, status === 204);
+    return generateResponse("ok", null);
   } catch (error) {
     console.log(error.message);
-    // return generateResponse(null, null, error.message);
+    return generateResponse(null, null, error.message);
   }
 };
 
@@ -113,7 +109,7 @@ const updateEmail = async (newEmail) => {
     }
 
     console.log("email reset - ok");
-    return generateResponse("ok", null, "E-mailul a fost salvat cu succes.");
+    return generateResponse("ok", null, "Intrǎ pe noua adresǎ de e-mail și confirmǎ modificǎrile.");
   } catch (error) {
     console.log(error);
     return generateResponse(null, null, error.message);
@@ -133,14 +129,14 @@ const logoutUser = async () => {
 };
 
 const getCurrentUser = async () => {
-  // session and user from local storage
+  // session and user from local storage then from DB
   const { data: session } = await supabase.auth.getSession();
   if (session.session === null) return generateResponse(null, null);
 
   const { data, error } = await supabase.auth.getUser();
   if (error || data.user === null) return generateResponse(null, null);
 
-  return generateResponse("ok", { id: data.user.id });
+  return generateResponse("ok", { id: data.user.id, email: data.user.email });
 };
 
 export {

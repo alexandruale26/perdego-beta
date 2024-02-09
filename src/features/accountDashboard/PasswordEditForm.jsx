@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from "../../formBase/FormContext";
-import { FormField, FormItem, FormMessage, FormLabel } from "../../formComponents/form";
+import { FormField, FormItem, FormMessage } from "../../formComponents/form";
 import ValidationInput from "../../formComponents/ValidationInput";
 import SubmitButton from "../../shared/SubmitButton";
 import { schema, lengths } from "../account/createAccountData";
@@ -35,8 +35,8 @@ const PasswordEditForm = () => {
         toastNotification(response.message);
       } else {
         const passwordInput = document.getElementById("password");
-
         if (passwordInput) passwordInput.value = "";
+
         toastNotification(response.message, true);
       }
 
@@ -74,7 +74,7 @@ const PasswordEditForm = () => {
       {modalIsOpen && (
         <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handlePasswordUpdate}>
           <div className="h-full min-h-[50px] flex flex-col items-center justify-between gap-8">
-            <p className="px-0 text-sm xxs:text-base text-grey-800 text-center">
+            <p className="px-0 text-sm xxs:text-base font-light text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici parola?
             </p>
           </div>

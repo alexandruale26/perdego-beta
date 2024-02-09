@@ -15,7 +15,6 @@ const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
     setIsLoading(false);
     return toastNotification(signUpResponse.message);
   }
-  console.log(signUpResponse.data);
 
   const userId = signUpResponse.data;
   const newProfile = { name, email, color, id: userId, phone: values.phone, location: values.location };
