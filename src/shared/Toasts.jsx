@@ -1,20 +1,8 @@
 import toast from "react-hot-toast";
-import WarningIcon from "./icons/WarningIcon";
-import SuccessIcon from "./icons/SuccessIcon";
 
-const largeIconsStyle = "w-12 h-12";
-const smallIconsStyle = "w-8 h-8";
-
-const errorToast = (message) =>
-  toast(<span className="text-white">{message}</span>, {
-    icon: <WarningIcon className={`text-white ${message.length > 30 ? largeIconsStyle : smallIconsStyle}`} />,
-    style: { background: "#f87171" },
+const toastNotification = (message, successToast = false) =>
+  toast(<span className="text-sm xs:text-base text-grey-800 text-center font-light">{message}</span>, {
+    style: { background: successToast ? "#86efac" : "#fca5a5" },
   });
 
-const successToast = (message) =>
-  toast(<span className="text-white">{message}</span>, {
-    icon: <SuccessIcon className={`text-white ${message.length > 30 ? largeIconsStyle : smallIconsStyle}`} />,
-    style: { background: "#4ade80" },
-  });
-
-export { errorToast, successToast };
+export default toastNotification;

@@ -87,7 +87,7 @@ const SignupForm = () => {
                   render={(field) => (
                     <FormItem className="max-w-full">
                       <FormLabel>Adresa ta de e-mail</FormLabel>
-                      <ValidationInput placeholder="nume@exemplu.com" {...field} />
+                      <ValidationInput placeholder="nume@exemplu.com" className="lowercase" {...field} />
                       <FormMessage />
                     </FormItem>
                   )}
@@ -107,7 +107,7 @@ const SignupForm = () => {
                   render={(field) => (
                     <FormItem className="max-w-full">
                       <FormLabel>Numele tǎu</FormLabel>
-                      <ValidationInput {...field} />
+                      <ValidationInput className="capitalize" {...field} />
                       <FormMessage />
                     </FormItem>
                   )}

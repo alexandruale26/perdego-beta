@@ -1,4 +1,4 @@
-import { errorToast } from "../../shared/Toasts";
+import toastNotification from "../../shared/Toasts";
 import { wordToUppercase } from "../../utils/helpers";
 import { createPost, deleteImage } from "../../services/postApi";
 import { handleImageUpload } from "./formHelpers";
@@ -8,7 +8,7 @@ const postFormProcess = async (values, setIsLoading, setIsPostCreated) => {
 
   if (imageUploaderResponse.status !== "ok") {
     setIsLoading(false);
-    return errorToast(imageUploaderResponse.message);
+    return toastNotification(imageUploaderResponse.message);
   }
 
   const sanitizedFormValues = {
@@ -24,7 +24,7 @@ const postFormProcess = async (values, setIsLoading, setIsPostCreated) => {
     await deleteImage(imageUploaderResponse.data); // no need to use response.status
     setIsLoading(false);
 
-    return errorToast(postResponse.message);
+    return toastNotification(postResponse.message);
   }
   setIsPostCreated(true);
   setIsLoading(false);

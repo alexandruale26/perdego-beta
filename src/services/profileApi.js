@@ -1,10 +1,12 @@
 import supabase from "./supabase";
 import { generateResponse } from "./helpers";
-import { GENERIC_ERROR_MESSAGE } from "./constants";
+import { GENERIC_ERROR_MESSAGE, PROFILE_ERROR_MESSAGE } from "./apiErrorMessages";
+
+const profilesTable = "profiles";
 
 const createProfile = async (profile) => {
   try {
-    const { error, status } = await supabase.from("profiles").insert([
+    const { error, status } = await supabase.from(profilesTable).insert([
       {
         name: profile.name,
         phone: profile.phone,
@@ -28,7 +30,7 @@ const createProfile = async (profile) => {
 const getProfile = async (id) => {
   try {
     const { data, error, status } = await supabase
-      .from("profiles")
+      .from(profilesTable)
       .select("email, name, phone, createdAt, color, location")
       .eq("id", id)
       .single();
@@ -41,4 +43,20 @@ const getProfile = async (id) => {
   }
 };
 
-export { createProfile, getProfile };
+const updateProfile = async (profileId, profile) => {
+  try {
+    const { error, status } = await supabase
+      .from(profilesTable)
+      .update({ name: profile.name, location: profile.location, phone: profile.phone })
+      .eq("id", profileId);
+
+    if (error || status !== 204) throw new Error(PROFILE_ERROR_MESSAGE);
+    console.log("modified profile - ok");
+    return generateResponse("ok", null, "Profilul tǎu a fost modificat cu success");
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
+};
+
+export { createProfile, getProfile, updateProfile };

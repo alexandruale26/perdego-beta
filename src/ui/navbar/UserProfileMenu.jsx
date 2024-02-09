@@ -6,7 +6,7 @@ import Button from "../../shared/button";
 import LinkButton from "../../shared/LinkButton";
 import { ReaderIcon, ExitIcon, GearIcon, PlusIcon } from "@radix-ui/react-icons";
 import { logoutUser } from "../../services/userApi";
-import { errorToast, successToast } from "../../shared/Toasts";
+import toastNotification from "../../shared/Toasts";
 import Modal from "../../shared/Modal";
 
 const iconsStyle = "w-5 h-5";
@@ -38,9 +38,9 @@ const UserProfileMenu = ({ user }) => {
   const signOut = async () => {
     const response = await logoutUser();
 
-    if (response.status !== "ok") return errorToast(response.message);
+    if (response.status !== "ok") return toastNotification(response.message);
 
-    successToast(response.message);
+    toastNotification(response.message, true);
     navigate("/", { replace: true });
   };
 

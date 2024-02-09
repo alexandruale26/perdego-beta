@@ -8,35 +8,45 @@ import ComboBox from "../../formComponents/ComboBox";
 import { COUNTIES } from "../../utils/sharedData";
 import { filterData } from "../../utils/helpers";
 import ConfirmationBox from "../../shared/ConfirmationBox";
+import Spinner from "../../shared/Spinner";
+import toastNotification from "../../shared/Toasts";
+import { updateProfile } from "../../services/profileApi";
+import { capitalizeEachWordFromString } from "../../utils/helpers";
 
-const ProfileEditForm = ({ profile }) => {
+const ProfileEditForm = ({ profile, changeUserProfile }) => {
+  const [newProfile, setNewProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleModal = (e) => {
     e.preventDefault();
-    setModalIsOpen(!modalIsOpen);
+    setModalIsOpen(false);
   };
 
   const handleOnSubmit = (values) => {
-    console.log(values);
-    setModalIsOpen(!modalIsOpen);
-    // setIsLoading(true);
+    setModalIsOpen(true);
+
+    // input has capitalize style, but the values can still have uppercase letters
+    const name = capitalizeEachWordFromString(values.name);
+    const curatedValues = { ...values, name };
+    setNewProfile(curatedValues);
   };
 
-  const handleModifyProfile = () => {
+  const handleProfileUpdate = () => {
     const process = async () => {
-      console.log("Profile modified");
-      setModalIsOpen(!modalIsOpen);
+      setModalIsOpen(false);
+      setIsLoading(true);
 
-      // const postResponse = await deletePost(post.id);
+      const response = await updateProfile(profile.id, newProfile);
 
-      // if (postResponse.status !== "ok") {
-      //   closeMenuAndModal();
-      //   return errorToast(postResponse.message);
-      // }
+      if (response.status !== "ok") {
+        toastNotification(response.message);
+      } else {
+        changeUserProfile(newProfile);
+        toastNotification(response.message, true);
+      }
 
-      // window.location.reload();
+      setIsLoading(false);
     };
 
     process();
@@ -52,7 +62,7 @@ const ProfileEditForm = ({ profile }) => {
         render={(field) => (
           <FormItem className="max-w-full">
             <FormLabel>Nume</FormLabel>
-            <ValidationInput {...field} />
+            <ValidationInput className="capitalize" {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -85,15 +95,17 @@ const ProfileEditForm = ({ profile }) => {
         )}
       />
 
-      <div className="w-full pt-6">
-        <SubmitButton className="h-12 w-full">Modificǎ profilul</SubmitButton>
+      <div className="w-full pt-2">
+        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
+          {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Modificǎ profilul</span>}
+        </SubmitButton>
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleModifyProfile}>
+        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleProfileUpdate}>
           <div className="h-full min-h-[60px] xxs:min-h-[80px] flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base text-grey-800 text-center">
-              Ești sigur cǎ dorești sǎ modifici datele profilulului tǎu?
+              Ești sigur cǎ dorești sǎ modifici datele profilulului?
             </p>
           </div>
         </ConfirmationBox>

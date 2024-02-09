@@ -29,7 +29,7 @@ const AppLayout = () => {
           <footer className="w-full bg-black h-[80px] text-white text-center">Footer</footer>
         </>
       )}
-      <Toaster gutter={20} toastOptions={{ duration: 5000, style: { borderRadius: "6px" } }} />
+      <Toaster gutter={10} toastOptions={{ duration: 5000, style: { borderRadius: "6px", marginBottom: 10 } }} />
     </>
   );
 };

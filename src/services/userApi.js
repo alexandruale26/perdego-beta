@@ -1,8 +1,15 @@
 import supabase from "./supabase";
 import { generateResponse } from "./helpers";
-import { GENERIC_ERROR_MESSAGE, USER_EXISTS_MESSAGE } from "./constants";
+import {
+  GENERIC_ERROR_MESSAGE,
+  EMAIL_EXISTS_MESSAGE,
+  LOGIN_ERROR_MESSAGE,
+  SAME_PASSWORD_ERROR_MESSAGE,
+} from "./apiErrorMessages";
 
-const userExistsError = "User already registered";
+const supabaseSamePasswordResponseMessage = "New password should be different from the old password.";
+const supabaseExistingEmailResponseMessage = "A user with this email address has already been registered";
+const supabaseUserExistsError = "User already registered";
 
 const signUpUser = async (credentials) => {
   try {
@@ -16,7 +23,7 @@ const signUpUser = async (credentials) => {
   } catch (error) {
     console.log(error);
 
-    const message = error.message === userExistsError ? USER_EXISTS_MESSAGE : GENERIC_ERROR_MESSAGE;
+    const message = error.message === supabaseUserExistsError ? EMAIL_EXISTS_MESSAGE : GENERIC_ERROR_MESSAGE;
     return generateResponse(null, null, message);
   }
 };
@@ -61,8 +68,52 @@ const loginUser = async (credentials) => {
       password: credentials.password,
     });
 
-    if (error || data.user === null) throw new Error("Ai introdus greșit datele tale. Încearcǎ din nou.");
+    if (error || data.user === null) throw new Error(LOGIN_ERROR_MESSAGE);
     return generateResponse("ok", null);
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
+};
+
+const updatePassword = async (newPassword) => {
+  try {
+    const { error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      if (error.message === supabaseSamePasswordResponseMessage || error.status === 422) {
+        throw new Error(SAME_PASSWORD_ERROR_MESSAGE);
+      } else {
+        throw new Error(GENERIC_ERROR_MESSAGE);
+      }
+    }
+
+    console.log("password reset - ok");
+    return generateResponse("ok", null, "Parola a fost salvatǎ cu succes.");
+  } catch (error) {
+    console.log(error);
+    return generateResponse(null, null, error.message);
+  }
+};
+
+const updateEmail = async (newEmail) => {
+  try {
+    const { error } = await supabase.auth.updateUser({
+      email: newEmail,
+    });
+
+    if (error) {
+      if (error.message === supabaseExistingEmailResponseMessage || error.status === 422) {
+        throw new Error(EMAIL_EXISTS_MESSAGE);
+      } else {
+        throw new Error(GENERIC_ERROR_MESSAGE);
+      }
+    }
+
+    console.log("email reset - ok");
+    return generateResponse("ok", null, "E-mailul a fost salvat cu succes.");
   } catch (error) {
     console.log(error);
     return generateResponse(null, null, error.message);
@@ -82,6 +133,7 @@ const logoutUser = async () => {
 };
 
 const getCurrentUser = async () => {
+  // session and user from local storage
   const { data: session } = await supabase.auth.getSession();
   if (session.session === null) return generateResponse(null, null);
 
@@ -91,4 +143,13 @@ const getCurrentUser = async () => {
   return generateResponse("ok", { id: data.user.id });
 };
 
-export { signUpUser, loginUser, deleteUserAtSignupError, deleteUserAccount, getCurrentUser, logoutUser };
+export {
+  signUpUser,
+  loginUser,
+  deleteUserAtSignupError,
+  deleteUserAccount,
+  getCurrentUser,
+  logoutUser,
+  updatePassword,
+  updateEmail,
+};

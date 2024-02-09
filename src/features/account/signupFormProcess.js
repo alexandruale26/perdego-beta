@@ -2,7 +2,7 @@ import { randomColor } from "./helpers";
 import { capitalizeEachWordFromString } from "../../utils/helpers";
 import { signUpUser, deleteUserAtSignupError } from "../../services/userApi";
 import { createProfile } from "../../services/profileApi";
-import { errorToast } from "../../shared/Toasts";
+import toastNotification from "../../shared/Toasts";
 
 const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
   const email = values.email.toLowerCase();
@@ -13,7 +13,7 @@ const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
 
   if (signUpResponse.status !== "ok") {
     setIsLoading(false);
-    return errorToast(signUpResponse.message);
+    return toastNotification(signUpResponse.message);
   }
   console.log(signUpResponse.data);
 
@@ -26,7 +26,7 @@ const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
     await deleteUserAtSignupError(userId); // no need to use response.status
     setIsLoading(false);
 
-    return errorToast(profileResponse.message);
+    return toastNotification(profileResponse.message);
   }
 
   setIsAccountCreated(true);

@@ -3,7 +3,7 @@ import PostLink from "../home/PostLink";
 import PostSettingsMenu from "./PostSettingsMenu";
 import ConfirmationBox from "../../shared/ConfirmationBox";
 import { deletePost } from "../../services/postApi";
-import { errorToast } from "../../shared/Toasts";
+import toastNotification from "../../shared/Toasts";
 
 const DashboardPost = ({ post }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -45,7 +45,7 @@ const DashboardPost = ({ post }) => {
 
       if (postResponse.status !== "ok") {
         closeMenuAndModal();
-        return errorToast(postResponse.message);
+        return toastNotification(postResponse.message);
       }
 
       window.location.reload();

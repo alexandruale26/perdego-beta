@@ -1,4 +1,4 @@
-import { errorToast } from "../../shared/Toasts";
+import toastNotification from "../../shared/Toasts";
 import { wordToUppercase } from "../../utils/helpers";
 import { updatePost, deleteImage } from "../../services/postApi";
 import { handleImageUpload } from "../postForm/formHelpers";
@@ -13,7 +13,7 @@ const postEditProcess = async (values, postId, imageName, setIsLoading, setIsPos
 
     if (imageUploaderResponse.status !== "ok") {
       setIsLoading(false);
-      return errorToast(imageUploaderResponse.message);
+      return toastNotification(imageUploaderResponse.message);
     }
 
     image = imageUploaderResponse.data;
@@ -32,7 +32,7 @@ const postEditProcess = async (values, postId, imageName, setIsLoading, setIsPos
     deleteExistingImage(image);
 
     setIsLoading(false);
-    return errorToast(postResponse.message);
+    return toastNotification(postResponse.message);
   }
 
   if (image !== imageName) deleteExistingImage(imageName);

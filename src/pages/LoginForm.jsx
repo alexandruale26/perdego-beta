@@ -13,7 +13,7 @@ import FormContainer from "../features/account/FormContainer";
 import Spinner from "../shared/Spinner";
 import { schema, lengths } from "../features/account/loginData";
 import { loginUser } from "../services/userApi";
-import { errorToast } from "../shared/Toasts";
+import toastNotification from "../shared/Toasts";
 
 const defaultValues = {};
 const formData = {
@@ -34,7 +34,7 @@ const LoginForm = () => {
 
       if (response.status !== "ok") {
         setIsLoading(false);
-        return errorToast(response.message);
+        return toastNotification(response.message);
       }
 
       navigate("/");
@@ -60,7 +60,7 @@ const LoginForm = () => {
               render={(field) => (
                 <FormItem className="max-w-full">
                   <FormLabel>E-mail</FormLabel>
-                  <ValidationInput {...field} />
+                  <ValidationInput className="lowercase" {...field} />
                   <FormMessage />
                 </FormItem>
               )}

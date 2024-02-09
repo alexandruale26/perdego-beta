@@ -5,7 +5,7 @@ import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { getCurrentUser } from "../services/userApi";
 import { getProfile } from "../services/profileApi";
-import { GENERIC_ERROR_MESSAGE } from "../services/constants";
+import { GENERIC_ERROR_MESSAGE } from "../services/apiErrorMessages";
 
 const UserSessionContext = createContext({});
 
@@ -20,6 +20,8 @@ function UserSession({ children }) {
       setIsLoading(false);
       return setUser(null);
     }
+
+    console.log(authResponse.data);
 
     const profileResponse = await getProfile(authResponse.data.id);
     if (profileResponse.status !== "ok") {
@@ -42,19 +44,26 @@ function UserSession({ children }) {
       } else if (event === "SIGNED_OUT") {
         setUser(null);
 
-        // IMPORTANT if user has the app opened in separate tabs and has access to logged user content.
-        // Otherwise will crash
         navigate("/", { replace: true });
+      } else if (event === "USER_UPDATED") {
+        console.log("new", session.user.new_email);
+        console.log("old", session.user.email);
       }
     });
 
     return () => subscription.data.subscription.unsubscribe();
   }, [navigate]);
 
+  // changing profile data in context because there is no need to reload
+  // the entire app just to get a few values that can easily be saved here
+  const changeUserProfile = (newProfile) => {
+    setUser({ ...user, ...newProfile });
+  };
+
   if (isLoading) return <Spinner />;
   if (isLoading && user === null) return <Error errorMessage={GENERIC_ERROR_MESSAGE} />;
 
-  return <UserSessionContext.Provider value={{ user }}>{children}</UserSessionContext.Provider>;
+  return <UserSessionContext.Provider value={{ user, changeUserProfile }}>{children}</UserSessionContext.Provider>;
 }
 
 const useUserSessionContext = () => {

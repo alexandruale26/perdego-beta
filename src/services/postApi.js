@@ -2,14 +2,14 @@ import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
 import { generateResponse } from "./helpers";
 import { imageExtension } from "../features/postForm/data";
-import { GENERIC_ERROR_MESSAGE } from "./constants";
+import { GENERIC_ERROR_MESSAGE } from "./apiErrorMessages";
 
 const postImagePath = "posts-images";
-const postsPath = "posts";
+const postsTable = "posts";
 
 const createPost = async (post) => {
   try {
-    const { status, error } = await supabase.from(postsPath).insert([
+    const { status, error } = await supabase.from(postsTable).insert([
       {
         title: post.title,
         description: post.description,
@@ -32,7 +32,7 @@ const createPost = async (post) => {
 const updatePost = async (post, postId) => {
   try {
     const { status, error } = await supabase
-      .from(postsPath)
+      .from(postsTable)
       .update({
         title: post.title,
         description: post.description,
@@ -54,7 +54,7 @@ const updatePost = async (post, postId) => {
 
 const getPost = async (id) => {
   try {
-    const { data, error, status } = await supabase.from(postsPath).select().eq("id", id).single();
+    const { data, error, status } = await supabase.from(postsTable).select().eq("id", id).single();
 
     if (error || status !== 200 || data === null) throw new Error("Could not find post");
     return generateResponse("ok", data);
@@ -67,7 +67,7 @@ const getPost = async (id) => {
 const getPostsByUserId = async (userId) => {
   try {
     const { data, error, status } = await supabase
-      .from(postsPath)
+      .from(postsTable)
       .select("id, title, location, createdAt, category, image, postType")
       .order("createdAt", { ascending: false })
       .eq("userId", userId);
