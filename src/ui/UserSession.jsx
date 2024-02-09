@@ -5,7 +5,7 @@ import Spinner from "../shared/Spinner";
 import Error from "../shared/Error";
 import { getCurrentUser } from "../services/userApi";
 import { getProfile } from "../services/profileApi";
-import { GENERIC_ERROR_MESSAGE } from "../services/apiErrorMessages";
+import { GENERIC_ERROR_MESSAGE } from "../services/apiHelpers/apiErrorMessages";
 
 const UserSessionContext = createContext({});
 
@@ -39,7 +39,6 @@ function UserSession({ children }) {
         process();
       } else if (event === "SIGNED_OUT") {
         setUser(null);
-
         navigate("/", { replace: true });
       }
     });

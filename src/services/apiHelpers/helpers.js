@@ -1,4 +1,4 @@
-import { removeDiacritics } from "../utils/helpers";
+import { removeDiacritics } from "../../utils/helpers";
 
 const convertToMatchSearch = (string) => {
   const splittedWords = string.split(" ");

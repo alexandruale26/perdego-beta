@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageContainer from "../shared/PageContainer";
 import Button from "../shared/button";
 import { useUserSessionContext } from "../ui/UserSession";
-import { deleteUserAccount } from "../services/userApi";
+import { deleteUserAccount, logoutUser } from "../services/userApi";
 import ProfileEditForm from "../features/accountDashboard/ProfileEditForm";
 import PasswordEditForm from "../features/accountDashboard/PasswordEditForm";
 import DashboardSection from "../features/accountDashboard/DashboardSection";
@@ -12,14 +11,12 @@ import Info from "../shared/Info";
 import toastNotification from "../shared/Toasts";
 import ConfirmationBox from "../shared/ConfirmationBox";
 import Spinner from "../shared/Spinner";
-import { removeSessionFromLocalStorage } from "../utils/helpers";
 
 const UserAccountDashboard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { user, changeUserProfile } = useUserSessionContext();
-  const navigate = useNavigate();
 
   const handleModal = (e) => {
     e.preventDefault();
@@ -31,15 +28,18 @@ const UserAccountDashboard = () => {
       setModalIsOpen(false);
       setIsLoading(true);
 
-      const response = await deleteUserAccount(user.id);
-      if (response.status !== "ok") {
+      const deleteResponse = await deleteUserAccount(user.id);
+      if (deleteResponse.status !== "ok") {
         setIsLoading(false);
-        return toastNotification(response.message);
+        return toastNotification(deleteResponse.message);
       }
 
-      removeSessionFromLocalStorage();
-      changeUserProfile({}, true);
-      navigate("/", { replace: true });
+      const logoutResponse = await logoutUser(true);
+      if (logoutResponse.status !== "ok") {
+        setIsLoading(false);
+        return toastNotification(logoutResponse.message);
+      }
+
       setIsLoading(false);
     };
     process();

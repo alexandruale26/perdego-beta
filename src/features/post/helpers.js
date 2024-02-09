@@ -1,4 +1,4 @@
-const generateSearchParamsTitle = (searchParams, skipSearchValue = false) => {
+const generateSearchParamsTitle = (searchParams, skipSearchInputValue = false) => {
   if (Object.entries(searchParams).length === 0) {
     return "Toate postǎrile ⁄ Toate categoriile ⁄ Toatǎ țara";
   }
@@ -12,7 +12,7 @@ const generateSearchParamsTitle = (searchParams, skipSearchValue = false) => {
 
   return Object.entries(arrangedSearchParams).reduce((acc, [key, value]) => {
     if (key === "search") {
-      return skipSearchValue || value === "" ? acc : acc + value + " ⁄ ";
+      return skipSearchInputValue || value === "" ? acc : acc + value + " ⁄ ";
     }
     if (key === "postType") {
       return value === "" ? acc + "Toate postǎrile" : acc + value;

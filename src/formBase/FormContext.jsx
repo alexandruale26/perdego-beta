@@ -59,7 +59,6 @@ const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
         const fieldName = ref.name;
         validateField(fieldName);
       });
-      console.log("not all are valid");
     }
   };
 

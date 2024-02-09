@@ -1,8 +1,8 @@
 import supabase from "./supabase";
 import { imageRandomName } from "../utils/helpers";
-import { generateResponse } from "./helpers";
+import { generateResponse } from "./apiHelpers/helpers";
 import { imageExtension } from "../features/postForm/data";
-import { GENERIC_ERROR_MESSAGE } from "./apiErrorMessages";
+import { GENERIC_ERROR_MESSAGE } from "./apiHelpers/apiErrorMessages";
 
 const postImagePath = "posts-images";
 const postsTable = "posts";
@@ -21,10 +21,8 @@ const createPost = async (post) => {
     ]);
 
     if (error || status !== 201) throw new Error(GENERIC_ERROR_MESSAGE);
-    console.log("created post - ok");
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -44,10 +42,8 @@ const updatePost = async (post, postId) => {
       .eq("id", postId);
 
     if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
-    console.log("modified post - ok");
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -59,7 +55,6 @@ const getPost = async (id) => {
     if (error || status !== 200 || data === null) throw new Error("Could not find post");
     return generateResponse("ok", data);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null);
   }
 };
@@ -75,7 +70,6 @@ const getPostsByUserId = async (userId) => {
     if (error || status !== 200 || data === null) throw new Error("Error fetching posts");
     return generateResponse("ok", data);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null);
   }
 };
@@ -84,10 +78,8 @@ const deletePost = async (postId) => {
   try {
     const { error, status } = await supabase.rpc("delete_image_at_deleting_post", { post_id: postId });
     if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
-    console.log(`post deleted: ${postId}`, status === 204);
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error.message);
     return generateResponse(null, null, error.message);
   }
 };
@@ -108,7 +100,6 @@ const uploadImage = async (image) => {
 
     return generateResponse("ok", data.path);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -121,7 +112,6 @@ const getImageUrl = (imageName) => {
 };
 
 const deleteImage = async (imageName) => {
-  console.log("deleted", imageName);
   try {
     const { data, error } = await supabase.storage.from(postImagePath).remove([imageName]);
 
@@ -130,7 +120,6 @@ const deleteImage = async (imageName) => {
     if (error) throw new Error("Error deleting image");
     return generateResponse("ok", data);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null);
   }
 };

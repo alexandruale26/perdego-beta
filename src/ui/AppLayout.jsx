@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import toastNotification from "../shared/Toasts";
 import Navbar from "./Navbar";
 import Spinner from "../shared/Spinner";
-import { NO_INTERNET_ERROR_MESSAGE } from "../services/apiErrorMessages";
+import { NO_INTERNET_ERROR_MESSAGE } from "../services/apiHelpers/apiErrorMessages";
 import { BARS_HEIGHT } from "../utils/sharedData";
 
 const AppLayout = () => {

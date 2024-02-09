@@ -1,6 +1,6 @@
 import supabase from "./supabase";
-import { convertToMatchSearch } from "./helpers";
-import { generateResponse } from "./helpers";
+import { convertToMatchSearch } from "./apiHelpers/helpers";
+import { generateResponse } from "./apiHelpers/helpers";
 
 const queryPosts = async (queryData, hasSearchParams = false) => {
   let query = supabase.from("posts").select("id, title, location, createdAt, category, image, postType");
@@ -33,7 +33,6 @@ const queryPosts = async (queryData, hasSearchParams = false) => {
     if (error || status !== 200 || data === null) throw new Error("Error fetching posts");
     return generateResponse("ok", data);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null);
   }
 };

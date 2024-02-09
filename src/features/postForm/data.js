@@ -5,7 +5,7 @@ const imageExtension = "jpeg";
 const lengths = {
   title: {
     min: 10,
-    max: 50,
+    max: 60,
   },
   description: {
     min: 20,

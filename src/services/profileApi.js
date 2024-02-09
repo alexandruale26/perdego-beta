@@ -1,6 +1,7 @@
 import supabase from "./supabase";
-import { generateResponse } from "./helpers";
-import { GENERIC_ERROR_MESSAGE, PROFILE_ERROR_MESSAGE } from "./apiErrorMessages";
+import { generateResponse } from "./apiHelpers/helpers";
+import { GENERIC_ERROR_MESSAGE, PROFILE_ERROR_MESSAGE } from "./apiHelpers/apiErrorMessages";
+import { PROFILE_UPDATED_MESSAGE } from "./apiHelpers/apiSuccessMessages";
 
 const profilesTable = "profiles";
 
@@ -18,10 +19,8 @@ const createProfile = async (profile) => {
 
     if (error || status !== 201) throw new Error(GENERIC_ERROR_MESSAGE);
 
-    console.log("created profile - ok");
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -37,7 +36,6 @@ const getProfile = async (id) => {
     if (error || status !== 200 || data === error) throw new Error("Error fetching user profile");
     return generateResponse("ok", data);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null);
   }
 };
@@ -50,10 +48,8 @@ const updateProfile = async (profileId, profile) => {
       .eq("id", profileId);
 
     if (error || status !== 204) throw new Error(PROFILE_ERROR_MESSAGE);
-    console.log("modified profile - ok");
-    return generateResponse("ok", null, "Profilul tǎu a fost modificat cu success");
+    return generateResponse("ok", null, PROFILE_UPDATED_MESSAGE);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };

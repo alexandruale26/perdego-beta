@@ -72,13 +72,6 @@ const saveToLocalStorage = (name, value) => {
   localStorage.setItem(name, value);
 };
 
-const removeSessionFromLocalStorage = () => {
-  var layoutValue = localStorage.getItem("layout");
-
-  localStorage.clear();
-  if (layoutValue !== null) localStorage.setItem("layout", layoutValue);
-};
-
 const generateErrorMessage = (inputName, minLength, maxLength) => {
   const messageBase = `${inputName} trebuie sǎ conținǎ`;
 
@@ -105,7 +98,6 @@ export {
   setDefaultValue,
   saveToLocalStorage,
   getFromLocalStorage,
-  removeSessionFromLocalStorage,
   generateErrorMessage,
   capitalizeEachWordFromString,
   allowWindowScroll,

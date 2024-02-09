@@ -1,11 +1,16 @@
 import supabase from "./supabase";
-import { generateResponse } from "./helpers";
+import { generateResponse } from "./apiHelpers/helpers";
+import {
+  PASSWORD_UPDATED_MESSAGE,
+  EMAIL_UPDATED_MESSAGE,
+  LOGOUT_SUCCESS_MESSAGE,
+} from "./apiHelpers/apiSuccessMessages";
 import {
   GENERIC_ERROR_MESSAGE,
-  EMAIL_EXISTS_MESSAGE,
+  EMAIL_EXISTS_ERROR_MESSAGE,
   LOGIN_ERROR_MESSAGE,
   SAME_PASSWORD_ERROR_MESSAGE,
-} from "./apiErrorMessages";
+} from "./apiHelpers/apiErrorMessages";
 
 // TODO move these from below
 const supabaseSamePasswordResponseMessage = "New password should be different from the old password.";
@@ -22,9 +27,7 @@ const signUpUser = async (credentials) => {
     if (error || data.user === null) throw new Error(error.message);
     return generateResponse("ok", data.user.id);
   } catch (error) {
-    console.log(error);
-
-    const message = error.message === supabaseUserExistsError ? EMAIL_EXISTS_MESSAGE : GENERIC_ERROR_MESSAGE;
+    const message = error.message === supabaseUserExistsError ? EMAIL_EXISTS_ERROR_MESSAGE : GENERIC_ERROR_MESSAGE;
     return generateResponse(null, null, message);
   }
 };
@@ -35,10 +38,8 @@ const deleteUserAtSignupError = async (id) => {
 
     if (error || status !== 204) throw new Error(error);
 
-    console.log(`user deleted: ${id}`, status === 204);
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error.message);
     return generateResponse(null, null, error.message);
   }
 };
@@ -49,10 +50,8 @@ const deleteUserAccount = async (id) => {
     const { error, status } = await supabase.rpc("delete_user_and_images", { user_id: id });
 
     if (error || status !== 204) throw new Error(GENERIC_ERROR_MESSAGE);
-    console.log(`user deleted: ${id}`, status === 204);
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error.message);
     return generateResponse(null, null, error.message);
   }
 };
@@ -67,7 +66,6 @@ const loginUser = async (credentials) => {
     if (error || data.user === null) throw new Error(LOGIN_ERROR_MESSAGE);
     return generateResponse("ok", null);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -86,10 +84,8 @@ const updatePassword = async (newPassword) => {
       }
     }
 
-    console.log("password reset - ok");
-    return generateResponse("ok", null, "Parola a fost salvatǎ cu succes.");
+    return generateResponse("ok", null, PASSWORD_UPDATED_MESSAGE);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
@@ -102,28 +98,27 @@ const updateEmail = async (newEmail) => {
 
     if (error) {
       if (error.message === supabaseExistingEmailResponseMessage || error.status === 422) {
-        throw new Error(EMAIL_EXISTS_MESSAGE);
+        throw new Error(EMAIL_EXISTS_ERROR_MESSAGE);
       } else {
         throw new Error(GENERIC_ERROR_MESSAGE);
       }
     }
 
-    console.log("email reset - ok");
-    return generateResponse("ok", null, "Intrǎ pe noua adresǎ de e-mail și confirmǎ modificǎrile.");
+    return generateResponse("ok", null, EMAIL_UPDATED_MESSAGE);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };
 
-const logoutUser = async () => {
+const logoutUser = async (globalSignOut = false) => {
+  const scope = globalSignOut ? "global" : "local";
+
   try {
-    const { error } = await supabase.auth.signOut({ scope: "local" });
+    const { error } = await supabase.auth.signOut({ scope: scope });
 
     if (error) throw new Error(GENERIC_ERROR_MESSAGE);
-    return generateResponse("ok", null, "Te-ai deconectat cu succes.");
+    return generateResponse("ok", null, LOGOUT_SUCCESS_MESSAGE);
   } catch (error) {
-    console.log(error);
     return generateResponse(null, null, error.message);
   }
 };

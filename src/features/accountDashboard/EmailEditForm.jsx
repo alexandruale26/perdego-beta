@@ -9,6 +9,7 @@ import Spinner from "../../shared/Spinner";
 import { updateEmail } from "../../services/userApi";
 import toastNotification from "../../shared/Toasts";
 import Info from "../../shared/Info";
+import { NEW_EMAIL_ERROR_MESSAGE } from "../../services/apiHelpers/apiErrorMessages";
 
 const EmailEditForm = ({ email }) => {
   const [newEmail, setNewEmail] = useState(null);
@@ -23,7 +24,7 @@ const EmailEditForm = ({ email }) => {
 
   const handleOnSubmit = (values) => {
     const curatedEmail = values.email.toLowerCase();
-    if (email === curatedEmail) return toastNotification("Introdu o nouǎ adresǎ de e-mail.");
+    if (email === curatedEmail) return toastNotification(NEW_EMAIL_ERROR_MESSAGE);
 
     setModalIsOpen(true);
     setNewEmail(curatedEmail);

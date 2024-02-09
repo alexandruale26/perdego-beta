@@ -53,8 +53,6 @@ const ColorSelect = forwardRef(({ className, defaultValue, colors, colorSize = 8
     setSelected(index);
   };
 
-  console.log(selected);
-
   return (
     <div className={twMerge("w-full", className)}>
       <input hidden readOnly value={selected} ref={ref} {...props} />
