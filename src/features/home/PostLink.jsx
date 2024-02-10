@@ -4,8 +4,8 @@ import { formatPostDate } from "../../utils/helpers";
 import { getImageUrl } from "../../services/postApi";
 import Image from "../../shared/icons/Image";
 
-const linkBaseStyle = "xs:h-[150px] xs:flex-row";
-const linkGridStyle = "xs:h-[320px]";
+const linkBaseStyle = "xs:h-[150px] xs:flex-row gap-2 xs:gap-4";
+const linkGridStyle = "xs:h-[320px] gap-2";
 const imageBaseStyle = "xs:w-[170px] sm:w-[230px] h-[200px] xs:h-full";
 const imageGridStyle = "h-[200px] xs:h-[150px]";
 const placeholderStyle = "p-4 bg-grey-200 object-contain";
@@ -18,7 +18,7 @@ const PostLink = ({ post, className, searchParams = "", gridMode = false, backTo
       to={`/${post.id}`}
       state={{ searchParams, backToUserPosts }}
       className={twMerge(
-        `w-full h-[340px] flex flex-col items-center justify-between gap-4 p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
+        `w-full h-[340px] flex flex-col items-center justify-between p-2 bg-white shadow-sm rounded-md text-start focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden transition-all ${
           gridMode ? linkGridStyle : linkBaseStyle
         }`,
         className
@@ -33,8 +33,8 @@ const PostLink = ({ post, className, searchParams = "", gridMode = false, backTo
       />
       <div className="h-full w-full flex flex-col items-start justify-between py-1 gap-2">
         <h3
-          className={`tracking-[0.01em] leading-snug ${
-            gridMode ? "text-base font-semibold" : "sm:text-lg font-semibold"
+          className={`tracking-[0.01em] font-semibold leading-snug ${
+            gridMode ? "text-[15px]" : "sm:text-[17px]"
           } text-grey-800 hover:text-white hover:bg-grey-800 flex break-words word-break`}
         >
           {post.title}

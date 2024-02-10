@@ -13,7 +13,7 @@ const Navbar = () => {
   const { user } = useUserSessionContext();
 
   return (
-    <div className="px-4">
+    <nav className="px-4">
       <div
         style={{ height: `${BARS_HEIGHT.nav}px` }}
         className={`flex w-full max-w-4xl mx-auto items-center justify-between`}
@@ -42,7 +42,7 @@ const Navbar = () => {
           {user !== null && <UserProfileButton user={user} />}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

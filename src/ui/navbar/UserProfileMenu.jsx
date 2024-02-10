@@ -15,6 +15,8 @@ const xsmSize = 540; // from tailwindcss.config.js
 
 const UserProfileMenu = ({ user }) => {
   const [mainWidth, setMainWidth] = useState(2000);
+  const [buttonRightDistance, setButtonRightDistance] = useState(0);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +37,23 @@ const UserProfileMenu = ({ user }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateDistanceFromRight = () => {
+      const userButton = document.getElementById("userButton");
+
+      if (userButton) {
+        const rect = userButton.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const distance = windowWidth - rect.right;
+        setButtonRightDistance(distance);
+      }
+    };
+
+    updateDistanceFromRight();
+    window.addEventListener("resize", updateDistanceFromRight);
+    return () => window.removeEventListener("resize", updateDistanceFromRight);
+  }, [buttonRightDistance]);
+
   const signOut = async () => {
     const response = await logoutUser();
 
@@ -45,8 +64,11 @@ const UserProfileMenu = ({ user }) => {
   };
 
   return (
-    <Modal className="items-start justify-end animate-in slide-in-from-right-10 ease-out z-20 overflow-hidden cursor-default">
-      <div className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 px-2 bg-white shadow-large rounded-md select-none">
+    <Modal className="items-start justify-end pr-0 animate-in slide-in-from-right-20 duration-50 z-20 overflow-hidden cursor-default">
+      <div
+        style={{ marginRight: buttonRightDistance }}
+        className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 px-2 bg-white shadow-large rounded-md select-none"
+      >
         <User className="pb-2 px-1" user={user} hideAvatar={mainWidth >= xsmSize} />
 
         <Separator className="mt-2 mb-3" />
