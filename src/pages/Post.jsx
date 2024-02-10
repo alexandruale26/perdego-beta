@@ -62,7 +62,7 @@ const Post = () => {
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full h-full max-w-3xl flex flex-col gap-4 rounded-md mx-auto">
-        <LinkButton to={linkRedirect} className="justify-start font-medium text-grey-700 select-none">
+        <LinkButton to={linkRedirect} className="justify-start -mt-2 font-medium text-grey-700 select-none">
           <ChevronLeftIcon className="shrink-0 w-8 h-8 pb-1 mr-[-4px]" /> Înapoi
           <span className="pl-4 text-xs xs:text-sm font-light">
             {backToUserPosts
@@ -84,7 +84,7 @@ const Post = () => {
         <Section className="flex-col items-start justify-center">
           <p className="text-xs font-light text-grey-600">{formatPostDate(post.createdAt)}</p>
 
-          <h1 className="-mt-1 text-xl xsm:text-2xl font-semibold text-grey-800">{post.title}</h1>
+          <h1 className="-mt-1 text-xl xsm:text-2xl font-semibold leading-none text-grey-800">{post.title}</h1>
           <p className="text-sm font-normal text-grey-700 mb-2">{post.description}</p>
 
           <div className="w-full flex flex-wrap gap-2 items-center justify-start mb-1">
@@ -92,8 +92,6 @@ const Post = () => {
             <Tag title="Locație:" description={post.location} />
             <Tag title="Categorie:" description={post.category} />
           </div>
-
-          {/* <h2 className="text-lg font-medium uppercase text-grey-800 -mb-2.5">Descriere</h2> */}
         </Section>
 
         <Section className="flex-col items-start justify-start">

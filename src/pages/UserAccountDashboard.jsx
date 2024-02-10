@@ -51,7 +51,7 @@ const UserAccountDashboard = () => {
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-2xl mx-auto">
         <div className="flex flex-col items-start justify-center gap-6">
-          <h1 className="text-2xl font-medium text-grey-800">Contul tǎu</h1>
+          <h1 className="text-2xl font-medium text-grey-800 leading-none">Contul tǎu</h1>
           <Info>
             <p className="text-start text-sm xs:text-base text-grey-600 font-light">Modificǎ informațiile contului</p>
           </Info>

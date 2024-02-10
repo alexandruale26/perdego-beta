@@ -7,7 +7,7 @@ const PostsDashboardContent = ({ posts }) => {
     <Section className="flex flex-col items-start justify-start gap-4 bg-transparent border-none p-0 shadow-none">
       {posts.length < 1 ? (
         <div className="w-full flex flex-col items-center justify-center gap-6 py-20 select-none">
-          <span className="text-4xl xs:text-5xl pb-10 bg-clip-text text-transparent bg-gradient-to-b from-cyan-400 to-cyan-500">
+          <span className="text-4xl xs:text-5xl pb-10 bg-clip-text text-transparent bg-gradient-to-b from-primary-400 to-primary-700">
             ¯\_(ツ)_/¯
           </span>
 

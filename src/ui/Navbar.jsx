@@ -14,7 +14,10 @@ const Navbar = () => {
 
   return (
     <div className="px-4">
-      <div style={{ height: `${BARS_HEIGHT.nav}px` }} className={`flex w-full mx-auto items-center justify-between`}>
+      <div
+        style={{ height: `${BARS_HEIGHT.nav}px` }}
+        className={`flex w-full max-w-4xl mx-auto items-center justify-between`}
+      >
         <LinkButton to="/">
           <Logo className="text-3xl sm:text-4xl" />
         </LinkButton>
@@ -22,7 +25,7 @@ const Navbar = () => {
         <div className="flex items-center justify-center gap-8">
           <LinkButton
             to={user !== null ? formPath : loginPath}
-            className="hidden xsm:flex min-h-[40px] bg-white text-black px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
+            className="hidden xsm:flex min-h-[40px] bg-white text-black font-medium px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
           >
             Adaugǎ anunț nou
           </LinkButton>

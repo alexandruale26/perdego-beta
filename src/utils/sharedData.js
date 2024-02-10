@@ -64,6 +64,8 @@ const BARS_HEIGHT = {
   footer: 80,
 };
 
+const ART_942 = "https://www.codulcivil.ro/art-942-Proprietatea-bunului-gasit/";
+
 const POSTTYPE = ["Pierdute", "Gǎsite"];
 
-export { COUNTIES, OBJECT_CATEGORY, POSTTYPE, BARS_HEIGHT };
+export { COUNTIES, OBJECT_CATEGORY, POSTTYPE, BARS_HEIGHT, ART_942 };

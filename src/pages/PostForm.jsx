@@ -6,7 +6,7 @@ import Spinner from "../shared/Spinner";
 import { useUserSessionContext } from "../ui/UserSession";
 import postFormProcess from "../features/postForm/postFormProcess";
 import FormContent from "../features/postForm/FormContent";
-
+import LegalInfo from "../features/postForm/LegalInfo";
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -26,15 +26,18 @@ const PostForm = () => {
 
   return (
     <PageContainer className={isPostCreated ? "flex items-center justify-center" : ""}>
-      {isPostCreated && <Confirmation message="Felicitǎri! Anunțul tǎu a fost postat cu succes." />}
+      {isPostCreated && <Confirmation message="Anunțul tǎu a fost publicat cu succes." />}
 
       {isPostCreated === false && (
-        <div className="max-w-2xl mx-auto space-y-8">
+        <div className="max-w-2xl mx-auto space-y-6">
           {isLoading && (
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
-          <h1 className="text-2xl font-medium text-grey-800">Creeazǎ un anunț nou</h1>
-          <FormContent formData={formData} handleOnSubmit={handlePostCreate} />
+          <h1 className="text-2xl font-medium text-grey-700 leading-none">Publicǎ un anunț nou</h1>
+          <div className="space-y-8">
+            <LegalInfo />
+            <FormContent formData={formData} handleOnSubmit={handlePostCreate} />
+          </div>
         </div>
       )}
     </PageContainer>

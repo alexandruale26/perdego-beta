@@ -18,7 +18,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         name="title"
         render={(field) => (
           <FormItem>
-            <FormLabel>Titlul anunțului</FormLabel>
+            <FormLabel>Titlu</FormLabel>
             <ValidationInput placeholder="ex.: Portofel bǎrbǎtesc de culoare maro" {...field} />
             <FormMessage />
           </FormItem>
@@ -29,7 +29,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         render={(field) => (
           <FormItem>
             <FormLabel>
-              Imaginea anunțului<span className="font-light"> (Opțional)</span>
+              Imagine<span className="font-light"> (Opțional)</span>
             </FormLabel>
             <ImageSelect imageUrl={formData.defaultValues.imageUrl} {...field} />
             <FormMessage />
@@ -50,7 +50,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         name="postType"
         render={(field) => (
           <FormItem>
-            <FormLabel>Tipul anunțului</FormLabel>
+            <FormLabel>Categorie anunț</FormLabel>
             <Selector
               values={POSTTYPE}
               defaultValue={formData.defaultValues.postType ? formData.defaultValues.postType : ""}
@@ -64,7 +64,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         name="category"
         render={(field) => (
           <FormItem>
-            <FormLabel>Categorie</FormLabel>
+            <FormLabel>Categorie obiect</FormLabel>
             <ComboBox
               placeholder="Cautǎ dupǎ categorie"
               defaultValue={formData.defaultValues.category}

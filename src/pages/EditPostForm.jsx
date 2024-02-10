@@ -8,6 +8,7 @@ import postEditProcess from "../features/editPostForm/postEditProcess";
 import { useLocation } from "react-router-dom";
 import FormContent from "../features/postForm/FormContent";
 import Error from "../shared/Error";
+import Info from "../shared/Info";
 import { getPost, getImageUrl } from "../services/postApi";
 
 const EditPostForm = () => {
@@ -67,14 +68,15 @@ const EditPostForm = () => {
 
   return (
     <PageContainer className={isPostModified ? "flex items-center justify-center" : ""}>
-      {isPostModified && <Confirmation message="Felicitǎri! Anunțul tǎu a fost modificat cu succes." />}
+      {isPostModified && <Confirmation message="Anunțul tǎu a fost modificat cu succes." />}
 
       {isPostModified === false && (
         <div className="max-w-2xl mx-auto space-y-8">
           {(isLoading || isPostDataFetched === false) && (
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
-          <h1 className="text-2xl font-medium text-grey-800 select-none">Modificǎ anunțul</h1>
+          <h1 className="text-2xl font-medium text-grey-700 leading-none select-none">Modificǎ anunțul</h1>
+          {/* <Info className="justify-start">Anunțul va fi valabil 10 zile de la data creǎrii</Info> */}
           {isPostDataFetched && (
             <FormContent formData={formData} handleOnSubmit={handlePostCreate} submitButtonTitle="Modificǎ anunțul" />
           )}
