@@ -26,7 +26,9 @@ const AppLayout = () => {
           >
             {isLoading ? <Spinner /> : <Outlet />}
           </main>
-          <footer className="w-full bg-black h-[80px] text-white text-center">Footer</footer>
+          <footer id="footer" className="w-full bg-black h-[80px] text-white text-center">
+            Footer
+          </footer>
         </>
       )}
       <Toaster gutter={10} toastOptions={{ duration: 5000, style: { borderRadius: "6px", marginBottom: 10 } }} />
