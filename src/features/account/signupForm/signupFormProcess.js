@@ -1,8 +1,8 @@
-import { randomColor } from "./helpers";
-import { capitalizeEachWordFromString } from "../../utils/helpers";
-import { signUpUser, deleteUserAtSignupError } from "../../services/userApi";
-import { createProfile } from "../../services/profileApi";
-import toastNotification from "../../shared/Toasts";
+import { randomColor } from "../helpers";
+import { capitalizeEachWordFromString } from "../../../utils/helpers";
+import { signUpUser, deleteUserAtSignupError } from "../../../services/userApi";
+import { createProfile } from "../../../services/profileApi";
+import toastNotification from "../../../shared/Toasts";
 
 const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
   setIsLoading(true);

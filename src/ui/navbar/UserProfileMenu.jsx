@@ -57,7 +57,7 @@ const UserProfileMenu = ({ user }) => {
           <PlusIcon className={iconsStyle} />
           <span>Adaugǎ anunț nou</span>
         </LinkButton>
-        <LinkButton to={""} color={user.color} className={linksStyle}>
+        <LinkButton to="/manage" color={user.color} className={linksStyle}>
           <ReaderIcon className={iconsStyle} />
           <span>Anunțurile mele</span>
         </LinkButton>

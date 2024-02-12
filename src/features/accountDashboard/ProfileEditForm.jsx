@@ -3,7 +3,7 @@ import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../../formComponents/form";
 import ValidationInput from "../../formComponents/ValidationInput";
 import SubmitButton from "../../shared/SubmitButton";
-import { schema } from "../account/createAccountData";
+import { schema } from "../userFormData";
 import ComboBox from "../../formComponents/ComboBox";
 import { COUNTIES } from "../../utils/sharedData";
 import { filterData } from "../../utils/helpers";

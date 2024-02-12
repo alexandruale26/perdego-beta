@@ -3,7 +3,7 @@ import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem, FormMessage } from "../../formComponents/form";
 import ValidationInput from "../../formComponents/ValidationInput";
 import SubmitButton from "../../shared/SubmitButton";
-import { schema, lengths } from "../account/createAccountData";
+import { schema, lengths } from "../userFormData";
 import ConfirmationBox from "../../shared/ConfirmationBox";
 import Spinner from "../../shared/Spinner";
 import { updatePassword } from "../../services/userApi";

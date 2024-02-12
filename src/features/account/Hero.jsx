@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import Logo from "../../shared/icons/Logo";
 import { LeftArrow, RightArrow } from "../../shared/icons/LogoArrows";
 import LinkButton from "../../shared/LinkButton";
-import HalfWidthDiv from "./HalfWidthDiv";
+import HalfWidthDiv from "./shared/HalfWidthDiv";
 
 const Hero = ({ className }) => {
   return (

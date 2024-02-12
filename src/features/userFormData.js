@@ -1,5 +1,5 @@
-import { generateErrorMessage } from "../../utils/helpers";
-import { EMAIL_AND_PASSWORD_LENGTHS } from "./helpers";
+import { generateErrorMessage } from "../utils/helpers";
+import { EMAIL_AND_PASSWORD_LENGTHS } from "./account/helpers";
 
 const lengths = {
   email: EMAIL_AND_PASSWORD_LENGTHS.email,
