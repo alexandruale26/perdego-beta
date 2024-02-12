@@ -7,7 +7,7 @@ import { useUserSessionContext } from "../ui/UserSession";
 import PostsDashboardContent from "../features/postsDashboard/PostsDashboardContent";
 import Info from "../shared/Info";
 
-const UserPostsDashboard = () => {
+const PostsDashboard = () => {
   const [posts, setPosts] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +36,7 @@ const UserPostsDashboard = () => {
           <h1 className="text-start text-2xl font-medium text-grey-800 leading-none">Anunțurile tale</h1>
           <Info>
             <p className="text-start text-sm xs:text-base text-grey-600 font-light">
-              Anunțurile vor fi șterse dupǎ 15 zile de la data creǎrii
+              Anunțurile vor fi șterse dupǎ 20 de zile de la data publicǎrii
             </p>
           </Info>
         </div>
@@ -53,4 +53,4 @@ const UserPostsDashboard = () => {
   );
 };
 
-export default UserPostsDashboard;
+export default PostsDashboard;

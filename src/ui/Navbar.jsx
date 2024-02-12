@@ -16,7 +16,7 @@ const Navbar = () => {
     <nav className="px-4">
       <div
         style={{ height: `${BARS_HEIGHT.nav}px` }}
-        className={`flex w-full max-w-4xl mx-auto items-center justify-between`}
+        className={`flex w-full max-w-7xl mx-auto items-center justify-between`}
       >
         <LinkButton to="/">
           <Logo className="text-3xl sm:text-4xl" />

@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import Button from "./button";
 
-// IMPORTANT should not use
+// IMPORTANT. Don't have favorites feature
 
 const iconStyle = "text-orange-500";
 

@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
 import UserProfileMenu from "./UserProfileMenu";
-import Avatar from "../../shared/Avatar";
 import { allowWindowScroll } from "../../utils/helpers";
+import UserIcon from "../../shared/icons/UserIcon";
 
-const menuIconsStyle = "w-8 h-8 text-white";
+const menuIconsStyle = "block xsm:hidden w-8 h-8 text-white hover:text-primary";
 
 const UserProfileButton = ({ user }) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -29,18 +29,9 @@ const UserProfileButton = ({ user }) => {
 
   return (
     <div id="userButton" ref={profileButtonRef} className="relative cursor-pointer">
-      <div className="hidden xsm:flex flex-col">
-        <Avatar color={user.color} name={user.name} className="w-11 h-11 text-xl" />
-        {menuIsOpen && <UserProfileMenu user={user} isOnMobileDevice={false} />}
-      </div>
-
-      <div className="flex xsm:hidden flex-col">
-        {menuIsOpen ? (
-          <Cross1Icon className={`${menuIconsStyle} ${!menuIsOpen ? "" : "hover:text-primary"}`} />
-        ) : (
-          <HamburgerMenuIcon className={`${menuIconsStyle} ${menuIsOpen ? "" : "hover:text-primary"}`} />
-        )}
-
+      <div>
+        {menuIsOpen ? <Cross1Icon className={menuIconsStyle} /> : <HamburgerMenuIcon className={menuIconsStyle} />}
+        <UserIcon className="hidden xsm:block p-1.5" />
         {menuIsOpen && <UserProfileMenu user={user} />}
       </div>
     </div>

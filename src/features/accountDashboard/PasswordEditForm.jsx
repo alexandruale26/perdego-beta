@@ -8,14 +8,14 @@ import ConfirmationBox from "../../shared/ConfirmationBox";
 import Spinner from "../../shared/Spinner";
 import { updatePassword } from "../../services/userApi";
 import toastNotification from "../../shared/Toasts";
+import { handleApiAction } from "../../services/apiHelpers/helpers";
 
 const PasswordEditForm = () => {
   const [newPassword, setNewPassword] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     setModalIsOpen(false);
   };
 
@@ -43,7 +43,7 @@ const PasswordEditForm = () => {
       setIsLoading(false);
     };
 
-    process();
+    handleApiAction(process, closeModal);
   };
 
   const formData = { schema, defaultValues: {} };
@@ -66,13 +66,17 @@ const PasswordEditForm = () => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
+        <SubmitButton
+          aria-label="submit password change"
+          className="h-12 w-full overflow-hidden bg-grey-800"
+          disabled={isLoading}
+        >
           {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Salveazǎ parola</span>}
         </SubmitButton>
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handlePasswordUpdate}>
+        <ConfirmationBox handleOnDeny={closeModal} handleOnConfirm={handlePasswordUpdate}>
           <div className="h-full min-h-[50px] flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base font-light text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici parola?

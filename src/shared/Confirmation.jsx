@@ -9,7 +9,7 @@ const Confirmation = ({ className, message, buttonTitle = null }) => {
       <img src="confetti.svg" alt="confetti" draggable="false" className="max-w-[200px] max-h-[200px]" />
       <h3 className="pt-8 text-xl text-grey-600 text-center">{message}</h3>
 
-      <LinkButton to="/" replace={true} disguiseAsFullButton={true}>
+      <LinkButton to="/" replace={true} disguiseAsButton={true}>
         {buttonText}
       </LinkButton>
     </div>

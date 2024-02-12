@@ -15,6 +15,7 @@ import ComboBox from "../formComponents/ComboBox";
 import { COUNTIES } from "../utils/sharedData";
 import { filterData } from "../utils/helpers";
 import signupFormProcess from "../features/account/signupFormProcess";
+import { handleApiAction } from "../services/apiHelpers/helpers";
 
 const defaultValues = {};
 const formData = { schema, defaultValues };
@@ -54,8 +55,7 @@ const SignupForm = () => {
   }, []);
 
   const handleOnSubmit = (values) => {
-    setIsLoading(true);
-    signupFormProcess(values, setIsLoading, setIsAccountCreated);
+    handleApiAction(() => signupFormProcess(values, setIsLoading, setIsAccountCreated));
   };
 
   const topMargin = pageWidth >= smSize ? formTopMargin : 0;
@@ -72,7 +72,7 @@ const SignupForm = () => {
         <FormContainer ref={formContainerRef} style={{ marginTop: topMargin }}>
           {isAccountCreated && (
             <Confirmation
-              message="Felicitǎri! Contul tǎu a fost creat cu succes."
+              message="Contul tǎu a fost creat cu succes."
               buttonTitle="Du-mǎ pe pagina principalǎ"
               className="py-10 sm:py-0"
             />
@@ -118,6 +118,7 @@ const SignupForm = () => {
                     <FormItem className="max-w-full">
                       <FormLabel>Locația ta</FormLabel>
                       <ComboBox
+                        aria-label="select location"
                         placeholder="Cautǎ dupǎ județ sau sector"
                         defaultValue={defaultValues.location}
                         filter={filterData}
@@ -141,7 +142,9 @@ const SignupForm = () => {
                 />
 
                 <div className="w-full pt-6">
-                  <SubmitButton className="h-12 w-full">Creeazǎ contul</SubmitButton>
+                  <SubmitButton aria-label="submit signup values" className="h-12 w-full">
+                    Creeazǎ contul
+                  </SubmitButton>
                 </div>
               </Form>
             </>

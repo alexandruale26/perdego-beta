@@ -14,6 +14,7 @@ import Spinner from "../shared/Spinner";
 import { schema, lengths } from "../features/account/loginData";
 import { loginUser } from "../services/userApi";
 import toastNotification from "../shared/Toasts";
+import { handleApiAction } from "../services/apiHelpers/helpers";
 
 const defaultValues = {};
 const formData = {
@@ -26,9 +27,8 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleOnSubmit = (values) => {
-    setIsLoading(true);
-
     const process = async () => {
+      setIsLoading(true);
       const curatedValues = { ...values, email: values.email.toLowerCase() };
       const response = await loginUser(curatedValues);
 
@@ -40,7 +40,7 @@ const LoginForm = () => {
       navigate("/");
     };
 
-    process();
+    handleApiAction(process);
   };
 
   return (
@@ -77,8 +77,11 @@ const LoginForm = () => {
             />
 
             <div className="w-full pt-6 space-y-4">
-              <SubmitButton className="h-12 w-full">Conecteazǎ-te</SubmitButton>
+              <SubmitButton aria-label="submit login values" className="h-12 w-full">
+                Conecteazǎ-te
+              </SubmitButton>
               <LinkButton
+                aria-label="redirect to signup"
                 to="/signup"
                 className="h-12 w-full border border-black rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
               >

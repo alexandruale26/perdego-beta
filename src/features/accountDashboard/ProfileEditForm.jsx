@@ -12,14 +12,14 @@ import Spinner from "../../shared/Spinner";
 import toastNotification from "../../shared/Toasts";
 import { updateProfile } from "../../services/profileApi";
 import { capitalizeEachWordFromString } from "../../utils/helpers";
+import { handleApiAction } from "../../services/apiHelpers/helpers";
 
 const ProfileEditForm = ({ profile, changeUserProfile }) => {
   const [newProfile, setNewProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     setModalIsOpen(false);
   };
 
@@ -53,7 +53,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
       setIsLoading(false);
     };
 
-    process();
+    handleApiAction(process, closeModal);
   };
 
   const defaultValues = { ...profile };
@@ -77,6 +77,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
           <FormItem className="max-w-full">
             <FormLabel>Locație</FormLabel>
             <ComboBox
+              aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.location}
               filter={filterData}
@@ -100,13 +101,17 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
       />
 
       <div className="w-full pt-2">
-        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
+        <SubmitButton
+          aria-label="submit profile change"
+          className="h-12 w-full overflow-hidden bg-grey-800"
+          disabled={isLoading}
+        >
           {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Modificǎ profilul</span>}
         </SubmitButton>
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleProfileUpdate}>
+        <ConfirmationBox handleOnDeny={closeModal} handleOnConfirm={handleProfileUpdate}>
           <div className="h-full min-h-[60px] xxs:min-h-[80px] flex flex-col items-center justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base font-light text-grey-800 text-center">
               Ești sigur cǎ dorești sǎ modifici datele profilulului?

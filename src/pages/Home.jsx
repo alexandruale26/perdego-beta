@@ -24,9 +24,8 @@ const Home = () => {
   const searchedParams = getAllSearchParamsAsObject(urlSearchParams);
 
   useEffect(() => {
-    setIsLoading(true);
-
     const process = async () => {
+      setIsLoading(true);
       const queryParams = getAllSearchParamsAsObject(urlSearchParams);
       const response = await queryPosts(queryParams, hasSearchParams);
 

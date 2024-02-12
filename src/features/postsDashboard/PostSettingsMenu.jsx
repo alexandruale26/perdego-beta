@@ -27,8 +27,9 @@ const PostSettingsMenu = ({ menuIsOpen, handleModal, postId }) => {
             <Pencil2Icon height="24" width="24" />
           </LinkButton>
           <Button
+            aria-label="post settings"
             onClick={handleModal}
-            className={`p-1 flex items-center justify-center text-white hover:text-rose-400 ${iconsAnimationStyle}`}
+            className={`p-1 flex items-center justify-center text-white hover:text-rose-500 ${iconsAnimationStyle}`}
           >
             <TrashIcon height="30" width="30" />
           </Button>

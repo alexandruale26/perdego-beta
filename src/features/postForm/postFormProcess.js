@@ -4,6 +4,8 @@ import { createPost, deleteImage } from "../../services/postApi";
 import { handleImageUpload } from "./formHelpers";
 
 const postFormProcess = async (values, setIsLoading, setIsPostCreated) => {
+  setIsLoading(true);
+
   const imageUploaderResponse = await handleImageUpload(values.image);
 
   if (imageUploaderResponse.status !== "ok") {

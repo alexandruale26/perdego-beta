@@ -10,32 +10,12 @@ import toastNotification from "../../shared/Toasts";
 import Modal from "../../shared/Modal";
 
 const iconsStyle = "w-5 h-5";
-const linksStyle = "w-full flex items-center justify-start gap-2 p-1 xs:text-lg rounded-[4px]";
-const xsmSize = 540; // from tailwindcss.config.js
+const linksStyle = "w-full flex items-center justify-start gap-2 p-1 xsm:text-lg rounded-[6px]";
 
 const UserProfileMenu = ({ user }) => {
-  const [mainWidth, setMainWidth] = useState(2000);
   const [buttonRightDistance, setButtonRightDistance] = useState(0);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const handleResize = () => {
-      const bodyElement = document.querySelector("body");
-
-      if (bodyElement) {
-        const { width } = bodyElement.getBoundingClientRect();
-        setMainWidth(width);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const updateDistanceFromRight = () => {
@@ -69,17 +49,15 @@ const UserProfileMenu = ({ user }) => {
         style={{ marginRight: buttonRightDistance }}
         className="max-w-[300px] max-h-[261px] flex flex-col items-start py-4 px-2 bg-white shadow-large rounded-md select-none"
       >
-        <User className="pb-2 px-1" user={user} hideAvatar={mainWidth >= xsmSize} />
+        <User className="pb-2 px-1" user={user} />
 
         <Separator className="mt-2 mb-3" />
 
-        {mainWidth < xsmSize && (
-          <LinkButton to="/new" color={user.color} className={linksStyle}>
-            <PlusIcon className={iconsStyle} />
-            <span>Adaugǎ anunț nou</span>
-          </LinkButton>
-        )}
-        <LinkButton to="/manage" color={user.color} className={linksStyle}>
+        <LinkButton to="/new" color={user.color} className={`xsm:hidden  ${linksStyle}`}>
+          <PlusIcon className={iconsStyle} />
+          <span>Adaugǎ anunț nou</span>
+        </LinkButton>
+        <LinkButton to={""} color={user.color} className={linksStyle}>
           <ReaderIcon className={iconsStyle} />
           <span>Anunțurile mele</span>
         </LinkButton>

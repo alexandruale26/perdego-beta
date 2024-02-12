@@ -1,6 +1,12 @@
 import supabase from "./supabase";
 import { generateResponse } from "./apiHelpers/helpers";
 import {
+  supabaseExistingEmailResponseMessage,
+  supabaseUserExistsError,
+  supabaseSamePasswordResponseMessage,
+} from "./apiHelpers/supabaseErrorMessages";
+
+import {
   PASSWORD_UPDATED_MESSAGE,
   EMAIL_UPDATED_MESSAGE,
   LOGOUT_SUCCESS_MESSAGE,
@@ -11,11 +17,6 @@ import {
   LOGIN_ERROR_MESSAGE,
   SAME_PASSWORD_ERROR_MESSAGE,
 } from "./apiHelpers/apiErrorMessages";
-
-// TODO move these from below
-const supabaseSamePasswordResponseMessage = "New password should be different from the old password.";
-const supabaseExistingEmailResponseMessage = "A user with this email address has already been registered";
-const supabaseUserExistsError = "User already registered";
 
 const signUpUser = async (credentials) => {
   try {

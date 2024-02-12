@@ -7,6 +7,8 @@ import { useUserSessionContext } from "../ui/UserSession";
 import postFormProcess from "../features/postForm/postFormProcess";
 import FormContent from "../features/postForm/FormContent";
 import LegalInfo from "../features/postForm/LegalInfo";
+import { handleApiAction } from "../services/apiHelpers/helpers";
+
 const PostForm = () => {
   const [isPostCreated, setIsPostCreated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,8 +18,7 @@ const PostForm = () => {
   const formData = { schema, defaultValues };
 
   const handlePostCreate = (values) => {
-    setIsLoading(true);
-    postFormProcess(values, setIsLoading, setIsPostCreated);
+    handleApiAction(() => postFormProcess(values, setIsLoading, setIsPostCreated));
   };
 
   // if user === null, user's data will be null at default values

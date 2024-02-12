@@ -52,6 +52,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
           <FormItem>
             <FormLabel>Categorie anunț</FormLabel>
             <Selector
+              aria-label="select post type"
               values={POSTTYPE}
               defaultValue={formData.defaultValues.postType ? formData.defaultValues.postType : ""}
               {...field}
@@ -66,6 +67,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
           <FormItem>
             <FormLabel>Categorie obiect</FormLabel>
             <ComboBox
+              aria-label="select object category"
               placeholder="Cautǎ dupǎ categorie"
               defaultValue={formData.defaultValues.category}
               filter={filterData}
@@ -83,6 +85,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
           <FormItem>
             <FormLabel>Locație</FormLabel>
             <ComboBox
+              aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={formData.defaultValues.location}
               filter={filterData}
@@ -113,7 +116,9 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         )}
       />
       <div className="w-full">
-        <SubmitButton className="h-12 w-full mt-10">{title}</SubmitButton>
+        <SubmitButton aria-label="submit post values" className="h-12 w-full mt-10">
+          {title}
+        </SubmitButton>
       </div>
     </Form>
   );

@@ -10,6 +10,9 @@ import { updateEmail } from "../../services/userApi";
 import toastNotification from "../../shared/Toasts";
 import Info from "../../shared/Info";
 import { NEW_EMAIL_ERROR_MESSAGE } from "../../services/apiHelpers/apiErrorMessages";
+import { handleApiAction } from "../../services/apiHelpers/helpers";
+
+const toConfirmMessage = "Confirmǎ modificǎrile pe noua adresǎ de e-mail";
 
 const EmailEditForm = ({ email }) => {
   const [newEmail, setNewEmail] = useState(null);
@@ -17,8 +20,7 @@ const EmailEditForm = ({ email }) => {
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     setModalIsOpen(false);
   };
 
@@ -48,7 +50,7 @@ const EmailEditForm = ({ email }) => {
       setIsLoading(false);
     };
 
-    process();
+    handleApiAction(process, closeModal);
   };
 
   const defaultValues = { email };
@@ -58,7 +60,7 @@ const EmailEditForm = ({ email }) => {
     <Form {...formData} onSubmit={handleOnSubmit} className="w-full space-y-3">
       {isEmailConfirmed === false && (
         <Info iconStyle="w-4 h-4" className="justify-start text-start text-xs text-grey-600 font-light">
-          Confirmǎ modificǎrile pe noua adresǎ de e-mail pentru a salva modificǎrile
+          {toConfirmMessage}
         </Info>
       )}
       <FormField
@@ -72,20 +74,24 @@ const EmailEditForm = ({ email }) => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
-          {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Salveazǎ e-mailul</span>}
+        <SubmitButton
+          aria-label="submit email change"
+          className="h-12 w-full overflow-hidden bg-grey-800"
+          disabled={isLoading}
+        >
+          {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Modificǎ e-mailul</span>}
         </SubmitButton>
       </div>
 
       {modalIsOpen && (
-        <ConfirmationBox handleOnDeny={handleModal} handleOnConfirm={handleEmailUpdate}>
+        <ConfirmationBox handleOnDeny={closeModal} handleOnConfirm={handleEmailUpdate}>
           <div className="h-full min-h-[50px] flex flex-col items-start justify-between gap-8">
             <p className="px-0 text-sm xxs:text-base font-light text-grey-700 text-center">
               Ești sigur cǎ dorești sǎ schimbi actuala adresǎ de e-mail{" "}
               <span className="text-grey-700 font-semibold">{email}</span>?
             </p>
             <Info iconStyle="w-4 h-4" className="justify-start gap-1 text-start text-xs text-grey-600 font-light">
-              Confirmǎ modificǎrile pe noua adresǎ de e-mail
+              {toConfirmMessage}
             </Info>
           </div>
         </ConfirmationBox>

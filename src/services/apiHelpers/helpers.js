@@ -1,4 +1,6 @@
 import { removeDiacritics } from "../../utils/helpers";
+import toastNotification from "../../shared/Toasts";
+import { NO_INTERNET_ERROR_MESSAGE } from "./apiErrorMessages";
 
 const convertToMatchSearch = (string) => {
   const splittedWords = string.split(" ");
@@ -14,4 +16,13 @@ const convertToMatchSearch = (string) => {
 
 const generateResponse = (status, data, message = null) => ({ status, data, message });
 
-export { convertToMatchSearch, generateResponse };
+const handleApiAction = (performApiAction, offlineAction = null) => {
+  if (window.navigator.onLine === false) {
+    toastNotification(NO_INTERNET_ERROR_MESSAGE);
+    if (offlineAction !== null) offlineAction();
+  } else {
+    performApiAction();
+  }
+};
+
+export { convertToMatchSearch, generateResponse, handleApiAction };

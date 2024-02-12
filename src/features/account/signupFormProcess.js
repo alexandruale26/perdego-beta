@@ -5,6 +5,8 @@ import { createProfile } from "../../services/profileApi";
 import toastNotification from "../../shared/Toasts";
 
 const signupFormProcess = async (values, setIsLoading, setIsAccountCreated) => {
+  setIsLoading(true);
+
   const email = values.email.toLowerCase();
   const color = randomColor();
   const name = capitalizeEachWordFromString(values.name);

@@ -11,6 +11,7 @@ import Info from "../shared/Info";
 import toastNotification from "../shared/Toasts";
 import ConfirmationBox from "../shared/ConfirmationBox";
 import Spinner from "../shared/Spinner";
+import { handleApiAction } from "../services/apiHelpers/helpers";
 
 const UserAccountDashboard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -42,7 +43,7 @@ const UserAccountDashboard = () => {
 
       setIsLoading(false);
     };
-    process();
+    handleApiAction(process, () => setModalIsOpen(false));
   };
 
   const profile = { name: user.name, location: user.location, phone: user.phone, id: user.id };
@@ -68,11 +69,12 @@ const UserAccountDashboard = () => {
               <PasswordEditForm />
             </DashboardSection>
 
-            <DashboardSection title="Eliminǎ contul">
+            <DashboardSection title="Eliminǎ contul" titleStyle="text-rose-500">
               <Button
+                aria-label="delete account"
                 onClick={handleModal}
                 disabled={isLoading}
-                className="w-full h-12 flex items-center justify-center bg-rose-600 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg disabled:hover:bg-rose-600"
+                className="w-full h-12 flex items-center justify-center bg-grey-800 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg disabled:hover:bg-grey-800"
               >
                 {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Șterge contul</span>}
               </Button>
@@ -85,9 +87,9 @@ const UserAccountDashboard = () => {
               <p className="px-0 text-sm xxs:text-base font-light text-grey-700 text-center">
                 Ești sigur cǎ dorești sǎ ștergi contul?
               </p>
-              <Info iconStyle="w-4 h-4" className="mr-auto gap-1 text-start text-xs text-grey-600 font-light">
+              <span className="text-xs text-grey-500 font-light mr-auto">
                 Contul si anunțurile tale vor fi șterse definitiv
-              </Info>
+              </span>
             </div>
           </ConfirmationBox>
         )}

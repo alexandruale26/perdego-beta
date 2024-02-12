@@ -1,25 +1,12 @@
-import { useEffect } from "react";
 import { Outlet, useNavigation, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import toastNotification from "../shared/Toasts";
 import Navbar from "./Navbar";
 import Spinner from "../shared/Spinner";
-import { NO_INTERNET_ERROR_MESSAGE } from "../services/apiHelpers/apiErrorMessages";
 import { BARS_HEIGHT } from "../utils/sharedData";
 
 const AppLayout = () => {
   const { pathname } = useLocation();
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const handleOffline = () => {
-      toastNotification(NO_INTERNET_ERROR_MESSAGE);
-    };
-
-    window.addEventListener("offline", handleOffline);
-
-    return () => window.removeEventListener("offline", handleOffline);
-  }, []);
 
   const isOnLoginOrCreate = pathname.includes("/login") || pathname.includes("/signup");
   const isLoading = navigation.state === "loading";

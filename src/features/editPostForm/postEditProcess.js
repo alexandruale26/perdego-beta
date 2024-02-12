@@ -6,6 +6,8 @@ import { handleImageUpload } from "../postForm/formHelpers";
 const deleteExistingImage = async (imageName) => await deleteImage(imageName);
 
 const postEditProcess = async (values, postId, imageName, setIsLoading, setIsPostModified) => {
+  setIsLoading(true);
+
   let image = imageName;
 
   if (values.image.size > 0) {

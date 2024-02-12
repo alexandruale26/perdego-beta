@@ -28,7 +28,7 @@ const ValidationInput = forwardRef(({ className, type, ...props }, ref) => {
         {...props}
       />
       {isValid && !passwordType && <Checkmark />}
-      {passwordType && <VisibilityButton visible={visible} onClick={onHandleClick} />}
+      {passwordType && <VisibilityButton name="show input values" visible={visible} onClick={onHandleClick} />}
     </div>
   );
 });

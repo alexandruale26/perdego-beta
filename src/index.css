@@ -8,10 +8,6 @@
   .word-break {
     word-break: break-word;
   }
-
-  .no-select-webkit::-webkit-selection {
-    background-color: purple;
-  }
 }
 
 ::selection {
@@ -37,10 +33,6 @@ input[type="password"] {
 input[type="file"],
 img {
   -webkit-user-select: none;
-  user-select: none;
-}
-
-.no-select {
   user-select: none;
 }
 

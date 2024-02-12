@@ -8,8 +8,8 @@ import postEditProcess from "../features/editPostForm/postEditProcess";
 import { useLocation } from "react-router-dom";
 import FormContent from "../features/postForm/FormContent";
 import Error from "../shared/Error";
-import Info from "../shared/Info";
 import { getPost, getImageUrl } from "../services/postApi";
+import { handleApiAction } from "../services/apiHelpers/helpers";
 
 const EditPostForm = () => {
   const [isPostModified, setIsPostModified] = useState(false);
@@ -52,8 +52,9 @@ const EditPostForm = () => {
   }, [state?.postId, user.name, user.phone]);
 
   const handlePostCreate = (values) => {
-    setIsLoading(true);
-    postEditProcess(values, state?.postId, defaultValues.imageName, setIsLoading, setIsPostModified);
+    handleApiAction(() =>
+      postEditProcess(values, state?.postId, defaultValues.imageName, setIsLoading, setIsPostModified)
+    );
   };
 
   // if user === null, user's data will be null at default values
@@ -76,7 +77,6 @@ const EditPostForm = () => {
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
           <h1 className="text-2xl font-medium text-grey-700 leading-none select-none">Modificǎ anunțul</h1>
-          {/* <Info className="justify-start">Anunțul va fi valabil 10 zile de la data creǎrii</Info> */}
           {isPostDataFetched && (
             <FormContent formData={formData} handleOnSubmit={handlePostCreate} submitButtonTitle="Modificǎ anunțul" />
           )}

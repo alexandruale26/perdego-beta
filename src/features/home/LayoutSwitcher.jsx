@@ -24,10 +24,10 @@ const LayoutSwitcher = ({ className, isGridSelected, onSelect }) => {
 
   return (
     <div className={twMerge("flex items-center justify-center gap-1", className)}>
-      <Button name="list" onClick={setLayout} className={buttonStyle}>
+      <Button name="list" aria-label="switch to list view" onClick={setLayout} className={buttonStyle}>
         <HamburgerMenuIcon className={`${iconStyle} ${setIconColor(!isGrid)}`} />
       </Button>
-      <Button name="grid" onClick={setLayout} className={buttonStyle}>
+      <Button name="grid" aria-label="switch to grid view" onClick={setLayout} className={buttonStyle}>
         <TokensIcon className={`${iconStyle} ${setIconColor(isGrid)}`} />
       </Button>
     </div>
