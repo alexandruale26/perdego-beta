@@ -7,9 +7,10 @@ import { queryPosts } from "../services/searchApi";
 import generateSearchParamsTitle from "../features/post/helpers";
 import PageContainer from "../shared/PageContainer";
 import SearchResults from "../features/home/SearchResults";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { defaultSearchParams } from "../features/home/data";
 import { getAllSearchParamsAsObject } from "../features/home/helpers";
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import Cookies from "../features/home/cookies/Cookies";
 
 const xsSize = 480; // size from tailwind.config.js
 
@@ -57,7 +58,6 @@ const Home = () => {
   };
 
   const getSearchValues = (queryData) => setUrlSearchParams(queryData);
-
   const loadedAndHasData = isLoading === false && posts !== null;
 
   return (
@@ -94,6 +94,7 @@ const Home = () => {
           <SearchResults hasSearchParams={hasSearchParams} posts={posts} searchedParams={searchedParams} />
         )}
       </div>
+      <Cookies />
     </PageContainer>
   );
 };

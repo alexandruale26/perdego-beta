@@ -13,7 +13,7 @@ import ConfirmationBox from "../shared/ConfirmationBox";
 import Spinner from "../shared/Spinner";
 import { handleApiAction } from "../services/apiHelpers/helpers";
 
-const UserAccountDashboard = () => {
+const UserDashboard = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -98,4 +98,4 @@ const UserAccountDashboard = () => {
   );
 };
 
-export default UserAccountDashboard;
+export default UserDashboard;

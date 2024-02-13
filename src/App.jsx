@@ -7,7 +7,7 @@ import Post from "./pages/Post";
 import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import PostsDashboard from "./pages/PostsDashboard";
-import UserAccountDashboard from "./pages/UserAccountDashboard";
+import UserDashboard from "./pages/UserDashboard";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         path: "account",
         element: (
           <ProtectedRoute>
-            <UserAccountDashboard />
+            <UserDashboard />
           </ProtectedRoute>
         ),
       },
