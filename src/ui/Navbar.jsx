@@ -5,8 +5,8 @@ import { BARS_HEIGHT } from "../utils/sharedData";
 import { useUserSessionContext } from "./UserSession";
 import UserProfileButton from "./navbar/UserProfileButton";
 
-const formPath = "/new";
-const loginPath = "/login";
+const formPath = "/anunt-nou";
+const loginPath = "/autentificare";
 const iconsStyle = "w-11 h-11 focus-visible:scale-110";
 
 const Navbar = () => {

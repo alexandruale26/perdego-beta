@@ -21,6 +21,8 @@ const router = createBrowserRouter([
       </UserSession>
     ),
 
+    //TODO: change ":pid" to "/posts:pid"
+
     children: [
       {
         path: "/",
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
         element: <Post />,
       },
       {
-        path: "new",
+        path: "anunt-nou",
         element: (
           <ProtectedRoute>
             <PostForm />
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "edit",
+        path: "modifica-anuntul",
         element: (
           <ProtectedRoute>
             <EditPostForm />
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "manage",
+        path: "administreaza-anunturile",
         element: (
           <ProtectedRoute>
             <PostsDashboard />
@@ -55,7 +57,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "account",
+        path: "contul-tau",
         element: (
           <ProtectedRoute>
             <UserDashboard />
@@ -63,11 +65,11 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "login",
+        path: "autentificare",
         element: <LoginForm />,
       },
       {
-        path: "signup",
+        path: "creeaza-cont",
         element: <SignupForm />,
       },
       {

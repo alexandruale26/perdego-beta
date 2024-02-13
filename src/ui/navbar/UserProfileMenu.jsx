@@ -53,15 +53,15 @@ const UserProfileMenu = ({ user }) => {
 
         <Separator className="mt-2 mb-3" />
 
-        <LinkButton to="/new" color={user.color} className={`xsm:hidden  ${linksStyle}`}>
+        <LinkButton to="/anunt-nou" color={user.color} className={`xsm:hidden  ${linksStyle}`}>
           <PlusIcon className={iconsStyle} />
           <span>Adaugǎ anunț nou</span>
         </LinkButton>
-        <LinkButton to="/manage" color={user.color} className={linksStyle}>
+        <LinkButton to="/administreaza-anunturile" color={user.color} className={linksStyle}>
           <ReaderIcon className={iconsStyle} />
           <span>Anunțurile mele</span>
         </LinkButton>
-        <LinkButton to="account" color={user.color} className={linksStyle}>
+        <LinkButton to="/contul-tau" color={user.color} className={linksStyle}>
           <GearIcon className={iconsStyle} />
           <span>Setǎri cont</span>
         </LinkButton>

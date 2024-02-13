@@ -20,7 +20,7 @@ const PostSettingsMenu = ({ menuIsOpen, handleModal, postId }) => {
       {menuIsOpen && (
         <div className="flex flex-col gap-2">
           <LinkButton
-            to="/edit"
+            to="/modifica-anuntul"
             state={{ postId: postId }}
             className={`p-1 flex items-center justify-center text-white hover:text-primary ${iconsAnimationStyle}`}
           >

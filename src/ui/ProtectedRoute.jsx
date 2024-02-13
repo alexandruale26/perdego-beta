@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
       const authResponse = await getCurrentUser();
 
       if (authResponse.status !== "ok") {
-        navigate("/login", { replace: true });
+        navigate("/autentificare", { replace: true });
       }
 
       setIsLoading(false);

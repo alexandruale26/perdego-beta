@@ -41,7 +41,7 @@ const LoginFormContent = ({ handleOnSubmit }) => {
         </SubmitButton>
         <LinkButton
           aria-label="redirect to signup"
-          to="/signup"
+          to="/creeaza-cont"
           className="h-12 w-full border border-black rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
         >
           Creeazǎ cont

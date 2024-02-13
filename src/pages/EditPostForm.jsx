@@ -61,8 +61,14 @@ const EditPostForm = () => {
   // form will re-render when user will not be null
   const isPostFetchCompleted = isPostDataFetched && Object.keys(defaultValues).length === 0;
   if (user === null) return;
-  if ((pathname === "/edit" && state?.postId === null) || isPostFetchCompleted) {
-    return <Error errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ." buttonMessage="Du-mǎ inapoi" to="/manage" />;
+  if ((pathname === "/modifica-anuntul" && state?.postId === null) || isPostFetchCompleted) {
+    return (
+      <Error
+        errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ."
+        buttonMessage="Du-mǎ inapoi"
+        to="/administreaza-anunturile"
+      />
+    );
   }
 
   const formData = { schema, defaultValues };
