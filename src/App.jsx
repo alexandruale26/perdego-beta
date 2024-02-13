@@ -8,6 +8,7 @@ import LoginForm from "./pages/LoginForm";
 import SignupForm from "./pages/SignupForm";
 import PostsDashboard from "./pages/PostsDashboard";
 import UserDashboard from "./pages/UserDashboard";
+import TermsAndConditions from "./pages/legal/TermsAndConditions";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignupForm />,
+      },
+      {
+        path: "termeni-si-conditii",
+        element: <TermsAndConditions />,
       },
       {
         path: "*",

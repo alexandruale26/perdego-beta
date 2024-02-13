@@ -3,7 +3,7 @@ import { ART_942 } from "../../utils/sharedData";
 
 const LegalInfo = () => {
   return (
-    <span className="block p-4 bg-grey-100 rounded-md text-grey-500 text-[13px] xs:text-[15px] leading-snug font-medium indent-1">
+    <span className="block p-4 bg-grey-100 rounded-md text-grey-600 text-[13px] xs:text-[15px] leading-snug font-medium indent-1">
       &rarr; Conform{" "}
       <a
         href={ART_942}

@@ -32,6 +32,7 @@ const Cookies = ({ className }) => {
         observer.disconnect();
       };
     }
+
     observeCookiePosition();
     window.addEventListener("scroll", observeCookiePosition);
     return () => window.removeEventListener("scroll", observeCookiePosition);
