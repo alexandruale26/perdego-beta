@@ -32,7 +32,7 @@ const TermsAndConditions = () => {
           <div className="ml-2 xsm:ml-3 space-y-2 xsm:space-y-3">
             <List title="Link-uri utile">
               <ListItem>
-                <TnCLink href={ART_942}>Art. 942 din Codului Civil al României </TnCLink>
+                <TnCLink href={ART_942}>Art. 942 din Codului Civil al României</TnCLink>
               </ListItem>
             </List>
           </div>

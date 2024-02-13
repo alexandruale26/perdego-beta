@@ -6,7 +6,7 @@ import Spinner from "../shared/Spinner";
 import { useUserSessionContext } from "../ui/UserSession";
 import postFormProcess from "../features/postForm/postFormProcess";
 import FormContent from "../features/postForm/FormContent";
-import LegalInfo from "../features/postForm/LegalInfo";
+import NewPostLegalInfo from "../features/legal/NewPostLegalInfo";
 import { handleApiAction } from "../services/apiHelpers/helpers";
 
 const PostForm = () => {
@@ -36,7 +36,7 @@ const PostForm = () => {
           )}
           <h1 className="text-2xl font-medium text-grey-700 leading-none">Publicǎ un anunț nou</h1>
           <div className="space-y-8">
-            <LegalInfo />
+            <NewPostLegalInfo />
             <FormContent formData={formData} handleOnSubmit={handlePostCreate} />
           </div>
         </div>
