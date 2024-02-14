@@ -42,7 +42,7 @@ const cookiesPolicy = [
 const cookiesPolicyTitle = "Descoperă cum folosim cookie-urile pentru o experiență plăcută pe platforma PERDEGO!";
 
 const cookiesPolicyFinalNotes = {
-  toUsersMessage: `Dacă ai întrebări sau nelămuriri cu privire la politica noastră de cookie-uri sau despre utilizarea acestora pe site-ul nostru, te rugăm să ne contactezi la adresa "${CONTACT_EMAIL}". Mulțumim pentru folosirea platformei noastre și pentru încrederea acordată!`,
+  toUsersMessage: `Dacă ai întrebări sau nelămuriri cu privire la politica noastră de cookie-uri sau despre utilizarea acestora pe site-ul nostru, te rugăm să ne contactezi la adresa de e-mail "${CONTACT_EMAIL}". Mulțumim pentru folosirea platformei noastre și pentru încrederea acordată!`,
   termsModificationDate: "Ultima actualizare: Februarie 2024",
 };
 

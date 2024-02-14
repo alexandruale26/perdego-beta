@@ -10,6 +10,7 @@ import PostsDashboard from "./pages/PostsDashboard";
 import UserDashboard from "./pages/UserDashboard";
 import TermsAndConditions from "./pages/legal/TermsAndConditions";
 import CookiesPolicy from "./pages/legal/CookiesPolicy";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Error from "./shared/Error";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "termeni-si-conditii",
         element: <TermsAndConditions />,
+      },
+      {
+        path: "politica-de-confidentialitate",
+        element: <PrivacyPolicy />,
       },
       {
         path: "politica-cookies",
