@@ -3,7 +3,7 @@ import { formatDateToRoumanian } from "../utils/helpers";
 import Avatar from "./Avatar";
 
 const UserProfile = ({ profile, className }) => {
-  const createdDate = new Date(profile.createdAt);
+  const createdDate = new Date(profile.created_at);
 
   return (
     <div className={twMerge("flex gap-3 items-center justify-center select-none", className)}>

@@ -29,7 +29,7 @@ const getProfile = async (id) => {
   try {
     const { data, error, status } = await supabase
       .from(profilesTable)
-      .select("name, phone, createdAt, color, location")
+      .select("name, phone, created_at, color, location")
       .eq("id", id)
       .single();
 

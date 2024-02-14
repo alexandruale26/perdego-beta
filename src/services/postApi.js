@@ -16,7 +16,7 @@ const createPost = async (post) => {
         location: post.location,
         category: post.category,
         image: post.image,
-        postType: post.postType,
+        post_type: post.post_type,
       },
     ]);
 
@@ -37,7 +37,7 @@ const updatePost = async (post, postId) => {
         location: post.location,
         category: post.category,
         image: post.image,
-        postType: post.postType,
+        post_type: post.post_type,
       })
       .eq("id", postId);
 
@@ -63,8 +63,8 @@ const getPostsByUserId = async (userId) => {
   try {
     const { data, error, status } = await supabase
       .from(postsTable)
-      .select("id, title, location, createdAt, category, image, postType")
-      .order("createdAt", { ascending: false })
+      .select("id, title, location, created_at, category, image, post_type")
+      .order("created_at", { ascending: false })
       .eq("userId", userId);
 
     if (error || status !== 200 || data === null) throw new Error("Error fetching posts");

@@ -5,7 +5,7 @@ import ValidationInput from "../../formComponents/ValidationInput";
 import SubmitButton from "../../shared/SubmitButton";
 import { schema } from "../userFormData";
 import ComboBox from "../../formComponents/ComboBox";
-import { COUNTIES } from "../../utils/sharedData";
+import { LOCATIONS } from "../../utils/sharedData";
 import { filterData } from "../../utils/helpers";
 import ConfirmationBox from "../../shared/ConfirmationBox";
 import Spinner from "../../shared/Spinner";
@@ -81,7 +81,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.location}
               filter={filterData}
-              data={COUNTIES}
+              data={LOCATIONS}
               render={(item) => <p className="text-left">{item}</p>}
               {...field}
             />

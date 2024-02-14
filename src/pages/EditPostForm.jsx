@@ -35,7 +35,7 @@ const EditPostForm = () => {
 
       setDefaultValues({
         title: response.data.title,
-        postType: response.data.postType,
+        post_type: response.data.post_type,
         category: response.data.category,
         description: response.data.description,
         location: response.data.location,

@@ -5,16 +5,16 @@ import { generateResponse } from "./apiHelpers/helpers";
 const postsTable = "posts";
 
 const queryPosts = async (queryData, hasSearchParams = false) => {
-  let query = supabase.from(postsTable).select("id, title, location, createdAt, category, image, postType");
+  let query = supabase.from(postsTable).select("id, title, location, created_at, category, image, post_type");
 
   if (hasSearchParams) {
-    const filterByPostType = !!queryData.postType;
+    const filterBypost_type = !!queryData.post_type;
     const filterByCategory = !!queryData.category;
     const filterByLocation = !!queryData.location;
     const filterBySearch = !!queryData.search;
 
-    if (filterByPostType) {
-      query = query.eq("postType", queryData.postType);
+    if (filterBypost_type) {
+      query = query.eq("post_type", queryData.post_type);
     }
     if (filterByCategory) {
       query = query.eq("category", queryData.category);
@@ -27,7 +27,7 @@ const queryPosts = async (queryData, hasSearchParams = false) => {
     }
   }
 
-  query = query.order("createdAt", { ascending: false });
+  query = query.order("created_at", { ascending: false });
 
   try {
     const { data, error, status } = await query;

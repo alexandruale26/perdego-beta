@@ -7,7 +7,7 @@ import LinkButton from "../../shared/LinkButton";
 import Division from "./Division";
 import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
-import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../utils/sharedData";
+import { LOCATIONS, OBJECT_CATEGORY, POST_TYPE } from "../../utils/sharedData";
 import { filterData, setDefaultValue } from "../../utils/helpers";
 import { MagnifyingGlassIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import Info from "../../shared/Info";
@@ -15,13 +15,13 @@ import Button from "../../shared/button";
 
 const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideFilters, handleHideFilters }) => {
   const [search, setSearch] = useState("");
-  const [postType, setPostType] = useState("");
+  const [post_type, setpost_type] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
 
   useEffect(() => {
     setSearch(setDefaultValue(searchParams.search));
-    setPostType(setDefaultValue(searchParams.postType));
+    setpost_type(setDefaultValue(searchParams.post_type));
     setLocation(setDefaultValue(searchParams.location));
     setCategory(setDefaultValue(searchParams.category));
   }, [searchParams]);
@@ -67,14 +67,14 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             )}
           />
           <FormField
-            name="postType"
+            name="post_type"
             render={(field) => (
               <FormItem className={hiddenFiltersApplyedStyle}>
                 <Selector
                   aria-label="select post type"
-                  values={POSTTYPE}
-                  defaultValue={postType}
-                  exportValue={(value) => setPostType(value)}
+                  values={POST_TYPE}
+                  defaultValue={post_type}
+                  exportValue={(value) => setpost_type(value)}
                   {...field}
                 />
               </FormItem>
@@ -91,7 +91,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
                   aria-label="select location"
                   placeholder="Toatǎ țara"
                   filter={filterData}
-                  data={COUNTIES}
+                  data={LOCATIONS}
                   defaultValue={location}
                   exportValue={(value) => setLocation(value)}
                   render={(item) => <p className="text-left">{item}</p>}

@@ -1,4 +1,4 @@
-const COUNTIES = [
+const LOCATIONS = [
   "Alba",
   "Arad",
   "Argeș",
@@ -66,6 +66,6 @@ const BARS_HEIGHT = {
 
 const ART_942 = "https://www.codulcivil.ro/art-942-Proprietatea-bunului-gasit/";
 
-const POSTTYPE = ["Pierdute", "Gǎsite"];
+const POST_TYPE = ["Pierdute", "Gǎsite"];
 
-export { COUNTIES, OBJECT_CATEGORY, POSTTYPE, BARS_HEIGHT, ART_942 };
+export { LOCATIONS, OBJECT_CATEGORY, POST_TYPE, BARS_HEIGHT, ART_942 };

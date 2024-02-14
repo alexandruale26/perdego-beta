@@ -3,7 +3,7 @@ import { FormField, FormItem, FormMessage, FormLabel } from "../../../formCompon
 import ValidationInput from "../../../formComponents/ValidationInput";
 import ComboBox from "../../../formComponents/ComboBox";
 import SubmitButton from "../../../shared/SubmitButton";
-import { COUNTIES } from "../../../utils/sharedData";
+import { LOCATIONS } from "../../../utils/sharedData";
 import { filterData } from "../../../utils/helpers";
 import { schema, lengths } from "../../userFormData";
 const defaultValues = {};
@@ -52,7 +52,7 @@ const SignupFormContent = ({ handleOnSubmit }) => {
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.location}
               filter={filterData}
-              data={COUNTIES}
+              data={LOCATIONS}
               render={(item) => <p className="text-left">{item}</p>}
               {...field}
             />

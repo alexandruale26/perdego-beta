@@ -42,12 +42,12 @@ const PostLink = ({ post, className, searchParams = "", gridMode = false, backTo
 
         <div className="w-full flex flex-col items-start gap-1">
           <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-medium text-grey-700`}>
-            {post.postType} - {post.category}
+            {post.post_type} - {post.category}
           </p>
 
           <div className="w-full flex items-center justify-between">
             <p className={`text-xs ${gridMode ? "" : "sm:text-sm"} font-light text-grey-600`}>
-              {post.location} - {formatPostDate(post.createdAt)}
+              {post.location} - {formatPostDate(post.created_at)}
             </p>
           </div>
         </div>

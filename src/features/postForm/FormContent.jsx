@@ -5,7 +5,7 @@ import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem, FormMessage, FormLabel } from "../../formComponents/form";
 import ComboBox from "../../formComponents/ComboBox";
 import Selector from "../../formComponents/Selector";
-import { COUNTIES, OBJECT_CATEGORY, POSTTYPE } from "../../utils/sharedData";
+import { LOCATIONS, OBJECT_CATEGORY, POST_TYPE } from "../../utils/sharedData";
 import { filterData } from "../../utils/helpers";
 import SubmitButton from "../../shared/SubmitButton";
 
@@ -47,14 +47,14 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         )}
       />
       <FormField
-        name="postType"
+        name="post_type"
         render={(field) => (
           <FormItem>
             <FormLabel>Categorie anunț</FormLabel>
             <Selector
               aria-label="select post type"
-              values={POSTTYPE}
-              defaultValue={formData.defaultValues.postType ? formData.defaultValues.postType : ""}
+              values={POST_TYPE}
+              defaultValue={formData.defaultValues.post_type ? formData.defaultValues.post_type : ""}
               {...field}
             />
             <FormMessage />
@@ -89,7 +89,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={formData.defaultValues.location}
               filter={filterData}
-              data={COUNTIES}
+              data={LOCATIONS}
               render={(item) => <p className="text-left">{item}</p>}
               {...field}
             />

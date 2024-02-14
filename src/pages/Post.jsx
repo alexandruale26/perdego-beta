@@ -82,13 +82,13 @@ const Post = () => {
         </div>
 
         <Section className="flex-col items-start justify-center">
-          <p className="text-xs font-light text-grey-600">{formatPostDate(post.createdAt)}</p>
+          <p className="text-xs font-light text-grey-600">{formatPostDate(post.created_at)}</p>
 
           <h1 className="-mt-1 text-xl xsm:text-2xl font-semibold leading-none text-grey-800">{post.title}</h1>
           <p className="text-sm font-normal text-grey-700 mb-2">{post.description}</p>
 
           <div className="w-full flex flex-wrap gap-2 items-center justify-start mb-1">
-            <Tag title="Tip anunț:" description={post.postType} />
+            <Tag title="Tip anunț:" description={post.post_type} />
             <Tag title="Locație:" description={post.location} />
             <Tag title="Categorie:" description={post.category} />
           </div>

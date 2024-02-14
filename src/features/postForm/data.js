@@ -48,7 +48,7 @@ const schema = {
       errorMessage: generateErrorMessage("Descrierea", null, lengths.description.max),
     },
   },
-  postType: {
+  post_type: {
     required: {
       errorMessage: "Alege tipul de anunț.",
     },

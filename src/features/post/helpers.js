@@ -5,7 +5,7 @@ const generateSearchParamsTitle = (searchParams, skipSearchInputValue = false) =
 
   const arrangedSearchParams = {
     search: searchParams.search,
-    postType: searchParams.postType,
+    post_type: searchParams.post_type,
     location: searchParams.location,
     category: searchParams.category,
   };
@@ -14,7 +14,7 @@ const generateSearchParamsTitle = (searchParams, skipSearchInputValue = false) =
     if (key === "search") {
       return skipSearchInputValue || value === "" ? acc : acc + value + " ⁄ ";
     }
-    if (key === "postType") {
+    if (key === "post_type") {
       return value === "" ? acc + "Toate postǎrile" : acc + value;
     }
 
