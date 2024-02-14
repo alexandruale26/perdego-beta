@@ -1,6 +1,7 @@
 import { Outlet, useNavigation, useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import Spinner from "../shared/Spinner";
 import LinkButton from "../shared/LinkButton";
 import { BARS_HEIGHT } from "../utils/sharedData";
@@ -27,17 +28,7 @@ const AppLayout = () => {
           >
             {isLoading ? <Spinner /> : <Outlet />}
           </main>
-          <footer id="footer" className="w-full flex justify-center bg-black h-[80px] text-white text-center">
-            <LinkButton to="/termeni-si-conditii" className="p-4">
-              Termeni și condiții
-            </LinkButton>
-            <LinkButton to="/politica-cookies" className="p-4">
-              Politica cookies
-            </LinkButton>
-            <LinkButton to="/politica-de-confidentialitate" className="p-4">
-              Politica de confidențialitate
-            </LinkButton>
-          </footer>
+          <Footer />
         </>
       )}
       <Toaster gutter={10} toastOptions={{ duration: 5000, style: { borderRadius: "6px", marginBottom: 10 } }} />
