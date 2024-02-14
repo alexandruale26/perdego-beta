@@ -10,6 +10,7 @@ import FormContent from "../features/postForm/FormContent";
 import Error from "../shared/Error";
 import { getPost, getImageUrl } from "../services/postApi";
 import { handleApiAction } from "../services/apiHelpers/helpers";
+import Post from "./Post";
 
 const EditPostForm = () => {
   const [isPostModified, setIsPostModified] = useState(false);
@@ -28,7 +29,7 @@ const EditPostForm = () => {
       const response = await getPost(state?.postId);
 
       if (response.status !== "ok") {
-        return setIsPostDataFetched(true);
+        return setIsPostDataFetched(false);
       }
 
       const imageUrl = getImageUrl(response.data.image);

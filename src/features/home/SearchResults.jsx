@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Section from "../../shared/Section";
 import LayoutSwitcher from "./LayoutSwitcher";
-import PostLink from "./PostLink";
+import PostLink from "../../shared/PostLink";
 import { showSearchResultsTitle, isLayoutChangeAllowed, getGridModeFromStorage } from "./helpers";
 import { saveToLocalStorage } from "../../utils/helpers";
 import { GRID_STORAGE_NAME } from "./data";

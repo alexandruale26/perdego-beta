@@ -1,19 +1,25 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Home from "./pages/Home";
-import PostForm from "./pages/PostForm";
-import EditPostForm from "./pages/EditPostForm";
-import Post from "./pages/Post";
-import LoginForm from "./pages/LoginForm";
-import SignupForm from "./pages/SignupForm";
-import PostsDashboard from "./pages/PostsDashboard";
-import UserDashboard from "./pages/UserDashboard";
-import TermsAndConditions from "./pages/legal/TermsAndConditions";
-import CookiesPolicy from "./pages/legal/CookiesPolicy";
-import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import Error from "./shared/Error";
+import Spinner from "./shared/Spinner";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { UserSession } from "./ui/UserSession";
+
+const Post = lazy(() => import("./pages/Post"));
+const PostForm = lazy(() => import("./pages/PostForm"));
+const EditPostForm = lazy(() => import("./pages/EditPostForm"));
+
+const LoginForm = lazy(() => import("./pages/LoginForm"));
+const SignupForm = lazy(() => import("./pages/SignupForm"));
+
+const PostsDashboard = lazy(() => import("./pages/PostsDashboard"));
+const UserDashboard = lazy(() => import("./pages/UserDashboard"));
+
+const TermsAndConditions = lazy(() => import("./pages/legal/TermsAndConditions"));
+const CookiesPolicy = lazy(() => import("./pages/legal/CookiesPolicy"));
+const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
 
 const router = createBrowserRouter([
   {
@@ -30,13 +36,19 @@ const router = createBrowserRouter([
       },
       {
         path: ":pid",
-        element: <Post />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Post />
+          </Suspense>
+        ),
       },
       {
         path: "anunt-nou",
         element: (
           <ProtectedRoute>
-            <PostForm />
+            <Suspense fallback={<Spinner />}>
+              <PostForm />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -44,7 +56,9 @@ const router = createBrowserRouter([
         path: "modifica-anuntul",
         element: (
           <ProtectedRoute>
-            <EditPostForm />
+            <Suspense fallback={<Spinner />}>
+              <EditPostForm />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -52,7 +66,9 @@ const router = createBrowserRouter([
         path: "administreaza-anunturile",
         element: (
           <ProtectedRoute>
-            <PostsDashboard />
+            <Suspense fallback={<Spinner />}>
+              <PostsDashboard />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
@@ -60,29 +76,51 @@ const router = createBrowserRouter([
         path: "contul-tau",
         element: (
           <ProtectedRoute>
-            <UserDashboard />
+            <Suspense fallback={<Spinner />}>
+              <UserDashboard />
+            </Suspense>
           </ProtectedRoute>
         ),
       },
       {
         path: "autentificare",
-        element: <LoginForm />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <LoginForm />
+          </Suspense>
+        ),
       },
       {
         path: "creeaza-cont",
-        element: <SignupForm />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <SignupForm />,
+          </Suspense>
+        ),
       },
       {
         path: "termeni-si-conditii",
-        element: <TermsAndConditions />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <TermsAndConditions />
+          </Suspense>
+        ),
       },
       {
         path: "politica-de-confidentialitate",
-        element: <PrivacyPolicy />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <PrivacyPolicy />,
+          </Suspense>
+        ),
       },
       {
         path: "politica-cookies",
-        element: <CookiesPolicy />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <CookiesPolicy />,
+          </Suspense>
+        ),
       },
       {
         path: "*",

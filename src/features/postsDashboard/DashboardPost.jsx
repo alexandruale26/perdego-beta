@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, Fragment } from "react";
-import PostLink from "../home/PostLink";
+import PostLink from "../../shared/PostLink";
 import PostSettingsMenu from "./PostSettingsMenu";
 import ConfirmationBox from "../../shared/ConfirmationBox";
 import { deletePost } from "../../services/postApi";

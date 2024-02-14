@@ -2,7 +2,7 @@ import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
 import { TrashIcon } from "@radix-ui/react-icons";
-import Image from "../shared/icons/Image";
+import Image from "../shared/Image";
 
 const IMAGE_MAX_SIZE_MB = 8;
 
