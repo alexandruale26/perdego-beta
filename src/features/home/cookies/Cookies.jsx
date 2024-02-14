@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { BARS_HEIGHT } from "../../../utils/sharedData";
 import Button from "../../../shared/button";
 import { getFromLocalStorage, saveToLocalStorage } from "../../../utils/helpers";
-import { LOCAL_STORAGE_ITEMS } from "./cookiesData";
+import { LOCAL_STORAGE_ITEMS, COOKIE_CONTENT } from "./cookiesData";
 
 const Cookies = ({ className }) => {
   const [cookiesAccepted, setCookiesAccepted] = useState(!!getFromLocalStorage(LOCAL_STORAGE_ITEMS.cookies));
@@ -56,11 +56,7 @@ const Cookies = ({ className }) => {
           <p className="w-full text-[#76453B]/90 text-sm xmd:text-base text-center font-medium">
             Poate nu știai, dar folosim <span className="whitespace-nowrap">Cookie-uri</span>
           </p>
-          <span className="text-xs xmd:text-[13px] text-[#87451a]/70 indent-3">
-            Utilizăm cookie-uri pentru a salva preferințele dvs. de navigare și a oferi o experiență de utilizare cât
-            mai plăcută. Nu colectăm date despre activitatea dvs. în afara acestor preferințe și nu permitem urmărirea
-            activității de către terțe părți.
-          </span>
+          <span className="text-xs xmd:text-[13px] text-[#87451a]/70 indent-3">{COOKIE_CONTENT}</span>
         </div>
         <Button
           onClick={handleOnAcceptCookie}

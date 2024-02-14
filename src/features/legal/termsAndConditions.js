@@ -1,5 +1,4 @@
-const termsAndConditionsTitle =
-  "Bine ați venit pe PERDEGO, o platformă independentă dedicată găzduirii anunțurilor pentru obiecte pierdute și găsite. Vă rugăm să citiți cu atenție acești termeni și condiții înainte de a utiliza serviciile noastre. Accesarea și utilizarea acestui site implică acceptarea acestor termeni și condiții.";
+import { CONTACT_EMAIL } from "./constants";
 
 const termsAndConditions = [
   {
@@ -61,18 +60,26 @@ const termsAndConditions = [
     ],
   },
   {
+    title: "Actualizări ale termenilor și condițiilor",
+    content: [
+      "Suntem dedicați să-ți oferim cele mai bune servicii, iar o parte importantă a acestui proces este actualizarea regulată a termenilor și condițiilor noastre pentru a reflecta schimbările și îmbunătățirile aduse platformei noastre. Te încurajăm să verifici periodic aceste actualizări pentru a fi la curent cu cele mai recente informații.",
+    ],
+  },
+  {
     title: "Comunicarea cu utilizatorii",
     content: [
       "Niciun membru al echipei PERDEGO nu va contacta utilizatorii și nu va solicita date personale sensibile (cod numeric personal, date card bancar, adresă locuință, dată de naștere etc.).",
 
-      "Orice tentativă de astfel de înșelăciune trebuie raportată la adresa de contact a site-ului.",
+      `Orice tentativă de astfel de înșelăciune trebuie raportată la adresa de contact a site-ului "${CONTACT_EMAIL}".`,
     ],
   },
 ];
 
+const termsAndConditionsTitle =
+  "Bine ați venit pe PERDEGO, o platformă independentă dedicată găzduirii anunțurilor pentru obiecte pierdute și găsite. Vă rugăm să citiți cu atenție acești termeni și condiții înainte de a utiliza serviciile noastre. Accesarea și utilizarea acestui site implică acceptarea acestor termeni și condiții.";
+
 const termsFinalNotes = {
-  toUserAgreementMessage:
-    "Ne angajăm să oferim o platformă sigură și eficientă pentru postarea și căutarea de anunțuri pentru obiecte pierdute și găsite. Acești termeni și condiții au fost concepuți pentru a asigura un mediu sigur și de încredere pentru toți utilizatorii PERDEGO. Dacă aveți întrebări sau nelămuriri, vă rugăm să ne contactați.",
+  toUsersMessage: `Ne angajăm să oferim o platformă sigură și eficientă pentru postarea și căutarea de anunțuri pentru obiecte pierdute și găsite. Acești termeni și condiții au fost concepuți pentru a asigura un mediu sigur și de încredere pentru toți utilizatorii PERDEGO. Dacă aveți întrebări sau nelămuriri, vă rugăm să ne contactați la adresa "${CONTACT_EMAIL}".`,
   termsModificationDate: "Ultima actualizare: Februarie 2024",
 };
 
