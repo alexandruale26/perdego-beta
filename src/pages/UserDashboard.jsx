@@ -71,7 +71,6 @@ const UserDashboard = () => {
 
             <DashboardSection title="Eliminǎ contul" titleStyle="text-rose-500">
               <Button
-                aria-label="delete account"
                 onClick={handleModal}
                 disabled={isLoading}
                 className="w-full h-12 flex items-center justify-center bg-grey-800 hover:bg-rose-500 text-white rounded-md focus-visible:text-lg disabled:hover:bg-grey-800"

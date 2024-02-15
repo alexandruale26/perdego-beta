@@ -49,7 +49,6 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
     >
       <button
         type="button"
-        aria-label="select image"
         className="h-full w-full border border-grey-300 rounded-md focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
       >
         <label className="h-full w-full items-center justify-center overflow-hidden">
@@ -86,7 +85,6 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
       {selectedImage && (
         <button
           type="button"
-          aria-label="remove image"
           onClick={handleOnClickRemove}
           className="flex items-center justify-center w-12 h-full border border-l-0 border-grey-300 rounded-r-md text-white bg-[rgba(252,0,60,1)] hover:text-black hover:w-1/3 z-10 transition-all shadow-[0_0_20px_0_rgba(255,0,0,0.3)] absolute top-0 right-0 focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
         >

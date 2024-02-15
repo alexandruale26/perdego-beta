@@ -36,11 +36,8 @@ const LoginFormContent = ({ handleOnSubmit }) => {
       />
 
       <div className="w-full pt-6 space-y-4">
-        <SubmitButton aria-label="submit login values" className="h-12 w-full">
-          Conecteazǎ-te
-        </SubmitButton>
+        <SubmitButton className="h-12 w-full">Conecteazǎ-te</SubmitButton>
         <LinkButton
-          aria-label="redirect to signup"
           to="/creeaza-cont"
           className="h-12 w-full border border-black rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
         >

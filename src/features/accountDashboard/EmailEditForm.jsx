@@ -74,11 +74,7 @@ const EmailEditForm = ({ email }) => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton
-          aria-label="submit email change"
-          className="h-12 w-full overflow-hidden bg-grey-800"
-          disabled={isLoading}
-        >
+        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
           {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Modificǎ e-mailul</span>}
         </SubmitButton>
       </div>

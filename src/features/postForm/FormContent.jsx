@@ -51,7 +51,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         render={(field) => (
           <FormItem>
             <FormLabel>Categorie anunț</FormLabel>
-            <Selector aria-label="select post type" values={POST_TYPE} {...field} />
+            <Selector values={POST_TYPE} {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -62,7 +62,6 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
           <FormItem>
             <FormLabel>Categorie obiect</FormLabel>
             <ComboBox
-              aria-label="select object category"
               placeholder="Cautǎ dupǎ categorie"
               filter={filterData}
               data={OBJECT_CATEGORY}
@@ -79,7 +78,6 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
           <FormItem>
             <FormLabel>Locație</FormLabel>
             <ComboBox
-              aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
               filter={filterData}
               data={LOCATIONS}
@@ -109,9 +107,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         )}
       />
       <div className="w-full">
-        <SubmitButton aria-label="submit post values" className="h-12 w-full mt-10">
-          {title}
-        </SubmitButton>
+        <SubmitButton className="h-12 w-full mt-10">{title}</SubmitButton>
       </div>
     </Form>
   );

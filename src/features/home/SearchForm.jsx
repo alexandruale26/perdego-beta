@@ -58,7 +58,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             name="post_type"
             render={(field) => (
               <FormItem className={hiddenFiltersApplyedStyle}>
-                <Selector aria-label="select post type" values={POST_TYPE} {...field} />
+                <Selector values={POST_TYPE} {...field} />
               </FormItem>
             )}
           />
@@ -70,7 +70,6 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             render={(field) => (
               <FormItem>
                 <ComboBox
-                  aria-label="select location"
                   placeholder="Toatǎ țara"
                   filter={filterData}
                   data={LOCATIONS}
@@ -85,7 +84,6 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             render={(field) => (
               <FormItem>
                 <ComboBox
-                  aria-label="select object category"
                   placeholder="Toate categoriile"
                   filter={filterData}
                   data={OBJECT_CATEGORY}
@@ -99,11 +97,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
       </div>
 
       <Division className="w-full gap-4 xsm:gap-8 items-start xsm:items-center">
-        <SubmitButton
-          aria-label="submit search values"
-          className="h-9 w-full xsm:w-56 flex items-center justify-center gap-2"
-          type="submit"
-        >
+        <SubmitButton className="h-9 w-full xsm:w-56 flex items-center justify-center gap-2" type="submit">
           Cǎutare
           <MagnifyingGlassIcon className="w-6 h-6" />
         </SubmitButton>
@@ -119,11 +113,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
           )}
 
           {isOnMobile && (
-            <Button
-              aria-label="search posts"
-              onClick={handleHideFilters}
-              className="w-full flex items-start justify-end -my-2"
-            >
+            <Button onClick={handleHideFilters} className="w-full flex items-start justify-end -my-2">
               <ChevronUpIcon className={`w-8 h-8 transition-all ${hideFilters ? "rotate-180" : "0"}`} />
             </Button>
           )}

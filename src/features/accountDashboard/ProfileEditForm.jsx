@@ -74,7 +74,6 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
           <FormItem className="max-w-full">
             <FormLabel>Locație</FormLabel>
             <ComboBox
-              aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
               filter={filterData}
               data={LOCATIONS}
@@ -97,11 +96,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
       />
 
       <div className="w-full pt-2">
-        <SubmitButton
-          aria-label="submit profile change"
-          className="h-12 w-full overflow-hidden bg-grey-800"
-          disabled={isLoading}
-        >
+        <SubmitButton className="h-12 w-full overflow-hidden bg-grey-800" disabled={isLoading}>
           {isLoading ? <Spinner fullHeight={false} className="w-9 h-9" /> : <span>Modificǎ profilul</span>}
         </SubmitButton>
       </div>

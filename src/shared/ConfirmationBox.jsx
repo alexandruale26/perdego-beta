@@ -51,18 +51,10 @@ const ConfirmationBox = ({
           {children}
 
           <div className="w-full flex items-center justify-between gap-4 py-2">
-            <Button
-              aria-label="deny action"
-              onClick={handleOnDeny}
-              className={`bg-black hover:bg-primary-400 ${buttonsStyle}`}
-            >
+            <Button onClick={handleOnDeny} className={`bg-black hover:bg-primary-400 ${buttonsStyle}`}>
               {denyButtonText}
             </Button>
-            <Button
-              aria-label="confirm action"
-              onClick={handleOnConfirm}
-              className={`bg-rose-600 hover:bg-rose-500 ${buttonsStyle}`}
-            >
+            <Button onClick={handleOnConfirm} className={`bg-rose-600 hover:bg-rose-500 ${buttonsStyle}`}>
               {confirmButtonText}
             </Button>
           </div>

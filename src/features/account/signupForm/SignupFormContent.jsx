@@ -48,7 +48,6 @@ const SignupFormContent = ({ handleOnSubmit }) => {
           <FormItem className="max-w-full">
             <FormLabel>Locația ta</FormLabel>
             <ComboBox
-              aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
               defaultValue={defaultValues.location}
               filter={filterData}
@@ -72,9 +71,7 @@ const SignupFormContent = ({ handleOnSubmit }) => {
       />
 
       <div className="w-full pt-6">
-        <SubmitButton aria-label="submit signup values" className="h-12 w-full">
-          Creeazǎ contul
-        </SubmitButton>
+        <SubmitButton className="h-12 w-full">Creeazǎ contul</SubmitButton>
       </div>
     </Form>
   );
