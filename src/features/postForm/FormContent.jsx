@@ -69,7 +69,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
             <ComboBox
               aria-label="select object category"
               placeholder="Cautǎ dupǎ categorie"
-              defaultValue={formData.defaultValues.category}
+              // defaultValue={formData.defaultValues.category}
               filter={filterData}
               data={OBJECT_CATEGORY}
               render={(item) => <p className="text-left">{item}</p>}

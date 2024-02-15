@@ -9,7 +9,7 @@ const compressImage = (file, maxWidth, maxHeight) => {
       maxWidth, // maxWidth
       maxHeight, // maxHeight
       imageExtension, // format
-      70, // quality
+      40, // quality
       0, // rotation
       (uri) => {
         resolve(uri);
@@ -19,7 +19,7 @@ const compressImage = (file, maxWidth, maxHeight) => {
   });
 };
 
-const convertImage = async (imageFile, maxWidth = 800, maxHeight = 800) => {
+const convertImage = async (imageFile, maxWidth = 700, maxHeight = 700) => {
   if (imageFile.type.startsWith("image/") === false) return null;
 
   try {

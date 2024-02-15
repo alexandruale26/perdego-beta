@@ -10,13 +10,13 @@ import FormContent from "../features/postForm/FormContent";
 import Error from "../shared/Error";
 import { getPost, getImageUrl } from "../services/postApi";
 import { handleApiAction } from "../services/apiHelpers/helpers";
-import Post from "./Post";
 
 const EditPostForm = () => {
   const [isPostModified, setIsPostModified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPostDataFetched, setIsPostDataFetched] = useState(false);
-  const [defaultValues, setDefaultValues] = useState({});
+  const [postData, setPostData] = useState(null);
+
   const { user } = useUserSessionContext();
   const { pathname, state } = useLocation();
 
@@ -32,25 +32,12 @@ const EditPostForm = () => {
         return setIsPostDataFetched(false);
       }
 
-      const imageUrl = getImageUrl(response.data.image);
-
-      setDefaultValues({
-        title: response.data.title,
-        post_type: response.data.post_type,
-        category: response.data.category,
-        description: response.data.description,
-        location: response.data.location,
-        name: user.name,
-        phone: user.phone,
-        imageName: response.data.image, // old image to be deleted if necesssary
-        imageUrl,
-      });
-
+      setPostData(response.data);
       setIsPostDataFetched(true);
     };
 
     process();
-  }, [state?.postId, user.name, user.phone]);
+  }, [state?.postId]);
 
   const handlePostCreate = (values) => {
     handleApiAction(() =>
@@ -58,11 +45,7 @@ const EditPostForm = () => {
     );
   };
 
-  // if user === null, user's data will be null at default values
-  // form will re-render when user will not be null
-  const isPostFetchCompleted = isPostDataFetched && Object.keys(defaultValues).length === 0;
-  if (user === null) return;
-  if ((pathname === "/modifica-anuntul" && state?.postId === null) || isPostFetchCompleted) {
+  if (pathname === "/modifica-anuntul" && state?.postId === null) {
     return (
       <Error
         errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ."
@@ -72,6 +55,21 @@ const EditPostForm = () => {
     );
   }
 
+  if (postData === null) return <Spinner />;
+
+  const defaultValues = {
+    title: postData.title,
+    post_type: postData.post_type,
+    category: postData.category,
+    description: postData.description,
+    location: postData.location,
+    name: user.name,
+    phone: user.phone,
+    imageName: postData.image, // old image to be deleted if necesssary
+    imageUrl: getImageUrl(postData.image),
+  };
+
+  // console.log(defaultValues);
   const formData = { schema, defaultValues };
 
   return (
