@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Spinner from "../shared/Spinner";
-import LinkButton from "../shared/LinkButton";
 import { BARS_HEIGHT } from "../utils/sharedData";
 
 const AppLayout = () => {

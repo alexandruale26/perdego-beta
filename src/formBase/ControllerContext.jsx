@@ -12,13 +12,12 @@ const Controller = ({ name, render }) => {
     registerField(ref.current);
   }, [name, ref, registerField]);
 
-  const onChange = (e) => {
-    e.preventDefault();
+  const onChange = () => {
     validateField(name);
   };
 
-  const onBlur = (e) => {
-    onChange(e);
+  const onBlur = () => {
+    onChange();
   };
 
   // here i could add all kind of input events: onFocus, etc

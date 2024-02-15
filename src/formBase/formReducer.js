@@ -30,22 +30,30 @@ const validateFieldAtRegister = (name, state) => {
 const formReducer = (state, { action, payload }) => {
   switch (action) {
     case actions.FORM_REGISTER_DATA:
+      // this runs after FIELD_REGISTER
+      state.refs.forEach((field) => {
+        const fieldName = field.name;
+
+        if (field.type === "file") return;
+        field.value = state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
+
+        const fieldValidation = validateFieldAtRegister(fieldName, state);
+
+        state = {
+          ...state,
+          fieldsState: {
+            ...state.fieldsState,
+            [fieldName]: { isValid: fieldValidation.isValid, errorMessage: fieldValidation.errorMessage },
+          },
+        };
+      });
+
       return { ...state, schema: payload.schema, defaultValues: payload.defaultValues };
 
     case actions.FIELD_REGISTER:
-      const fieldRef = payload.ref;
-      const fieldName = fieldRef.name;
-
-      fieldRef.value = state.defaultValues[fieldName] ? state.defaultValues[fieldName] : "";
-      const fieldValidation = validateFieldAtRegister(fieldName, state);
-
       return {
         ...state,
-        refs: [...addFieldRef(state.refs, fieldRef)],
-        fieldsState: {
-          ...state.fieldsState,
-          [fieldName]: { isValid: fieldValidation.isValid, errorMessage: fieldValidation.errorMessage },
-        },
+        refs: [...addFieldRef(state.refs, payload.ref)],
       };
 
     case actions.FIELD_SET_INVALID:

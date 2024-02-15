@@ -51,12 +51,7 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
         render={(field) => (
           <FormItem>
             <FormLabel>Categorie anunț</FormLabel>
-            <Selector
-              aria-label="select post type"
-              values={POST_TYPE}
-              defaultValue={formData.defaultValues.post_type ? formData.defaultValues.post_type : ""}
-              {...field}
-            />
+            <Selector aria-label="select post type" values={POST_TYPE} {...field} />
             <FormMessage />
           </FormItem>
         )}
@@ -69,7 +64,6 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
             <ComboBox
               aria-label="select object category"
               placeholder="Cautǎ dupǎ categorie"
-              // defaultValue={formData.defaultValues.category}
               filter={filterData}
               data={OBJECT_CATEGORY}
               render={(item) => <p className="text-left">{item}</p>}
@@ -87,7 +81,6 @@ const FormContent = ({ formData, handleOnSubmit, submitButtonTitle = null }) => 
             <ComboBox
               aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
-              defaultValue={formData.defaultValues.location}
               filter={filterData}
               data={LOCATIONS}
               render={(item) => <p className="text-left">{item}</p>}

@@ -15,6 +15,7 @@ import { capitalizeEachWordFromString } from "../../utils/helpers";
 import { handleApiAction } from "../../services/apiHelpers/helpers";
 
 const ProfileEditForm = ({ profile, changeUserProfile }) => {
+  const [currentProfile] = useState(profile);
   const [newProfile, setNewProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -26,7 +27,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
   const handleOnSubmit = (values) => {
     setModalIsOpen(true);
 
-    // input has capitalize style, but the values can still have uppercase letters
+    // input has capitalize style, but the values still have uppercase letters
     const name = capitalizeEachWordFromString(values.name);
     const curatedValues = { ...values, name };
     setNewProfile(curatedValues);
@@ -43,10 +44,6 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
         toastNotification(response.message);
       } else {
         changeUserProfile(newProfile);
-
-        const nameInput = document.getElementById("name");
-        if (nameInput) nameInput.value = newProfile.name;
-
         toastNotification(response.message, true);
       }
 
@@ -56,7 +53,7 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
     handleApiAction(process, closeModal);
   };
 
-  const defaultValues = { ...profile };
+  const defaultValues = currentProfile ? currentProfile : newProfile;
   const formData = { schema, defaultValues };
 
   return (
@@ -79,7 +76,6 @@ const ProfileEditForm = ({ profile, changeUserProfile }) => {
             <ComboBox
               aria-label="select location"
               placeholder="Cautǎ dupǎ județ sau sector"
-              defaultValue={defaultValues.location}
               filter={filterData}
               data={LOCATIONS}
               render={(item) => <p className="text-left">{item}</p>}

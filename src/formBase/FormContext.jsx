@@ -7,6 +7,10 @@ const FormContext = createContext({});
 const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
   const [state, dispatch] = useReducer(formReducer, INITIAL_STATE);
 
+  useEffect(() => {
+    dispatch({ action: actions.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
+  }, [schema, defaultValues, state.refs]);
+
   const setAsInvalid = (name, message) => {
     dispatch({ action: actions.FIELD_SET_INVALID, payload: { name, message } });
   };
@@ -18,9 +22,9 @@ const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
   const allFieldsAreValid = () => {
     const fieldsNames = Object.keys(state.fieldsState);
 
-    const fieldsAreValid = fieldsNames.every((field) => {
-      const isValid = state.fieldsState[field].isValid;
-      const input = state.refs.find((el) => el.name === field);
+    const fieldsAreValid = fieldsNames.every((fieldName) => {
+      const isValid = state.fieldsState[fieldName].isValid;
+      const input = state.refs.find((el) => el.name === fieldName);
 
       if (!isValid) input.focus();
       return isValid;
@@ -67,12 +71,17 @@ const Form = ({ children, schema, defaultValues, onSubmit, className }) => {
   }, []);
 
   const getFieldState = (fieldName) => {
-    return state.fieldsState[fieldName];
-  };
+    const fieldState = state.fieldsState[fieldName];
+    const inputField = state.refs.find((ref) => ref.name === fieldName);
 
-  useEffect(() => {
-    dispatch({ action: actions.FORM_REGISTER_DATA, payload: { schema, defaultValues } });
-  }, [schema, defaultValues, state.refs]);
+    const fieldData = {
+      isValid: fieldState?.isValid ? fieldState.isValid : null,
+      errorMessage: fieldState?.errorMessage ? fieldState.errorMessage : null,
+      value: inputField?.value ? inputField.value : null,
+    };
+
+    return fieldData;
+  };
 
   return (
     <FormContext.Provider value={{ registerField, getFieldState, validateField, setAsInvalid }}>

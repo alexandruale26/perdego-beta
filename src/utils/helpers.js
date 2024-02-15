@@ -58,8 +58,6 @@ const filterData = (data, search) => {
   });
 };
 
-const setDefaultValue = (initialValue) => (initialValue ? initialValue : "");
-
 const getFromLocalStorage = (name) => {
   return localStorage.getItem(name);
 };
@@ -95,7 +93,6 @@ export {
   formatPostDate,
   formatDateToRoumanian,
   filterData,
-  setDefaultValue,
   saveToLocalStorage,
   getFromLocalStorage,
   generateErrorMessage,

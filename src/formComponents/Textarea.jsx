@@ -1,9 +1,9 @@
-import * as React from "react";
+import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import Checkmark from "./variousComponents/Checkmark";
 import { useController } from "../formBase/ControllerContext";
 
-const Textarea = React.forwardRef(({ className, ...props }, ref) => {
+const Textarea = forwardRef(({ className, ...props }, ref) => {
   const { fieldState } = useController();
   const { isValid } = fieldState ? fieldState : { isValid: false };
 

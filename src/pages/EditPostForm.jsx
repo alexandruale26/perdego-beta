@@ -15,10 +15,9 @@ const EditPostForm = () => {
   const [isPostModified, setIsPostModified] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isPostDataFetched, setIsPostDataFetched] = useState(false);
-  const [postData, setPostData] = useState(null);
-
+  const [defaultValues, setDefaultValues] = useState({});
   const { user } = useUserSessionContext();
-  const { pathname, state } = useLocation();
+  const { state } = useLocation();
 
   useEffect(() => {
     if (state?.postId === null) return;
@@ -29,15 +28,28 @@ const EditPostForm = () => {
       const response = await getPost(state?.postId);
 
       if (response.status !== "ok") {
-        return setIsPostDataFetched(false);
+        return setIsPostDataFetched(true);
       }
 
-      setPostData(response.data);
+      const imageUrl = getImageUrl(response.data.image);
+
+      setDefaultValues({
+        title: response.data.title,
+        post_type: response.data.post_type,
+        category: response.data.category,
+        description: response.data.description,
+        location: response.data.location,
+        name: user.name,
+        phone: user.phone,
+        imageName: response.data.image, // old image to be deleted if necesssary
+        imageUrl,
+      });
+
       setIsPostDataFetched(true);
     };
 
     process();
-  }, [state?.postId]);
+  }, [state?.postId, user.name, user.phone]);
 
   const handlePostCreate = (values) => {
     handleApiAction(() =>
@@ -45,7 +57,10 @@ const EditPostForm = () => {
     );
   };
 
-  if (pathname === "/modifica-anuntul" && state?.postId === null) {
+  // if user === null will send user to login page
+  if (user === null) return;
+
+  if (state === null)
     return (
       <Error
         errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ."
@@ -53,23 +68,8 @@ const EditPostForm = () => {
         to="/administreaza-anunturile"
       />
     );
-  }
 
-  if (postData === null) return <Spinner />;
-
-  const defaultValues = {
-    title: postData.title,
-    post_type: postData.post_type,
-    category: postData.category,
-    description: postData.description,
-    location: postData.location,
-    name: user.name,
-    phone: user.phone,
-    imageName: postData.image, // old image to be deleted if necesssary
-    imageUrl: getImageUrl(postData.image),
-  };
-
-  // console.log(defaultValues);
+  const fetchedWithData = isPostDataFetched && Object.entries(defaultValues).length > 0;
   const formData = { schema, defaultValues };
 
   return (
@@ -82,7 +82,8 @@ const EditPostForm = () => {
             <Spinner className="fixed z-20 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 backdrop-blur-[4px]" />
           )}
           <h1 className="text-2xl font-medium text-grey-700 leading-none select-none">Modificǎ anunțul</h1>
-          {isPostDataFetched && (
+
+          {fetchedWithData && (
             <FormContent formData={formData} handleOnSubmit={handlePostCreate} submitButtonTitle="Modificǎ anunțul" />
           )}
         </div>

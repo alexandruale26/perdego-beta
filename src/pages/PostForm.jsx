@@ -21,8 +21,6 @@ const PostForm = () => {
     handleApiAction(() => postFormProcess(values, setIsLoading, setIsPostCreated));
   };
 
-  // if user === null, user's data will be null at default values
-  // form will re-render when user will not be null
   if (user === null) return;
 
   return (

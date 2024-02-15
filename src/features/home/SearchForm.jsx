@@ -8,39 +8,33 @@ import Division from "./Division";
 import { Form } from "../../formBase/FormContext";
 import { FormField, FormItem } from "../../formComponents/form";
 import { LOCATIONS, OBJECT_CATEGORY, POST_TYPE } from "../../utils/sharedData";
-import { filterData, setDefaultValue } from "../../utils/helpers";
+import { filterData } from "../../utils/helpers";
 import { MagnifyingGlassIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import Info from "../../shared/Info";
 import Button from "../../shared/button";
 
 const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideFilters, handleHideFilters }) => {
-  const [search, setSearch] = useState("");
-  const [post_type, setpost_type] = useState("");
-  const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("");
+  const [defaultValues, setDefaultValue] = useState({});
 
   useEffect(() => {
-    setSearch(setDefaultValue(searchParams.search));
-    setpost_type(setDefaultValue(searchParams.post_type));
-    setLocation(setDefaultValue(searchParams.location));
-    setCategory(setDefaultValue(searchParams.category));
+    setDefaultValue({
+      search: searchParams.search,
+      post_type: searchParams.post_type,
+      location: searchParams.location,
+      category: searchParams.category,
+    });
   }, [searchParams]);
-
-  const handleSearchOnChange = (e) => {
-    e.preventDefault();
-    setSearch(e.target.value);
-  };
 
   const handleSubmit = (values) => {
     onSubmit(values);
   };
 
   const hiddenFiltersApplyedStyle = hideFilters ? "hidden" : "flex";
+  const formData = { schema: {}, defaultValues };
 
   return (
     <Form
-      schema={{}}
-      defaultValues={{}}
+      {...formData}
       onSubmit={handleSubmit}
       className="flex flex-col w-full items-start justify-center gap-6 p-4 pb-5 bg-white mx-auto rounded-md shadow-sm"
     >
@@ -56,13 +50,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             name="search"
             render={(field) => (
               <FormItem>
-                <SimpleInput
-                  placeholder="Ce anume cauți?"
-                  {...field}
-                  value={search}
-                  onChange={handleSearchOnChange}
-                  maxLength={60}
-                />
+                <SimpleInput placeholder="Ce anume cauți?" {...field} maxLength={60} />
               </FormItem>
             )}
           />
@@ -70,13 +58,7 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
             name="post_type"
             render={(field) => (
               <FormItem className={hiddenFiltersApplyedStyle}>
-                <Selector
-                  aria-label="select post type"
-                  values={POST_TYPE}
-                  defaultValue={post_type}
-                  exportValue={(value) => setpost_type(value)}
-                  {...field}
-                />
+                <Selector aria-label="select post type" values={POST_TYPE} {...field} />
               </FormItem>
             )}
           />
@@ -92,8 +74,6 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
                   placeholder="Toatǎ țara"
                   filter={filterData}
                   data={LOCATIONS}
-                  defaultValue={location}
-                  exportValue={(value) => setLocation(value)}
                   render={(item) => <p className="text-left">{item}</p>}
                   {...field}
                 />
@@ -109,8 +89,6 @@ const SearchForm = ({ onSubmit, searchParams, hasSearchParams, isOnMobile, hideF
                   placeholder="Toate categoriile"
                   filter={filterData}
                   data={OBJECT_CATEGORY}
-                  defaultValue={category}
-                  exportValue={(value) => setCategory(value)}
                   render={(item) => <p className="text-left">{item}</p>}
                   {...field}
                 />

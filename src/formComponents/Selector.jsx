@@ -1,6 +1,6 @@
 import { forwardRef, useState, useEffect, Fragment } from "react";
 import { twMerge } from "tailwind-merge";
-import { setDefaultValue } from "../utils/helpers";
+import { useController } from "../formBase/ControllerContext";
 
 const Option = ({ item, className, onSelectedClick }) => {
   return (
@@ -16,21 +16,24 @@ const Option = ({ item, className, onSelectedClick }) => {
   );
 };
 
-const Selector = forwardRef(({ className, values, defaultValue, onChange, exportValue, ...props }, ref) => {
-  const [selected, setSelected] = useState(setDefaultValue(defaultValue));
+const Selector = forwardRef(({ className, values, onChange, ...props }, ref) => {
+  const [selected, setSelected] = useState("");
+  const input = useController();
 
   useEffect(() => {
-    setSelected(defaultValue);
-  }, [defaultValue]);
+    const stateValue = input.fieldState.value;
+    const value = stateValue === null ? "" : stateValue;
+
+    setSelected(value);
+    ref.current.value = value;
+  }, [input.fieldState.value, ref]);
 
   const onSelectedClick = (e, newValue) => {
     e.preventDefault();
-    setSelected(newValue);
 
+    setSelected(newValue);
     ref.current.value = newValue;
     onChange(e);
-
-    if (exportValue) exportValue(newValue);
   };
 
   return (
@@ -41,7 +44,7 @@ const Selector = forwardRef(({ className, values, defaultValue, onChange, export
         className
       )}
     >
-      <input hidden readOnly value={selected} ref={ref} {...props} />
+      <input hidden readOnly type="text" value={selected} ref={ref} {...props} />
       <ul className="flex w-full h-full">
         {values.map((item, index) => (
           <Fragment key={item}>
