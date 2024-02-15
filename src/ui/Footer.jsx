@@ -2,7 +2,10 @@ import LinkButton from "../shared/LinkButton";
 
 const Footer = () => {
   return (
-    <footer id="footer" className="w-full flex justify-center bg-black h-[80px] text-white text-center">
+    <footer
+      id="footer"
+      className="w-full flex flex-col xsm:flex-row justify-center bg-black h-[80px] text-white text-center"
+    >
       <LinkButton to="/termeni-si-conditii" className="p-4">
         Termeni și condiții
       </LinkButton>

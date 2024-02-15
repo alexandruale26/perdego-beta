@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
   return (
     <PageContainer className="bg-inherit">
       <div className="w-full max-w-4xl h-full mx-auto space-y-8">
-        <Title title="Politicǎ de confidentialitate" />
+        <Title title="Politica de confidentialitate" />
         <Section className="flex-col items-start justify-center xsm:gap-6 xsm:p-8">
           <SecondaryTitle text={privacyPolicyTitle} />
           <div className="space-y-2 xsm:space-y-3">
