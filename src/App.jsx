@@ -110,7 +110,7 @@ const router = createBrowserRouter([
         path: "politica-de-confidentialitate",
         element: (
           <Suspense fallback={<Spinner />}>
-            <PrivacyPolicy />,
+            <PrivacyPolicy />
           </Suspense>
         ),
       },
@@ -118,7 +118,7 @@ const router = createBrowserRouter([
         path: "politica-cookies",
         element: (
           <Suspense fallback={<Spinner />}>
-            <CookiesPolicy />,
+            <CookiesPolicy />
           </Suspense>
         ),
       },
