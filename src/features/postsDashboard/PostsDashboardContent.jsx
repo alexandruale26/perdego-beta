@@ -12,7 +12,7 @@ const PostsDashboardContent = ({ posts }) => {
           </span>
 
           <h3 className="text-lg xs:text-xl text-grey-700">Ai pierdut sau ai gǎsit un obiect?</h3>
-          <LinkButton to="/anunt-nou" disguiseAsButton={true} className="min-h-[40px] max-w-[250px]">
+          <LinkButton to="/anunt-nou" displayAsButton={true} className="min-h-[40px] max-w-[250px]">
             Adaugǎ anunț nou
           </LinkButton>
         </div>

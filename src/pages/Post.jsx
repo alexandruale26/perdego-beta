@@ -15,8 +15,6 @@ import { formatPostDate } from "../utils/helpers";
 import generateSearchParamsTitle from "../features/post/helpers";
 import { getProfile } from "../services/profileApi";
 
-const placeholderStyle = "p-20 bg-grey-200";
-
 const Post = () => {
   const [post, setPost] = useState(null);
   const [profile, setProfile] = useState(null);
@@ -74,11 +72,7 @@ const Post = () => {
         </LinkButton>
 
         <div className="w-full h-[280px] xs:h-[400px] sm:h-[500px] p-2 bg-white rounded-md overflow-hidden shadow-sm transition-all">
-          <Image
-            src={image}
-            alt="object"
-            className={`max-w-full object-contain ${image === null ? placeholderStyle : ""}`}
-          />
+          <Image src={image} className="object-contain" />
         </div>
 
         <Section className="flex-col items-start justify-center">

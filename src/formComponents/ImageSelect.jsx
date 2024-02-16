@@ -2,9 +2,9 @@ import { useState, forwardRef } from "react";
 import { useController } from "../formBase/ControllerContext";
 import { twMerge } from "tailwind-merge";
 import { TrashIcon } from "@radix-ui/react-icons";
-import Image from "../shared/Image";
 
 const IMAGE_MAX_SIZE_MB = 8;
+const placeholderImg = "camera.png";
 
 const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ...props }, ref) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -56,11 +56,15 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
 
           {!selectedImage && imageUrl === null && (
             <div className="h-full w-full flex items-center justify-center flex-col gap-1  cursor-pointer">
-              <p className="text-base font-normal text-grey-800">Adauga o imagine</p>
+              <p className="text-sm xs:text-base text-grey-800">Adauga o imagine</p>
               <p className="text-xs font-light text-grey-600">
                 Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
               </p>
-              <Image className="mt-2 max-w-[70px] max-h-[70px]" />
+              <img
+                src={placeholderImg}
+                alt="select"
+                className="mt-2 max-w-[70px] xsm:max-w-[80px] max-h-[70px] xsm:max-h-[80px]"
+              />
             </div>
           )}
           {selectedImage && (

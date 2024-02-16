@@ -10,6 +10,27 @@
   }
 }
 
+.loading {
+  background: #eee;
+  background: linear-gradient(
+    110deg,
+    theme(colors.grey-100) 8%,
+    theme(colors.grey-200) 18%,
+    theme(colors.grey-100) 33%
+  );
+  background-size: 200% auto;
+  animation: shine 2.5s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: 200%;
+  }
+  100% {
+    background-position-x: -200%;
+  }
+}
+
 ::selection {
   color: #fff;
   background: theme(colors.primary-500);

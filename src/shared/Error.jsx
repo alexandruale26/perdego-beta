@@ -30,7 +30,7 @@ const Error = ({
       </div>
 
       {showButton && (
-        <LinkButton to={path} disguiseAsButton={true} className="p-2">
+        <LinkButton to={path} displayAsButton={true} className="p-2">
           {linkButtonMessage}
         </LinkButton>
       )}

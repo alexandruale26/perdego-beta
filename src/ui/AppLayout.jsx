@@ -23,7 +23,7 @@ const AppLayout = () => {
           <Navbar />
           <main
             style={{ minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` }}
-            className={`w-full h-full bg-grey-100 overflow-hidden`}
+            className={`w-full h-full bg-grey-100/95 overflow-hidden`}
           >
             {isLoading ? <Spinner /> : <Outlet />}
           </main>

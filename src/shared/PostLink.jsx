@@ -8,7 +8,6 @@ const linkBaseStyle = "xs:h-[150px] xs:flex-row gap-2 xs:gap-4";
 const linkGridStyle = "xs:h-[320px] gap-2";
 const imageBaseStyle = "xs:w-[170px] sm:w-[230px] h-[200px] xs:h-full";
 const imageGridStyle = "h-[200px] xs:h-[150px]";
-const placeholderStyle = "p-4 bg-grey-200 object-contain";
 
 const PostLink = ({ post, className, searchParams = "", gridMode = false, backToUserPosts = false }) => {
   const image = getImageUrl(post.image);
@@ -26,8 +25,7 @@ const PostLink = ({ post, className, searchParams = "", gridMode = false, backTo
     >
       <Image
         src={image}
-        alt="object"
-        className={`max-w-full max-h-full shrink-0 ${image === null ? placeholderStyle : "object-cover"} rounded-sm ${
+        className={`max-w-full max-h-full shrink-0 object-cover rounded-sm ${
           gridMode ? imageGridStyle : imageBaseStyle
         }`}
       />

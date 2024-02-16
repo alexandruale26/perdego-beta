@@ -63,7 +63,7 @@ const EditPostForm = () => {
   if (state === null)
     return (
       <Error
-        errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ."
+        errorMessage="Ne pare rǎu, dar a apǎrut o problemǎ :("
         buttonMessage="Du-mǎ inapoi"
         to="/administreaza-anunturile"
       />
