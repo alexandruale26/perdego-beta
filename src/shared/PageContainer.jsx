@@ -1,17 +1,11 @@
 import { twMerge } from "tailwind-merge";
 import { BARS_HEIGHT } from "../utils/sharedData";
-import { ScrollRestoration } from "react-router-dom";
 
 const PageContainer = ({ className, children, style }) => {
   const styleToApply = style ? style : { minHeight: `calc(100vh - ${BARS_HEIGHT.nav + BARS_HEIGHT.footer}px)` };
 
   return (
     <>
-      <ScrollRestoration
-        getKey={(location, matches) => {
-          return location.pathname;
-        }}
-      />
       <div
         id="page-container"
         style={styleToApply}

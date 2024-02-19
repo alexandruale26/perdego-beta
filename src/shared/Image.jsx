@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 const placeholderImg = "camera.png";
@@ -6,6 +6,13 @@ const placeholderImg = "camera.png";
 const Image = ({ className, src, placeholderStyle, ...imgProps }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [failedToFetchImg, setFailedToFetchImg] = useState(false);
+
+  useEffect(() => {
+    if (src === null) {
+      setIsLoading(false);
+      setFailedToFetchImg(true);
+    }
+  }, [src]);
 
   const handleImageLoad = () => {
     setIsLoading(false);
