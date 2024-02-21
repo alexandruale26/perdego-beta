@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import LinkButton from "./LinkButton";
 import Spinner from "./Spinner";
 
-const confetti = "../../public/confetti.svg";
+const confetti = "confetti.svg";
 
 const Confirmation = ({ className, message, buttonTitle = null }) => {
   const [isLoading, setIsLoading] = useState(true);

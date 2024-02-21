@@ -59,9 +59,9 @@ const Cookies = ({ className }) => {
           </p>
           <span className="text-xs xmd:text-[13px] text-grey-300">{COOKIE_CONTENT}</span>
 
-          <div className="w-full flex flex-col items-center justify-center gap-1 text-xs xmd:text-[13px] text-primary underline">
-            <LinkButton to="/politica-cookies">Politica cookies</LinkButton>
-            <LinkButton to="/politica-de-confidentialitate">Politica de confidențialitate</LinkButton>
+          <div className="w-full flex flex-col items-center justify-center gap-1 text-xs xmd:text-[13px] text-primary">
+            <LinkButton to="/politica-cookies">Politica cookies &rarr;</LinkButton>
+            <LinkButton to="/politica-de-confidentialitate">Politica de confidențialitate &rarr;</LinkButton>
           </div>
         </div>
         <Button
