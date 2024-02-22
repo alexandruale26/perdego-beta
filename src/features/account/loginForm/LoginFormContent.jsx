@@ -39,7 +39,7 @@ const LoginFormContent = ({ handleOnSubmit }) => {
         <SubmitButton className="h-12 w-full">Conecteazǎ-te</SubmitButton>
         <LinkButton
           to="/creeaza-cont"
-          className="h-12 w-full border border-black rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
+          className="h-12 w-full border border-grey-900 rounded-md focus-visible:text-lg hover:scale-105 transition-transform"
         >
           Creeazǎ cont
         </LinkButton>

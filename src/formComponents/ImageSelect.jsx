@@ -56,7 +56,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
 
           {!selectedImage && imageUrl === null && (
             <div className="h-full w-full flex items-center justify-center flex-col gap-1  cursor-pointer">
-              <p className="text-sm xs:text-base text-grey-800">Adauga o imagine</p>
+              <p className="text-sm xs:text-base text-grey-800">Adaugǎ o imagine</p>
               <p className="text-xs font-light text-grey-600">
                 Aceasta va fi imaginea anunțului tău <span className="font-medium">(max {IMAGE_MAX_SIZE_MB}MB)</span>
               </p>
@@ -90,7 +90,7 @@ const ImageSelect = forwardRef(({ className, type, onChange, imageUrl = null, ..
         <button
           type="button"
           onClick={handleOnClickRemove}
-          className="flex items-center justify-center w-12 h-full border border-l-0 border-grey-300 rounded-r-md text-white bg-[rgba(252,0,60,1)] hover:text-black hover:w-1/3 z-10 transition-all shadow-[0_0_20px_0_rgba(255,0,0,0.3)] absolute top-0 right-0 focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
+          className="flex items-center justify-center w-12 h-full border border-l-0 border-grey-300 rounded-r-md text-white bg-[rgba(252,0,60,1)] hover:text-grey-900 hover:w-1/3 z-10 transition-all shadow-[0_0_20px_0_rgba(255,0,0,0.3)] absolute top-0 right-0 focus-visible:outline-none focus-visible:border-2 focus-visible:border-grey-700 overflow-hidden"
         >
           <TrashIcon className="w-10 h-10" />
         </button>

@@ -8,7 +8,7 @@ const PostSettingsMenu = ({ menuIsOpen, handleModal, postId }) => {
   return (
     <div
       className={`absolute min-h-[54px] min-w-[54px] flex flex-col items-center justify-center rounded-full p-2 top-3 xs:top-1 right-3 xs:right-2 transition-all ${
-        menuIsOpen ? "text-white bg-grey-800/80 xs:bg-grey-800" : "text-black bg-white/60 hover:bg-grey-300"
+        menuIsOpen ? "text-white bg-grey-800/80 xs:bg-grey-800" : "text-grey-900 bg-white/60 hover:bg-grey-300"
       }`}
     >
       <DotsVerticalIcon

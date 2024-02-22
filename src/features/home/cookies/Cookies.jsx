@@ -46,7 +46,7 @@ const Cookies = ({ className }) => {
 
   return cookiesAccepted === false ? (
     <div id="cookie" style={{ bottom: distance, left: 0 }} className={twMerge("fixed p-0 xs:p-4", className)}>
-      <div className="flex flex-col items-center justify-start max-w-full xs:max-w-[400px] p-4 border-2 border-[#76582712] bg-grey-900 xs:rounded-md drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col items-center justify-start max-w-full xs:max-w-[400px] p-4 border border-grey-700 bg-grey-800 xs:rounded-md drop-shadow-[0_0_20px_rgba(0,0,0,0.25)]">
         <img
           src="cookies.png"
           alt="cookies"

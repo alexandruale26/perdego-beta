@@ -5,7 +5,6 @@ import {
   supabaseUserExistsError,
   supabaseSamePasswordResponseMessage,
 } from "./apiHelpers/supabaseErrorMessages";
-
 import {
   PASSWORD_UPDATED_MESSAGE,
   EMAIL_UPDATED_MESSAGE,

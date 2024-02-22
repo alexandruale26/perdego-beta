@@ -16,7 +16,7 @@ const LinkButton = ({ to, replace = false, children, className, color = null, di
   const hoverStyle = color !== null && isHovered ? { backgroundColor: color, color: "#fff" } : {};
 
   const linkClassStyle = displayAsButton
-    ? "min-h-[48px] w-full max-w-xs gap-2 bg-black rounded-md text-white text-center hover:bg-primary focus-visible:outline-none focus-visible:text-lg select-none"
+    ? "min-h-[48px] w-full max-w-xs gap-2 bg-grey-900 rounded-md text-white text-center hover:bg-primary focus-visible:outline-none focus-visible:text-lg select-none"
     : "focus-visible:outline-none select-none";
 
   return (

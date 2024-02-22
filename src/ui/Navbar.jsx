@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="flex items-center justify-center gap-8">
           <LinkButton
             to={user !== null ? formPath : loginPath}
-            className="hidden xsm:flex min-h-[40px] bg-white text-black font-medium px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
+            className="hidden xsm:flex min-h-[40px] bg-white text-grey-900 font-medium px-4 rounded-md focus-visible:scale-105 hover:text-white hover:bg-primary transition-all"
           >
             Adaugǎ anunț nou
           </LinkButton>
@@ -33,7 +33,7 @@ const Navbar = () => {
           {user === null && (
             <LinkButton
               to={loginPath}
-              className={`text-black bg-white p-2 hover:bg-primary hover:text-white rounded-full ${iconsStyle}`}
+              className={`text-grey-900 bg-white p-2 hover:bg-primary hover:text-white rounded-full ${iconsStyle}`}
             >
               <PersonIcon className="w-full h-full" />
             </LinkButton>

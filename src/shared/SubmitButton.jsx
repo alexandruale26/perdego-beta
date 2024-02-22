@@ -5,7 +5,7 @@ const SubmitButton = ({ children, className, ...props }) => {
     <button
       type="submit"
       className={twMerge(
-        "flex items-center justify-center gap-2 bg-black rounded-md text-white hover:bg-primary focus-visible:outline-none focus-visible:text-lg select-none disabled:bg-grey-800",
+        "flex items-center justify-center gap-2 bg-grey-900 rounded-md text-white hover:bg-primary focus-visible:outline-none focus-visible:text-lg select-none disabled:bg-grey-800",
         className
       )}
       {...props}

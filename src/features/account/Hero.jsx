@@ -6,7 +6,7 @@ import HalfWidthDiv from "./shared/HalfWidthDiv";
 
 const Hero = ({ className }) => {
   return (
-    <HalfWidthDiv className="bg-black">
+    <HalfWidthDiv className="bg-grey-900">
       <div className={twMerge("flex flex-col items-start justify-start w-full max-w-lg p-6", className)}>
         <h1>
           <LinkButton to="/">

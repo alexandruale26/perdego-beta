@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer
       id="footer"
-      className="w-full flex flex-wrap justify-center bg-black h-[80px] text-xs xsm:text-base text-white text-center"
+      className="w-full flex flex-wrap justify-center bg-grey-900 h-[80px] text-xs xsm:text-base text-white text-center"
     >
       <LinkButton to="/termeni-si-conditii" className="p-2">
         Termeni și condiții

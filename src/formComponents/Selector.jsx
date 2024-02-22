@@ -51,7 +51,7 @@ const Selector = forwardRef(({ className, values, onChange, ...props }, ref) => 
             <Option
               onSelectedClick={onSelectedClick}
               item={item}
-              className={selected === item ? "bg-black text-white hover:bg-black" : ""}
+              className={selected === item ? "bg-grey-900 text-white hover:bg-grey-900" : ""}
             />
             {index + 1 < values.length && !selected && <div className="h-full w-[1px] bg-grey-300"></div>}
           </Fragment>

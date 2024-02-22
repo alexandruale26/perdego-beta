@@ -19,7 +19,7 @@ const FormLabel = ({ className, children, ...props }) => {
   const { name: id } = useController();
 
   return (
-    <label htmlFor={id} className={twMerge("block w-full text-sm font-medium text-grey-800", className)} {...props}>
+    <label htmlFor={id} className={twMerge("inline-block text-sm font-medium text-grey-800", className)} {...props}>
       {children}
     </label>
   );
